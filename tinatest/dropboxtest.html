@@ -100,657 +100,44 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="尋物紀實_序章體驗(程式功能)" startnode="13" creator="Twine" creator-version="2.3.9" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" zoom="1" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/*彈跳視窗*/
-// dialog API macro set, by chapel; for sugarcube 2
-// version 1.3.0
-// see the documentation: https://github.com/ChapelR/custom-macros-for-sugarcube-2#dialog-api-macros
+	<tw-storydata name="尋物紀實_序章體驗(程式功能)" startnode="27" creator="Twine" creator-version="2.3.9" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" zoom="1" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 特定片段產生連結網址開始 */
+if ("onhashchange" in window) {  // event supported
+	window.onhashchange = function () {
+		hashChanged();
+	};
+} else {  // event not supported
+	window.setInterval(function () {
+		if (window.location.hash != setup.storedHash) {
+			hashChanged();
+		}
+	}, 100);
+}
+function hashChanged() {
+	if (Engine.isIdle()) {
+		if (window.location.hash && (setup.storedHash != window.location.hash)) {
+			setup.storedHash = window.location.hash;
+			var anchor = decodeURI(window.location.hash.substring(1));
+			if (Story.has(anchor) && (passage() !== anchor)) {
+				Engine.play(anchor);
+			}
+		} else {
+			// Comment out the following line of code if you don't want the
+			// anchor link of the current passage displayed in the URL bar.
+			//window.location.hash = encodeURI(passage());
+		}
+		// Comment out the following line of code if you don't want the
+		// title of the page set to the passage name.
+		//document.title = passage();
+	} else {
+		setTimeout(hashChanged, 100);
+	}
+}
+$(document).on(':passageend', function () { hashChanged(); });
+/* 特定片段產生連結網址結束 */
 
-// <<dialog>> macro
-Macro.add('dialog', {
-       tags : ['onopen', 'onclose'],
-    handler : function () {
-        
-        // handle args (if any)
-        var errors = [];
-        var content = '', onOpen = null, onClose = null;
-        var title = (this.args.length > 0) ? this.args[0] : '';
-        var classes = (this.args.length > 1) ? this.args.slice(1).flatten() : [];
-
-        this.payload.forEach( function (pl, idx) {
-            if (idx === 0) {
-                content = pl.contents;
-            } else {
-                if (pl.name === 'onopen') {
-                    onOpen = onOpen ? onOpen + pl.contents : pl.contents;
-                } else {
-                    onClose = onClose ? onClose + pl.contents : pl.contents;
-                }
-            }
-        });
-        
-        // add the macro- class
-        classes.push('macro-' + this.name);
-        
-        // dialog box
-        Dialog.setup(title, classes.join(' '));
-        Dialog.wiki(content);
-
-        // should these be shadowWrapper-aware?
-        if (onOpen && typeof onOpen === 'string' && onOpen.trim()) {
-            $(document).one(':dialogopened', function () {
-                $.wiki(onOpen);
-            });
-        }
-
-        if (onClose && typeof onClose === 'string' && onClose.trim()) {
-            $(document).one(':dialogclosed', function () {
-                $.wiki(onClose);
-            });
-        }
-
-        Dialog.open();
-        
-    }
-
-});
-
-// <<popup>> macro
-Macro.add('popup', {
-    handler : function () {
-        
-        // errors
-        if (this.args.length < 1) {
-            return this.error('need at least one argument; the passage to display');
-        }
-        if (!Story.has(this.args[0])) {
-            return this.error('the passage ' + this.args[0] + 'does not exist');
-        }
-        
-        // passage name and title
-        var psg   = this.args[0];
-        var title = (this.args.length > 1) ? this.args[1] : '';
-        var classes = (this.args.length > 2) ? this.args.slice(2).flatten() : [];
-        
-        // add the macro- class
-        classes.push('macro-' + this.name);
-        
-        // dialog box
-        Dialog.setup(title, classes.join(' '));
-        Dialog.wiki(Story.get(psg).processText());
-        Dialog.open();
-        
-    }
-
-});
-
-// <<dialogclose>> macro
-Macro.add('dialogclose', { 
-    skipArgs : true, 
-    handler : function () {
-        Dialog.close();
-    } 
-});
-
-
-
-/*背包系統*/
-(function () {
-    // simple-inventory.js, by chapel; for sugarcube 2
-    // version 2.3.0
-    'use strict';
-
-    // options object
-
-    var options = {
-        tryGlobal : true,
-        defaultStrings : {
-            empty     : '沒有東西...',
-            listDrop  : '丟棄',
-            separator : '\n'
-        }
-    };
-
-    // private functions
-
-    function _attachEvent (inv, loc, items, cont) {
-        // attach special inventory change events to the document
-        $(document).trigger({
-            type       : (cont === 'initialized') ?  ':inventory-init' : ':inventory-update', // the event name
-            instance   : inv, // the calling instance; the giver in transfers
-            receiving  : loc, // the inventory recieving transfers, or null
-            moved      : items, // the items moved to or from the calling inventory, or null
-            context    : cont // drop, pickup, transfer, or initialized
-        });
-    }
-
-    function _getUID (name, i) {
-        // generates a random, unique-enough-for-this-purpose ID
-        var key = Math.random().toString(36).substring(7);
-        if (arguments.length < 2) {
-            // we'll generate an id anyway, but it might not be as unique as i'd like.
-            name = Math.random().toString(36).substring(7);
-            i    = random(99);
-        }
-        return ('simple-inv-' + i + '-' + Date.now() + '-' + name.replace(/[^A-Za-z0-9]/g, '') + '-' + key);
-    }
-
-    // constructor
-
-    function Inventory (array) {
-        if (array) {
-            // some number of arguments were passed
-            array = [].slice.call(arguments);
-            array = array.flatten();
-        } else { 
-            // no arguments were passed
-            array = [];
-        }
-        
-        if (this instanceof Inventory) {
-            this.inv = array;
-            array = (array.length) ? array : null;
-            // run the event only if assignement is successful
-            _attachEvent(this, null, array, 'initialized');
-        } else { // if the author forgets the 'new' operator, add it for them
-            return new Inventory(array);
-        }
-    }
-
-    // static methods
-
-    Object.assign(Inventory, {
-        is : function (inv) {
-            // test to see if passed object is an inventory instance
-            return (inv instanceof Inventory);
-        },
-        log : function (inv) {
-            // logs the inventory to the console (for debugging)
-            var string = (Inventory.is(inv)) ?
-                ('Inventory.log() -> ' + inv.toArray().join(' - ')) : 
-                ('Inventory.log() -> object is not an inventory...');
-            return string;
-        },
-        removeDuplicates : function (inv) {
-            // removes duplicate items from an inventory
-            if (!Inventory.is(inv)) {
-                return; // not an inventory
-            }
-            var items = inv.toArray();
-            var uniq  = (function (i) {
-                var ret = [];
-                i.forEach( function (item) {
-                    if (!ret.includes(item)) {
-                        ret.push(item);
-                    }
-                });
-                return ret;
-            }(items));
-            
-            return uniq;
-        }
-    });
-
-    Object.assign(Inventory.prototype, {
-        transfer : function (loc) {
-            // transfer items from this inventory to a specified inventory
-            if (arguments.length < 2) {
-                return this; // error in args, do nothing
-            }   
-            if (!Inventory.is(loc)) {
-                return this; // error in args, do nothing
-            }
-            
-            var items = [].slice.call(arguments);
-            items = items.slice(1).flatten();
-            
-            var pushed = [];
-            for (var i = 0, l = items.length; i < l; i++) {
-                // only transfer the item if it exists
-                if (this.inv.includes(items[i])) { 
-                    this.inv.delete(items[i]);
-                    pushed.push(items[i]);
-                }
-            }
-            
-            if (pushed.length) {
-                loc.inv = loc.inv.concat(pushed);
-                _attachEvent(this, loc, pushed, 'transfer');
-                return this; // for chaining
-            }
-            return this; // for chaining
-        },
-        
-        has : function () { // this inventory has any of the passed items
-            var items = [].slice.call(arguments).flatten();
-            if (items && items.length) {
-                return this.inv.includesAny(items);
-            }
-            return false;
-        },
-        
-        hasAll : function () { // this inventory has all of the passed items
-            var items = [].slice.call(arguments).flatten();
-            if (items && items.length) {
-                return this.inv.includesAll(items);
-            }
-            return false;
-        },
-        
-        pickUp : function (unique) { // add items to this inventory
-            var items = [].slice.call(arguments).flatten(), inventory = this;
-            if (items && items.length) {
-                if (unique === 'unique' || items[0] === 'unique') { // items must be unique in each inventory instance
-                    items = items.splice(1);
-                    items = (function (items) { 
-                        var ret = []; // this code could use some cleanup
-                        items.forEach(function (item) {
-                            if (!inventory.inv.includes(item) && !ret.includes(item)) {
-                                ret.push(item);
-                            }
-                        });
-                        return ret;
-                    }(items));
-                }
-                // concat the arrays and call the event
-                this.inv = this.inv.concat(items);
-                _attachEvent(this, null, items, 'pickup');
-            }
-            return this; // for chaining
-        },
-        
-        drop : function () { // remove items from this inventory
-            var items = [].slice.call(arguments).flatten(),
-                inventory = this, del; // we need to access this in the <array>.forEach()
-            if (items && items.length) {
-                var moved = [];
-                items.forEach(function (item) {
-                    if (inventory.has(item)) {
-                        moved.push(item); // for the event below
-                        del = inventory.inv.indexOf(item);
-                        inventory.inv.deleteAt(del);
-                    }
-                });
-                _attachEvent(this, null, moved, 'drop');
-            }
-            return this; // for chaining
-        },
-        
-        sort : function () { // sorts this inventory
-            this.inv = this.inv.sort();
-            _attachEvent(this, null, null, 'sort');
-            return this;
-        },
-        
-        show : function (sep) { // returns a string representing the inventory
-            if (!sep || typeof sep !== 'string') {
-                sep = options.defaultStrings.separator; // default
-            }
-            if (this.inv.length) {
-                return this.inv.join(sep);
-            }
-            return options.defaultStrings.empty; // nothing is in this inventory
-        },
-        
-        empty : function () { // remove all items from this inventory
-            var temp = clone(this.inv); // for the event
-            this.inv = []; 
-            // this is still technically a 'drop' event
-            _attachEvent(this, null, temp, 'drop');
-            return this; // for that sweet chaining action
-        },
-        
-        toArray : function () { // not super necessary
-            return (this.inv);
-        },
-
-        count : function (item) {
-            // if item, count the number of duplicates
-            if (item && typeof item === 'string') {
-                var cnt = 0;
-                this.toArray().forEach( function (i) {
-                    if (i === item) {
-                        cnt++;
-                    }
-                });
-                return cnt;
-            }
-            // else return the length
-            return this.toArray().length;
-        },
-
-        isEmpty : function () {
-            return this.toArray().length === 0;
-        },
-        
-        linkedList : function (loc, action) { // construct the list elements to keep the macro call clean-ish
-            if (!loc || !Inventory.is(loc)) {
-                loc = false; // if no loc, then no transferring
-            }
-            
-            // set up vars
-            var list = this.toArray();
-            var inv = this;
-            var $wrapper = $(document.createElement('span'));
-            
-            // if inventory is empty, append message and return element
-            if (!list || !list.length) {
-                $wrapper.wiki(options.defaultStrings.empty);
-                return $wrapper;
-            }
-            
-            // construct the link list
-            list.forEach(function (item, idx, arr) {
-                var $listing = $(document.createElement('span')),
-                    $link    = $(document.createElement('a')),
-                    drop     = (action) ? action : options.defaultStrings.drop, // the action name or default
-                    UID      = _getUID(item, idx); // create a unique element ID 
-                
-                $link // create the drop link
-                    .wiki(drop)
-                    .addClass('simple-inv drop-link');
-                
-                // add click event handler
-                $link.ariaClick(function () {
-                    if (loc) {
-                        inv.transfer(loc, item);
-                    } else {
-                        inv.drop(item);
-                    }
-                    $('#' + UID).empty(); // empty the listing by its UID
-                });
-                
-                // set up the listing element, which contains the name and the link
-                $listing
-                    .attr('id', UID)
-                    .addClass('simple-inv link-listing')
-                    .wiki(item + ' ')
-                    .append($link);
-                
-                // add newline via <br> for listings that aren't last
-                // this also allows the newline to disappear with its associated listing when dropped
-                if (idx < arr.length - 1) {
-                    $listing.wiki('<br />');
-                }
-                
-                // attach to the return element
-                $wrapper.append($listing);
-            });
-            
-            // return the whole element
-            return $wrapper;
-        },
-        
-        // we need to reassign this since we may have clobbered it using the prototype
-        constructor : Inventory,
-        
-        toJSON : function () { // the custom revive wrapper for SugarCube's state tracking
-            // use `setup` version in case the global version is unavailable
-            return JSON.reviveWrapper('new setup.Inventory(' + JSON.stringify(this.inv) + ')');
-        },
-        
-        clone : function () { return new Inventory(this.inv); }
-    });
-
-    // JS APIs
-
-    setup.Inventory = Inventory;
-    setup.simpleInv = { inventory : Inventory }; // legacy
-
-    if (options.tryGlobal) {
-        // this allows authors to access the JS API using the global Inventory function
-        window.Inventory = window.Inventory || Inventory;
-        // ... but only if window.Inventory is undefined
-    }
-
-    // macros
-
-    // <<newinventory '$var' '(optional) list of items'>>
-    Macro.add('newinventory', {
-        handler : function () {
-
-            if (this.args.length < 1) {
-                return this.error('incorrect number of arguments');
-            }
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // set up new inventory
-            Wikifier.setValue(varName, new Inventory(this.args.slice(1).flatten()));
-        }
-    });
-
-    // <<pickup '$var' 'list of items'>>
-    Macro.add('pickup', {
-        handler : function () {
-            
-            if (this.args.length < 2) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            inv.pickUp(this.args.slice(1).flatten());
-        }
-    });
-
-    // <<drop '$var' 'list of items'>>
-    Macro.add('drop', {
-        handler : function () {
-            
-            if (this.args.length < 2) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            inv.drop(this.args.slice(1).flatten());
-        }
-    });
-
-    // <<transfer '$var' '$anotherVar' 'list of items'>>
-    Macro.add('transfer', {
-        handler : function () {
-            
-            if (this.args.length < 3) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            /* the receiving inventory */
-            var recVarName = this.args[1].trim();
-            // check variable string
-            if (recVarName[0] !== '$' && recVarName[0] !== '_') {
-                return this.error('variable name "' + this.args[1] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var recInv = Wikifier.getValue(recVarName);
-            if (!Inventory.is(recInv)) {
-                return this.error('variable ' + recVarName + ' is not an inventory!');
-            }
-            
-            inv.transfer(recInv, this.args.slice(2).flatten());
-        }
-    });
-
-    // <<dropall '$var'>>
-    Macro.add('dropall', {
-        handler : function () {
-            
-            if (this.args.length !== 1) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            inv.empty();
-        }
-    });
-
-    // <<clear>> (same as <<dropall>>)
-    Macro.add('clear', 'dropall', false);
-
-    // <<sort '$var'>>
-    Macro.add('sort', {
-        handler : function () {
-            
-            if (this.args.length !== 1) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            inv.sort();
-        }
-    });
-
-    // <<inventory '$var' 'separator'>>
-    Macro.add('inventory', {
-        handler : function () {
-            
-            if (this.args.length < 1 || this.args.length > 2) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var varName = this.args[0].trim();
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[0] + '" is missing its sigil ($ or _)');
-            }
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            // create output element and add to DOM
-            var $wrapper = $(document.createElement('span')), 
-                sep = (this.args[1]) ? this.args[1] : false;
-            
-            $wrapper
-                .wiki(inv.show(sep))
-                .addClass('macro-' + this.name)
-                .appendTo(this.output);
-        }
-    });
-
-    // <<linkedinventory 'action name' '$var' '(optional) $anotherVar'
-    Macro.add('linkedinventory', {
-        handler : function () {
-            
-            if (this.args.length < 2 || this.args.length > 3) {
-                return this.error('incorrect number of arguments');
-            }
-            
-            var recInv = false,
-                recVarName = '',
-                varName = this.args[1].trim(),
-                action = (typeof this.args[0] === 'string') ? this.args[0] : false; // the action name, which is required
-            
-            if (!action) { // just in case
-                return this.error('first argument should be the link text');
-            }
-            
-            // check variable string
-            if (varName[0] !== '$' && varName[0] !== '_') {
-                return this.error('variable name "' + this.args[1] + '" is missing its sigil ($ or _)');
-            }
-            
-            // use a varID for linked lists
-            var varID = Util.slugify(varName); 
-            varID = this.name + '-' + varID;
-            
-            // check if story var is an inventory instance
-            var inv = Wikifier.getValue(varName);
-            if (!Inventory.is(inv)) {
-                return this.error('variable ' + varName + ' is not an inventory!');
-            }
-            
-            if (this.args.length > 2) {
-                // the receiving inventory, if applicable
-                recVarName = this.args[2].trim();
-                // check variable string
-                if (recVarName[0] !== '$' && recVarName[0] !== '_') {
-                    return this.error('variable name "' + this.args[2] + '" is missing its sigil ($ or _)');
-                }
-                
-                // check if story var is an inventory instance
-                recInv = Wikifier.getValue(recVarName);
-                if (!Inventory.is(recInv)) {
-                    return this.error('variable ' + recVarName + ' is not an inventory!');
-                }
-            }
-            
-            // create output and att to DOM
-            var $list = inv.linkedList(recInv, action);
-            $list
-                .attr({ // add data to reconstruct the call via an event
-                    id : varID,
-                    'data-rec' : recVarName,
-                    'data-self' : varName,
-                    'data-action' : action
-                })
-                .addClass('macro-' + this.name)
-                .appendTo(this.output);
-        }
-    });
-
-}());
+/* 介面中文化開始 */
+!function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
+/* 介面中文化結束 */
 
 
 /* 返回前頁開始 */
@@ -759,357 +146,7 @@ predisplay["Menu Return"] = function (taskName) {
 		State.variables.return = passage();
 	}
 };
-/* 返回前頁結束 */</script><tw-passagedata pid="1" name="All started" tags="" position="409,151" size="100,100">真虧你能找到這裡，這樣便算是初步的篩選過了
-接下來就請你嘗試打開下面的大門吧，若你不是誤闖此地，定能打開
-&lt;em&gt;(接下來，點擊藍色的字便能與之互動)&lt;/em&gt;
-
-&lt;img src=&quot;https://drive.google.com/uc?id=13gReKufpd7aHw8nvJVxtLZdoWNjaH_eH&quot; width=&quot;300(px)&quot;&gt; 
-
-&lt;&lt;linkreplace  靠近一點&gt;&gt;
-&lt;img src=&quot;https://drive.google.com/uc?id=1Knl8r7FVKG6zEReFbSR0WdqF_iXcLWNQ&quot; width=&quot;300(px)&quot;&gt;
-[[再靠近一點]]
-&lt;&lt;/linkreplace&gt;&gt;
-
-</tw-passagedata><tw-passagedata pid="2" name="再靠近一點" tags="" position="407,320" size="100,100">/*
-&lt;&lt;cacheaudio &quot;intro&quot; &quot;the URL of your sound effect&quot;&gt;&gt;
-*/
-&lt;img src=&quot;https://drive.google.com/uc?id=1B2VTXkFShdNZch55omsBuW2l3_RL9Xxb&quot; width=&quot;300(px)&quot;&gt; 
-
-&lt;em&gt;
-森嚴的大木門，鎖的嚴嚴實實。
-門上有著一把與中式的外觀相異的觸控螢幕
-&lt;/em&gt;
-&lt;&lt;linkreplace 仔細端詳看看&gt;&gt;
-&lt;em&gt;
-&lt;/em&gt;
-&lt;img src=&quot;https://drive.google.com/uc?id=1f3RVYEbpmA8gJiTwAMtB-RPtI7rpVY7s&quot; width=&quot;300(px)&quot;&gt;
-&lt;em&gt;
-你似乎想起剛剛用到的解謎素材，並嘗試輸入了數字
-&lt;/em&gt;
-[[嘗試輸入數字|進入試驗場]]
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="進入試驗場" tags="" position="403,451" size="100,100">/*&lt;&lt;audio &quot;intro&quot;&gt;&gt;*/
-&lt;img src=&quot;https://drive.google.com/uc?id=1B2VTXkFShdNZch55omsBuW2l3_RL9Xxb&quot; width=&quot;300(px)&quot;&gt;
-&lt;em&gt;@@color:GRAY;大門並沒有馬上打開，而是從電子鎖處傳來一陣人聲@@&lt;/em&gt;
-
-「&lt;em&gt;沙沙&lt;/em&gt;...是新的&lt;em&gt;沙沙&lt;/em&gt;...」
-
-「是新的測驗者呢...」
-&lt;em&gt;@@color:GRAY;透過電子設備的傳遞，你聽出了是男性的聲音，雖然有些失真，但是你仍感受到聲音主人的和藹、沉穩@@&lt;/em&gt;
-
-「抱歉，今天有很多人先到了有點忙不過來，我馬上替您開門」
-
-&lt;&lt;linkreplace //接著，大門有了動靜，並像是鬆動了一樣，開了一個縫隙//&gt;&gt;
-&lt;img src=&quot;https://drive.google.com/uc?id=1T8jfqXyRcWOzELnlK8t7VXt8ybaXRrWn&quot; width=&quot;300(px)&quot;&gt;
-[[揣揣不安地走進門內]]
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 詢問:測驗者是甚麼??&gt;&gt;
-&lt;em&gt;
-電子鎖處又傳來人聲
-&lt;/em&gt;
-「&lt;em&gt;沙沙&lt;/em&gt;...我知道您仍一頭霧水，但若您往裡面走，就一定越能了解的」
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="揣揣不安地走進門內" tags="" position="404,606" size="100,100">&lt;em&gt;@@color:GRAY;你走進門中，僅透過門口傳來的一點日光，看到了一個小孩親切對你行了個禮。
-門僮?好老派的作風...@@&lt;/em&gt;
-
-&lt;h1&gt;「碰!」&lt;/h1&gt;
-
-&lt;em&gt;@@color:GRAY;後方的門自動的關上，雖說不算造成巨響，但突然的聲音仍讓你受到了一點驚嚇。
-從驚嚇中馬上恢復的你，看到他示意你跟著他走入昏暗的建築之中。@@&lt;/em&gt;
-
-&lt;&lt;linkreplace 緊跟著他&gt;&gt;
-喀踏、喀踏、喀踏...
-&lt;em&gt;@@color:GRAY;走了幾步後，你發現你居然只聽到你的腳步聲和呼吸聲。接著你聽到門僮用著清淡的口氣，說道@@&lt;/em&gt;
-
-「如果說歷史是一個時間軸，人站在時間軸線上代表著一場又一場事件的節點」
-&lt;em&gt;@@color:GRAY;空蕩蕩的建築中，他的話就像飄盪在建築之間，若有似無的產生回音...@@&lt;/em&gt;
-
-「人們常常忘記歷史，但每個事件結束後總會留下一些東西」
-&lt;em&gt;@@color:GRAY;屋內的回音讓你產生了一種如夢似幻的感覺，你甚至開始產生了跟不上他的錯覺...@@&lt;/em&gt;
-
-「在盜匪眼中，這些東西是財寶...」
-&lt;em&gt;@@color:GRAY;這不是錯覺，你的腳程逐漸落後於他...@@&lt;/em&gt;
-
-「在博物館眼中是古董...」
-&lt;em&gt;@@color:GRAY;你們的距離逐漸越拉..越開...@@&lt;/em&gt;
-
-「在我們『拳師』眼裡，這些『物』代表失落的歷史與記憶。」
-&lt;em&gt;@@color:GRAY;就在你開始覺得要跟不上時，他卻像剛好知道你的極限似的，再一個轉角停了下來@@&lt;/em&gt;
-
-「正式的測驗在這裡繼續...」
-&lt;em&gt;@@color:GRAY;終於趕上了他的你，看到了轉角後，是一個人影幢動的廳堂@@&lt;/em&gt;
-
-「祝你武運昌隆，未來的拳師」
-&lt;em&gt;@@color:GRAY;門僮又向你行了剛進來時的那個禮，並示意要你進去@@&lt;/em&gt;
-
-[[踏入廳堂|TestStart]]
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 向門僮問個大概&gt;&gt;
-&lt;em&gt;@@color:GRAY;門僮僅是向你微笑，便沒入黑暗之中@@&lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="TestStart" tags="" position="404,756" size="100,100">&lt;em&gt;
-@@color:GRAY;
-步入廳堂之內，你很驚訝的發現，這個地方是多麼的寬敞，完全無法和入口處的窄門產生聯想。
-雖然室內昏暗且被人影淹沒，但左、中、右的牆面仍能清楚看到三道門，沒上似乎刻著甚麼。
-雖然室內昏暗，但好在採光的設計刻意讓光線能打在三道門楣之上。
-@@
-&lt;/em&gt;
-
-&lt;&lt;linkreplace 仔細端詳門&gt;&gt;
-&lt;em&gt;@@color:GRAY;「日月」「八卦」「白鶴」@@&lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 向旁人搭話&gt;&gt;
-&lt;em&gt;@@color:GRAY;
-旁人僅是轉頭瞪了你一眼，便隨即轉向了他先前凝視的方向，似乎是在養精蓄銳。
-但你注意還有到其他人看向你，其中有個相貌不凡、穿著十分年輕的少女吸引了你的目光。但你再也不敢亂搭話。
-@@&lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 安分隨眾人等待&gt;&gt;
-&lt;em&gt;@@color:GRAY;
-廳堂內的眾人雖然沒有甚麼交談，但仍聽得出大家因為緊張而伴隨的喘氣、踱步，以及不耐煩的嘆息與來回踱步聲。
-不過這些細碎聲音沒過多久就被一個人聲打破。
-你聽出了這聲音在門口處的電子鎖也聽過，有些親切的聲音讓你的緊張感減少了大半。
-@@&lt;/em&gt;
-「恭迎眾人的大駕，人數上應該足夠今天的試煉了。」
-&lt;em&gt;@@color:GRAY;聲音的主人應該是個可靠的長輩，但卻不知道是從甚麼地方發出。@@&lt;/em&gt;
-
-「先前的一切是為了大致理解各位的能耐，能到達這個地方的各位也實屬不簡單...」
-&lt;em&gt;@@color:GRAY;「先前的一切」之云云，讓你憶起自網站開始，到解開門鎖後的一切，這又讓你對這個「試煉」產生了懷疑，但你也僅是隨著發話者的話聽下去...@@&lt;/em&gt;
-
-「敏銳的人一定知道『清心散』僅是個幌子，但這「永華堂」卻也不全然是騙人的玩意。」
-
-&lt;em&gt;@@color:GRAY;廳堂內發出了與先前不同的躁動聲，多是些不解的疑惑@@&lt;/em&gt;
-
-「我們是一群保護歷史的人，一直致力於阻止他人盜賣、甚至竄弄歷史的可惡行徑。」
-
-「接下來的試煉，你們會逐漸了解到我們，到時候你們也一定能覺醒一些意識和能力。」
-&lt;em&gt;@@color:GRAY;廳堂內躁動聲漸大，有不解的，有嗤之以鼻的：@@&lt;/em&gt;
-
-「開甚麼玩笑?」「我花這麼多時間就為了被你玩弄嗎?」「了解你們?了解甚麼啊!」
-
-&lt;em&gt;@@color:GRAY;抱怨之中，開始有人已經往剛才進來時的那個走道準備離開@@&lt;/em&gt;
-
-[[隨眾人離開廳堂|隨波逐流消逝在歷史之中]]
-
-「離去的人們我們不會強留，你們還有大把的時間能夠享受被蒙在鼓裡的人生...」
-&lt;em&gt;@@color:GRAY;
-你也同樣帶著許多疑惑，只是不斷迴盪著「歷史」這兩個字。沒等你多做思考，那人又發話。
-@@&lt;/em&gt;
-
-「但留下來的各位，我們就像網站和郵件說道的，歡迎各位有志之士的加入；你們也將隨我們完成後續的試煉。」
-&lt;em&gt;@@color:GRAY;這時廳堂內早已走掉一堆人，隨著躁動聲你也無法發話，這讓你陷入抉擇之中@@&lt;/em&gt;
-
-[[隨眾人離開廳堂|隨波逐流消逝在歷史之中]]
-[[抱持好奇留在廳堂|測驗繼續]]
-[[堅毅的留在廳堂|測驗繼續]]
-
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="隨波逐流消逝在歷史之中" tags="BadEndding" position="255,899" size="100,100">&lt;em&gt;@@color:GRAY;
-不知道是甚麼時候開始，你發覺自己頭重腳輕，是現逐漸模糊。
-
-伴隨你逐漸意識到的一股異香，幾道人聲響起...
-@@&lt;/em&gt;
-
-&lt;&lt;linkreplace 勉強支撐著聆聽&gt;&gt;
-「知道他是從哪裡來的嗎」
-&lt;em&gt;@@color:GRAY;一個親切的男聲說道。@@&lt;/em&gt;
-
-「從他接受測驗起，就摸透他的IP位置了」
-&lt;em&gt;@@color:GRAY;另一個男聲顯得滑稽、難聽@@&lt;/em&gt;
-
-「已經是第幾位了...你們可要幫我一起送他們回家阿...」
-&lt;em&gt;@@color:GRAY;聽起來是與你同齡的女子的聲音@@&lt;/em&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 順應疲憊感&gt;&gt;
-你已經來不及驚訝和理解一切，而是隨者本能轉而沉沉昏迷。
-游離之際，最後的一絲感受僅剩下自己躺在一陣溫暖的感覺之中，[[接著沉沉睡去......]]
-
-&lt;&lt;/linkreplace&gt;&gt;
-</tw-passagedata><tw-passagedata pid="7" name="測驗繼續" tags="" position="403,902" size="100,100">&lt;em&gt;@@color:GRAY;躁動聲漸止，你目測發現留下之人不餘30名，那個聲音悠悠響起@@&lt;/em&gt;
-「看來這次留住的各位心意已決，本次的試驗就繼續吧。」
-
-&lt;em&gt;@@color:GRAY;一改輕鬆的口吻，你聽出他改以更嚴肅的語調來談論此事@@&lt;/em&gt;
-
-「『永華堂』的名號並非完全杜撰，請各位琢磨琢磨接下來的話，這也是我們的志志！」&lt;em&gt;@@color:GRAY;發話之人在此停頓，並開始唸道@@&lt;/em&gt;
-&lt;h3&gt;
-
-日月江山一氣連，
-止戈共水不爭田。
-髮長當須頭顱落，
-豈作順民陳予仙。
-
-&lt;/h3&gt;
-
-「隨著門僮的引導，你們應該也聽到了『拳師』的名號對不對?」
-&lt;em&gt;@@color:GRAY;你想起那位小童的話「在我們『拳師』眼裡，這些『物』代表失落的歷史與記憶。」@@&lt;/em&gt;
-
-「各位腳下的這座建築物是由當年天地會在台灣留下，歷史十分悠久。」
-&lt;em&gt;@@color:GRAY;這倒解釋了從沒口到這個廳堂為止，能保持得這般古色古香的原因@@&lt;/em&gt;
-
-「清朝時創立的天地會，是為了維護政權的『正宗』而生，是為革命的一群人。組織隨著眾人散播的意志而開枝散葉，成員遍布中國與台灣，甚至是世界各地。」
-
-「至今的四百多年來，在台灣的成員們歷經了清朝、日治時期，對保護民族的貢獻可以說是不遺餘力，最終迎來了民國政權，所以我們也逐漸隱於市井之間低調度日」
-&lt;em&gt;@@color:GRAY;「不只是這棟建築，歷史悠久的天地會，居然仍隱隱於市?」@@&lt;/em&gt;
-
-「隨著時間的推移，我們逐漸的了解到，政權時有興衰，以歷史的宏觀視角來看不過是曇花一現。只有民族、土地的記憶才是我們深扎的根。」
-
-「現在，這個&lt;h1&gt;『根』&lt;/h1&gt;正被我們的一些敵人盜去、販賣，甚至是扭曲」
-&lt;em&gt;@@color:GRAY;形成盜去、販賣？被扭曲？？歷史不是存在於我們的課本之上嗎？而那些我們到處參訪的古蹟們又是甚麼？@@&lt;/em&gt;
-
-「為了不讓歷史出現空白和錯誤，由過去的天地會成員發起，我們組織一群有志之士，形成一個保護歷史的組織。勢要對這樣的頹勢，再次進行革命！」
-&lt;em&gt;@@color:GRAY;僅剩三十餘人的廳堂之內，此刻的躁動聲卻不亞於人群離開前，並多了份激動！@@&lt;/em&gt;
-
-「記住!後面各位踏入的將不是一件容易的志業，就如同求道修行一樣，但又遠比這個更多」
-
-「你將會牽涉到許多許多你們知道的或不知道的歷史與人、事、物，甚至會讓你們陷入麻煩的經歷之中。」
-
-「但是你們守護的歷史，將會影響接下來的世世代代，對他們的身處的這片土地的認同感。」
-
-「追隨我們也是一個方向，選擇你們的道路吧!」
-&lt;em&gt;@@color:GRAY;語罷，一股木造結構摩擦的聲音想起，並讓一道光打向廳堂之中矗立的一塊石碑，上面就寫著方才念道的詩詞@@&lt;/em&gt;
-
-&lt;em&gt;@@color:GRAY;廳堂再度陷入騷動，但與之相反的是發話之人的沉默。他離開了嗎?沒有人知道...@@&lt;/em&gt;
-
-&lt;em&gt;@@color:GRAY;你開始思索他的話@@&lt;/em&gt;
-
-&lt;&lt;linkreplace 天地會?&gt;&gt;
-這在台灣至今仍然存在嗎?但好像不重要。
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 「拳師」&gt;&gt;
-天地會成員發起，有志之士籌建的組織？這不就是地下結社嗎？
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 台灣的歷史&gt;&gt;
-民族、土地的記憶才是我們的根，這句話沒錯；但「逐漸被抹去形成空白，甚至還被不肖之人給扭曲了...」，「不肖之人」是誰？
-
-&lt;&lt;linkreplace 選擇我們的道路...&gt;&gt;
-[[這是份危險的職業，還是不要繼續吧|隨波逐流消逝在歷史之中]]
-[[挺身而出吧，為了我們的根|道路的選擇]]
-[[還是繼續看看這是在幹嘛吧|道路的選擇]]
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="接著沉沉睡去......" tags="" position="102,900" size="100,100">&lt;em&gt;@@color:GRAY;
-不知過了多久，你在自己熟悉的位置醒來。
-
-你僅記得自己從一個賣藥網站開始做了些甚麼，卻不再記得自己的經歷。
-
-你決定...
-@@&lt;/em&gt;
-
-[[追朔那個網站與一切經歷|All started]]
-[[放棄一切]]</tw-passagedata><tw-passagedata pid="9" name="放棄一切" tags="" position="101,1098" size="100,100">如果說歷史是一個時間軸，
-人站在時間軸線上代表著一場又一場事件的節點，
-每個事件結束後總會留下一些東西。
-
-在盜匪眼中，這些東西是財寶；
-在博物館眼中是古董；
-在『拳師』眼裡，這些『物』代表失落的歷史與記憶。
-
-你僅是任由歷史留盪，未曾參與、創造、甚至使守護他們....
-
-&lt;h1&gt;BAD ENDDING&lt;/h1&gt;</tw-passagedata><tw-passagedata pid="10" name="道路的選擇" tags="" position="411,1049" size="100,100">&lt;h3&gt;
-
-日月江山一氣連，
-止戈共水不爭田。
-髮長當須頭顱落，
-豈作順民陳予仙。
-
-&lt;/h3&gt;
-
-&lt;em&gt;
-@@color:GRAY;
-隨著若干人等地離去，你意識到大家都有了明確的方向。
-
-很快的，就有人走湧向剛才過來的地方準備離去。
-
-其他人則分成幾波，往廳堂三側的門走去。
-
-漸漸的，廳堂就只剩下刻著詩詞的那個石碑，和還在思考的你。
-
-看來接下來的去向除了離開就與這三道門有關，你這時決定...
-@@
-&lt;/em&gt;
-
-[[蒙住眼睛，打個轉之後，隨意往出口與其他方向信步走去，聽天由命|隨波逐流消逝在歷史之中]]
-/*麻煩幫我隨機起來!!*/
-
-&lt;&lt;linkreplace 望向其他道門&gt;&gt;
-&lt;em&gt;@@color:GRAY;望向其他方向...@@&lt;/em&gt;
-[[往刻有「白鶴」的門走去]]
-[[往刻有「日月」的門走去|隨波逐流消逝在歷史之中]]
-[[往刻有「八卦」的門走去|隨波逐流消逝在歷史之中]]
-[[往前來廳堂的門來開此地|隨波逐流消逝在歷史之中]]
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;em&gt;@@color:GRAY;回頭思考剛剛說的話，尋找線索@@&lt;/em&gt;
-
-@@color:GREEN;(開發者ㄉ筆記：這邊想用類似海龜湯的形式，加上以前拼圖的功能，讓關鍵字可以被拖曳、放入盒子後組合成新的單詞，在將單詞不斷組合直至推倒出謎底)@@
-
-&lt;&lt;linkreplace 思考「『永華堂』的名號並非完全杜撰，接下來的一段話說明了我們的志志」&gt;&gt;
-或許包括詩詞與後面的演說，都會是重要的隻字片語！
-&lt;&lt;/linkreplace&gt;&gt;
-
-&lt;&lt;linkreplace 石碑?&gt;&gt;
-石碑上的詩文
-「日月」一詞道盡對大明江山的不捨，與不願從清廷規定而剃髮的決心。
-「豈作順民陳予仙」一句也相傳是化名陳近南的天地會舵主的革命志業
-&lt;&lt;/linkreplace&gt;&gt;
-@@color:GREEN;(選項：日月/明朝、陳予仙、陳近南)@@
-
-&lt;&lt;linkreplace 思考「政權時有興衰，以歷史的宏觀視角來看不過是曇花一現。只有民族、土地的記憶才是我們深扎的根。」&gt;&gt;
-看來政權並非重點，他們是想保護歷史。
-&lt;&lt;/linkreplace&gt;&gt;
-@@color:GREEN;(選項：政權非重點)@@
-
-&lt;&lt;linkreplace 思考「勢要對這樣的頹勢，再次進行革命！」&gt;&gt;
-看來這不是單純的保護活動，而是某種對抗。
-&lt;&lt;/linkreplace&gt;&gt;
-@@color:GREEN;(選項：革命)@@
-
-&lt;&lt;linkreplace 思考「後面各位踏入的將不是一件容易的志業，就如同求道修行一樣，但又遠比這個更多」&gt;&gt;
-遠比求道修行更多...？
-&lt;&lt;/linkreplace&gt;&gt;
-@@color:GREEN;(選項：求道修行、遠超求道)@@
-
-&lt;&lt;linkreplace 「追隨我們也次一個方向，選擇你們的道路...」&gt;&gt;
-追隨...?
-&lt;&lt;/linkreplace&gt;&gt;
-@@color:GREEN;(選項：追隨)@@
-
-&lt;&lt;linkreplace 綜合這些線索&gt;&gt;
-陳進南、天地會、陳永華，道人...白鶴道人...
-&lt;h3&gt;
-白鶴!!!
-&lt;/h3&gt;
-&lt;&lt;/linkreplace&gt;&gt;
-
-@@color:GREEN;
-
-配方(?)：
-見可刪筆記：https://docs.google.com/spreadsheets/d/1sbbsMQ37Ha1-pPwZNzYE33E8AS6izWosroTYLvpT9ME/edit#gid=184813529
-
-當出現Ｆ選項，可多做說明：天地會，相傳為陳永華化名陳進南所創建，是維護漢人政權的勢力。
-當出現Ｇ選項，可多做說明：相傳陳進南便是以傳道為明周遊四海，聯絡各方志士。
-當出現Ｈ選項，可多做說明：相傳陳進南曾於襄陽城南「白鶴洞」建居，以道士自居的他，號「白鶴道人」，今仍有祭祀「仙鶴先生」知人。
-部分選項相碰會替玩家帶來八卦、日月門楣的提示，但也有去除的，就讓玩家自行意會、組合
-
-@@</tw-passagedata><tw-passagedata pid="11" name="詳加研究桌上圖案" tags="" position="424,1344" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="12" name="往刻有「白鶴」的門走去" tags="" position="350,1202" size="100,100">※這邊還在做，先做到這邊
-
-&lt;em&gt;
-@@color:GRAY;
-再度來到一個室內空間，但不如剛才的廳堂大。
-
-一進門，你便注意到一座石桌，以及通往室外的出口。
-@@
-&lt;/em&gt;
-
-&lt;&lt;linkreplace 你仔細觀察四周&gt;&gt;
-你仔細觀察四周，所見的是...
-刻有密密麻麻圖樣、文字的石桌；內容是一大片表格，表格中有實心、挖空的格子，邊緣又飆有大量數列，但與數獨相仿...，上面又刻有一些中文字
-[[詳加研究桌上圖案]]
-&lt;&lt;/linkreplace&gt;&gt;
-
-[[直接往室外隨意離去，不再回來|隨波逐流消逝在歷史之中]]</tw-passagedata><tw-passagedata pid="13" name="組合線索1" tags="" position="1100,100" size="100,100">點擊後得到線索：
+/* 返回前頁結束 */</script><tw-passagedata pid="1" name="getclue" tags="" position="400,300" size="100,100">點擊後得到線索：
 &lt;&lt;button &#39;得到「日月」&#39;&gt;&gt;
 &lt;&lt;if $word.includes(&#39;日月&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;日月&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
@@ -1118,55 +155,491 @@ predisplay["Menu Return"] = function (taskName) {
 &lt;&lt;if $word.includes(&#39;陳予仙&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;陳予仙&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
+&lt;&lt;button &#39;得到「陳近南」&#39;&gt;&gt;
+&lt;&lt;if $word.includes(&#39;陳近南&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;陳近南&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &#39;得到「求道修行」&#39;&gt;&gt;
+&lt;&lt;if $word.includes(&#39;求道修行&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;求道修行&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
 &lt;&lt;button &#39;得到「追隨」&#39;&gt;&gt;
 &lt;&lt;if $word.includes(&#39;追隨&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;追隨&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &#39;得到「政權非重點」&#39;&gt;&gt;
+&lt;&lt;if $word.includes(&#39;政權非重點&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;政權非重點&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &#39;得到「革命」&#39;&gt;&gt;
+&lt;&lt;if $word.includes(&#39;革命&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;革命&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+
+&lt;&lt;button &#39;得到「遠超求道」&#39;&gt;&gt;
+&lt;&lt;if $word.includes(&#39;遠超求道&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;遠超求道&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;button &#39;清除全部線索&#39;&gt;&gt;
 &lt;&lt;unset $word&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-[[開始組合]]</tw-passagedata><tw-passagedata pid="14" name="組合1" tags="" position="1300,100" size="100,100">&lt;&lt;include &#39;下拉1&#39;&gt;&gt;＋&lt;&lt;include &#39;下拉2&#39;&gt;&gt;
+[[組合線索|combineclue]]</tw-passagedata><tw-passagedata pid="2" name="組合選單" tags="noreturn" position="600,300" size="100,100">&lt;&lt;include &#39;下拉1&#39;&gt;&gt;＋&lt;&lt;include &#39;下拉2&#39;&gt;&gt;
 	&lt;&lt;link 組合&gt;&gt;
-		&lt;&lt;if $action1 == $action2&gt;&gt;
+		&lt;&lt;if $action1 == $action2&gt;&gt;/* 組合1=組合2 */
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
 				什麼事都沒發生。
 			&lt;&lt;/dialog&gt;&gt;
-		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;/* 組合1=日月*/
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
-				&lt;&lt;include &#39;結果：天地會&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
 			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
 		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
-				答案就在日月門楣。
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
 			&lt;&lt;/dialog&gt;&gt;
-		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;日月&quot;&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
-				&lt;&lt;include &#39;結果：天地會&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
 			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;日月&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=陳予先 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果G&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
 		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
-				答案就在白鶴門楣。
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
 			&lt;&lt;/dialog&gt;&gt;
-		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;日月&quot;&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
-				答案就在日月門楣。
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳予仙&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=陳近南 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果G&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;陳近南&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=求道修行 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;求道修行&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=追隨 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
 			&lt;&lt;/dialog&gt;&gt;
 		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
-				答案就在白鶴門楣。
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;追隨&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=政權非重點 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;政權非重點&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=革命 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;革命&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=遠超求道 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;遠超求道&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=天地會 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS日月門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;天地會&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=傳道/道人 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果H&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;傳道/道人&quot; and $action2 is &quot;白鶴道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;日月&quot;&gt;&gt;/* 組合1=白鶴道人 */
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;陳予仙&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;陳近南&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;		
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;求道修行&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;×ANS八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;追隨&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;ANS白鶴門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;政權非重點&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;革命&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;遠超求道&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;去除八卦門楣&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;天地會&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果J&#39;&gt;&gt;
+			&lt;&lt;/dialog&gt;&gt;
+		&lt;&lt;elseif $action1 is &quot;白鶴道人&quot; and $action2 is &quot;傳道/道人&quot;&gt;&gt;
+			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
+				&lt;&lt;include &#39;結果F&#39;&gt;&gt;
 			&lt;&lt;/dialog&gt;&gt;
 		&lt;&lt;else&gt;&gt;
 			&lt;&lt;dialog &#39;結果&#39;&gt;&gt;
 				什麼事都沒發生。
 			&lt;&lt;/dialog&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="下拉1" tags="" position="1300,200" size="100,100">&lt;&lt;listbox &quot;$action1&quot;&gt;&gt;
+	&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="下拉1" tags="noreturn" position="600,400" size="100,100">&lt;&lt;listbox &quot;$action1&quot;&gt;&gt;
 &lt;&lt;optionsfrom $word&gt;&gt;
-&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="下拉2" tags="" position="1300,300" size="100,100">&lt;&lt;listbox &quot;$action2&quot;&gt;&gt;
+&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="下拉2" tags="noreturn" position="600,500" size="100,100">&lt;&lt;listbox &quot;$action2&quot;&gt;&gt;
 &lt;&lt;optionsfrom $word&gt;&gt;
-&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="StoryInit" tags="" position="1700,100" size="100,100">&lt;&lt;set $word to []&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="天地會" tags="" position="1400,400" size="100,100">你找到了新線索：天地會&lt;&lt;set $word.push(&quot;天地會&quot;)&gt;&gt;。
-&lt;&lt;timed 2s&gt;&gt;&lt;&lt;goto &quot;開始組合&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="開始組合" tags="" position="1100,250" size="100,100">目前有的線索：
+&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="StoryInit" tags="noreturn" position="200,600" size="100,100">&lt;&lt;set $word to []&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="天地會" tags="noreturn" position="700,200" size="100,100">你找到了新線索：天地會。&lt;&lt;if $word.includes(&#39;天地會&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;天地會&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[組合線索|combineclue]]</tw-passagedata><tw-passagedata pid="7" name="combineclue" tags="" position="500,300" size="100,100">目前有的線索：
 &lt;&lt;if $word.length is 0&gt;&gt;\
     沒有找到線索。
 &lt;&lt;else&gt;&gt;\
@@ -1177,10 +650,12 @@ predisplay["Menu Return"] = function (taskName) {
 &lt;&lt;if $word.length is 0&gt;&gt;
 線索不足以組合。
 &lt;&lt;else&gt;&gt;
-&lt;&lt;include &#39;組合1&#39;&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-[[返回前頁|$return]]</tw-passagedata><tw-passagedata pid="20" name="結果：天地會" tags="" position="1300,400" size="100,100">你找到了&lt;&lt;link 新線索&gt;&gt;&lt;&lt;goto &#39;天地會&#39;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;。</tw-passagedata></tw-storydata>
+&lt;&lt;include &#39;組合選單&#39;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="結果F" tags="noreturn" position="700,300" size="100,100">你找到了&lt;&lt;link 新線索&gt;&gt;&lt;&lt;goto &#39;天地會&#39;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;。</tw-passagedata><tw-passagedata pid="9" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[線索|combineclue]]</tw-passagedata><tw-passagedata pid="10" name="*StoryBanner" tags="noreturn" position="200,0" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="11" name="*StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="12" name="*StorySubtitle " tags="noreturn" position="200,200" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="13" name="*StoryAuthor " tags="noreturn" position="200,300" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="14" name="*StoryCaption" tags="noreturn" position="200,400" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="15" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="16" name="結果H" tags="noreturn" position="900,300" size="100,100">你找到了&lt;&lt;link 新線索&gt;&gt;&lt;&lt;goto &#39;白鶴道人&#39;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;。</tw-passagedata><tw-passagedata pid="17" name="結果G" tags="noreturn" position="800,300" size="100,100">你找到了&lt;&lt;link 新線索&gt;&gt;&lt;&lt;goto &#39;傳道/道人&#39;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;。</tw-passagedata><tw-passagedata pid="18" name="結果J" tags="noreturn" position="1000,300" size="100,100">你找到了&lt;&lt;link 新線索&gt;&gt;&lt;&lt;goto &#39;革命&#39;&gt;&gt;&lt;&lt;dialogclose&gt;&gt;&lt;&lt;/link&gt;&gt;。</tw-passagedata><tw-passagedata pid="19" name="×ANS日月門楣" tags="noreturn" position="1100,300" size="100,100">×ANS日月門楣</tw-passagedata><tw-passagedata pid="20" name="×ANS八卦門楣" tags="noreturn" position="1200,300" size="100,100">×ANS八卦門楣</tw-passagedata><tw-passagedata pid="21" name="ANS白鶴門楣" tags="noreturn" position="1300,300" size="100,100">ANS白鶴門楣</tw-passagedata><tw-passagedata pid="22" name="去除八卦門楣" tags="noreturn" position="1400,300" size="100,100">去除八卦門楣</tw-passagedata><tw-passagedata pid="23" name="去除日月門楣" tags="noreturn" position="1500,300" size="100,100">去除日月門楣</tw-passagedata><tw-passagedata pid="24" name="傳道/道人" tags="noreturn" position="800,200" size="100,100">你找到了新線索：傳道/道人。&lt;&lt;if $word.includes(&#39;傳道/道人&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;傳道/道人&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[組合線索|combineclue]]</tw-passagedata><tw-passagedata pid="25" name="白鶴道人" tags="noreturn" position="900,200" size="100,100">你找到了新線索：白鶴道人。&lt;&lt;if $word.includes(&#39;白鶴道人&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;白鶴道人&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[組合線索|combineclue]]</tw-passagedata><tw-passagedata pid="26" name="革命" tags="noreturn" position="1000,200" size="100,100">你找到了新線索：革命。&lt;&lt;if $word.includes(&#39;革命&#39;)&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;run $word.push(&#39;革命&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[組合線索|combineclue]]</tw-passagedata><tw-passagedata pid="27" name="start" tags="" position="500,100" size="100,100">[[獲得線索|getclue]]
+[[組合線索|combineclue]] </tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:i,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e);if("function"==typeof e.clone)return e.clone(!0);if(e.nodeType&&"function"==typeof e.cloneNode)return e.cloneNode(!0);var r=void 0;return e instanceof Array?r=new Array(e.length):e instanceof Date?r=new Date(e.getTime()):e instanceof Map?(r=new Map,e.forEach(function(e,n){return r.set(n,t(e))})):e instanceof RegExp?r=new RegExp(e):e instanceof Set?(r=new Set,e.forEach(function(e){return r.add(t(e))})):r=Object.create(Object.getPrototypeOf(e)),Object.keys(e).forEach(function(n){return r[n]=t(e[n])}),r}function r(e){
