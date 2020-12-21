@@ -100,7 +100,100 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="尋物紀實_序章體驗(程式功能)" startnode="27" creator="Twine" creator-version="2.3.9" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" zoom="1" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 特定片段產生連結網址開始 */
+	<tw-storydata name="尋物紀實_序章體驗(程式功能)" startnode="27" creator="Twine" creator-version="2.3.9" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" zoom="1" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/*彈跳視窗*/
+// dialog API macro set, by chapel; for sugarcube 2
+// version 1.3.0
+// see the documentation: https://github.com/ChapelR/custom-macros-for-sugarcube-2#dialog-api-macros
+
+// <<dialog>> macro
+Macro.add('dialog', {
+       tags : ['onopen', 'onclose'],
+    handler : function () {
+        
+        // handle args (if any)
+        var errors = [];
+        var content = '', onOpen = null, onClose = null;
+        var title = (this.args.length > 0) ? this.args[0] : '';
+        var classes = (this.args.length > 1) ? this.args.slice(1).flatten() : [];
+
+        this.payload.forEach( function (pl, idx) {
+            if (idx === 0) {
+                content = pl.contents;
+            } else {
+                if (pl.name === 'onopen') {
+                    onOpen = onOpen ? onOpen + pl.contents : pl.contents;
+                } else {
+                    onClose = onClose ? onClose + pl.contents : pl.contents;
+                }
+            }
+        });
+        
+        // add the macro- class
+        classes.push('macro-' + this.name);
+        
+        // dialog box
+        Dialog.setup(title, classes.join(' '));
+        Dialog.wiki(content);
+
+        // should these be shadowWrapper-aware?
+        if (onOpen && typeof onOpen === 'string' && onOpen.trim()) {
+            $(document).one(':dialogopened', function () {
+                $.wiki(onOpen);
+            });
+        }
+
+        if (onClose && typeof onClose === 'string' && onClose.trim()) {
+            $(document).one(':dialogclosed', function () {
+                $.wiki(onClose);
+            });
+        }
+
+        Dialog.open();
+        
+    }
+
+});
+
+// <<popup>> macro
+Macro.add('popup', {
+    handler : function () {
+        
+        // errors
+        if (this.args.length < 1) {
+            return this.error('need at least one argument; the passage to display');
+        }
+        if (!Story.has(this.args[0])) {
+            return this.error('the passage ' + this.args[0] + 'does not exist');
+        }
+        
+        // passage name and title
+        var psg   = this.args[0];
+        var title = (this.args.length > 1) ? this.args[1] : '';
+        var classes = (this.args.length > 2) ? this.args.slice(2).flatten() : [];
+        
+        // add the macro- class
+        classes.push('macro-' + this.name);
+        
+        // dialog box
+        Dialog.setup(title, classes.join(' '));
+        Dialog.wiki(Story.get(psg).processText());
+        Dialog.open();
+        
+    }
+
+});
+
+// <<dialogclose>> macro
+Macro.add('dialogclose', { 
+    skipArgs : true, 
+    handler : function () {
+        Dialog.close();
+    } 
+});
+
+
+
+/* 特定片段產生連結網址開始 */
 if ("onhashchange" in window) {  // event supported
 	window.onhashchange = function () {
 		hashChanged();
@@ -138,6 +231,7 @@ $(document).on(':passageend', function () { hashChanged(); });
 /* 介面中文化開始 */
 !function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
 /* 介面中文化結束 */
+
 
 
 /* 返回前頁開始 */
@@ -180,7 +274,7 @@ predisplay["Menu Return"] = function (taskName) {
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;button &#39;清除全部線索&#39;&gt;&gt;
-&lt;&lt;unset $word&gt;&gt;
+&lt;&lt;set $word to []&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
 [[組合線索|combineclue]]</tw-passagedata><tw-passagedata pid="2" name="組合選單" tags="noreturn" position="600,300" size="100,100">&lt;&lt;include &#39;下拉1&#39;&gt;&gt;＋&lt;&lt;include &#39;下拉2&#39;&gt;&gt;
