@@ -893,6 +893,14 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 @@color:green;{{{&lt;&lt;timed 1s t8n&gt;&gt;}}}@@出現的文字內容@@color:green;{{{&lt;&lt;/timed&gt;&gt;}}}@@
 要調整出現的時間，更改@@color:green;1s@@(1秒)
 不想要文字淡出，刪掉@@color:green;t8n@@
+
+//此語法亦可用來製作逐行出現的效果//
+以下是固定@@color:red;一秒@@後，逐行出現各行文字的語法
+@@color:green;{{{&lt;&lt;timed 1s t8n&gt;&gt;}}}@@第一行文字
+@@color:green;{{{&lt;&lt;next&gt;&gt;}}}@@第二行文字
+@@color:green;{{{&lt;&lt;next&gt;&gt;}}}@@第三行文字
+@@color:green;{{{&lt;&lt;/timed&gt;&gt;}}}@@
+文字逐行出現[[範例|逐行出現範例]]
 &lt;&lt;/message&gt;&gt;
 !!!!&lt;&lt;message &#39;4.喝醉效果&#39;&gt;&gt;
 * 新增CSS代碼
@@ -1272,10 +1280,21 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 選取「編輯故事Javascript腳本」(edit story javascript)，然後把代碼複製貼上即可。
 [img[media/javahow.png]]
 
-[[返回|previous()]]</tw-passagedata><tw-passagedata pid="26" name="逐行出現範例" tags="" position="600,500" size="100,100">@@.delayed;第一行@@
+[[返回|previous()]]</tw-passagedata><tw-passagedata pid="26" name="逐行出現範例" tags="" position="600,500" size="100,100">&quot;&quot;&quot;@@.delayed;&quot;&quot;&quot;
+@@.delayed;第一行@@
 @@.delayed;第二行@@
 @@.delayed;第三行@@
-@@.delayed;[[返回|previous()]]@@</tw-passagedata><tw-passagedata pid="27" name="變數" tags="" position="500,600" size="100,100">[[變數基本概念]]
+
+----
+
+&quot;&quot;&quot;&lt;&lt;timed&gt;&gt;&quot;&quot;&quot;
+&lt;&lt;timed 1s t8n&gt;&gt;第一行文字
+&lt;&lt;next&gt;&gt;第二行文字
+&lt;&lt;next&gt;&gt;第三行文字
+&lt;&lt;/timed&gt;&gt;
+
+[[再看一次效果|逐行出現範例]]
+[[返回|previous()]]</tw-passagedata><tw-passagedata pid="27" name="變數" tags="" position="500,600" size="100,100">[[變數基本概念]]
 [[變數進階：陣列]]
 [[變數應用]]
 [[返回首頁|start]]</tw-passagedata><tw-passagedata pid="28" name="變數進階：陣列" tags="" position="700,600" size="100,100">前一頁有說明到陣列的宣告方式，以下會介紹陣列的修改與讀取語法。
