@@ -100,7 +100,18 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="留草遺芳錄-遺芳九言" startnode="1" creator="Twine" creator-version="2.3.9" ifid="74B5A11F-48F9-4201-9161-E669B6F508AB" zoom="0.6" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*文字閃爍*/
+	<tw-storydata name="留草遺芳錄-遺芳九言" startnode="1" creator="Twine" creator-version="2.3.9" ifid="74B5A11F-48F9-4201-9161-E669B6F508AB" zoom="0.6" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* 思源黑體 */
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+/* 楷體字體 */
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexkai.css);
+/* 圓體字體 */
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
+.font-1 { font-family: 'Noto Sans TC', sans-serif; }
+.font-2 { font-family: 'cwTeXKai', sans-serif; }
+.font-3 { font-family: 'cwTeXYen', sans-serif; }
+
+/*文字閃爍*/
 .blink {
     -webkit-animation: blinker 1s step-end infinite;
             animation: blinker 1s step-end infinite;
@@ -171,7 +182,7 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 /* 喝醉效果 */
 .drunk {
 	animation: drunkCam 10s infinite alternate;
-	color: white;
+	color: black;
 }
 @keyframes drunkCam {
 	0%  { filter: blur(0px); text-shadow: 0 0 0 grey; }
@@ -519,6 +530,95 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
   100% {
     clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
   }
+}
+
+/*自訂樣式*/
+html {
+/*
+  background-image: linear-gradient(to bottom,  hsl(70, 39%, 30%), black);
+  background-image: -webkit-linear-gradient(top,  hsl(70, 39%, 30%), black);
+  background-attachment: fixed;
+*/
+  background-color: black;
+}
+body {
+  background-color: transparent;
+  margin: 2% 0 0 0;
+  font-size: 100%;
+}
+
+#passages {
+  background-color: white;
+  /*
+  background-image: linear-gradient(-135deg, BurlyWood, #6b432b);
+  background-image: -webkit-linear-gradient(-45deg, BurlyWood, #6b432b);
+  background-color: BurlyWood;
+  */
+  width: 70%;
+  margin:auto;
+  margin-bottom: 5%;
+  border-radius: 1em;
+  padding: 2em;
+  box-shadow: inset 0 0 2em DarkSlateGrey;
+}
+
+.passage {
+  margin: 0px;
+  padding: 2em;
+
+  /* Text formatting */
+  color: black;
+  font-family:'Noto Sans TC'!important;
+  text-align:justify;
+}
+
+input, select, textarea {
+ color: LightSlateGray; 
+}
+
+.passage br + .char {
+  margin-left: 1.6em;
+}
+
+.char.e + .char, .char.t + .char, .char.a + .char, .char.o + .char, .char.i + .char, .char.n + .char, .char:nth-child(8n) {
+  text-shadow: 0em 3px 0.3em hsla(82, 39%, 20%, .25);
+  color: rgba(0,0,0,0.7);
+}
+
+hr {
+  border: 0;
+  height: 2px !important;
+  background-color: black;
+  box-shadow: 0 0 1em darkolivegreen;
+}
+
+/* Links */
+.passage a .char {
+  color: hsla(82, 39%, 20%, .75);
+  text-shadow: 0em 3px 0.2em hsla(82, 39%, 20%, .25), 0em 6px 0.4em hsla(82, 39%, 20%, .25);
+}
+.passage a:visited .char {
+  color: hsla(37, 39%, 20%, .75);
+  text-shadow: 0em 3px 0.2em hsla(37, 39%, 20%, .25), 0em 6px 0.4em hsla(37, 39%, 20%, .25);
+}
+.passage a:hover {
+  text-decoration: none;
+}
+.passage a:hover .char {
+  color: darkgreen !important;
+}
+.passage a:visited:hover .char {
+  color: darkred !important;
+}
+
+.passage input[type="text"] {
+min-width: 60%;
+width: 60%;
+}
+
+＃ui-bar a,a {
+  font-family:'cwTeXYen'!important;
+  font-size: 120%;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 返回前頁開始 */
 predisplay["Menu Return"] = function (taskName) {
 	if (! tags().contains("noreturn")) {
@@ -690,7 +790,7 @@ Macro.add('ScrollTo', {
 
 /* 介面中文化開始 */
 !function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
-/* 介面中文化結束 */</script><tw-tag name="combine" color="purple"></tw-tag>,<tw-tag name="epoint" color="orange"></tw-tag>,<tw-tag name="include" color="yellow"></tw-tag>,<tw-tag name="noreturn" color="gray"></tw-tag>,<tw-tag name="other" color="blue"></tw-tag>,<tw-tag name="result" color="purple"></tw-tag>,<tw-tag name="spoint" color="green"></tw-tag>,<tw-tag name="進度" color="red"></tw-tag><tw-passagedata pid="1" name="All started" tags="spoint" position="200,100" size="200,200">真虧你能找到這裡，這樣便算是初步的篩選過了。
+/* 介面中文化結束 */</script><tw-tag name="combine" color="purple"></tw-tag>,<tw-tag name="epoint" color="orange"></tw-tag>,<tw-tag name="include" color="yellow"></tw-tag>,<tw-tag name="noreturn" color="gray"></tw-tag>,<tw-tag name="other" color="blue"></tw-tag>,<tw-tag name="result" color="purple"></tw-tag>,<tw-tag name="spoint" color="green"></tw-tag>,<tw-tag name="進度" color="red"></tw-tag>,<tw-tag name="phone" color="red"></tw-tag>,<tw-tag name="bag" color="red"></tw-tag><tw-passagedata pid="1" name="All started" tags="spoint" position="200,100" size="200,200">真虧你能找到這裡，這樣便算是初步的篩選過了。
 接下來就請你嘗試打開下面地址的大門吧，若你不是誤闖此地，定能打開……
 
 &lt;em&gt;(接下來，點擊&lt;&lt;link &#39;藍色的字&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;便能與之互動)&lt;/em&gt;
@@ -704,7 +804,7 @@ Macro.add('ScrollTo', {
 
 @@color:RED;莉莉@@
 @@color:BLUE;宗哥@@
-@@color:YELLOW;凜夜@@
+@@color:Orange;凜夜@@
 
 &lt;&lt;linkreplace 你仔細觀察四周&gt;&gt;
 123
@@ -988,13 +1088,13 @@ Macro.add('ScrollTo', {
 就字面意思去閱讀，字畫內容不完全能了解意涵；但若詳加觀察，便不難發現上面畫有奇怪的圖案，於是你一一湊近觀察並詳加記錄……@@
 
 &lt;&lt;linkappend 近看「則為河」的字畫&gt;&gt;@@color:GREEN;（將字畫記錄到背包中，從側邊欄選單點擊觀看）@@
-&lt;img src=&quot;https://drive.google.com/uc?id=16Ze5V3NEwXGILXF3EA38FDvxTJvvdpF0&quot; width=&quot;1080(px)&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
+&lt;img src=&quot;https://drive.google.com/uc?id=16Ze5V3NEwXGILXF3EA38FDvxTJvvdpF0&quot; width=&quot;100%&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;linkappend 近看「地正人浩」的字畫&gt;&gt;@@color:GREEN;（將字畫記錄到背包中，從側邊欄選單點擊觀看）@@
-&lt;img src=&quot;https://drive.google.com/uc?id=1zYLObaAy3m-Zkth0b1eAIeU1Kb6miXX2&quot; width=&quot;1080(px)&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
+&lt;img src=&quot;https://drive.google.com/uc?id=1zYLObaAy3m-Zkth0b1eAIeU1Kb6miXX2&quot; width=&quot;100%&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;linkappend 近看「上為星」的字畫&gt;&gt;@@color:GREEN;（將字畫記錄到背包中，從側邊欄選單點擊觀看）@@
-&lt;img src=&quot;https://drive.google.com/uc?id=1reJzSQ_pn7jJW2E0u_GsP6wBmD45RYH0&quot; width=&quot;1080(px)&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
+&lt;img src=&quot;https://drive.google.com/uc?id=1reJzSQ_pn7jJW2E0u_GsP6wBmD45RYH0&quot; width=&quot;100%&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
 &lt;&lt;linkappend 近看「雜賦形」的字畫&gt;&gt;@@color:GREEN;（將字畫記錄到背包中，從側邊欄選單點擊觀看）@@
-&lt;img src=&quot;https://drive.google.com/uc?id=1ZnT8Su_KE3FqBkKxlweZ86Qkwtkjvy9I&quot; width=&quot;1080(px)&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
+&lt;img src=&quot;https://drive.google.com/uc?id=1ZnT8Su_KE3FqBkKxlweZ86Qkwtkjvy9I&quot; width=&quot;100%&quot;&gt;&lt;&lt;/linkappend&gt;&gt;
 
 你隱隱感覺到，這一切與什麼事情似乎有著關聯，所以你決定……@@//
 &lt;hr&gt;
@@ -1013,7 +1113,7 @@ Macro.add('ScrollTo', {
 
 @@color:RED;莉莉@@
 @@color:BLUE;宗哥@@
-@@color:YELLOW;凜夜@@
+@@color:Orange;凜夜@@
 
 &lt;&lt;linkreplace 你仔細觀察四周&gt;&gt;
 123
@@ -1255,18 +1355,18 @@ Macro.add('ScrollTo', {
 &lt;&lt;/linkreplace&gt;&gt;
 */</tw-passagedata><tw-passagedata pid="22" name="有人拍了拍你的肩膀" tags="" position="1150,400" size="100,100">@@color:GREEN;來一張立繪阿@@
 「朋友，你也一個人嗎？」
-//@@color:YELLOW;拍你肩膀的人@@@@color:GRAY;，所用的力氣並不大，甚至可以說像蜻蜓點水一樣。他的身形也相襯得十分清瘦，卻背著與身形不符的一個袋子。@@//
+//@@color:Orange;拍你肩膀的人@@@@color:GRAY;，所用的力氣並不大，甚至可以說像蜻蜓點水一樣。他的身形也相襯得十分清瘦，卻背著與身形不符的一個袋子。@@//
 
-//@@color:GRAY;見你目光移向袋子，@@@@color:YELLOW;那人@@@@color:GRAY;馬上親切的向你解釋@@//
+//@@color:GRAY;見你目光移向袋子，@@@@color:Orange;那人@@@@color:GRAY;馬上親切的向你解釋@@//
 「喔！這是月琴啦，是一種很古老的樂器，我最近正在學習呢！」
-//@@color:YELLOW;他@@@@color:GRAY;對你投以純真、親切的笑容，讓你覺得這不像是和你一樣經歷了剛剛那些嚴肅的謎題的人。@@//
+//@@color:Orange;他@@@@color:GRAY;對你投以純真、親切的笑容，讓你覺得這不像是和你一樣經歷了剛剛那些嚴肅的謎題的人。@@//
 
 //@@color:GRAY;你望向他、又望向莉莉，一時間難以抉擇@@//
 
 &lt;&lt;linkreplace 往@@color:RED;莉莉@@看去&gt;&gt;
 //@@color:RED;莉莉@@@@color:GRAY;、@@@@color:BLUE;宗哥@@@@color:GRAY;的組合以是板上釘釘的事實，和他組隊已是無望……@@//
 &lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;link 向@@color:YELLOW;那人@@回話&gt;&gt;&lt;&lt;goto &#39;凜夜邀請&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link 向@@color:Orange;那人@@回話&gt;&gt;&lt;&lt;goto &#39;凜夜邀請&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 /*
 //@@color:GRAY;13132131321321@@//
@@ -1277,7 +1377,7 @@ Macro.add('ScrollTo', {
 
 //@@color:RED;莉莉@@//
 @@color:BLUE;宗哥@@
-@@color:YELLOW;凜夜@@
+@@color:Orange;凜夜@@
 
 &lt;&lt;linkreplace 你仔細觀察四周&gt;&gt;
 123
@@ -1287,20 +1387,20 @@ Macro.add('ScrollTo', {
 //@@color:BLUE;宗哥@@@@color:GRAY;自己閒聊之餘，竟也留意到了其他人的情況，你沒有多想，只覺得他是個老練、可靠的前輩。@@//
 
 「彼此加油吧『夥伴』！」
-//@@color:YELLOW;凜夜@@@@color:GRAY;神情輕鬆但是真誠的向你小聲說道，接著又補充道@@//
+//@@color:Orange;凜夜@@@@color:GRAY;神情輕鬆但是真誠的向你小聲說道，接著又補充道@@//
 「我會盡力在謎題上向你支援的！！！」
 
 //@@color:GRAY;見他真誠，加上先前@@@@color:BLUE;宗哥@@@@color:GRAY;「守護歷史的志士」的一席話，你不做他想的接納這個人。@@//
 
 &lt;&lt;linkreplace 請他日後多多指教。&gt;&gt;「日後請多多指教！」
-//@@color:GRAY;你的回覆讓@@@@color:YELLOW;凜夜@@@@color:GRAY;很是高興，這將是你們組隊生涯的開始。@@//
+//@@color:GRAY;你的回覆讓@@@@color:Orange;凜夜@@@@color:GRAY;很是高興，這將是你們組隊生涯的開始。@@//
 
 @@color:GRAY;&lt;h3&gt;「這可能會是你們入門後的重要夥伴！」&lt;/h3&gt;@@
 //@@color:BLUE;宗哥@@@@color:GRAY;這句話，更是迴繞在你的心中……@@//
 
 //@@color:GRAY;你們交談之際，@@@@color:BLUE;宗哥@@//&lt;&lt;linkreplace //並沒有閒下來……//&gt;&gt;//@@color:GRAY;宣佈道……@@//
 「大家若準備完畢，就可以分頭行動了，但可千萬要保全彼此的安全喔！」
-//@@color:GRAY;語罷，眾人開始了關於試驗的討論，你與@@@@color:YELLOW;凜夜@@@@color:GRAY;亦然。@@//
+//@@color:GRAY;語罷，眾人開始了關於試驗的討論，你與@@@@color:Orange;凜夜@@@@color:GRAY;亦然。@@//
 
 [[開始討論]]
 &lt;&lt;/linkreplace&gt;&gt;
@@ -1314,19 +1414,19 @@ Macro.add('ScrollTo', {
 
 //@@color:RED;莉莉@@//
 @@color:BLUE;宗哥@@
-@@color:YELLOW;凜夜@@
+@@color:Orange;凜夜@@
 
 &lt;&lt;linkreplace 你仔細觀察四周&gt;&gt;
 123
 &lt;&lt;/linkreplace&gt;&gt;
-*/</tw-passagedata><tw-passagedata pid="24" name="開始討論" tags="" position="1350,550" size="100,100">「一直以來，那個拳師前輩都是話中有話的，在講述很多事情……」//@@color:YELLOW;凜夜@@@@color:GRAY;首先得提出了一些自己的見解@@//「我覺得我們先梳理一下當下我們了解的所有資訊吧！」
+*/</tw-passagedata><tw-passagedata pid="24" name="開始討論" tags="" position="1350,550" size="100,100">「一直以來，那個拳師前輩都是話中有話的，在講述很多事情……」//@@color:Orange;凜夜@@@@color:GRAY;首先得提出了一些自己的見解@@//「我覺得我們先梳理一下當下我們了解的所有資訊吧！」
 
 //
 @@color:GRAY;隨著先前你們所聽的故事，大概可以理解到以下兩個重要的資訊：@@
 #鳳山宮&lt;&lt;run $clue2.pushUnique(&#39;鳳山宮&#39;)&gt;&gt;
 #台灣銀行台南分行&lt;&lt;run $clue2.pushUnique(&#39;台灣銀行台南分行&#39;)&gt;&gt;
 
-@@color:GRAY;於是你與@@@@color:YELLOW;凜夜@@@@color:GRAY;開始了推理……@@//
+@@color:GRAY;於是你與@@@@color:Orange;凜夜@@@@color:GRAY;開始了推理……@@//
 &lt;&lt;if $cluecount.includes(&#39;鳳山台銀&#39;)&gt;&gt;
 隨著你們簡單的推敲，很快發現了「六合境柱子行全台開基永華宮」這一地點，[[於是馬上動身前往。|六合境柱子行全台開基永華宮]]
 &lt;&lt;else&gt;&gt;
@@ -1355,7 +1455,7 @@ Macro.add('ScrollTo', {
 
 &lt;h3&gt;「咚嗆！」&lt;/h3&gt;
 
-//@@color:GRAY;隨著樹木歸位（或者說倒向後方牆面勉強的被扶著），@@//[[你逐漸回過神來看清楚了一切的情勢。|揭露]]</tw-passagedata><tw-passagedata pid="26" name="六合境柱子行全台開基永華宮" tags="" position="1475,550" size="100,100">//@@color:GRAY;自台南市的府前路一段向西行，並彎入196巷之中，你與@@@@color:YELLOW;凜夜@@@@color:GRAY;花了不到五分鐘的時間，就見到地面從人行道磚頭鋪成的路，轉變為灰白石磚的廟埕(廟前空地)，轉頭一張望，就見到了一座廟。
+//@@color:GRAY;隨著樹木歸位（或者說倒向後方牆面勉強的被扶著），@@//[[你逐漸回過神來看清楚了一切的情勢。|揭露]]</tw-passagedata><tw-passagedata pid="26" name="六合境柱子行全台開基永華宮" tags="" position="1475,550" size="100,100">//@@color:GRAY;自台南市的府前路一段向西行，並彎入196巷之中，你與@@@@color:Orange;凜夜@@@@color:GRAY;花了不到五分鐘的時間，就見到地面從人行道磚頭鋪成的路，轉變為灰白石磚的廟埕(廟前空地)，轉頭一張望，就見到了一座廟。
 
 橫梁之上，「永華宮」三個大字之外還有「全台開基」幾個小字，再加上前庭後方的匾額，你不難看出這裡就是「六合境柱仔行全台開基永華宮」。
 
@@ -1365,15 +1465,15 @@ Macro.add('ScrollTo', {
 @@//
 
 「沒想到搬遷的地方這麼近。」
-//@@color:YELLOW;凜夜@@@@color:GRAY;向你說道。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;向你說道。@@//
 
 「但不知道這裡埋藏了什麼重要的線索……」
-//@@color:YELLOW;凜夜@@@@color:GRAY;說罷，便親切的拉著你，[[自廟的左側、「龍門」處，往廟裡走去。]]@@//</tw-passagedata><tw-passagedata pid="27" name="自廟的左側、「龍門」處，往廟裡走去。" tags="" position="1600,550" size="100,100">&lt;&lt;if $visit.includesAll($temple1)&gt;&gt;
+//@@color:Orange;凜夜@@@@color:GRAY;說罷，便親切的拉著你，[[自廟的左側、「龍門」處，往廟裡走去。]]@@//</tw-passagedata><tw-passagedata pid="27" name="自廟的左側、「龍門」處，往廟裡走去。" tags="" position="1600,550" size="100,100">&lt;&lt;if $visit.includesAll($temple1)&gt;&gt;
 &lt;&lt;include &#39;永華宮全探索&#39;&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;來到永華宮內，莊嚴氣息更勝廟外的風光，廟內陳設、裝飾之豐富同樣讓你與@@@@color:YELLOW;凜夜@@@@color:GRAY;感到目不暇給。@@
+//@@color:GRAY;來到永華宮內，莊嚴氣息更勝廟外的風光，廟內陳設、裝飾之豐富同樣讓你與@@@@color:Orange;凜夜@@@@color:GRAY;感到目不暇給。@@
 
-@@color:YELLOW;凜夜@@@@color:GRAY;原地在廟中環視了個大概，便走向一旁像是廟方工作人員的老者問候幾句，接著就一起有說有笑的走向了你。@@//
+@@color:Orange;凜夜@@@@color:GRAY;原地在廟中環視了個大概，便走向一旁像是廟方工作人員的老者問候幾句，接著就一起有說有笑的走向了你。@@//
 
 「現在的年輕人居然還對這些廟的故事有興趣阿！」
 //@@color:GRAY;看起來像是廟公的老者笑咪咪的看著你們兩個，操著台語對你們說。@@//
@@ -1423,9 +1523,9 @@ Macro.add('ScrollTo', {
 
 [[往廟外移動]]
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="一起去「香爐」前仔細觀察" tags="" position="2400,550" size="100,100">&lt;img src=&quot;https://drive.google.com/uc?id=1IErY5CxdXKsODtU6W2lHii4AXmruXOX6&quot; width=&quot;300(px)&quot;&gt;
-//@@color:GRAY;靠近觀察後，你看到四處斑駁並帶有幾處龜裂的一個爐子，頂上有著奇怪生物的裝飾，周圍被布置了一些盆栽。@@@@color:YELLOW;凜夜@@@@color:GRAY;像是如獲至寶一樣的繞著它不斷上下打量，獨留你充滿疑惑。@@//
+//@@color:GRAY;靠近觀察後，你看到四處斑駁並帶有幾處龜裂的一個爐子，頂上有著奇怪生物的裝飾，周圍被布置了一些盆栽。@@@@color:Orange;凜夜@@@@color:GRAY;像是如獲至寶一樣的繞著它不斷上下打量，獨留你充滿疑惑。@@//
 
-「這可不是你所想的金爐啊！我找廟裡的阿伯來跟我們完整的解釋解釋！」//@@color:YELLOW;凜夜@@@@color:GRAY;說完後就用矯健的身手馬上去找來廟裡的工作人員，並請他做一些解釋。
+「這可不是你所想的金爐啊！我找廟裡的阿伯來跟我們完整的解釋解釋！」//@@color:Orange;凜夜@@@@color:GRAY;說完後就用矯健的身手馬上去找來廟裡的工作人員，並請他做一些解釋。
 
 原來這並不是我們在許多廟與看到的，用來焚燒金紙的金爐，永華宮的金爐是在廟的對面。
 
@@ -1443,32 +1543,30 @@ Macro.add('ScrollTo', {
 
 或許這個許特齊前輩，就曾經是繼承了兩百多年來天地會歷史的一名私塾老師，藉著私塾與教育的名義，暗自有一些活動吧！
 
-於是你和@@@@color:YELLOW;凜夜@@@@color:GRAY;交流了這個想法，並往下繼續進行推理。@@//
-&lt;&lt;linkreplace 進行推理&gt;&gt;
+於是你和@@@@color:Orange;凜夜@@@@color:GRAY;交流了這個想法，並往下繼續進行推理。@@//
 &lt;&lt;include &#39;推理2組合選單&#39;&gt;&gt;
-&lt;&lt;/linkreplace&gt;&gt;
 
 &lt;&lt;if $clue2.includes(&#39;許南英晚年&#39;)&gt;&gt;
-&lt;&lt;include &#39;許南英推理完畢&#39;&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;set $title3 to 1&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="叫住凜夜" tags="" position="550,800" size="100,100">//@@color:GRAY;隨著你的叫喚@@@@color:YELLOW;凜夜@@@@color:GRAY;剛轉身就馬上回頭@@//
-「怎麼啦？你這麼快就有發現嗎？」//@@color:YELLOW;凜夜@@@@color:GRAY;馬上湊近了你，想聽個明白@@//
+&lt;&lt;include &#39;許南英推理完畢&#39;&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;set $title3 to 1&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="叫住凜夜" tags="" position="550,800" size="100,100">//@@color:GRAY;隨著你的叫喚@@@@color:Orange;凜夜@@@@color:GRAY;剛轉身就馬上回頭@@//
+「怎麼啦？你這麼快就有發現嗎？」//@@color:Orange;凜夜@@@@color:GRAY;馬上湊近了你，想聽個明白@@//
 
 &lt;&lt;linkreplace 向他敘述你的疑慮&gt;&gt;//@@color:GRAY;在你向他敘述了你的疑慮之後，他誠心的向你道了謝@@//
-「哇~！謝謝你的關心，你真的很細心呢！」//@@color:YELLOW;凜夜@@@@color:GRAY;的口氣真誠的反而讓你有點不好意思，他隨即又兩手往腰間一插，作出很有精神的動作，並說@@//
+「哇~！謝謝你的關心，你真的很細心呢！」//@@color:Orange;凜夜@@@@color:GRAY;的口氣真誠的反而讓你有點不好意思，他隨即又兩手往腰間一插，作出很有精神的動作，並說@@//
 「但我也是有點能耐的喔！夥伴你就別擔心我了，我們的進度可是大大超前其他人的，可要繼續保持這個氣勢！」
 //@@color:GRAY;說完後他就衝你作了個大大的微笑，接著就轉身走向廟宇之中。
 
 「只是小小的一次試驗、廟的內外有這麼多人，事情能夠還能多糟糕呢？」你這麼告訴自己。
 
-雖然@@@@color:YELLOW;凜夜@@@@color:GRAY;像是在警戒著@@@@color:BLUE;宗哥@@@@color:GRAY;，但是這麼可靠的大前輩，又怎麼可能會讓大家出什麼亂子？@@//
+雖然@@@@color:Orange;凜夜@@@@color:GRAY;像是在警戒著@@@@color:BLUE;宗哥@@@@color:GRAY;，但是這麼可靠的大前輩，又怎麼可能會讓大家出什麼亂子？@@//
 
 //@@color:GRAY;與其擔心，還不如找出其他重要的線索，盡快和他碰頭！
 
 想到這裡，即便你懷著一些不安，但仍決定@@//[[放心讓他離去|繼續許南英這個線索的推理]]//@@color:GRAY;。@@//
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="繼續許南英這個線索的推理" tags="" position="550,700" size="100,100">//@@color:GRAY;望著獨自離去的@@@@color:YELLOW;凜夜@@@@color:GRAY;從你的視線消失在廟內人群裡，然後你繼續進行推理。@@//
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="繼續許南英這個線索的推理" tags="" position="550,700" size="100,100">//@@color:GRAY;望著獨自離去的@@@@color:Orange;凜夜@@@@color:GRAY;從你的視線消失在廟內人群裡，然後你繼續進行推理。@@//
 
 &lt;&lt;include &#39;推理2組合選單&#39;&gt;&gt;
 
-&lt;&lt;if $clue2.includes(&#39;許丙丁&#39;)&gt;&gt;//@@color:GRAY;至此，由@@@@color:BLUE;宗哥@@@@color:GRAY;給你們的題目，像是完成了個大概，所以你決定@@//&lt;&lt;linkreplace //去廟裡找凜夜看看他那邊有沒有什麼新發現。//&gt;&gt;&lt;&lt;include &#39;找凜夜新發現&#39;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="上前去慰問傷者" tags="" position="800,725" size="100,100">//@@color:GRAY;放眼望去，離你最近的傷者大概有三個，每個都各自有不同的受傷部位，與嚴重程度。@@//
+&lt;&lt;if $cluecount.includesAny(&#39;許地山日本政府&#39;, &#39;窺園留草日本政府&#39;)&gt;&gt;//@@color:GRAY;至此，由@@@@color:BLUE;宗哥@@@@color:GRAY;給你們的題目，像是完成了個大概，所以你決定@@//&lt;&lt;linkreplace //去廟裡找凜夜看看他那邊有沒有什麼新發現。//&gt;&gt;&lt;&lt;include &#39;找凜夜新發現&#39;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="上前去慰問傷者" tags="" position="800,725" size="100,100">//@@color:GRAY;放眼望去，離你最近的傷者大概有三個，每個都各自有不同的受傷部位，與嚴重程度。@@//
 
 &lt;&lt;linkreplace 前去檢查躺在地上奄奄一息的傷者&gt;&gt;&lt;hr&gt;
 @@color:GRAY;你上前查看他的狀況，他的傷勢雖然不嚴重，卻僅能氣若游絲的躺在地上，似乎剛剛在頭部受到過什麼重擊所以留有一些血漬。@@
@@ -1496,15 +1594,15 @@ Macro.add('ScrollTo', {
 
 「現在在場的大家還只是受傷的人的一半左右吧……那些人，尤其那個啤酒肚的為什麼進道廟裡了卻沒事，而且還多出了這麼多不明的男男女女在場，那些都是他們的人吧？」//@@color:GRAY;他的語氣一樣很快，向自自己也著急得在整理思緒，於是馬上又說道@@//
 
-「難道他們假借是扶我們出來，實際上攻擊我們的就是他們……」//@@color:GRAY;他說的話讓你陷入恐懼，因為這也不是不可能。這也讓你想起@@@@color:YELLOW;凜夜@@@@color:GRAY;的話。然後就像是[[想起了什麼……|凜夜人呢？]]@@//
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="於是你循聲音望去……" tags="" position="1050,725" size="100,100">//@@color:GRAY;循聲望去，果然是你剛在尋找的@@@@color:YELLOW;凜夜@@@@color:GRAY;，他正一瘸一拐的，獨自走了過來。@@//
+「難道他們假借是扶我們出來，實際上攻擊我們的就是他們……」//@@color:GRAY;他說的話讓你陷入恐懼，因為這也不是不可能。這也讓你想起@@@@color:Orange;凜夜@@@@color:GRAY;的話。然後就像是[[想起了什麼……|凜夜人呢？]]@@//
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="於是你循聲音望去……" tags="" position="1050,725" size="100,100">//@@color:GRAY;循聲望去，果然是你剛在尋找的@@@@color:Orange;凜夜@@@@color:GRAY;，他正一瘸一拐的，獨自走了過來。@@//
 
 &lt;&lt;linkreplace 趕緊上前攙扶。&gt;&gt;「抱歉阿，受了這麼大的傷，還沒有任何的調查收穫，可能要拖累你的調查了。」
-//@@color:YELLOW;凜夜@@@@color:GRAY;有點為難的向你賠不是，但此刻也沒有人會對這樣的情境做任何責怪吧。
+//@@color:Orange;凜夜@@@@color:GRAY;有點為難的向你賠不是，但此刻也沒有人會對這樣的情境做任何責怪吧。
 
 你感覺到附近人來人往的很不方便，所以馬上把他扶到離廟較為偏遠，剛剛你們休息的那棵榕樹下。沿途你問了他的傷勢，他雖然看起來有點狼狽，但是卻仍不改親切的神情跟你說他沒事，只要休息一下就好。
 
-你此刻充滿疑惑，見@@@@color:YELLOW;凜夜@@@@color:GRAY;還算有精神，於是想要問他剛剛的情況。
+你此刻充滿疑惑，見@@@@color:Orange;凜夜@@@@color:GRAY;還算有精神，於是想要問他剛剛的情況。
 
 剛要開口，他就先小聲地向你說道@@//
 「剛剛把你留在外面是對的，他們那些人果然有問題，不然怎麼會出事的都是我們這些受測驗的人……」
@@ -1512,26 +1610,26 @@ Macro.add('ScrollTo', {
 @@color:GRAY;你们來到樹下之後，放眼望去，發現場上都是些在廳堂內、銀行前面就看過的人，除了那些多出來、看起來都沒有事情的男男女女。
 
 這讓你連結了剛剛其它人說的話……@@
-「雖然似乎不該在這個時候問這個，但你有其它發現嗎？」//@@color:GRAY;看來@@@@color:YELLOW;凜夜@@@@color:GRAY;還是對測驗的內容很有興趣，所以你一五一十地把許南英、著作等等的事情一五一十地說了出來……@@//
+「雖然似乎不該在這個時候問這個，但你有其它發現嗎？」//@@color:GRAY;看來@@@@color:Orange;凜夜@@@@color:GRAY;還是對測驗的內容很有興趣，所以你一五一十地把許南英、著作等等的事情一五一十地說了出來……@@//
 
 &lt;hr&gt;
 
-「這些話你可不要和他們說……」//@@color:YELLOW;凜夜@@@@color:GRAY;聽完之後，語氣誠懇的說道@@//「或許我們被聚集起來，就是因為他們需要有人幫忙找到這些蛛絲馬跡，之所以現在的事情會發生，可能就是因為我們找到了足夠的資訊。」//@@color:GRAY;看到現在的狀況這般慘烈，你覺得這完全不無可能。@@//
+「這些話你可不要和他們說……」//@@color:Orange;凜夜@@@@color:GRAY;聽完之後，語氣誠懇的說道@@//「或許我們被聚集起來，就是因為他們需要有人幫忙找到這些蛛絲馬跡，之所以現在的事情會發生，可能就是因為我們找到了足夠的資訊。」//@@color:GRAY;看到現在的狀況這般慘烈，你覺得這完全不無可能。@@//
 
 「真是可惜，如果拳師這個事情是真的，我還真想在繼續往下挖掘下去。」
 
-「但是按照現在這個情況，恐怕我們光是要自保就有點難度了……」//@@color:YELLOW;凜夜@@@@color:GRAY;一臉可惜地向你說了這些，讓你也同樣感到可惜。@@//
+「但是按照現在這個情況，恐怕我們光是要自保就有點難度了……」//@@color:Orange;凜夜@@@@color:GRAY;一臉可惜地向你說了這些，讓你也同樣感到可惜。@@//
 
 //@@color:GRAY;這時，廟埕之內塞滿了傷患，似乎進行測驗時受傷的大家都被帶了出來。@@//
-「是說，你覺得許丙丁與拳師又是什麼關係呢？」//@@color:YELLOW;凜夜@@@@color:GRAY;像是保有著許多好奇心的繼續問了你。@@//
+「是說，你覺得許丙丁與拳師又是什麼關係呢？」//@@color:Orange;凜夜@@@@color:GRAY;像是保有著許多好奇心的繼續問了你。@@//
 
 「許丙丁？真虧你們能調查到這裡啊……」//@@color:GRAY;不知何時，@@@@color:BLUE;宗哥@@@@color:GRAY;朝你們靠了過來，聽到了你們對話內容的他，像是要說什麼。
 
-你馬上看向@@@@color:YELLOW;凜夜@@@@color:GRAY;，他又是一臉警戒，但似乎因為傷的關係沒有了先前的嚴肅神情。@@//
+你馬上看向@@@@color:Orange;凜夜@@@@color:GRAY;，他又是一臉警戒，但似乎因為傷的關係沒有了先前的嚴肅神情。@@//
 
 「你們很有潛力，一定能繼續查到更多資料的」//@@color:GRAY;這番鼓勵的話，在現在的情況看來，似乎帶著深意，難道他們還想要對你們做什麼！？@@//
 
-「如果你們肯的話，還可以繼續試驗，以你們的……」//@@color:BLUE;宗哥@@@@color:GRAY;越說離你們越近，彷彿有什麼極大的壓力在向你們靠攏；@@@@color:YELLOW;凜夜@@@@color:GRAY;則是越來越緊張。
+「如果你們肯的話，還可以繼續試驗，以你們的……」//@@color:BLUE;宗哥@@@@color:GRAY;越說離你們越近，彷彿有什麼極大的壓力在向你們靠攏；@@@@color:Orange;凜夜@@@@color:GRAY;則是越來越緊張。
 
 但他還沒說完，就被漸大的幾聲救護車的聲音打斷，而@@@@color:BLUE;宗哥@@@@color:GRAY;也將逐漸靠近你們的腳步停止下來，丟了一句@@//「等等受傷的人都來上車吧」//@@color:GRAY;便轉向受傷的人群走去。@@//
 
@@ -1547,18 +1645,18 @@ Macro.add('ScrollTo', {
 
 你對後者的想法感到不寒而慄。@@//
 
-「夥伴……以你的能耐一定能夠祕密的調查完剩下的事情了，但是我恐怕得先隨他們去醫院一趟。」//@@color:YELLOW;凜夜@@@@color:GRAY;剛剛還很緊張，這時卻釋然的將調查的任務交給了你。@@//
+「夥伴……以你的能耐一定能夠祕密的調查完剩下的事情了，但是我恐怕得先隨他們去醫院一趟。」//@@color:Orange;凜夜@@@@color:GRAY;剛剛還很緊張，這時卻釋然的將調查的任務交給了你。@@//
 
-「他們應該也會到醫院去，相信他們在醫護人員的眼皮底下，也不敢做些什麼」//@@color:GRAY;說笑之間，一名救護人員前來準備將@@@@color:YELLOW;凜夜@@@@color:GRAY;送上救護車。@@//
+「他們應該也會到醫院去，相信他們在醫護人員的眼皮底下，也不敢做些什麼」//@@color:GRAY;說笑之間，一名救護人員前來準備將@@@@color:Orange;凜夜@@@@color:GRAY;送上救護車。@@//
 
 [[於是你也趕近上前攙扶，協助他站起來]]&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="繼續後續的調查，完成夥伴的心願。" tags="spoint" position="200,1000" size="200,200">//@@color:GRAY;這時的永華宮早已恢復平靜，剩下廟內人員與香客偶有交談，似乎是心有餘悸。
 
 你知道，在這樹下，你有更多調查工作可以做，所以馬上展開了推理！@@//
-
-&lt;&lt;if $cluecount.includesAny(&#39;俠士傳承台灣文化&#39;, &#39;許丙丁革命日本政府&#39;, &#39;湯德章革命日本政府&#39;, &#39;俠士革命日本政府&#39;)&gt;&gt;
+&lt;&lt;run $clue2.delete(&#39;惜字亭&#39;)&gt;&gt;&lt;&lt;run $clue2.delete(&#39;窺園&#39;)&gt;&gt;&lt;&lt;run $clue2.delete(&#39;許特齊&#39;)&gt;&gt;&lt;&lt;run $clue2.delete(&#39;許南英&#39;)&gt;&gt;&lt;&lt;run $clue2.delete(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $clue2.delete(&#39;私塾&#39;)&gt;&gt;
+&lt;&lt;if $cluecount.includesAll(&#39;時機成熟1&#39;, &#39;時機成熟2&#39;)&gt;&gt;
 &lt;&lt;include &#39;推理出拳師傳承&#39;&gt;&gt;
 &lt;&lt;else&gt;&gt;
-&lt;&lt;include &#39;推理2組合選單&#39;&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;set $title4 to 1&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="於是你也趕近上前攙扶，協助他站起來" tags="epoint" position="1175,725" size="100,100">「謝謝，你可要加油啊」//@@color:YELLOW;凜夜@@@@color:GRAY;說罷便往車內走去，你看到他要做上的車裡，另外一位傷者的傷勢似乎不輕，在救護人員測量脈搏的時候仍不斷呻吟著。
+&lt;&lt;include &#39;推理2組合選單&#39;&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;set $title4 to 1&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="於是你也趕近上前攙扶，協助他站起來" tags="epoint" position="1175,725" size="100,100">「謝謝，你可要加油啊」//@@color:Orange;凜夜@@@@color:GRAY;說罷便往車內走去，你看到他要做上的車裡，另外一位傷者的傷勢似乎不輕，在救護人員測量脈搏的時候仍不斷呻吟著。
 
 這時候的你仍站在那棵樹下，茫然無措。
 
@@ -1571,9 +1669,9 @@ Macro.add('ScrollTo', {
 
 [[繼續後續的調查，完成夥伴的心願。]]</tw-passagedata><tw-passagedata pid="38" name="隨凜夜一同搭救護車到醫院，從此不再過問這些事情。" tags="epoint" position="1175,850" size="100,100">//@@color:GRAY;你邁開步子，趕上了救護車關門前坐了上去。@@
 
-@@color:YELLOW;凜夜@@@@color:GRAY;一臉詫異，像是想要說什麼，但卻止住了，只是滿臉遺憾地閉目養神。
+@@color:Orange;凜夜@@@@color:GRAY;一臉詫異，像是想要說什麼，但卻止住了，只是滿臉遺憾地閉目養神。
 
-到了醫院之後，你僅是陪在@@@@color:YELLOW;凜夜@@@@color:GRAY;身邊，陪他做了很多檢查，幸好他真的傷的不輕，當天就出院了。
+到了醫院之後，你僅是陪在@@@@color:Orange;凜夜@@@@color:GRAY;身邊，陪他做了很多檢查，幸好他真的傷的不輕，當天就出院了。
 
 離院前，你與他談論是否要繼續測驗，但他似乎怕了。
 
@@ -1605,7 +1703,7 @@ Macro.add('ScrollTo', {
 
 你知道你不可能在這個情況下支撐太久，於是開始後悔獨自完成試驗。
 
-不知道@@@@color:YELLOW;凜夜@@@@color:GRAY;現在傷勢如何……，但在怎麼慘可能也沒有你現在這樣狼狽吧。若是沒有@@@@color:BLUE;宗哥@@@@color:GRAY;那伙人傷害其它測驗的人，自己可能還能得到幫助，但現在可能只有廟裡的人能夠幫忙了。
+不知道@@@@color:Orange;凜夜@@@@color:GRAY;現在傷勢如何……，但在怎麼慘可能也沒有你現在這樣狼狽吧。若是沒有@@@@color:BLUE;宗哥@@@@color:GRAY;那伙人傷害其它測驗的人，自己可能還能得到幫助，但現在可能只有廟裡的人能夠幫忙了。
 
 豈料，由於這裡是個視覺上的死角，廟裡似乎沒有人發現你的狀況，況且，沒有人能料到這棵果善固定的樹木還能這樣倒下。再沒有人來幫忙，你恐怕就要被這樣下去……@@
 
@@ -1646,7 +1744,7 @@ Macro.add('ScrollTo', {
 [[直面掌擊，靜待一切變卦|宗哥Carry]]
 
 [[聽天由命，後悔加入這次的測驗|宗哥Carry]]@@//
-&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="揭露" tags="" position="800,1000" size="100,100">//@@color:GRAY;操著奇怪的兵器，與@@@@color:RED;莉莉@@@@color:GRAY;、@@@@color:BLUE;宗哥@@@@color:GRAY;展開對峙的，是你以為很親切的@@@@color:YELLOW;凜夜@@@@color:GRAY;，剛剛磅、磅的撞擊聲與逼近的腳步聲，恐怕其實是是他的。
+&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="揭露" tags="" position="800,1000" size="100,100">//@@color:GRAY;操著奇怪的兵器，與@@@@color:RED;莉莉@@@@color:GRAY;、@@@@color:BLUE;宗哥@@@@color:GRAY;展開對峙的，是你以為很親切的@@@@color:Orange;凜夜@@@@color:GRAY;，剛剛磅、磅的撞擊聲與逼近的腳步聲，恐怕其實是是他的。
 @@//
 
 //@@color:GRAY;原來到廟裡調查、去醫院稍作修養都是騙人的，實際上是抽身在幹這些壞事……。
@@ -1659,19 +1757,19 @@ Macro.add('ScrollTo', {
 //@@color:BLUE;宗哥@@@@color:GRAY;口氣嚴厲，但卻是給予肯定。@@//
 
 「『拳師』一眾卻是倒退無比，竟讓我們混入了重要的試驗！」
-//@@color:YELLOW;凜夜@@@@color:GRAY;一改親切，面部扭曲、口氣嚴厲的說道。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;一改親切，面部扭曲、口氣嚴厲的說道。@@//
 
 @@color:RED;「宗哥，別和他廢話了，你的能耐可不只如此。」@@
 //@@color:RED;莉莉@@@@color:GRAY;語氣平淡，雖然透漏著肯定，但也顯露出不耐煩。@@//
 
 「莉莉，我還沒套完話呢……」
-//@@color:BLUE;宗哥@@@@color:GRAY;又發出一套嚴密的拳腳招式襲向@@@@color:YELLOW;凜夜@@@@color:GRAY;。@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;又發出一套嚴密的拳腳招式襲向@@@@color:Orange;凜夜@@@@color:GRAY;。@@//
 
 「套話？你是不是小看我了？」
-//@@color:YELLOW;凜夜@@@@color:GRAY;嘴上說的不疾不徐，兵器與拳腳卻相反的如狂風般舞動，招式也是嚴嚴實實。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;嘴上說的不疾不徐，兵器與拳腳卻相反的如狂風般舞動，招式也是嚴嚴實實。@@//
 
 「根據你操作的兵器，你是『Emily』的手下的吧？難道你們還沒學乖？」
-//@@color:BLUE;宗哥@@@@color:GRAY;厲聲發問，@@@@color:YELLOW;凜夜@@@@color:GRAY;則輕蔑的回覆道@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;厲聲發問，@@@@color:Orange;凜夜@@@@color:GRAY;則輕蔑的回覆道@@//
 「首領的名號你叫的親切，但招式上倒是沒有首領的那般狠勁。」
 
 //@@color:GRAY;此等激戰場面，你看的心驚膽顫，畢竟這不是在尋常的生活中能看到的危險情況。但@@@@color:RED;莉莉@@@@color:GRAY;卻是泰然自若，僅帶有幾分警戒。@@//
@@ -1741,38 +1839,38 @@ Macro.add('ScrollTo', {
 &lt;&lt;/linkreplace&gt;&gt;
 
 &lt;&lt;linkreplace 還是別多想了，緊盯戰鬥&gt;&gt;
-//@@color:BLUE;宗哥@@@@color:GRAY;、@@@@color:YELLOW;凜夜@@@@color:GRAY;纏鬥良久，即便兩人年紀有著極大差異，但雙方仍不落下風的[[繼續出招、拆招。]]@@@@color:GRAY;你看著看著，便無從分心到@@@@color:RED;莉莉@@@@color:GRAY;身上。@@//&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="繼續出招、拆招。" tags="" position="925,1000" size="100,100">//@@color:GRAY;這場比試已經從招式的優異，逐漸變成了雙方專注度的拚比。@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;、@@@@color:Orange;凜夜@@@@color:GRAY;纏鬥良久，即便兩人年紀有著極大差異，但雙方仍不落下風的[[繼續出招、拆招。]]@@@@color:GRAY;你看著看著，便無從分心到@@@@color:RED;莉莉@@@@color:GRAY;身上。@@//&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="繼續出招、拆招。" tags="" position="925,1000" size="100,100">//@@color:GRAY;這場比試已經從招式的優異，逐漸變成了雙方專注度的拚比。@@//
 
 「你的能耐我已摸清了，招式的狠辣程度直逼『你們首領』沒錯，但恐怕你還有幾招沒有學會……」
-//@@color:BLUE;宗哥@@@@color:GRAY;語帶清挑，似乎是要讓@@@@color:YELLOW;凜夜@@@@color:GRAY;心生動搖，豈料@@@@color:YELLOW;凜夜@@@@color:GRAY;卻是輕鬆地回應。@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;語帶清挑，似乎是要讓@@@@color:Orange;凜夜@@@@color:GRAY;心生動搖，豈料@@@@color:Orange;凜夜@@@@color:GRAY;卻是輕鬆地回應。@@//
 
 「你這話又是怎麼說？難道你能夠使我這兵器九九八十一招的功法？」
 
 「確是不能……」//@@color:BLUE;宗哥@@@@color:GRAY;不疾不徐，回應道@@//「但是這一招卻是從你身上看不到的東西。」
-//@@color:BLUE;宗哥@@@@color:GRAY;語罷，就一改先前端正好看的架式，使了一個扭曲身形的怪招，將@@@@color:YELLOW;凜夜@@@@color:GRAY;的怪異兵器卸了下來，輕巧的拋給了@@@@color:RED;莉莉@@@@color:GRAY;。@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;語罷，就一改先前端正好看的架式，使了一個扭曲身形的怪招，將@@@@color:Orange;凜夜@@@@color:GRAY;的怪異兵器卸了下來，輕巧的拋給了@@@@color:RED;莉莉@@@@color:GRAY;。@@//
 
 「咦！？」
-//@@color:YELLOW;凜夜@@@@color:GRAY;一聲驚嘆，見到仍滯於半空的兵器，轉身就要去奪，但@@@@color:BLUE;宗哥@@@@color:GRAY;哪裡肯讓他離開。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;一聲驚嘆，見到仍滯於半空的兵器，轉身就要去奪，但@@@@color:BLUE;宗哥@@@@color:GRAY;哪裡肯讓他離開。@@//
 
 &lt;h3&gt;「碰！碰！碰！碰！碰！」&lt;/h3&gt;
-//@@color:BLUE;宗哥@@@@color:GRAY;見他失去了對自己的專注，便陡發招式向@@@@color:YELLOW;凜夜@@@@color:GRAY;襲去。@@@@color:YELLOW;凜夜@@@@color:GRAY;此時門戶大開，讓@@@@color:BLUE;宗哥@@@@color:GRAY;有了發揮空間。
+//@@color:BLUE;宗哥@@@@color:GRAY;見他失去了對自己的專注，便陡發招式向@@@@color:Orange;凜夜@@@@color:GRAY;襲去。@@@@color:Orange;凜夜@@@@color:GRAY;此時門戶大開，讓@@@@color:BLUE;宗哥@@@@color:GRAY;有了發揮空間。
 
-一連五招，勁力發的老辣！硬是將@@@@color:YELLOW;凜夜@@@@color:GRAY;打得站立不住。@@
+一連五招，勁力發的老辣！硬是將@@@@color:Orange;凜夜@@@@color:GRAY;打得站立不住。@@
 
-@@color:YELLOW;凜夜@@@@color:GRAY;受了重擊即將倒下之際，@@@@color:BLUE;宗哥@@@@color:GRAY;又是迅捷的身法，幾個跨步就靠近了@@@@color:YELLOW;凜夜@@@@color:GRAY;，並將他[[制伏在地]]，速度明顯比他剛才纏鬥時快捷很多。@@//</tw-passagedata><tw-passagedata pid="42" name="制伏在地" tags="" position="1050,1000" size="100,100">//@@color:GRAY;隨著宗哥的壓制，方才拋出的怪異兵器同時也落了下來。@@
+@@color:Orange;凜夜@@@@color:GRAY;受了重擊即將倒下之際，@@@@color:BLUE;宗哥@@@@color:GRAY;又是迅捷的身法，幾個跨步就靠近了@@@@color:Orange;凜夜@@@@color:GRAY;，並將他[[制伏在地]]，速度明顯比他剛才纏鬥時快捷很多。@@//</tw-passagedata><tw-passagedata pid="42" name="制伏在地" tags="" position="1050,1000" size="100,100">//@@color:GRAY;隨著宗哥的壓制，方才拋出的怪異兵器同時也落了下來。@@
 
 @@color:RED;莉莉@@@@color:GRAY;雖然因為它的重量而差點拿不住，但有了你機警的出手幫忙，讓東西不至於砸了你們的腳。@@//
 
 「警局那邊的朋友，泡茶的技術是差了點，但教我們的手法倒是純正有效。」
-//@@color:BLUE;宗哥@@@@color:GRAY;又回到輕鬆的態度，但壓制的手倒是箝的像鐵箍般緊密，讓@@@@color:YELLOW;凜夜@@@@color:GRAY;又驚又怒@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;又回到輕鬆的態度，但壓制的手倒是箝的像鐵箍般緊密，讓@@@@color:Orange;凜夜@@@@color:GRAY;又驚又怒@@//
 
 「老傢伙，你剛才使什麼妖法？！」
-//@@color:YELLOW;凜夜@@@@color:GRAY;不耐的大吼，神情完全沒有了先前的親切可鞠。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;不耐的大吼，神情完全沒有了先前的親切可鞠。@@//
 
 「妖法倒不至於啦，使的是『Emily』的妙手空空手法。」
 
 「首領的招式豈是你能學會的…！！！」
-//@@color:YELLOW;凜夜@@@@color:GRAY;失態的繼續大吼。這句話其實不是問句，但@@@@color:BLUE;宗哥@@@@color:GRAY;的個性哪裡會放過這個講幹話機會？@@//
+//@@color:Orange;凜夜@@@@color:GRAY;失態的繼續大吼。這句話其實不是問句，但@@@@color:BLUE;宗哥@@@@color:GRAY;的個性哪裡會放過這個講幹話機會？@@//
 
 「他的偷盜技巧我是不可能學全啦，但只是一些雞鳴狗盜的小身法倒是能簡單上手。」
 //@@color:BLUE;宗哥@@@@color:GRAY;像是在回想什麼@@//「嗯～」//@@color:BLUE;的一聲後又回道@@//
@@ -1783,20 +1881,20 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;這時你看清楚了發話之人，是個頭上有著數道刀疤的壯年男子，其他人則都是些你在選隊友時沒機會接觸的人們，原來這次的試煉真的是精心策畫的，但是是在一定程度的保護之上。@@//
 
 「感謝各位的挺力相助，這次的事情就不用特別稟上『拳不二』老人家了，連同這個人一起帶到警局的朋友那裏吧！」
-//@@color:BLUE;宗哥@@@@color:GRAY;輕巧的一拉、一提，@@@@color:YELLOW;凜夜@@@@color:GRAY;就因為受痛而配合著站起身來，並由刀疤男子接過去，整個過程如行雲流水，展現了他們各自的深厚功力。@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;輕巧的一拉、一提，@@@@color:Orange;凜夜@@@@color:GRAY;就因為受痛而配合著站起身來，並由刀疤男子接過去，整個過程如行雲流水，展現了他們各自的深厚功力。@@//
 
 「是什麼東西讓你撿走了，你倒是說阿！」
-//@@color:YELLOW;凜夜@@@@color:GRAY;雖然沒了剛才的勢頭，但仍然嘴上不留情面的罵著。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;雖然沒了剛才的勢頭，但仍然嘴上不留情面的罵著。@@//
 「就憑你們拳師的水平，怎麼可能隨隨便便就習得首領的一招一式！」
 
-//@@color:GRAY;刀疤男子聽到@@@@color:YELLOW;凜夜@@@@color:GRAY;出言不遜，便以冰冷且帶殺氣的口氣向@@@@color:YELLOW;凜夜@@@@color:GRAY;說道@@//
+//@@color:GRAY;刀疤男子聽到@@@@color:Orange;凜夜@@@@color:GRAY;出言不遜，便以冰冷且帶殺氣的口氣向@@@@color:Orange;凜夜@@@@color:GRAY;說道@@//
 「你聽著……這位小兄弟……，道上的人我見多了，但沒有一個可以這樣對@@color:BLUE;昇宗大哥@@講話的。」
 
 「你就別和他一般見識了。」//@@color:BLUE;宗哥@@@@color:GRAY;輕鬆地說道@@//「你可別讓怪盜一眾有了我們是混道上的人的錯覺呀！」
 
 「是，昇宗大哥，我不會再與他廢話。」//@@color:GRAY;刀疤男子敬重的回應@@//
 
-「小兄弟，就當作剛好分享給新人知道，就一齊說給你聽吧。」//@@color:BLUE;宗哥@@@@color:GRAY;看了看你，又親切的對@@@@color:YELLOW;凜夜@@@@color:GRAY;解釋道@@//
+「小兄弟，就當作剛好分享給新人知道，就一齊說給你聽吧。」//@@color:BLUE;宗哥@@@@color:GRAY;看了看你，又親切的對@@@@color:Orange;凜夜@@@@color:GRAY;解釋道@@//
 
 「隨著經手的案件多寡，或是累積對事件的調查，我們拳師能夠某種程度的去聽見『物』的聲音。」
 //@@color:BLUE;宗哥@@@@color:GRAY;吸了口氣，又道@@//「即便不才如我，僅能聽見若干的資訊，但透過對『物』的歷史的不輟挖掘，都能夠旁敲側擊的理解很多事情……」
@@ -1806,7 +1904,7 @@ Macro.add('ScrollTo', {
 「把他帶走吧，我們還要繼續試驗呢。」
 
 「是！」
-//@@color:GRAY;刀疤男子簡短但慎重的道別後，便催促著@@@@color:YELLOW;凜夜@@@@color:GRAY;，並與其他拳師一眾領著其餘怪盜，逐漸遠去。@@//
+//@@color:GRAY;刀疤男子簡短但慎重的道別後，便催促著@@@@color:Orange;凜夜@@@@color:GRAY;，並與其他拳師一眾領著其餘怪盜，逐漸遠去。@@//
 
 //@@color:BLUE;宗哥@@@@color:GRAY;見事件結束，便[[向在一旁呆若木雞的你道歉。|準備得到夥伴莉莉]]@@//
 
@@ -1819,7 +1917,7 @@ Macro.add('ScrollTo', {
 
 @@color:RED;莉莉@@
 @@color:BLUE;宗哥@@
-@@color:YELLOW;凜夜@@
+@@color:Orange;凜夜@@
 
 &lt;&lt;linkreplace 你仔細觀察四周&gt;&gt;
 123
@@ -2068,6 +2166,7 @@ Macro.add('ScrollTo', {
 
 [[重新回答|結結結結結結結結結局]]</tw-passagedata><tw-passagedata pid="52" name="StoryBanner" tags="noreturn" position="0,100" size="100,100">&lt;img src=&quot;https://3zhiyu.weebly.com/uploads/1/3/0/0/130070522/1219.png&quot; width=&quot;80%&quot;&gt;
 </tw-passagedata><tw-passagedata pid="53" name="StoryDisplayTitle" tags="noreturn" position="0,200" size="100,100">留草遺芳錄</tw-passagedata><tw-passagedata pid="54" name="StorySubtitle" tags="noreturn" position="0,300" size="100,100">-遺芳九言-</tw-passagedata><tw-passagedata pid="55" name="StoryAuthor" tags="noreturn" position="0,400" size="100,100">(三知餘文化)</tw-passagedata><tw-passagedata pid="56" name="*StoryCaption" tags="noreturn" position="0,500" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="57" name="StoryMenu" tags="noreturn" position="0,600" size="100,100">[[背包]]
+[[手機訊息|手機]]
 /*
 &lt;&lt;if $title1 is 1&gt;&gt;
 [[第一章|All started]]
@@ -2110,7 +2209,7 @@ Macro.add('ScrollTo', {
 
 /*永華宮*/
 &lt;&lt;set $visit to []&gt;&gt;
-&lt;&lt;set $temple1 to [&#39;偏殿&#39;, &#39;主殿&#39;, &#39;廟內紅柱&#39;, &#39;廟內木門&#39;, &#39;廟內匾額&#39;, &#39;廟內圖像&#39;, &#39;廟外白牆&#39;, &#39;廟外祈願榕樹&#39;, &#39;廟外榕樹&#39;, &#39;廟外裸牆&#39;, &#39;陳永華祭祀二樓&#39;, &#39;陳永華祭祀三樓&#39;]&gt;&gt;/*永華宮全探索*/</tw-passagedata><tw-passagedata pid="59" name="*StoryInterface" tags="noreturn" position="0,800" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="60" name="*PassageHeader" tags="noreturn" position="0,900" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="61" name="*PassageFooter" tags="noreturn" position="0,1000" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="62" name="背包" tags="noreturn" position="100,0" size="100,100">&lt;&lt;if $painting.length is 0&gt;&gt;\
+&lt;&lt;set $temple1 to [&#39;偏殿&#39;, &#39;主殿&#39;, &#39;廟內紅柱&#39;, &#39;廟內木門&#39;, &#39;廟內匾額&#39;, &#39;廟內圖像&#39;, &#39;廟外白牆&#39;, &#39;廟外祈願榕樹&#39;, &#39;廟外榕樹&#39;, &#39;廟外裸牆&#39;, &#39;陳永華祭祀二樓&#39;, &#39;陳永華祭祀三樓&#39;]&gt;&gt;/*永華宮全探索*/</tw-passagedata><tw-passagedata pid="59" name="*StoryInterface" tags="noreturn" position="0,800" size="100,100"></tw-passagedata><tw-passagedata pid="60" name="*PassageHeader" tags="noreturn" position="0,900" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="61" name="*PassageFooter" tags="noreturn" position="0,1000" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="62" name="背包" tags="noreturn bag" position="100,0" size="100,100">&lt;&lt;if $painting.length is 0&gt;&gt;\
     沒有東西。
 &lt;&lt;else&gt;&gt;\
   &lt;&lt;if $painting.includes(&#39;則為河&#39;)&gt;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=16Ze5V3NEwXGILXF3EA38FDvxTJvvdpF0&quot; width=&quot;1080(px)&quot;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
@@ -2325,13 +2424,13 @@ Macro.add('ScrollTo', {
 
 「現在，請你們以同為『守護歷史的志士』的心情，從現場的各位之中找尋一名搭檔，這可能會是你們入門後的重要夥伴！」
 
-//@@color:BLUE;宗哥@@@@color:GRAY;「守護歷史的志士」的一席話，讓你有了很多想像，@@[[於是你開始張望人群……|轉折-內鬼加入你]]//</tw-passagedata><tw-passagedata pid="75" name="凜夜邀請" tags="" position="1275,400" size="100,100">//@@color:GRAY;你簡單向@@@@color:YELLOW;那人@@@@color:GRAY;點了點頭，示意了一下。@@//
+//@@color:BLUE;宗哥@@@@color:GRAY;「守護歷史的志士」的一席話，讓你有了很多想像，@@[[於是你開始張望人群……|轉折-內鬼加入你]]//</tw-passagedata><tw-passagedata pid="75" name="凜夜邀請" tags="" position="1275,400" size="100,100">//@@color:GRAY;你簡單向@@@@color:Orange;那人@@@@color:GRAY;點了點頭，示意了一下。@@//
 
-「就叫我@@color:YELLOW;『凜夜』@@吧，這是我玩遊戲時都會用的ID，雖然很中二就是了」
+「就叫我@@color:Orange;『凜夜』@@吧，這是我玩遊戲時都會用的ID，雖然很中二就是了」
 //@@color:GRAY;那人真誠的解釋後，又向你投以親切的笑容，於是你也回之以禮的自我介紹。@@//
 
 「既然我們都是落單的人，不如就組成一隊吧，否則其他人都兩兩的湊在一起了！」
-//@@color:YELLOW;凜夜@@@@color:GRAY;說的沒錯，方才將你包圍的人群，早就像你們目前一樣開始熱絡的介紹起彼此。連@@@@color:RED;莉莉@@@@color:GRAY;、@@@@color:BLUE;宗哥@@@@color:GRAY;也有一搭沒一搭的閒聊，但他們明顯少了生澀的感覺，果然相識已久。@@//
+//@@color:Orange;凜夜@@@@color:GRAY;說的沒錯，方才將你包圍的人群，早就像你們目前一樣開始熱絡的介紹起彼此。連@@@@color:RED;莉莉@@@@color:GRAY;、@@@@color:BLUE;宗哥@@@@color:GRAY;也有一搭沒一搭的閒聊，但他們明顯少了生澀的感覺，果然相識已久。@@//
 
 //@@color:GRAY;見此光景，你不再做他想，決定……@@//
 
@@ -2647,6 +2746,10 @@ Macro.add('ScrollTo', {
 			&lt;&lt;replace &#39;#clue2result&#39;&gt;&gt;觀看[[推理結果|許丙丁湯德章]]！&lt;&lt;/replace&gt;&gt;
 		&lt;&lt;elseif $clue2list1 is &quot;許丙丁&quot; and $clue2list2 is &quot;湯德章&quot;&gt;&gt;
 			&lt;&lt;replace &#39;#clue2result&#39;&gt;&gt;觀看[[推理結果|許丙丁湯德章]]！&lt;&lt;/replace&gt;&gt;
+		&lt;&lt;elseif $clue2list1 is &quot;湯德章&quot; and $clue2list2 is &quot;俠士&quot;&gt;&gt;
+			&lt;&lt;replace &#39;#clue2result&#39;&gt;&gt;觀看[[推理結果|俠士湯德章]]！&lt;&lt;/replace&gt;&gt;
+		&lt;&lt;elseif $clue2list1 is &quot;俠士&quot; and $clue2list2 is &quot;湯德章&quot;&gt;&gt;
+			&lt;&lt;replace &#39;#clue2result&#39;&gt;&gt;觀看[[推理結果|俠士湯德章]]！&lt;&lt;/replace&gt;&gt;
 		&lt;&lt;else&gt;&gt;
 			&lt;&lt;replace &#39;#clue2result&#39;&gt;&gt;沒什麼有用的資訊。&lt;&lt;/replace&gt;&gt;
 		&lt;&lt;/if&gt;&gt;
@@ -2664,7 +2767,7 @@ Macro.add('ScrollTo', {
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
 //@@color:GRAY;經過幾次翻修，鳳山宮於清領時期更名為「永華宮」，並用於對陳永華的追念，後來又在日治時期被迫遷廟至六合境柱子行。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;經過幾次翻修，鳳山宮於清領時期更名為「永華宮」，並用於對陳永華的追念，後來又在日治時期被迫遷廟至六合境柱子行。@@//&lt;&lt;run $clue2.pushUnique(&#39;永華宮&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;日治時期&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;鳳山台銀&#39;)&gt;&gt;
+//@@color:GRAY;經過幾次翻修，鳳山宮於清領時期更名為「永華宮」，並用於對陳永華的追念，後來又在日治時期被迫遷廟至六合境柱子行。@@//&lt;&lt;run $cluecount.pushUnique(&#39;鳳山台銀&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="85" name="望向主殿" tags="" position="1650,325" size="100,100">//@@color:GRAY;望向主殿，除了廟與本身主祀神像外，還有更多的其他神像被擺在廟裡。
 透過廟內柱子上的對聯，你發現到原來永華宮內並非主要祭祀著陳永華，而是來自福建泉州南安，本名郭忠福的廣澤尊王，信眾、官府都因為其神蹟又追封了不少封號。
@@ -2718,36 +2821,36 @@ Macro.add('ScrollTo', {
 &lt;&lt;run $visit.pushUnique(&#39;詢問祭祀&#39;)&gt;&gt;&lt;&lt;run $visit.pushUnique(&#39;廟外&#39;)&gt;&gt;
 [[觀察廟內的其他地方|自廟的左側、「龍門」處，往廟裡走去。]]</tw-passagedata><tw-passagedata pid="92" name="望向白色的牆壁" tags="" position="1650,700" size="100,100">//@@color:GRAY;眼前的牆壁也不高，上方還有類似屋頂的裝飾物，用做區隔空間還可以，但是要能夠作為高樓建築的結構，看起來不是太合理。@@
 
-@@color:YELLOW;凜夜@@@@color:GRAY;見你望著牆壁像在思索什麼，對你說道@@//
+@@color:Orange;凜夜@@@@color:GRAY;見你望著牆壁像在思索什麼，對你說道@@//
 「這是照牆，有人也叫它照壁或影壁。」//@@color:GRAY;他向你笑了笑，又接著說@@//
 「我不是說過『我會盡力在謎題上向你支援的』嗎？這點程度的知識我就不需要廟裡的那個老爺爺幫忙了!」//@@color:GRAY;他充滿自信的向你回覆，見你了解了之後，又繼續補述@@//
 
 「過去建造這個，多半是用於提供防禦、阻隔海風、避邪和遮蔽效果，但你看它被漆成明亮的顏色，其實也同時能透過反射光線，來多少替室內空間提供……，用現在的話說，就叫『間接照明』吧!」
 
-//@@color:YELLOW;凜夜@@@@color:GRAY;說完後，想了一下，然後對你表示@@//
+//@@color:Orange;凜夜@@@@color:GRAY;說完後，想了一下，然後對你表示@@//
 「不過這對測驗來說，似乎沒有什麼幫助呢」//@@color:GRAY;語罷便是一陣苦笑。@@//
 &lt;&lt;run $visit.pushUnique(&#39;廟外白牆&#39;)&gt;&gt;
 [[觀察廟外的其他地方|往廟外移動]]</tw-passagedata><tw-passagedata pid="93" name="望向掛滿許願牌的榕樹" tags="" position="1750,700" size="100,100">//@@color:GRAY;從樹上掛滿的許願牌，你們可以感受到這裡對於吸引觀光客、信徒這件事，實在是不遺餘力。得益於附近就是台南孔廟，此處總是不乏觀光客，對向的泮宮坊也是氣勢輝煌。
 
 深入泮宮坊來到的老街也是別有風光。在假日時，這個古今交錯的氣息讓附近的攤販對遊客接應不暇，這些許願牌也是透過這樣的環境一點一滴地逐漸掛滿的吧。@@
 
-@@color:YELLOW;凜夜@@@@color:GRAY;幾個箭步跑向廟方人員問了一下之後，就馬上告訴你@@//「這個牌子已經有很久的歷史了，你看，這裡有很新很新的、也有早已斑駁老舊的牌子」//@@color:GRAY;說完就馬上往樹上一指，接著又說@@//「廟裡的人說，其實這些牌子也有掉下來的時候，但是這就意味著事情已經圓滿了，所以他們就不會再繼續把牌子掛回去了」
+@@color:Orange;凜夜@@@@color:GRAY;幾個箭步跑向廟方人員問了一下之後，就馬上告訴你@@//「這個牌子已經有很久的歷史了，你看，這裡有很新很新的、也有早已斑駁老舊的牌子」//@@color:GRAY;說完就馬上往樹上一指，接著又說@@//「廟裡的人說，其實這些牌子也有掉下來的時候，但是這就意味著事情已經圓滿了，所以他們就不會再繼續把牌子掛回去了」
 
 //@@color:GRAY;就像日本神社的繪馬的習俗一樣，在台灣有這樣的事情能夠祈願、紀念自己的一番心意，倒也挺浪漫的，但這和測驗的關聯似乎不大。@@//
 
 &lt;&lt;run $visit.pushUnique(&#39;廟外祈願榕樹&#39;)&gt;&gt;
 [[觀察廟外的其他地方|往廟外移動]]</tw-passagedata><tw-passagedata pid="94" name="望向另一棵榕樹" tags="" position="1650,800" size="100,100">//@@color:GRAY;看向另一棵榕樹，你發現它是被金屬支架給固定著的，旁邊還有一座小廟。@@
-@@color:YELLOW;凜夜@@@@color:GRAY;見你看著這棵樹，馬上對你說道@@//「當初這棵樹是一起被移來這裡種植的，但這棵樹的根被削掉大半，不如還紮根到孔廟前的另一棵來的穩健，所以僅能用這種方式將它固定、防止倒塌」//@@color:GRAY;然後又補充道@@//
+@@color:Orange;凜夜@@@@color:GRAY;見你看著這棵樹，馬上對你說道@@//「當初這棵樹是一起被移來這裡種植的，但這棵樹的根被削掉大半，不如還紮根到孔廟前的另一棵來的穩健，所以僅能用這種方式將它固定、防止倒塌」//@@color:GRAY;然後又補充道@@//
 
 「雖然這好像對測驗沒有幫助，不過它門邊的小廟也是有著多年歷史喔！！曾經有老樹倒下來，卻奇蹟的沒有壓到它與其他信眾呢！」
 
 &lt;&lt;run $visit.pushUnique(&#39;廟外榕樹&#39;)&gt;&gt;
-[[觀察廟外的其他地方|往廟外移動]]</tw-passagedata><tw-passagedata pid="95" name="望向一旁磚塊裸露的牆面" tags="" position="1750,800" size="100,100">//@@color:YELLOW;凜夜@@@@color:GRAY;和你都凝視了以「之」字方式錯落鋪排的紅磚結構牆面。
+[[觀察廟外的其他地方|往廟外移動]]</tw-passagedata><tw-passagedata pid="95" name="望向一旁磚塊裸露的牆面" tags="" position="1750,800" size="100,100">//@@color:Orange;凜夜@@@@color:GRAY;和你都凝視了以「之」字方式錯落鋪排的紅磚結構牆面。
 
 整面牆有著完整的漆面進行裝飾，唯獨右下區域以類似花瓣的圖案，裸露出磚頭結構，似乎是在展示著什麼。@@
 
-@@color:YELLOW;凜夜@@@@color:GRAY;沉思許久，終於像是想到什麼一樣的說道@@//
-「我想起來了，這是一種能夠用於抵抗地震的結構!應該是廟方為了展示這項特色才特別製作的展示區域，真是有心。」//@@color:GRAY;雖然像是解答了什麼，但是@@@@color:YELLOW;凜夜@@@@color:GRAY;搔了搔腦袋，似乎是覺得這跟測驗半點關係也沒有。@@//
+@@color:Orange;凜夜@@@@color:GRAY;沉思許久，終於像是想到什麼一樣的說道@@//
+「我想起來了，這是一種能夠用於抵抗地震的結構!應該是廟方為了展示這項特色才特別製作的展示區域，真是有心。」//@@color:GRAY;雖然像是解答了什麼，但是@@@@color:Orange;凜夜@@@@color:GRAY;搔了搔腦袋，似乎是覺得這跟測驗半點關係也沒有。@@//
 
 &lt;&lt;run $visit.pushUnique(&#39;廟外裸牆&#39;)&gt;&gt;
 [[觀察廟外的其他地方|往廟外移動]]</tw-passagedata><tw-passagedata pid="96" name="陳永華祭祀二樓" tags="include noreturn" position="2025,600" size="100,100">//@@color:GRAY;來到廟宇第二層處，雖然門窗封畢，無法觀賞任何東西，但是走廊處的圍牆滿是精緻的雕刻。
@@ -2755,19 +2858,19 @@ Macro.add('ScrollTo', {
 往原先的廟宇處望去，永華宮廟宇上方的結構、裝飾直映入眼簾，本僅能仰視之的諸多細節都變得清晰無比，霎時間讓你們感到心曠神怡！@@//
 &lt;&lt;run $visit.pushUnique(&#39;陳永華祭祀二樓&#39;)&gt;&gt;
 &lt;&lt;linkreplace 繼續向上方樓層前進&gt;&gt;@@color:GRAY;抵達三樓後，你們僅走個幾步便看到陳永華參軍的祭祀位置。
-@@@@color:YELLOW;凜夜@@@@color:GRAY;告訴你剛剛廟方人員有和他說明，本來廟方爭取過要將此處的布製作的更加豐富，但礙於與周邊環境的溝通結果不如預期，僅能以目前的形勢進行展示與祭祀。@@//
+@@@@color:Orange;凜夜@@@@color:GRAY;告訴你剛剛廟方人員有和他說明，本來廟方爭取過要將此處的布製作的更加豐富，但礙於與周邊環境的溝通結果不如預期，僅能以目前的形勢進行展示與祭祀。@@//
 
 @@color:GRAY;來到室內空間，除了兩側陪祀的神明，這裡主要祭祀著的，就是陳永華參軍的神像；兩側也撰有由吳榮富教授所提的對聯。@@
 
 //@@color:GRAY;精簡的空間內，你們發現能夠考究的東西看來沒有很多。@@//
 &lt;&lt;run $visit.pushUnique(&#39;陳永華祭祀三樓&#39;)&gt;&gt;
-[[再仔細看看祭祀處|仔細看看祭祀處]]&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="97" name="永華宮全探索" tags="include noreturn" position="2125,600" size="100,100">//@@color:YELLOW;凜夜@@@@color:GRAY;與你在廟內、廟外都跑遍了，就是沒有找到與天地會、拳師相關的痕跡，難道這件事情隱密到無法從這些觀察來得出答案嗎？
+[[再仔細看看祭祀處|仔細看看祭祀處]]&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="97" name="永華宮全探索" tags="include noreturn" position="2125,600" size="100,100">//@@color:Orange;凜夜@@@@color:GRAY;與你在廟內、廟外都跑遍了，就是沒有找到與天地會、拳師相關的痕跡，難道這件事情隱密到無法從這些觀察來得出答案嗎？
 
 還是說是你們找錯了方向呢？
 
-方才的一陣折騰讓你與@@@@color:YELLOW;凜夜@@@@color:GRAY;感到疲倦，於是@@@@color:YELLOW;凜夜@@@@color:GRAY;提議道@@//「我們到樹下陰涼處歇歇吧。」
+方才的一陣折騰讓你與@@@@color:Orange;凜夜@@@@color:GRAY;感到疲倦，於是@@@@color:Orange;凜夜@@@@color:GRAY;提議道@@//「我們到樹下陰涼處歇歇吧。」
 
-//@@color:GRAY;來到樹下，@@@@color:YELLOW;凜夜@@@@color:GRAY;捶了捶雙腿，深深換一口氣，像是在重整狀態。
+//@@color:GRAY;來到樹下，@@@@color:Orange;凜夜@@@@color:GRAY;捶了捶雙腿，深深換一口氣，像是在重整狀態。
 
 你沒有它這麼疲倦，[[只是往永華宮呆呆的望著。]]</tw-passagedata><tw-passagedata pid="98" name="只是往永華宮呆呆的望著。" tags="" position="2275,550" size="100,100">//@@color:GRAY;永華宮不少人像你們一樣在廟內、廟外走動。
 
@@ -2775,7 +2878,7 @@ Macro.add('ScrollTo', {
 
 這時@@@@color:BLUE;宗哥@@@@color:GRAY;也出現了，他悠哉的和@@@@color:RED;莉莉@@@@color:GRAY;慢慢走來，兩人不像是有在調查的樣子。@@//
 
-//@@color:GRAY;你馬上轉頭要告訴@@@@color:YELLOW;凜夜@@@@color:GRAY;，但卻見他一改親切的表情，像是警戒著什麼一樣的收起微笑。
+//@@color:GRAY;你馬上轉頭要告訴@@@@color:Orange;凜夜@@@@color:GRAY;，但卻見他一改親切的表情，像是警戒著什麼一樣的收起微笑。
 
 還沒來得及問他怎麼了，你便聽到……@@//
 「唉呦！乘個涼休息一下是很重要的，適當的休息也是拳師的工作。」
@@ -2789,18 +2892,18 @@ Macro.add('ScrollTo', {
 
 這時你循著@@@@color:BLUE;宗哥@@@@color:GRAY;的背影，在一個角落，發現了一個明顯與廟宇的保存狀況不同、類似金爐的建築。@@//
 
-&lt;&lt;linkreplace 你馬上將這個發現告訴@@color:YELLOW;凜夜@@&gt;&gt;
-@@color:GRAY;一轉頭，你看到@@@@color:YELLOW;凜夜@@@@color:GRAY;正盯著宗哥遠去的身影，直到聽到你跟他說話。@@
-「廟裡有金爐，這有什麼奇怪的嗎？？」//@@color:YELLOW;凜夜@@@@color:GRAY;恢復了親切的神色，但是仍以略帶疑惑的表情，向你說的方位望去。@@//
+&lt;&lt;linkreplace 你馬上將這個發現告訴@@color:Orange;凜夜@@&gt;&gt;
+@@color:GRAY;一轉頭，你看到@@@@color:Orange;凜夜@@@@color:GRAY;正盯著宗哥遠去的身影，直到聽到你跟他說話。@@
+「廟裡有金爐，這有什麼奇怪的嗎？？」//@@color:Orange;凜夜@@@@color:GRAY;恢復了親切的神色，但是仍以略帶疑惑的表情，向你說的方位望去。@@//
 
-「夥伴！！！」//@@color:YELLOW;凜夜@@@@color:GRAY;話語中帶著驚喜，馬上說道@@//「這個發現很不得了啊！」@@color:GRAY;接著就拉著你的手，@@[[一起去「香爐」前仔細觀察。|一起去「香爐」前仔細觀察]]//
+「夥伴！！！」//@@color:Orange;凜夜@@@@color:GRAY;話語中帶著驚喜，馬上說道@@//「這個發現很不得了啊！」@@color:GRAY;接著就拉著你的手，@@[[一起去「香爐」前仔細觀察。|一起去「香爐」前仔細觀察]]//
 &lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="99" name="私塾惜字亭" tags="result noreturn" position="500,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾惜字亭&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
 //@@color:GRAY;原來這裡曾經是個叫作「窺園」的私塾，昔日占地甚廣，是由一名叫作許廷彰，字特齊的人所建！@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;原來這裡曾經是個叫作「窺園」的私塾，昔日占地甚廣，是由一名叫作許廷彰，字特齊的人所建！@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許特齊&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾惜字亭&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園、許特齊。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園、許特齊。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="100" name="窺園許特齊" tags="result noreturn" position="700,1875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園許特齊&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2808,7 +2911,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;此處是許特齊在他的兒子許南英在六歲時，舉家搬遷至「南門里東安坊馬公廟」處，闢住宅四周的空地，悉心種植花木並設立私塾開館授徒，昔日的住家位置就在今日的延平郡王祠附近。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園許特齊&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="101" name="窺園許南英" tags="result noreturn" position="800,1875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園許南英&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2818,7 +2921,7 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;許南英於成年後，在窺園之內也創辦了「聞樨學舍」開館授徒，並廣為交遊。
 當時與吳樵山、丘逢甲、陳卜五、王永翔、施雲舫等名士和學人往來。許南英晚年在中國徐聞仍同時任有官職。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園許南英&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="102" name="私塾許南英" tags="result noreturn" position="800,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾窺園&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2828,14 +2931,13 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;許南英於成年後，在窺園之內也創辦了「聞樨學舍」開館授徒，並廣為交遊。
 當時與吳樵山、丘逢甲、陳卜五、王永翔、施雲舫等名士和學人往來。許南英晚年在中國徐聞仍同時任有官職。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾許南英&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
-[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="103" name="許南英推理完畢" tags="include noreturn" position="400,675" size="100,100">//@@color:GRAY;
-若說許南英除了窺園之外，尚繼承了父業，延續了那些天地會活動，那麼當年與他有往來的那些人們，可能也多半有著類似的志趣！
+[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="103" name="許南英推理完畢" tags="include noreturn" position="400,675" size="100,100">//@@color:GRAY;若說許南英除了窺園之外，尚繼承了父業，延續了那些天地會活動，那麼當年與他有往來的那些人們，可能也多半有著類似的志趣！
 
 迄今為止的發現是個重大的突破，但是怎麼會說這裡是第二次險些失傳的相關地點呢？@@//
 
-//@@color:YELLOW;凜夜@@@@color:GRAY;似乎與你有同樣的疑惑，所以他說：@@
+//@@color:Orange;凜夜@@@@color:GRAY;似乎與你有同樣的疑惑，所以他說：@@
 「目前的發現來蠻重要的，我覺得我有必要把這些發現加以運用，在對廟裡的環境做一些調查！！」
 
 @@color:GRAY;說完便將月琴袋子提到肩上背起來。@@//
@@ -2843,7 +2945,7 @@ Macro.add('ScrollTo', {
 「我們暫時分頭行動吧，你在這裡繼續想想，我若有任何發現都會再和你說的。」
 
 「如果你有發現，也要和我分享呦！」
-//@@color:GRAY;接著@@@@color:YELLOW;凜夜@@@@color:GRAY;就轉身要離開，但你隱隱覺得不妥：「拳師都是兩人活動」的這一條件讓你有些疑慮，於是你……@@//
+//@@color:GRAY;接著@@@@color:Orange;凜夜@@@@color:GRAY;就轉身要離開，但你隱隱覺得不妥：「拳師都是兩人活動」的這一條件讓你有些疑慮，於是你……@@//
 
 [[叫住凜夜]]
 
@@ -2861,7 +2963,7 @@ Macro.add('ScrollTo', {
 
 這層想法似乎很合理，略為破敗的敬字亭，也似乎是用自己的狀況，向你敘述著許南英的晚景，以及窺園最後的景色。@@//&lt;&lt;run $clue2.pushUnique(&#39;日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英晚年窺園&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="105" name="許南英日本政府" tags="noreturn result" position="1000,2075" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許南英日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2883,7 +2985,7 @@ Macro.add('ScrollTo', {
 五百份的書籍除了自家收藏外，還另外分贈親友之用。如此低調的處理，應該就是許南英在撰寫時，多少摻入了拳師相關的內容，並且也在年譜內作有文章吧!
 我們手上的年譜，估計就是當時候撰寫的部分內容。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="106" name="許地山窺園留草" tags="result noreturn" position="1200,2375" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許地山窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2903,7 +3005,7 @@ Macro.add('ScrollTo', {
 
 但，為什麼是許丙丁？？@@//&lt;&lt;run $clue2.pushUnique(&#39;許丙丁&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許地山日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許丙丁。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許丙丁。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="108" name="窺園留草日本政府" tags="result noreturn" position="1100,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園留草日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2915,7 +3017,7 @@ Macro.add('ScrollTo', {
 
 但，為什麼是許丙丁？？@@//&lt;&lt;run $clue2.pushUnique(&#39;許丙丁&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園留草日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許丙丁。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許丙丁。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="109" name="找凜夜新發現" tags="include noreturn" position="650,675" size="100,100">//@@color:GRAY;去廟裡找凜夜看看他那邊有沒有什麼新發現。@@//
 
@@ -2937,9 +3039,9 @@ Macro.add('ScrollTo', {
 
 霎時間，整個廟的內內外外像是炸開了鍋一樣，@@@@color:BLUE;宗哥@@@@color:GRAY;、@@@@color:RED;莉莉@@@@color:GRAY;以及其它完好無事的人們，又繼續忙進忙出的，整個空間也從剛道這裡時的清幽感，變成了充滿呻吟的痛苦哀號。@@//
 
-見到此景，你無法按奈自己的衝動，[[上前去慰問傷者]]。</tw-passagedata><tw-passagedata pid="110" name="凜夜人呢？" tags="" position="925,725" size="100,100">&lt;h3&gt;@@color:YELLOW;凜夜@@@@color:GRAY;人在哪裡？！@@&lt;/h3&gt;
+見到此景，你無法按奈自己的衝動，[[上前去慰問傷者]]。</tw-passagedata><tw-passagedata pid="110" name="凜夜人呢？" tags="" position="925,725" size="100,100">&lt;h3&gt;@@color:Orange;凜夜@@@@color:GRAY;人在哪裡？！@@&lt;/h3&gt;
 
-//@@color:GRAY;你突然意識到@@@@color:YELLOW;凜夜@@@@color:GRAY;可能有危險，於是開始左右張望，但那人又再次抓著你，這次的力道有點大，讓你感受道疼痛感，於是你的注意力又被拉了過去……@@//
+//@@color:GRAY;你突然意識到@@@@color:Orange;凜夜@@@@color:GRAY;可能有危險，於是開始左右張望，但那人又再次抓著你，這次的力道有點大，讓你感受道疼痛感，於是你的注意力又被拉了過去……@@//
 
 「不然怎麼可能一次就有這麼多人受傷？而且他們的人看起來都沒事……」//@@color:GRAY;接著，他像是受到驚嚇，突然的把抓著你手縮了回去，用著顫抖的聲音微微地說道……@@//
 
@@ -2951,7 +3053,7 @@ Macro.add('ScrollTo', {
 
 先前和藹可親的形象現在完全破滅。
 
-難道@@@@color:YELLOW;凜夜@@@@color:GRAY;口中需要注意的就是這個情況嗎？那我豈不也暴露在危險裡面了？！
+難道@@@@color:Orange;凜夜@@@@color:GRAY;口中需要注意的就是這個情況嗎？那我豈不也暴露在危險裡面了？！
 
 剛想到這裡，你就聽到了有人叫喚你，[[於是你循聲音望去……]]。</tw-passagedata><tw-passagedata pid="111" name="許丙丁日本政府" tags="result noreturn" position="1300,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2959,7 +3061,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許丙丁出生於日治時期，在音樂、著作方面多有成就，長期擔任警務直至二戰結束日本戰敗前。辭職後著有《實話偵探密帖》，其中還有律師湯德章的序文。@@//&lt;&lt;run $clue2.pushUnique(&#39;湯德章&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;日本戰敗&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：湯德章、日本戰敗。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：湯德章、日本戰敗。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="112" name="許丙丁日本戰敗" tags="result noreturn" position="1400,2575" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁日本戰敗&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2967,7 +3069,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許丙丁直至戰敗前都認有警職，並且在擔任警務時，以漫畫、音樂等才華，延續著傳承台灣文化，其中的《小封神》漫畫更是將台灣的神明文化發揮的精彩萬分！@@//&lt;&lt;run $clue2.pushUnique(&#39;傳承台灣文化&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁日本戰敗&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：傳承台灣文化。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：傳承台灣文化。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="113" name="湯德章日本戰敗" tags="result noreturn" position="1400,2675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;湯德章日本戰敗&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2977,7 +3079,7 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;湯德章身為台灣鄒族人與日本人混血，因為感到台灣人與日本人之間的不平等，加上日本警務同仁對他的排擠行為，早已在戰前辭去警務赴日求學。若干年後，學成返台的他開啟了律師事業，在地方上替台灣人對抗諸多不公平的地方。
 由於少時就以武術曾勇退地痞，學成歸台後的義舉更是讓他在地方上的俠士稱號更盛於當年。@@//&lt;&lt;run $clue2.pushUnique(&#39;俠士&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;湯德章日本戰敗&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：俠士。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：俠士。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="114" name="許丙丁湯德章" tags="result noreturn" position="1500,2575" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁湯德章&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -2986,11 +3088,11 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;除了乙未革命，日治時期的漢人仍對日本政府多有革命活動，其中一起焦吧哖事件的受害者家屬之中，就有湯德章。可能是正義感使然，同為好友的他們都曾擔任警務，並在國共內戰後，擔任過治安組長。@@//&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁湯德章&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="115" name="俠士傳承台灣文化" tags="result noreturn" position="1600,2875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士傳承台灣文化&#39;)&gt;&gt;
+[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="115" name="俠士傳承台灣文化" tags="result noreturn" position="1700,2775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士傳承台灣文化&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩位俠士：許丙丁、湯德章，做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士傳承台灣文化&#39;)&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩位俠士：許丙丁、湯德章，做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士傳承台灣文化&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟1&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="116" name="推理出拳師傳承" tags="include noreturn" position="400,975" size="100,100">//@@color:GRAY;曾三次險些失傳的拳師志業，原來最後是由許丙丁、湯德章兩人所繼承。
 
@@ -3012,7 +3114,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;國共內戰期間，台灣爆發舉國震驚的228事件。時任台灣省行政長官的陳儀假借協商名義，在中山堂舉行二二八事件處理委員會，台灣各縣市、地區也在數天後成立當地的處理委員會，其中台南就由韓石泉擔任主任委員，與地方人士共同處理相關事務。其中，由湯德章抱病擔任治安組組長，維持該市治安。@@//&lt;&lt;run $clue3.pushUnique(&#39;二二八事件&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;湯德章國民政府遷台&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：二二八事件。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：二二八事件。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="119" name="許丙丁治安組長" tags="result noreturn" position="1425,1700" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁治安組長&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3043,7 +3145,7 @@ Macro.add('ScrollTo', {
 
 然而在陳儀的陰謀之下，表面和平的台灣各地，再次發生血洗的慘案。@@//&lt;&lt;run $clue3.pushUnique(&#39;血洗慘案&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;二二八事件治安組長&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：血洗慘案。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：血洗慘案。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="122" name="湯德章治安組長" tags="result noreturn" position="1525,1700" size="100,100">&lt;&lt;if $cluecount.includes(&#39;湯德章治安組長&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3059,7 +3161,7 @@ Macro.add('ScrollTo', {
 
 然而在陳儀的陰謀之下，表面和平的台灣各地，再次發生血洗的慘案。@@//&lt;&lt;run $clue3.pushUnique(&#39;二二八事件&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;湯德章治安組長&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：二二八事件。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：二二八事件。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="123" name="湯德章血洗慘案" tags="result noreturn" position="1525,1900" size="100,100">&lt;&lt;if $cluecount.includes(&#39;湯德章血洗慘案&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3132,7 +3234,7 @@ Macro.add('ScrollTo', {
 這邊沒有什麼特別的，是不是前面有漏掉什麼……
 
 [[往廟外移動]]
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="多虧廟方人員，又有新的資料可以推理了！" tags="epoint" position="2275,725" size="100,100">把剛剛獲得的資料，繼續進行推理！
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="127" name="多虧廟方人員，又有新的資料可以推理了！" tags="epoint" position="2275,725" size="100,100">把剛剛獲得的資料，繼續進行推理！&lt;&lt;run $clue2.delete(&#39;鳳山宮&#39;)&gt;&gt;&lt;&lt;run $clue2.delete(&#39;台灣銀行台南分行&#39;)&gt;&gt;
 &lt;&lt;include &#39;推理2組合選單&#39;&gt;&gt;
 
 &lt;&lt;if $clue2.includes(&#39;許南英&#39;)&gt;&gt;[[將所有發現與手上資料作比對。|將這一發現與手上資料作比對]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="128" name="空結果" tags="result noreturn" position="350,1275" size="100,100"></tw-passagedata><tw-passagedata pid="129" name="1" tags="" position="1725,50" size="100,100">/*白鶴*/
@@ -3162,90 +3264,115 @@ Macro.add('ScrollTo', {
 
 &lt;&lt;linkappend 「追隨我們也是一個方向，選擇你們的道路……」&gt;&gt;
 //@@color:GRAY;追隨...？@@//
-&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="資訊足夠了，來推理應該往哪一扇門走吧！" tags="" position="2050,250" size="100,100">//@@color:GRAY;利用已獲得的資訊關鍵字，將兩種資訊組合起來推理，也許就能得出新的資訊。@@//
+&lt;&lt;/linkappend&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="資訊足夠了，來推理應該往哪一扇門走吧！" tags="" position="2050,275" size="100,100">//@@color:GRAY;利用已獲得的資訊關鍵字，將兩種資訊組合起來推理，也許就能得出新的資訊。@@//
 &lt;&lt;linkreplace 立刻來試試吧！&gt;&gt;
 &lt;&lt;include &#39;推理1組合選單&#39;&gt;&gt;
 &lt;&lt;/linkreplace&gt;&gt;
-&lt;&lt;if $cluecount.includes(&#39;陳予仙天地會&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與天地會的資料|陳予仙天地會]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;陳予仙保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與保護歷史的資料|陳予仙保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $cluecount.includes(&#39;天地會保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶天地會與保護歷史的資料|天地會保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;傳教天地會&#39;)&gt;&gt;&lt;br&gt;[[回憶天地會與傳教的資料|傳教天地會]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;傳教陳予仙&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與傳教的資料|傳教陳予仙]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;傳教保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶保護歷史與傳教的資料|傳教保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢陳予仙&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與留漢的資料|留漢陳予仙]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢天地會&#39;)&gt;&gt;&lt;br&gt;[[回憶天地會與留漢的資料|留漢天地會]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶留漢與保護歷史的資料|留漢保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢傳教&#39;)&gt;&gt;&lt;br&gt;[[回憶留漢與傳教的資料|留漢傳教]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $clue1.includes(&#39;汗青&#39;)&gt;&gt;[[找到門相關的線索，選擇前進的道路吧！|道路的選擇]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="134" name="陳予仙天地會" tags="result noreturn" position="0,1600" size="100,100">&lt;&lt;if $cluecount.includes(&#39;陳予仙天地會&#39;)&gt;&gt;
+&lt;&lt;if $cluecount.includes(&#39;陳予仙天地會&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與天地會的資料|陳予仙天地會]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;陳予仙保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與保護歷史的資料|陳予仙保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;天地會保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶天地會與保護歷史的資料|天地會保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;傳教天地會&#39;)&gt;&gt;&lt;br&gt;[[回憶天地會與傳教的資料|傳教天地會]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;傳教陳予仙&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與傳教的資料|傳教陳予仙]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;傳教保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶保護歷史與傳教的資料|傳教保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢陳予仙&#39;)&gt;&gt;&lt;br&gt;[[回憶陳予仙與留漢的資料|留漢陳予仙]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢天地會&#39;)&gt;&gt;&lt;br&gt;[[回憶天地會與留漢的資料|留漢天地會]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢保護歷史&#39;)&gt;&gt;&lt;br&gt;[[回憶留漢與保護歷史的資料|留漢保護歷史]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $cluecount.includes(&#39;留漢傳教&#39;)&gt;&gt;&lt;br&gt;[[回憶留漢與傳教的資料|留漢傳教]]&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $clue1.includes(&#39;傳教&#39;)&gt;&gt;&lt;br&gt;//八卦門楣似乎不是解答……//&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $clue1.includes(&#39;留漢&#39;)&gt;&gt;&lt;br&gt;//日月門楣似乎不是解答……//&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $clue1.includes(&#39;汗青&#39;)&gt;&gt;&lt;br&gt;//竹子門楣似乎是應該追尋的道路……//&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[訊息已經足夠，選擇前進的道路！|道路的選擇]]</tw-passagedata><tw-passagedata pid="134" name="陳予仙天地會" tags="result noreturn" position="0,1600" size="100,100">&lt;&lt;if $cluecount.includes(&#39;陳予仙天地會&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;陳予仙和天地會的資訊(D)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;相傳陳進南就是天地會之領袖，當年他就是以傳道的名義進行成員的聯繫，以及廣召志士的手段，這也是石碑之上的詩詞的由來。
+又有傳說說道他過去曾結廬白鶴洞，故有白鶴道人之自稱。
+但是，剛剛發話人有講過「遠超求道」的說法，似乎八卦門楣不是解答呢……@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;陳予仙和天地會的資訊(D)。@@//&lt;&lt;run $clue1.pushUnique(&#39;傳教&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;陳予仙天地會&#39;)&gt;&gt;
+//@@color:GRAY;相傳陳進南就是天地會之領袖，當年他就是以傳道的名義進行成員的聯繫，以及廣召志士的手段，這也是石碑之上的詩詞的由來。
+又有傳說說道他過去曾結廬白鶴洞，故有白鶴道人之自稱。
+但是，剛剛發話人有講過「遠超求道」的說法，似乎八卦門楣不是解答呢……@@//&lt;&lt;run $clue1.pushUnique(&#39;傳教&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;陳予仙天地會&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：傳教。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：傳教。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="135" name="陳予仙保護歷史" tags="result noreturn" position="100,1600" size="100,100">&lt;&lt;if $cluecount.includes(&#39;陳予仙保護歷史&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;陳予仙和保護歷史的資訊(E)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;當年延平郡王攻台不久便逝世，或許是自知實力不夠，鄭氏政權後來把方針自留漢轉做復明，這對天地會來說，應該是個重大的改變。
+但是剛剛提到了政權並非重點，那麼應該不會將明朝視做是首要傳承的對象，這樣象徵明朝的日月門，可能就沒有了進去的價值……@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;陳予仙和保護歷史的資訊(E)。@@//&lt;&lt;run $clue1.pushUnique(&#39;留漢&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;陳予仙保護歷史&#39;)&gt;&gt;
+//@@color:GRAY;當年延平郡王攻台不久便逝世，或許是自知實力不夠，鄭氏政權後來把方針自留漢轉做復明，這對天地會來說，應該是個重大的改變。
+但是剛剛提到了政權並非重點，那麼應該不會將明朝視做是首要傳承的對象，這樣象徵明朝的日月門，可能就沒有了進去的價值……@@//&lt;&lt;run $clue1.pushUnique(&#39;留漢&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;陳予仙保護歷史&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：留漢。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：留漢。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="136" name="天地會保護歷史" tags="result noreturn" position="100,1700" size="100,100">&lt;&lt;if $cluecount.includes(&#39;天地會保護歷史&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;天地會和保護歷史的資訊(E)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;當年延平郡王攻台不久便逝世，或許是自知實力不夠，鄭氏政權後來把方針自留漢轉做復明，這對天地會來說，應該是個重大的改變。
+但是剛剛提到了政權並非重點，那麼應該不會將明朝視做是首要傳承的對象，這樣象徵明朝的日月門，可能就沒有了進去的價值……@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;天地會和保護歷史的資訊(E)。@@//&lt;&lt;run $clue1.pushUnique(&#39;傳教&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;天地會保護歷史&#39;)&gt;&gt;
+//@@color:GRAY;當年延平郡王攻台不久便逝世，或許是自知實力不夠，鄭氏政權後來把方針自留漢轉做復明，這對天地會來說，應該是個重大的改變。
+但是剛剛提到了政權並非重點，那麼應該不會將明朝視做是首要傳承的對象，這樣象徵明朝的日月門，可能就沒有了進去的價值……@@//&lt;&lt;run $clue1.pushUnique(&#39;傳教&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;天地會保護歷史&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：傳教。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：傳教。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="137" name="傳教天地會" tags="result noreturn" position="200,1700" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳教天地會&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;天地會和傳教的資訊(D)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;相傳陳進南就是天地會之領袖，當年他就是以傳道的名義進行成員的聯繫，以及廣召志士的手段，這也是石碑之上的詩詞的由來。
+又有傳說說道他過去曾結廬白鶴洞，故有白鶴道人之自稱。
+但是，剛剛發話人有講過「遠超求道」的說法，似乎八卦門楣不是解答呢……@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;天地會和傳教的資訊(D)。@@//&lt;&lt;run $cluecount.pushUnique(&#39;傳教天地會&#39;)&gt;&gt;
+//@@color:GRAY;相傳陳進南就是天地會之領袖，當年他就是以傳道的名義進行成員的聯繫，以及廣召志士的手段，這也是石碑之上的詩詞的由來。
+又有傳說說道他過去曾結廬白鶴洞，故有白鶴道人之自稱。
+但是，剛剛發話人有講過「遠超求道」的說法，似乎八卦門楣不是解答呢……@@//&lt;&lt;run $cluecount.pushUnique(&#39;傳教天地會&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="138" name="傳教陳予仙" tags="result noreturn" position="200,1600" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳教陳予仙&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;陳予仙和傳教的資訊(D)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;相傳陳進南就是天地會之領袖，當年他就是以傳道的名義進行成員的聯繫，以及廣召志士的手段，這也是石碑之上的詩詞的由來。
+又有傳說說道他過去曾結廬白鶴洞，故有白鶴道人之自稱。
+但是，剛剛發話人有講過「遠超求道」的說法，似乎八卦門楣不是解答呢……@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;陳予仙和傳教的資訊(D)。@@//&lt;&lt;run $cluecount.pushUnique(&#39;傳教陳予仙&#39;)&gt;&gt;
+//@@color:GRAY;相傳陳進南就是天地會之領袖，當年他就是以傳道的名義進行成員的聯繫，以及廣召志士的手段，這也是石碑之上的詩詞的由來。
+又有傳說說道他過去曾結廬白鶴洞，故有白鶴道人之自稱。
+但是，剛剛發話人有講過「遠超求道」的說法，似乎八卦門楣不是解答呢……@@//&lt;&lt;run $cluecount.pushUnique(&#39;傳教陳予仙&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="139" name="傳教保護歷史" tags="result noreturn" position="200,1800" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳教保護歷史&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;傳教和保護歷史的資訊(E)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;當年延平郡王攻台不久便逝世，或許是自知實力不夠，鄭氏政權後來把方針自留漢轉做復明，這對天地會來說，應該是個重大的改變。
+但是剛剛提到了政權並非重點，那麼應該不會將明朝視做是首要傳承的對象，這樣象徵明朝的日月門，可能就沒有了進去的價值……@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;傳教和保護歷史的資訊(E)。@@//&lt;&lt;run $clue1.pushUnique(&#39;留漢&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;傳教保護歷史&#39;)&gt;&gt;
+//@@color:GRAY;當年延平郡王攻台不久便逝世，或許是自知實力不夠，鄭氏政權後來把方針自留漢轉做復明，這對天地會來說，應該是個重大的改變。
+但是剛剛提到了政權並非重點，那麼應該不會將明朝視做是首要傳承的對象，這樣象徵明朝的日月門，可能就沒有了進去的價值……@@//&lt;&lt;run $clue1.pushUnique(&#39;留漢&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;傳教保護歷史&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：留漢。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：留漢。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="140" name="留漢陳予仙" tags="result noreturn" position="300,1600" size="100,100">&lt;&lt;if $cluecount.includes(&#39;留漢陳予仙&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;陳予仙和留漢的資訊(F)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;陳予仙和留漢的資訊(F)。@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢陳予仙&#39;)&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢陳予仙&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：汗青。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：汗青。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="141" name="留漢天地會" tags="result noreturn" position="300,1700" size="100,100">&lt;&lt;if $cluecount.includes(&#39;留漢天地會&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;天地會和留漢的資訊(F)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;天地會和留漢的資訊(F)。@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢天地會&#39;)&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢天地會&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：汗青。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：汗青。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="142" name="留漢保護歷史" tags="result noreturn" position="300,1800" size="100,100">&lt;&lt;if $cluecount.includes(&#39;留漢保護歷史&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;保護歷史和留漢的資訊(F)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;保護歷史和留漢的資訊(F)。@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢保護歷史&#39;)&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢保護歷史&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：汗青。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：汗青。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="143" name="留漢傳教" tags="result noreturn" position="300,1900" size="100,100">&lt;&lt;if $cluecount.includes(&#39;留漢傳教&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;傳教和留漢的資訊(F)。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;傳教和留漢的資訊(F)。@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢傳教&#39;)&gt;&gt;
+//@@color:GRAY;若是天地會的傳承已經從狹隘的恢復明朝政權，那麼傳承漢族文化就會是首要的任務。這與發話人所說的保護歷史、保護根的意涵才更為相近。
+若說到歷史，由青竹製作的竹簡有汗青之稱，一般被用來作為史冊的稱呼。看來竹子的門會是可以追尋的道路！@@//&lt;&lt;run $clue1.pushUnique(&#39;汗青&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;留漢傳教&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：汗青。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：汗青。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="144" name="第三階段推理" tags="combine noreturn" position="1575,1325" size="200,100">推理系統
 
@@ -3327,7 +3454,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;私塾和窺園的資訊(E)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾窺園&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="149" name="私塾許特齊" tags="result noreturn" position="700,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾許特齊&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3335,7 +3462,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;私塾和許特齊的資訊(E)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾許特齊&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="150" name="私塾許南英晚年" tags="result noreturn" position="900,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾許南英晚年&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3343,7 +3470,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;私塾和許南英晚年的資訊(G)。@@//&lt;&lt;run $clue2.pushUnique(&#39;日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾許南英晚年&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="151" name="私塾日本政府" tags="result noreturn" position="1000,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3351,7 +3478,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;私塾和日本政府的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="152" name="私塾窺園留草" tags="result noreturn" position="1100,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3359,7 +3486,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;私塾和窺園留草的資訊(F)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾窺園留草&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="153" name="私塾許地山" tags="result noreturn" position="1200,1675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;私塾許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3367,7 +3494,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;私塾和許地山的資訊(H)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;私塾許地山&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="154" name="窺園惜字亭" tags="result noreturn" position="600,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園惜字亭&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3375,7 +3502,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;窺園和惜字亭的資訊(E)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園惜字亭&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="155" name="惜字亭許特齊" tags="result noreturn" position="700,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;惜字亭許特齊&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3383,7 +3510,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許特齊和惜字亭的資訊(E)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;惜字亭許特齊&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="156" name="惜字亭許南英" tags="result noreturn" position="800,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;惜字亭許南英&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3391,7 +3518,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英和惜字亭的資訊(F)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;惜字亭許南英&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="157" name="惜字亭許南英晚年" tags="result noreturn" position="900,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;惜字亭許南英晚年&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3399,7 +3526,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英和惜字亭的資訊(G)。@@//&lt;&lt;run $clue2.pushUnique(&#39;日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;惜字亭許南英晚年&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="158" name="惜字亭日本政府" tags="result noreturn" position="1000,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;惜字亭日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3407,7 +3534,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英和日本政府的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;惜字亭日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="159" name="惜字亭窺園留草" tags="result noreturn" position="1100,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;惜字亭窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3415,7 +3542,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;惜字亭和窺園留草的資訊(F)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;惜字亭窺園留草&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="160" name="惜字亭許地山" tags="result noreturn" position="1200,1775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;惜字亭許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3423,7 +3550,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;惜字亭和許地山的資訊(H)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;惜字亭許地山&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="161" name="窺園日本政府" tags="result noreturn" position="1000,1875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3431,7 +3558,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;窺園和日本政府的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="162" name="窺園窺園留草" tags="result noreturn" position="1100,1875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3439,7 +3566,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;窺園和窺園留草的資訊(F)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園窺園留草&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="163" name="窺園許地山" tags="result noreturn" position="1200,1875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3447,7 +3574,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;窺園和許地山的資訊(H)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園許地山&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="164" name="許特齊許南英" tags="result noreturn" position="800,1975" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許特齊許南英&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3476,7 +3603,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英和許南英晚年的資訊(G)。@@//&lt;&lt;run $clue2.pushUnique(&#39;日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英許南英晚年&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：日本政府。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="168" name="許南英窺園留草" tags="result noreturn" position="1100,2075" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許南英窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3484,7 +3611,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英和窺園留草的資訊(F)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英窺園留草&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="169" name="許南英許地山" tags="result noreturn" position="1200,2075" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許南英許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3499,7 +3626,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英晚年和日本政府的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英晚年日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草、許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="171" name="許南英晚年窺園留草" tags="result noreturn" position="1100,2175" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許南英晚年窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3507,7 +3634,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英晚年和窺園留草的資訊(F)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許南英晚年&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英晚年窺園留草&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許南英晚年。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="172" name="許南英晚年許地山" tags="result noreturn" position="1200,2175" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許南英晚年許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3515,7 +3642,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許南英晚年和許地山的資訊(H)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許南英晚年許地山&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="173" name="許丙丁窺園留草" tags="result noreturn" position="1300,2375" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3523,7 +3650,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;許丙丁和窺園留草的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁窺園留草&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="174" name="日本政府日本戰敗" tags="result noreturn" position="1400,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;日本政府日本戰敗&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3531,7 +3658,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;日本政府和日本戰敗的資訊(P)。@@//&lt;&lt;run $clue2.pushUnique(&#39;國民政府遷台&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;日本政府日本戰敗&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：國民政府遷台。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：國民政府遷台。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="175" name="湯德章日本政府" tags="result noreturn" position="1500,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;湯德章日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3541,7 +3668,7 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;湯德章身為台灣鄒族人與日本人混血，因為感到台灣人與日本人之間的不平等，加上日本警務同仁對他的排擠行為，早已在戰前辭去警務赴日求學。若干年後，學成返台的他開啟了律師事業，在地方上替台灣人對抗諸多不公平的地方。
 由於少時就以武術曾勇退地痞，學成歸台後的義舉更是讓他在地方上的俠士稱號更盛於當年。@@//&lt;&lt;run $clue2.pushUnique(&#39;俠士&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;湯德章日本政府&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：俠士。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：俠士。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="176" name="傳承台灣文化日本政府" tags="result noreturn" position="1600,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳承台灣文化日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3552,9 +3679,9 @@ Macro.add('ScrollTo', {
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="177" name="俠士日本政府" tags="result noreturn" position="1700,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的人士做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士日本政府&#39;)&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的人士做為拳師志業的傳承對象。&lt;&lt;run $cluecount.pushUnique(&#39;俠士日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟1&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="178" name="窺園留草日本戰敗" tags="result noreturn" position="1400,2375" size="100,100">&lt;&lt;if $cluecount.includes(&#39;窺園留草日本戰敗&#39;)&gt;&gt;
@@ -3563,7 +3690,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;日本戰敗和窺園留草的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;窺園留草日本戰敗&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：許地山。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：許地山。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="179" name="傳承台灣文化窺園留草" tags="result noreturn" position="1600,2375" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳承台灣文化窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3574,9 +3701,9 @@ Macro.add('ScrollTo', {
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="180" name="俠士窺園留草" tags="result noreturn" position="1700,2375" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士窺園留草&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的人士做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士窺園留草&#39;)&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的人士做為拳師志業的傳承對象。&lt;&lt;run $cluecount.pushUnique(&#39;俠士窺園留草&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟1&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="181" name="許地山日本戰敗" tags="result noreturn" position="1400,2475" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許地山日本戰敗&#39;)&gt;&gt;
@@ -3585,7 +3712,7 @@ Macro.add('ScrollTo', {
 &lt;&lt;else&gt;&gt;
 //@@color:GRAY;日本戰敗和許地山的資訊(HI)。@@//&lt;&lt;run $clue2.pushUnique(&#39;窺園留草&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許地山日本戰敗&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：窺園留草。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="182" name="傳承台灣文化許地山" tags="result noreturn" position="1600,2475" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳承台灣文化許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3596,9 +3723,9 @@ Macro.add('ScrollTo', {
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="183" name="俠士許地山" tags="result noreturn" position="1700,2475" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士許地山&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的人士做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士許地山&#39;)&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的人士做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士許地山&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟1&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="184" name="傳承台灣文化許丙丁" tags="result noreturn" position="1600,2575" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳承台灣文化許丙丁&#39;)&gt;&gt;
@@ -3610,16 +3737,16 @@ Macro.add('ScrollTo', {
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="185" name="俠士許丙丁" tags="result noreturn" position="1700,2575" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士許丙丁&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的許丙丁、湯德章兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士許丙丁&#39;)&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的許丙丁、湯德章兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士許丙丁&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟1&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="186" name="許丙丁革命日本政府" tags="result noreturn" position="1800,2275" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁革命日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
 //@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁革命日本政府&#39;)&gt;&gt;
+//@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁革命日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟2&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="187" name="傳承台灣文化日本戰敗" tags="result noreturn" position="1400,2775" size="100,100">&lt;&lt;if $cluecount.includes(&#39;傳承台灣文化日本戰敗&#39;)&gt;&gt;
@@ -3636,18 +3763,18 @@ Macro.add('ScrollTo', {
 //@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士日本戰敗&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="189" name="俠士革命日本政府" tags="result noreturn" position="1800,2875" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士革命日本政府&#39;)&gt;&gt;
+[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="189" name="俠士革命日本政府" tags="result noreturn" position="1700,2975" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士革命日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
 //@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士革命日本政府&#39;)&gt;&gt;
+//@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士革命日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟2&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="190" name="湯德章革命日本政府" tags="result noreturn" position="1800,2675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;湯德章革命日本政府&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
 //@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;else&gt;&gt;
-//@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;run $cluecount.pushUnique(&#39;湯德章革命日本政府&#39;)&gt;&gt;
+//@@color:GRAY;日治時期的台灣並非一直安分地接受殖民，而是有著許多運動。除了幾起重大的反抗事件，更有諸如「台灣文化協會」、「台灣民眾黨」……等，串聯台灣各地能人志士的運動。@@//&lt;&lt;run $cluecount.pushUnique(&#39;湯德章革命日本政府&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟2&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="191" name="許丙丁二二八事件" tags="result noreturn" position="1425,1800" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁二二八事件&#39;)&gt;&gt;
@@ -3671,7 +3798,7 @@ Macro.add('ScrollTo', {
 
 然而在陳儀的陰謀之下，表面和平的台灣各地，再次發生血洗的慘案。@@//&lt;&lt;run $clue3.pushUnique(&#39;血洗慘案&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;湯德章二二八事件&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：血洗慘案。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：血洗慘案。@@&lt;/span&gt;
 
 [[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="193" name="治安組長國民政府遷台" tags="" position="1625,1700" size="100,100">&lt;&lt;if $cluecount.includes(&#39;治安組長國民政府遷台&#39;)&gt;&gt;
 你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
@@ -3687,7 +3814,24 @@ Macro.add('ScrollTo', {
 
 然而在陳儀的陰謀之下，表面和平的台灣各地，再次發生血洗的慘案。@@//&lt;&lt;run $clue3.pushUnique(&#39;血洗慘案&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;治安組長國民政府遷台&#39;)&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;span class=&quot;blink&quot;&gt;@@你得到了關鍵資訊：二二八事件。@@&lt;/span&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：二二八事件。@@&lt;/span&gt;
+
+[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="194" name="許丙丁許地山" tags="result noreturn" position="1200,2575" size="100,100">&lt;&lt;if $cluecount.includes(&#39;許丙丁許地山&#39;)&gt;&gt;
+你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
+//@@color:GRAY;M。@@//&lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;else&gt;&gt;
+//@@color:GRAY;M。@@//&lt;&lt;run $clue2.pushUnique(&#39;傳承台灣文化&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;許丙丁許地山&#39;)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+&lt;span class=&quot;blink&quot;&gt;@@color:orange;你得到了關鍵資訊：傳承台灣文化。@@&lt;/span&gt;
+
+[[繼續推理|previous()]]</tw-passagedata><tw-passagedata pid="195" name="手機" tags="phone noreturn" position="100,100" size="100,100">&lt;div style=&quot;background-image:url(https://drive.google.com/uc?id=1WQOPAmGiXAl1NzIfbjVn_g6VSCib28KP);width:400px;height:735px;&quot;&gt;
+&lt;/div&gt;
+[[返回|previous()]]</tw-passagedata><tw-passagedata pid="196" name="俠士湯德章" tags="" position="1700,2675" size="100,100">&lt;&lt;if $cluecount.includes(&#39;俠士湯德章&#39;)&gt;&gt;
+你先前已推理出該結果。&lt;&lt;linkreplace 回憶推理結果。&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的許丙丁、湯德章兩人做為拳師志業的傳承對象。@@//&lt;&lt;/linkreplace&gt;&gt;
+&lt;&lt;else&gt;&gt;
+//@@color:GRAY;許南英、許地山中國的生活已經太長，在台灣早已沒有了當年的活動能力與影響力，有了新一輩的能人志士，加上台灣人自治的風氣漸長，自然會選擇在地方上貢獻甚廣、文武兼備的許丙丁、湯德章兩人做為拳師志業的傳承對象。@@//&lt;&lt;run $cluecount.pushUnique(&#39;俠士湯德章&#39;)&gt;&gt;&lt;&lt;run $cluecount.pushUnique(&#39;時機成熟1&#39;)&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 
 [[繼續推理|previous()]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
