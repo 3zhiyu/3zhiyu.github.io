@@ -651,6 +651,7 @@ Macro.add('message', {
 @@color:green;{{{&lt;&lt;set&gt;&gt;}}}@@巨集→點擊文字後更動或獲得變數數值。&lt;/p&gt;
 &lt;/table&gt;
 
+----
 點擊之後，連結文字後生成新內容：&lt;&lt;linkappend &#39;點擊文字&#39;&gt;&gt;新的內容&lt;&lt;/linkappend&gt;&gt;。
 @@color:green;{{{&lt;&lt;linkappend}}}@@ &#39;點擊文字&#39;@@color:green;{{{&gt;&gt;}}}@@新的內容@@color:green;{{{&lt;&lt;/linkappend&gt;&gt;}}}@@
 
@@ -668,8 +669,31 @@ Macro.add('message', {
 &lt;&lt;linkprepend &#39;文字淡出&#39; t8n&gt;&gt;新的內容&lt;&lt;/linkprepend&gt;&gt;
 @@color:green;{{{&lt;&lt;linkprepend}}}@@ &#39;文字淡出&#39; @@color:green;{{{t8n&gt;&gt;}}}@@新的內容@@color:green;{{{&lt;&lt;/linkprepend&gt;&gt;}}}@@
 
+----
 點擊之後，變成其他內容：&lt;&lt;include &quot;循環選項&quot;&gt;&gt;。
-@@color:green;{{{[[}}}@@外連網址@@color:green;{{{|}}}@@{{{https://www.google.com/}}}@@color:green;{{{]]}}}@@
+@@color:green;{{{&lt;&lt;include &quot;}}}@@循環選項@@color:green;{{{&quot;&gt;&gt;}}}@@
+新增一個名叫「循環出現」的PASSAGE，將要循環出現的內容打在其中，並用&quot;&quot;&quot;&lt;&lt;include&gt;&gt;&quot;&quot;&quot;巨集呈現。
+&lt;&lt;message 「循環出現」PASSAGE的內容&gt;&gt;
+&lt;table class=&quot;border-table&quot;&gt;@@color:green;
+{{{
+  &lt;&lt;silently&gt;&gt;
+	&lt;&lt;if not $choices&gt;&gt;
+	  &lt;&lt;set $choicesCount to -1&gt;&gt;
+	  &lt;&lt;set $choices to [&quot;第一個選項&quot;, &quot;第二個選項&quot;, &quot;第三個選項&quot;]&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+
+  &lt;&lt;set $choicesCount to $choicesCount + 1&gt;&gt;
+
+	&lt;&lt;if $choicesCount &gt;= $choices.length&gt;&gt;
+	   &lt;&lt;set $choicesCount to 0&gt;&gt;
+	&lt;&lt;/if&gt;&gt;
+
+  &lt;&lt;set $cyclingResult to $choices[$choicesCount]&gt;&gt;
+  &lt;&lt;/silently&gt;&gt;\
+  &lt;&lt;linkreplace $choices[$choicesCount]&gt;&gt;&lt;&lt;include &quot;循環選項&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;
+}}}
+@@&lt;/table&gt;
+&lt;&lt;/message&gt;&gt;
 
 
 [[返回首頁|start]]</tw-passagedata><tw-passagedata pid="13" name="新的passage" tags="" position="600,200" size="100,100">新頁面
@@ -810,7 +834,7 @@ __底線__
 用圖片作為連結文字，比如點擊圖片後到新的PASSAGE。
 &lt;&lt;link [img[media\image.png][新的passage]]&gt;&gt;&lt;&lt;/link&gt;&gt;
 語法：
-@@color:green;{{{&lt;&lt;link [img[}}}@@media\image.png@@color:green;{{{][}}@@新的passage@@color:green;{{{]]&gt;&gt;&lt;&lt;/link&gt;&gt;}}}@@
+@@color:green;&quot;&quot;&quot;&lt;&lt;link [img[&quot;&quot;&quot;@@media\image.png@@color:green;&quot;&quot;&quot;][&quot;&quot;&quot;@@新的passage@@color:green;&quot;&quot;&quot;]]&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&quot;&quot;@@
 
 [[返回首頁|start]]</tw-passagedata><tw-passagedata pid="23" name="音源" tags="" position="500,400" size="100,100">!!!撥放音源
 
