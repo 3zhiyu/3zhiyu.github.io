@@ -148,7 +148,42 @@ a.link-internal > img {
 	  0 20px 1px -9px rgba(0,0,0,0.15);
 	/* Padding for demo purposes */
 	padding: 30px;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">// <<message>> macro
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 特定片段產生連結網址開始 */
+if ("onhashchange" in window) {  // event supported
+	window.onhashchange = function () {
+		hashChanged();
+	};
+} else {  // event not supported
+	window.setInterval(function () {
+		if (window.location.hash != setup.storedHash) {
+			hashChanged();
+		}
+	}, 100);
+}
+function hashChanged() {
+	if (Engine.isIdle()) {
+		if (window.location.hash && (setup.storedHash != window.location.hash)) {
+			setup.storedHash = window.location.hash;
+			var anchor = decodeURI(window.location.hash.substring(1));
+			if (Story.has(anchor) && (passage() !== anchor)) {
+				Engine.play(anchor);
+			}
+		} else {
+			// Comment out the following line of code if you don't want the
+			// anchor link of the current passage displayed in the URL bar.
+			//window.location.hash = encodeURI(passage());
+		}
+		// Comment out the following line of code if you don't want the
+		// title of the page set to the passage name.
+		//document.title = passage();
+	} else {
+		setTimeout(hashChanged, 100);
+	}
+}
+$(document).on(':passageend', function () { hashChanged(); });
+/* 特定片段產生連結網址結束 */
+
+/*message START*/
 Macro.add('message', {
     tags    : null,
     handler : function () {
