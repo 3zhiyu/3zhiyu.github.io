@@ -368,6 +368,11 @@ Macro.add('message', {
 &lt;div id=&#39;soundform&#39;&gt;
 &lt;&lt;button &#39;感應碎片&#39;&gt;&gt;&lt;&lt;if $haveclue&gt;&gt;&lt;&lt;run $clue1.pushUnique($getclue)&gt;&gt;&lt;&lt;replace &#39;#getsound&#39;&gt;&gt;找到碎片「$getclue」！&lt;&lt;/replace&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;replace &#39;#getsound&#39;&gt;&gt;沒有碎片！&lt;&lt;/replace&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;span id=&#39;getsound&#39;&gt;&lt;/span&gt;
+&lt;&lt;silently&gt;&gt;&lt;&lt;set $clueplay to $clueplay.concatUnique($clue1, $clue2)&gt;&gt;
+&lt;&lt;/silently&gt;&gt;碎片聲音：&lt;&lt;if $clueplay.length is 0&gt;&gt;沒有碎片&lt;&lt;else&gt;&gt;&lt;&lt;include &#39;碎片清單&#39;&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $clueplay.length is 0&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;button &#39;聆聽&#39;&gt;&gt;&lt;&lt;audio $sound play&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;link &#39;重新整理&#39;&gt;&gt;&lt;&lt;updatebar&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="*PassageDone" tags="" position="300,200" size="100,100">&lt;&lt;set $clueplay to $clueplay.concatUnique($clue1, $clue2)&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="*PassageReady" tags="" position="300,300" size="100,100">&lt;&lt;set $clueplay to []&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="start" tags="" position="700,400" size="100,100">[[獲得線索1]]
 [[獲得線索2]]
@@ -382,12 +387,8 @@ Macro.add('message', {
 
 [[返回|start]]</tw-passagedata><tw-passagedata pid="23" name="碎片清單" tags="" position="200,0" size="100,100">&lt;&lt;listbox &quot;$sound&quot;&gt;&gt;
 &lt;&lt;optionsfrom $clueplay&gt;&gt;
-&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="StoryCaption" tags="" position="500,0" size="100,100">&lt;&lt;silently&gt;&gt;&lt;&lt;set $clueplay to $clueplay.concatUnique($clue1, $clue2)&gt;&gt;
-&lt;&lt;/silently&gt;&gt;碎片聲音：&lt;&lt;if $clueplay.length is 0&gt;&gt;沒有碎片&lt;&lt;else&gt;&gt;&lt;&lt;include &#39;碎片清單&#39;&gt;&gt;&lt;&lt;/if&gt;&gt;
-&lt;&lt;if $clueplay.length is 0&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;button &#39;聆聽&#39;&gt;&gt;&lt;&lt;audio $sound play&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;link &#39;重新整理&#39;&gt;&gt;&lt;&lt;updatebar&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="global widget" tags="widget nobr" position="300,400" size="100,100">&lt;&lt;widget &quot;updatebar&quot;&gt;&gt;
-&lt;&lt;replace &quot;#story-caption&quot;&gt;&gt;&lt;&lt;display &quot;StoryCaption&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="*StoryCaption" tags="" position="500,0" size="100,100"></tw-passagedata><tw-passagedata pid="25" name="global widget" tags="widget nobr" position="300,400" size="100,100">&lt;&lt;widget &quot;updatebar&quot;&gt;&gt;
+&lt;&lt;replace &quot;#soundform&quot;&gt;&gt;&lt;&lt;display &quot;PassageFooter&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
