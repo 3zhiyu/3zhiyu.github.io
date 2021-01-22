@@ -119,7 +119,62 @@ importScripts(setup.Path + "jsQR.js")
 	}
 );</script><tw-passagedata pid="1" name="未命名片段" tags="" position="515,394" size="100,100">&lt;&lt;script&gt;&gt;
 	if (setup.JSLoaded) {
-		SomeFunction();
+
+    var video = document.createElement(&quot;video&quot;);
+    var canvasElement = document.getElementById(&quot;canvas&quot;);
+    var canvas = canvasElement.getContext(&quot;2d&quot;);
+    var loadingMessage = document.getElementById(&quot;loadingMessage&quot;);
+    var outputContainer = document.getElementById(&quot;output&quot;);
+    var outputMessage = document.getElementById(&quot;outputMessage&quot;);
+    var outputData = document.getElementById(&quot;outputData&quot;);
+
+    function drawLine(begin, end, color) {
+      canvas.beginPath();
+      canvas.moveTo(begin.x, begin.y);
+      canvas.lineTo(end.x, end.y);
+      canvas.lineWidth = 4;
+      canvas.strokeStyle = color;
+      canvas.stroke();
+    }
+
+    // Use facingMode: environment to attemt to get the front camera on phones
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: &quot;environment&quot; } }).then(function(stream) {
+      video.srcObject = stream;
+      video.setAttribute(&quot;playsinline&quot;, true); // required to tell iOS safari we don&#39;t want fullscreen
+      video.play();
+      requestAnimationFrame(tick);
+    });
+
+    function tick() {
+      loadingMessage.innerText = &quot;⌛ Loading video...&quot;
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        loadingMessage.hidden = true;
+        canvasElement.hidden = false;
+        outputContainer.hidden = false;
+
+        canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        var imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        var code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: &quot;dontInvert&quot;,
+        });
+        if (code) {
+          drawLine(code.location.topLeftCorner, code.location.topRightCorner, &quot;#FF3B58&quot;);
+          drawLine(code.location.topRightCorner, code.location.bottomRightCorner, &quot;#FF3B58&quot;);
+          drawLine(code.location.bottomRightCorner, code.location.bottomLeftCorner, &quot;#FF3B58&quot;);
+          drawLine(code.location.bottomLeftCorner, code.location.topLeftCorner, &quot;#FF3B58&quot;);
+          outputMessage.hidden = true;
+          outputData.parentElement.hidden = false;
+          outputData.innerText = code.data;
+        } else {
+          outputMessage.hidden = false;
+          outputData.parentElement.hidden = true;
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+
 	};
 &lt;&lt;/script&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
