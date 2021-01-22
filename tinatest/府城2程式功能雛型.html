@@ -513,20 +513,11 @@ function clearStorage()
 &lt;/script&gt;&lt;&lt;/silently&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="獲得線索1" tags="scanfooter" position="475,550" size="100,100">你找到了正確地點！
 （點擊「感應碎片」按鈕獲取碎片）&lt;&lt;set $haveclue to true&gt;&gt;&lt;&lt;set $getclue to &#39;線索1&#39;&gt;&gt;
 
-[[返回|start]]</tw-passagedata><tw-passagedata pid="20" name="獲得線索2" tags="" position="625,550" size="100,100">&lt;div id=&#39;supportercode-form&#39;&gt;\
-輸入答案獲取碎片：&lt;&lt;textbox &#39;$inputtext&#39; &#39;正解為6&#39; autofocus&gt;&gt; \
+[[返回|start]]</tw-passagedata><tw-passagedata pid="20" name="獲得線索2" tags="" position="625,550" size="100,100">輸入答案獲取碎片：&lt;&lt;textbox &#39;$inputtext&#39; &#39;正解為6&#39; autofocus&gt;&gt; \
 &lt;&lt;button &#39;輸入&#39;&gt;&gt;
 	&lt;&lt;set $inputtext to $inputtext.trim()&gt;&gt;
-	&lt;&lt;if $inputtext is 6 &gt;&gt;
-		&lt;&lt;replace &#39;#supportercode-form&#39;&gt;&gt;&lt;&lt;set $getclue to &#39;線索2&#39;&gt;&gt;&lt;&lt;run $clue1.pushUnique($getclue)&gt;&gt;&lt;&lt;replace &#39;#getsound&#39;&gt;&gt;找到碎片「$getclue」！&lt;&lt;/replace&gt;&gt;&lt;&lt;/replace&gt;&gt;
-	&lt;&lt;else&gt;&gt;
-		&lt;&lt;replace &#39;#supportercode-error&#39;&gt;&gt;&lt;br&gt;輸入錯誤，再試一次？&lt;&lt;/replace&gt;&gt;
-	&lt;&lt;/if&gt;&gt;
-&lt;&lt;/button&gt;&gt;\
-&lt;span id=&#39;supportercode-error&#39;&gt;&lt;/span&gt;
-&lt;/div&gt;
-
-[[返回|start]]</tw-passagedata><tw-passagedata pid="21" name="獲得線索3" tags="" position="775,550" size="100,100">你抵達一棟建築。
+	&lt;&lt;goto &#39;結果&#39;&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="獲得線索3" tags="" position="775,550" size="100,100">你抵達一棟建築。
 
 （在進行搜尋之前，請先開啟定位功能）
 
@@ -580,6 +571,12 @@ function clearStorage()
 &lt;&lt;/if&gt;&gt;
 
 [[重新定位|尋找關鍵位置]]
+[[返回|start]]</tw-passagedata><tw-passagedata pid="28" name="結果" tags="" position="625,650" size="100,100">&lt;&lt;if $inputtext == 6&gt;&gt;
+&lt;&lt;set $getclue to &#39;線索2&#39;&gt;&gt;&lt;&lt;run $clue1.pushUnique($getclue)&gt;&gt;找到碎片「$getclue」！
+&lt;&lt;else&gt;&gt;
+輸入錯誤，[[再試一次|獲得線索2]]？
+&lt;&lt;/if&gt;&gt;
+
 [[返回|start]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
