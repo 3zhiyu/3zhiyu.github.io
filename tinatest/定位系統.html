@@ -208,10 +208,18 @@ Longitude: $location.longitude
 
 &lt;&lt;set $approxLat to  window.geolocation.approximateLocation(State.variables.location.latitude, $siteLat) &gt;&gt;
 
-&lt;&lt;set $approxLong to window.geolocation.approximateLocation(State.variables.location.longitude, $siteLong) &gt;&gt;
+&lt;&lt;set $approxLong to window.geolocation.approximateLocation(State.variables.location.longitude, $siteLong)&gt;&gt;
 
 Latitude: $approxLat
-Longitude: $approxLong</tw-passagedata><tw-passagedata pid="4" name="start" tags="" position="500,100" size="100,100">你抵達一棟建築。
+Longitude: $approxLong
+
+&lt;&lt;if approxEqual($location.latitude, $siteLat) and approxEqual($Location.longitude, $siteLong)&gt;&gt;
+在附近。
+&lt;&lt;else&gt;&gt;
+沒在附近。
+&lt;&lt;/if&gt;&gt;
+
+[[重整頁面|定位結果]]</tw-passagedata><tw-passagedata pid="4" name="start" tags="" position="500,100" size="100,100">你抵達一棟建築。
 
 （在進行搜尋之前，請先開啟定位功能）
 
