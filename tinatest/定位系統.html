@@ -175,18 +175,14 @@ body[data-tags~="no-side-bar"] #ui-bar~#story {
         return true;
       }
 
-      allowedDiff = allowedDiff || 0.0005;
+      allowedDiff = allowedDiff || 0.05;
 
       return Math.abs(a - b) < allowedDiff;
     }
 
   };
 
-}());
-
-
-
-</script><tw-passagedata pid="1" name="StoryMenu" tags="" position="300,0" size="100,100">[[定位系統各變數|開啟定位]]</tw-passagedata><tw-passagedata pid="2" name="開啟定位" tags="" position="300,200" size="100,100">&lt;&lt;linkreplace &quot;要求開啟定位&quot;&gt;&gt;
+}());</script><tw-passagedata pid="1" name="StoryMenu" tags="" position="300,0" size="100,100">[[定位系統各變數|開啟定位]]</tw-passagedata><tw-passagedata pid="2" name="開啟定位" tags="" position="300,200" size="100,100">&lt;&lt;linkreplace &quot;要求開啟定位&quot;&gt;&gt;
   &lt;&lt;script&gt;&gt;
 
   State.variables.geoLocationAvailable = window.geolocation.available();
