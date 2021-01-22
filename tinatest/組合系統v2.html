@@ -403,7 +403,8 @@ Macro.add('message', {
 &lt;&lt;link &#39;重新整理&#39;&gt;&gt;&lt;&lt;updatebar&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="global widget" tags="widget nobr" position="300,400" size="100,100">&lt;&lt;widget &quot;updatebar&quot;&gt;&gt;
 &lt;&lt;replace &quot;#story-caption&quot;&gt;&gt;&lt;&lt;display &quot;StoryCaption&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="閱讀線索4" tags="" position="925,700" size="100,100">線索4內容
-&lt;&lt;print $haveclue&gt;&gt;
+&lt;&lt;print $haveclue.name&gt;&gt;
+&lt;&lt;run $clue1.pushUnique($haveclue.name)&gt;&gt;
 [[返回|start]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
