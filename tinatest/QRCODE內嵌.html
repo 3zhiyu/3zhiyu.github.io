@@ -100,7 +100,51 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="QRCODE內嵌" startnode="1" creator="Twine" creator-version="2.3.9" ifid="482E685E-5A24-45A3-8B00-98DE3D609119" zoom="1" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">if (window.hasOwnProperty("storyFormat")) {
+	<tw-storydata name="QRCODE內嵌" startnode="1" creator="Twine" creator-version="2.3.9" ifid="482E685E-5A24-45A3-8B00-98DE3D609119" zoom="1" format="SugarCube" format-version="2.31.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">    body {
+      font-family: 'Ropa Sans', sans-serif;
+      color: #333;
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    #githubLink {
+      position: absolute;
+      right: 0;
+      top: 12px;
+      color: #2D99FF;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 40px;
+    }
+
+    #loadingMessage {
+      text-align: center;
+      padding: 40px;
+      background-color: #eee;
+    }
+
+    #canvas {
+      width: 100%;
+    }
+
+    #output {
+      margin-top: 20px;
+      background: #eee;
+      padding: 10px;
+      padding-bottom: 0;
+    }
+
+    #output div {
+      padding-bottom: 10px;
+      word-wrap: break-word;
+    }
+
+    #noQRFound {
+      text-align: center;
+    }</style><script role="script" id="twine-user-script" type="text/twine-javascript">if (window.hasOwnProperty("storyFormat")) {
 	// Change this to the path where your HTML file is
 	// located if you want to run this from inside Twine.
 	setup.Path = "C:/Users/user/AppData/Local/Temp/media";  // Running inside Twine application
@@ -117,9 +161,13 @@ importScripts(setup.Path + "jsQR.js")
 	}).catch(function(error) {  // eslint-disable-line
 		alert("Error: Could not find file 'jsQR.js'.");
 	}
-);</script><tw-passagedata pid="1" name="未命名片段" tags="" position="515,394" size="100,100">&lt;&lt;script&gt;&gt;
-	if (setup.JSLoaded) {
-
+);</script><tw-passagedata pid="1" name="未命名片段" tags="" position="515,394" size="100,100">&lt;div id=&quot;loadingMessage&quot;&gt;🎥 Unable to access video stream (please make sure you have a webcam enabled)&lt;/div&gt;
+&lt;canvas id=&quot;canvas&quot; hidden&gt;&lt;/canvas&gt;
+  &lt;div id=&quot;output&quot; hidden&gt;
+    &lt;div id=&quot;outputMessage&quot;&gt;No QR code detected.&lt;/div&gt;
+    &lt;div hidden&gt;&lt;b&gt;Data:&lt;/b&gt; &lt;span id=&quot;outputData&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;&lt;script&gt;&gt;
     var video = document.createElement(&quot;video&quot;);
     var canvasElement = document.getElementById(&quot;canvas&quot;);
     var canvas = canvasElement.getContext(&quot;2d&quot;);
@@ -174,8 +222,6 @@ importScripts(setup.Path + "jsQR.js")
       }
       requestAnimationFrame(tick);
     }
-
-	};
 &lt;&lt;/script&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
