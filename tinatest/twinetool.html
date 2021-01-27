@@ -623,7 +623,10 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
     clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
   }
 }
-/* 動態效果結束 */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 返回前頁 */
+/* 動態效果結束 */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 匯入CSS */
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+
+/* 返回前頁 */
 predisplay["Menu Return"] = function (taskName) {
 	if (! tags().contains("noreturn")) {
 		State.variables.return = passage();
@@ -2564,18 +2567,21 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
     });
 &lt;&lt;/script&gt;&gt;
 }}}
-@@</tw-passagedata><tw-passagedata pid="54" name="如何使用Animate.css" tags="" position="1500,500" size="100,100">先匯入CSS檔案
-{{{importStyles(&quot;https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css&quot;)}}}
-
+@@</tw-passagedata><tw-passagedata pid="54" name="如何使用Animate.css" tags="" position="1500,500" size="100,100">使用Animate.css的圖片
 &lt;div align=&#39;left&#39;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounce animate__slow animate__infinite&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;&lt;/div&gt;
-&lt;div align=&#39;right&#39;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounce animate__infinite&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;&lt;/div&gt;
-&lt;div align=&#39;center&#39;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounce animate__fast animate__infinite&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;&lt;/div&gt;
+&lt;div align=&#39;center&#39;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounce animate__infinite&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;&lt;/div&gt;
+&lt;div align=&#39;right&#39;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounce animate__fast animate__infinite&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;&lt;/div&gt;
 
-語法：
-{{{&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounce animate__delay-1s animate__repeat-2&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;}}}
+&lt;h2&gt;使用說明&lt;/h2&gt;
+# 先匯入CSS檔案
+@@color:green;{{{importStyles(&quot;https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css&quot;)}}}@@
 
+# 加上語法：
+@@color:green;{{{&lt;img data-passage =&quot;start&quot; class =&quot;}}}@@@@color:red;{{{animate__animated animate__bounce animate__delay-1s animate__repeat-2}}}@@@@color:green;{{{&quot; src=&quot;media/img/線索3.png&quot; width=&quot;30%&quot;&gt;}}}@@
+{{{
 animate__XXXXXX → 使用動畫XXXXXX(替換成動畫名稱)
 animate__animated → 啟用動畫
+animate__delay-2s → 延遲兩秒
 animate__repeat-2 → 重複兩次
 animate__infinite → 無限循環
 
@@ -2583,7 +2589,7 @@ animate__slow  → 動畫變慢(變成2秒)
 animate__fast  → 動畫變快(變成800毫秒)
 animate__faster  → 動畫變超快(變成500毫秒)
 (動畫的速度一般默認為1秒)
-
+}}}
 [[返回|previous()]]</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
