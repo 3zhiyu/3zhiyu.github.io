@@ -1009,9 +1009,17 @@ __底線__
 
 !!!!3.以圖片為連結：
 用圖片作為連結文字，比如點擊圖片後到新的PASSAGE。
-&lt;&lt;link [img[media\image.png][新的passage]]&gt;&gt;&lt;&lt;/link&gt;&gt;
+&lt;&lt;link [img[media/image.png][新的passage]]&gt;&gt;&lt;&lt;/link&gt;&gt;
 語法：
-@@color:green;&quot;&quot;&quot;&lt;&lt;link [img[&quot;&quot;&quot;@@media\image.png@@color:green;&quot;&quot;&quot;][&quot;&quot;&quot;@@新的passage@@color:green;&quot;&quot;&quot;]]&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&quot;&quot;@@
+@@color:green;&quot;&quot;&quot;&lt;&lt;link [img[&quot;&quot;&quot;@@media/image.png@@color:green;&quot;&quot;&quot;][&quot;&quot;&quot;@@新的passage@@color:green;&quot;&quot;&quot;]]&gt;&gt;&lt;&lt;/link&gt;&gt;&quot;&quot;&quot;@@
+
+!!!!4.隨機圖片：
+&lt;&lt;set $random to random(1,5)&gt;&gt;
+&lt;&lt;= &quot;&lt;img src=&#39;media/img/&quot;+$random+&quot;.png&#39;&gt;&quot;&gt;&gt;
+語法：
+@@color:green;&quot;&quot;&quot;&lt;&lt;set $random to random(1,5)&gt;&gt;&quot;&quot;&quot;@@
+@@color:green;&quot;&quot;&quot;&lt;&lt;=&quot;&quot;&quot;@@ @@color:green;&quot;&quot;&quot;&quot;&lt;img src=&#39;media/img/&quot; + $random + &quot;.png&#39;&gt;&quot;&gt;&gt;&quot;&quot;&quot;@@
+
 
 [[返回首頁|start]]</tw-passagedata><tw-passagedata pid="23" name="音源" tags="" position="500,400" size="100,100">!!!撥放音源
 
