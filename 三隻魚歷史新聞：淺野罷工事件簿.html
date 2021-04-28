@@ -107,13 +107,65 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 /* 圓體字體 */
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 /* 符號字體 */
-@import url(https://www.webnots.com/resources/font-awesome/css/font-awesome.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
 .font-1 { font-family: 'Noto Sans TC', sans-serif; }
 .font-2 { font-family: 'cwTeXKai', sans-serif; }
 .font-3 { font-family: 'cwTeXYen', sans-serif; }
+.font-4 { font-family: 'FontAwesome'; }
 
-/* 任務訊息樣式開始 */
+/*底部筆記樣式*/
+.paper {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    min-width: 400px;
+    min-height: 210px;
+    margin: 0 auto;
+    background: #fafafa;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    overflow: hidden;
+    text-align: left;
+}
+.paper:before {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 60px;
+    background: radial-gradient(#575450 6px, transparent 7px) repeat-y;
+    background-size: 30px 30px;
+    border-right: 3px solid #D44147;
+    box-sizing: border-box;
+}
+
+.paper-content {
+    position: absolute;
+    top: 30px; right: 0; bottom: 30px; left: 60px;
+    background: linear-gradient(transparent, transparent 28px, #91D1D3 28px);
+    background-size: 30px 30px;
+}
+
+.paper-content textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    line-height: 30px;
+    padding: 0 10px;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: mediumblue;
+    font-family:'cwTeXYen'!important;
+    font-weight: bold;
+    font-size: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+
+/* 任務訊息樣式 */
 .webnots-notification-box {
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
@@ -136,7 +188,37 @@ background-color: #3498db;
 }
 
 .webnots-information:before {
-content: "\f129";
+font-family: "FontAwesome";
+font-weight: 900;
+content: "\f002";
+}
+
+/* 側邊欄任務訊息樣式 */
+.sidewebnots-notification-box {
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+color: #ffffff;
+font-family:'cwTeXKai'!important;;
+margin-bottom: 25px;
+padding: 10px 14px 10px 14px;
+position: relative;
+box-shadow: 0px 1px 5px #999;
+}
+
+.sidewebnots-notification-box:before {
+font-family: FontAwesome;
+font-size: 21px;
+}
+
+.sidewebnots-information {
+background-color: #404040;
+}
+
+.sidewebnots-information:before {
+font-family: "FontAwesome";
+font-weight: 900;
+content: "\f002";
 }
 
 /*動態效果整合*/
@@ -707,7 +789,7 @@ body {
 
 #passages {
   position: relative;
-  background: #fff;
+  background: #F5DEB3;
   width: 85%;
   margin:auto;
   margin-bottom: 5%;
@@ -716,7 +798,7 @@ body {
     /* Text formatting */
   color: black;
   font-family:'Noto Sans TC'!important;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .passage:after, .passage:before {
@@ -811,15 +893,71 @@ width: 60%;
 }
 
 /*自訂背景*/
-/*
 body[data-tags~="ch1"]{
-	background-image: url("https://drive.google.com/uc?id=10h9j1er7LNtNZeH-aqKUnie0zA3W9-gS");
+	background-image: url("media/img/bg.jpg");
 }
-*/
 
 
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">/*禁用側邊欄前進、後退的按鈕*/
 Config.history.controls = false;
+
+/*預載圖片*/
+(function () {
+    'use strict';
+    // v1.0.0
+    // preload images prior to story startup
+
+    function preloadImage (url, cb) {
+        var img = new Image();
+        img.onload = cb;
+        img.onerror = cb;
+        img.src = url;
+    }
+
+    function preloadAll (urls, cb) {
+        var loaded = 0;
+        var toBeLoaded = urls.length;
+        urls.forEach( function (url) {
+            preloadImage( url, function () {
+                loaded++;
+                if (loaded === toBeLoaded) {
+                    cb();
+                }
+            });
+        });
+    }
+
+    function isInit () {
+        return State.length <= 0;
+    }
+
+
+    function preload () {
+        var list = [].slice.call(arguments).flatten();
+        var id = isInit() ? LoadScreen.lock() : false;
+        preloadAll( list, function () {
+            if (id) {
+                LoadScreen.unlock(id);
+            }
+        });
+        return id;
+    }
+
+    setup.preload = preload;
+    setup.preload.force = false;
+
+    /* <<preload imageUrls...>> */
+    Macro.add('preload', {
+        handler : function () {
+            if (!isInit() && !setup.preload.force) {
+                return this.error("Attempting to preload images outside of `StoryInit` or similar can cause performance issues. Set `setup.preload.force` to `true` if you want to do it anyway.");
+            }
+            preload(this.args.flatten().filter( function (url) {
+                return typeof url === 'string';
+            }));
+        }
+    });
+}());
 
 /*動態效果*/
 $(document).on(':passagerender', function (ev) {
@@ -835,6 +973,13 @@ $(document).on(':passagerender', function (ev) {
 		});
 	}
 });
+
+/* 返回前頁 */
+predisplay["Menu Return"] = function (taskName) {
+	if (! tags().contains("noreturn")) {
+		State.variables.return = passage();
+	}
+};
 
 /*對話功能*/
 (function () {
@@ -1115,73 +1260,30 @@ $(document).on(':passagerender', function (ev) {
 })();
 
 
-
-/*預載圖片*/
-(function () {
-    'use strict';
-    // v1.0.0
-    // preload images prior to story startup
-
-    function preloadImage (url, cb) {
-        var img = new Image();
-        img.onload = cb;
-        img.onerror = cb;
-        img.src = url;
-    }
-
-    function preloadAll (urls, cb) {
-        var loaded = 0;
-        var toBeLoaded = urls.length;
-        urls.forEach( function (url) {
-            preloadImage( url, function () {
-                loaded++;
-                if (loaded === toBeLoaded) {
-                    cb();
-                }
-            });
-        });
-    }
-
-    function isInit () {
-        return State.length <= 0;
-    }
-
-
-    function preload () {
-        var list = [].slice.call(arguments).flatten();
-        var id = isInit() ? LoadScreen.lock() : false;
-        preloadAll( list, function () {
-            if (id) {
-                LoadScreen.unlock(id);
-            }
-        });
-        return id;
-    }
-
-    setup.preload = preload;
-    setup.preload.force = false;
-
-    /* <<preload imageUrls...>> */
-    Macro.add('preload', {
-        handler : function () {
-            if (!isInit() && !setup.preload.force) {
-                return this.error("Attempting to preload images outside of `StoryInit` or similar can cause performance issues. Set `setup.preload.force` to `true` if you want to do it anyway.");
-            }
-            preload(this.args.flatten().filter( function (url) {
-                return typeof url === 'string';
-            }));
-        }
-    });
-}());
-
 /* 介面中文化開始 */
 !function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
 /* 介面中文化結束 */</script><tw-tag name="CSS" color="purple"></tw-tag>,<tw-tag name="noreturn" color="red"></tw-tag><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="200,600" size="100,100">&lt;&lt;set $news1q12 to false&gt;&gt;
 &lt;&lt;set $news1q13 to false&gt;&gt;
 &lt;&lt;set $news1q14 to false&gt;&gt;
-&lt;&lt;set $clue to []&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪手冊]]</tw-passagedata><tw-passagedata pid="3" name="*StoryBanner" tags="noreturn" position="200,0" size="100,100"></tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100">@@.center;三隻魚歷史新聞台@@</tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100">@@.center;淺野洋灰水泥廠罷工
+&lt;&lt;set $clue to []&gt;&gt;
+&lt;&lt;set $noteclue to []&gt;&gt;
+&lt;&lt;set $choice to false&gt;&gt;
+
+/*預載圖片*/
+&lt;&lt;preload &#39;media/img/player.jpg&#39; &#39;media/img/ch1people1.jpg&#39; &#39;media/img/ch1people2.jpg&#39; &#39;media/img/ch1people3.jpg&#39; &#39;media/img/bg.jpg&#39; &#39;media/img/bgch1&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪手冊]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100">&lt;br&gt;
+@@.center;淺野洋灰水泥廠罷工
 專題報導
-[試玩版]@@</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="*StoryCaption" tags="noreturn" position="200,400" size="100,100"></tw-passagedata><tw-passagedata pid="8" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="遊戲教學" tags="center" position="525,200" size="100,100">&lt;h3&gt;採訪教學&lt;/h3&gt;
+V2@@</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn" position="200,400" size="100,100">&lt;div class=&quot;sidewebnots-information sidewebnots-notification-box&quot;&gt;
+- 採訪任務 -
+&lt;&lt;if $choice is true&gt;&gt;
+【任務一】採訪到能佐證@@color:Chocolate;連警察都管不了@@的訪問內容
+【任務二】找出「吃飯隊」四處蹭飯的真正原因
+&lt;&lt;else&gt;&gt;
+請先選擇採訪主題。
+&lt;&lt;/if&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="遊戲教學" tags="center" position="525,200" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;h3&gt;@@color:MidnightBlue;採訪教學@@&lt;/h3&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 遊戲中你扮演的是一位未來的歷史記者。
 你必須依照主管指派的採訪任務，回到過去進行採訪。
 
@@ -1189,26 +1291,35 @@ $(document).on(':passagerender', function (ev) {
 關於歷史事件，你可以在採訪手冊中，閱讀詳細的介紹。
 點擊下方【觀看採訪手冊】的按鈕，觀看手冊內容。
 
-回到過去之後，你就可以開始採訪工作。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一則教學&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;回到過去之後，你就可以開始採訪工作。
 選擇採訪的人，以及你要提問的問題，來進行採訪。
 內容中有底線的藍色字句，即是可以進行的行動，或是選擇的採訪對象與內容，
 透過點擊，來進行你的選擇吧！
 
-當你看到&lt;span style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/span&gt;，那便是可以提出採訪問題的時候！
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+當你看到&lt;span style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/span&gt;，那便是可以提出採訪問題的時候！
 選擇你想提問的內容，來完成採訪！
 
-採訪時，記得點擊【下一句】按鈕繼續觀看採訪的內容。
-如果忘記了，你也可以點擊【上一句】按鈕，來回放採訪。
+採訪時，記得點擊&lt;&lt;link 下一句&gt;&gt;&lt;&lt;/link&gt;&gt;繼續觀看採訪的內容。
+如果忘記了，你也可以點擊&lt;&lt;link 上一句&gt;&gt;&lt;&lt;/link&gt;&gt;，來回放採訪。
 
-遊戲中可以點選左上角的圖示，開啟側邊選單。
-採訪完成後，如果想重新進行採訪，可以選擇側邊選單的【重新開始】按鈕。
-如果想記錄這次採訪的進度或結果，也可以選擇側邊選單的【存檔】，存下採訪內容。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+遊戲中可以點選左上角的圖示&lt;img src=&quot;media/img/back.png&quot; height=&quot;20px&quot;&gt;，開啟側邊選單。
+採訪完成後，如果想重新進行採訪，可以選擇側邊選單的&lt;img src=&quot;media/img/restart.png&quot; height=&quot;20px&quot;&gt;按鈕。
+如果想記錄這次採訪的進度或結果，也可以選擇側邊選單的&lt;img src=&quot;media/img/save.png&quot; height=&quot;20px&quot;&gt;，存下採訪內容。
 
-所有採訪需要注意的事情就是這些。
-如果忘記了，可以再次翻閱採訪手冊的「採訪注意事項」。
-祝你這次採訪工作可以順利，穿越愉快！
-
-[[開始採訪|選擇採訪主題]]</tw-passagedata><tw-passagedata pid="10" name="link" tags="" position="600,0" size="100,100">/*
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;[[再看一次教學|遊戲教學]]&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;[[開始採訪|選擇採訪主題]]&lt;&lt;/replace&gt;&gt;所有採訪需要注意的事情就是這些。
+如果忘記了，可以再次翻閱採訪手冊的&lt;&lt;link 採訪注意事項&gt;&gt;&lt;&lt;/link&gt;&gt;。
+祝採訪工作順利，穿越愉快！
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一則教學&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="link" tags="" position="600,0" size="100,100">/*
 [[點擊後到新的passage]]
 [[外連網址|https://www.google.com/]]
 &lt;&lt;link 點擊後到新passage的link連結&gt;&gt;&lt;&lt;goto 點擊後到新的passage&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -1226,7 +1337,10 @@ $(document).on(':passagerender', function (ev) {
 __底線__
 ==刪除線==
 字^^上標^^
-字~~下標~~</tw-passagedata><tw-passagedata pid="12" name="*PassageFooter" tags="noreturn" position="100,0" size="100,100"></tw-passagedata><tw-passagedata pid="13" name="*PassageHeader" tags="noreturn" position="100,100" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="*PassageDone" tags="noreturn" position="100,200" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="15" name="*PassageReady" tags="noreturn" position="100,300" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="16" name="自訂頁面樣式1" tags="CSS" position="700,0" size="100,100">/*自訂頁面樣式*/
+字~~下標~~</tw-passagedata><tw-passagedata pid="12" name="PassageFooter" tags="noreturn" position="100,0" size="100,100">&lt;br&gt;&lt;br&gt;
+&lt;&lt;if tags().includes(&#39;ch1&#39;)&gt;&gt;
+&lt;div class=&quot;paper&quot;&gt;&lt;div class=&quot;paper-content&quot;&gt;&lt;&lt;include &#39;採訪筆記&#39;&gt;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="*PassageHeader" tags="noreturn" position="100,100" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="*PassageDone" tags="noreturn" position="100,200" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="15" name="*PassageReady" tags="noreturn" position="100,300" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="16" name="自訂頁面樣式1" tags="CSS" position="700,0" size="100,100">/*自訂頁面樣式*/
 html, body {
 	width: -webkit-calc(100vw - 16px);
 	width: -moz-calc(100vw - 16px);
@@ -1384,8 +1498,8 @@ width: 60%;
 ＃ui-bar a,a {
   font-family:&#39;cwTeXYen&#39;!important;
   font-size: 120%;
-}</tw-passagedata><tw-passagedata pid="18" name="事件1" tags="center" position="750,400" size="100,100">&lt;h3&gt;@@color:red;不用改名鮭魚，也能免費吃大餐？
-「吃飯隊」四處蹭飯　受害婦女：警察都管不了@@&lt;/h3&gt;
+}</tw-passagedata><tw-passagedata pid="18" name="事件1" tags="center" position="750,400" size="100,100">&lt;h3&gt;&lt;div class=&quot;font-2&quot;&gt;@@color:red;不用改名鮭魚，也能免費吃大餐？
+「吃飯隊」四處蹭飯　受害者：警察都管不了@@&lt;/div&gt;&lt;/h3&gt;
 &lt;img src=&quot;media/img/strikegame02.png&quot; width=&quot;80%&quot;&gt;
 
 近日出現神祕組織「吃飯隊」的成員，
@@ -1394,17 +1508,17 @@ width: 60%;
 他們蹭飯蹭的毫無節制，
 已經有好幾位受害者家中的米被吃光！
 
-@@color:grey;&lt;em&gt;根據新聞台蒐集到的資料，
-1928年在高雄壽山地區有一群四處蹭飯的組織「吃飯隊」，
+@@color:grey;&lt;em&gt;根據新聞台蒐集到的資料，1928年在高雄壽山地區，有一群四處蹭飯的組織「吃飯隊」。
 據說跟淺野水泥罷工有關，而且連警察都管不了！
-完成主管交代的採訪任務，找出「吃飯隊」蹭飯的真正原因！&lt;/em&gt;@@
+完成採訪任務，找出「吃飯隊」蹭飯的真正原因！&lt;/em&gt;@@
 
 &lt;div class=&quot;webnots-information webnots-notification-box&quot;&gt;
 &lt;&lt;include &#39;吃飯隊任務&#39;&gt;&gt;
 &lt;/div&gt;
 
 
-[[穿越時空進行採訪|事件1開場]]</tw-passagedata><tw-passagedata pid="19" name="事件2" tags="" position="1200,400" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="20" name="start" tags="center" position="400,196.66666666666669" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
+[[穿越時空進行採訪|事件1開場]]
+&lt;&lt;set $choice to true&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="事件2" tags="" position="1200,400" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="20" name="start" tags="center" position="400,200" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
 這裡是三隻魚歷史新聞台！
 
 今日要報導的，
@@ -1416,8 +1530,8 @@ width: 60%;
 &lt;img src=&quot;media/img/strikegamecover.jpg&quot; width=&quot;80%&quot;&gt;
 
 [[進行連線|遊戲教學]]
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="事件1新聞開始" tags="center" position="750,650" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="事件1新聞開始" tags="center ch1" position="750,650" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 我們現在已經回到1928年的5月6日，
 &lt;&lt;ctpNext 0.5s t8n&gt;&gt;
@@ -1431,32 +1545,32 @@ width: 60%;
 讓我們來了解一下「吃飯隊」對他帶來的影響！
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\&lt;&lt;/replace&gt;&gt;[[吃飯隊做了什麼事？|事件1新聞1-1]]
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\&lt;&lt;/replace&gt;&gt;[[吃飯隊做了什麼事？|事件1新聞1-1]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="事件1新聞1-1" tags="center" position="750,775" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="事件1新聞1-1" tags="center ch1" position="750,775" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你好，我是三隻魚新聞台的歷史記者。
 可以詳細講一下「吃飯隊」對你做了什麼事嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;我人生中第一次遇到這麼誇張的行為，家裡直接被當免費食堂！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我人生中第一次遇到這麼誇張的行為，家裡直接被當免費食堂！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-這些「吃飯隊」的人，就是最近罷工的工人組成的，他們在昨天突然跑到我家，差不多來了10幾個人。
+這些「吃飯隊」的人，就是最近罷工的工人組成的，他們在昨天突然跑到我家，差不多來了10幾個人。&lt;&lt;run $noteclue.pushUnique(&#39;罷工蹭飯&#39;)&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 一進門他們就嚷嚷著要我家請吃飯！我本來以為只是開玩笑，畢竟裡面有些人曾是丈夫的同事，彼此認識。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-可是他們拿出契約，堅持要我們履約請吃飯。雖然我不識字，看不懂契約內容。
+可是他們拿出契約，堅持要我們履約請吃飯。雖然我不識字，看不懂契約內容。&lt;&lt;run $noteclue.pushUnique(&#39;契約蹭飯&#39;)&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 但萬一真的違約，怕對丈夫有不利的影響，只好配合煮飯請他們吃。
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 [[是否有嘗試阻止吃飯隊蹭飯？|事件1新聞1-2]]
 [[為什麼罷工的人要蹭飯？|事件1新聞1-3]]
 [[訪問對罷工的看法|事件1新聞1-4]]
@@ -1467,13 +1581,13 @@ width: 60%;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="事件1新聞1-2" tags="center" position="500,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="事件1新聞1-2" tags="center ch1" position="500,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你有嘗試過阻止「吃飯隊」蹭飯嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;當然有，一開始我婆婆就跳出來拒絕煮飯給「吃飯隊」的人吃，沒想到他們竟然直接跑進廚房，把我家的米搬出來要自己開煮。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;當然有，一開始我婆婆就跳出來拒絕煮飯給「吃飯隊」的人吃，沒想到他們竟然直接跑進廚房，把我家的米搬出來要自己開煮。&lt;&lt;run $noteclue.pushUnique(&#39;拒絕無用&#39;)&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我們當然不能放任他們亂來，只好假意配合煮飯拖延一下，另一方面則偷偷讓小姑去派出所請警察大人來維護秩序。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -1481,18 +1595,18 @@ width: 60%;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 說是根據契約規定，罷工後又復工的人有義務負擔罷工者的生活，所以才來吃飯。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-警察大人最後無法可管，只讓大家吃飯時不要搞破壞就回去了。
+警察大人最後無法可管，只讓大家吃飯時不要搞破壞就回去了。&lt;&lt;run $noteclue.pushUnique(&#39;無法可管&#39;)&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:green;【記者】@@&lt;&lt;/replace&gt;&gt;沒想到「吃飯隊」憑藉的契約這麼厲害！
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒想到「吃飯隊」憑藉的契約這麼厲害！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;對啊！後來丈夫跟我說，才知道原來契約是他參加罷工時簽的。
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;對啊！後來丈夫跟我說，才知道原來契約是他參加罷工時簽的。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我丈夫是淺野水泥工廠的工人，之前4月罷工時他有參加，那時候參加罷工的工人要簽過契約，來保障罷工團結。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 契約中就有一條規定簽約者違約或自行復職的話，就要負擔罷工者的生活費用。
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q13 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[吃飯隊為什麼要來你家蹭飯|事件1新聞1-3]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q14 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[對罷工有什麼看法|事件1新聞1-4]]&lt;&lt;/if&gt;&gt;
 [[採訪下一位|事件1新聞2-1]]
 &lt;&lt;/ctp&gt;&gt;
@@ -1502,13 +1616,13 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
-&lt;&lt;set $news1q12 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="事件1新聞1-3" tags="center" position="750,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;&lt;set $news1q12 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="事件1新聞1-3" tags="center ch1" position="750,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 妳說「吃飯隊」是罷工的人組成，為什麼他們要蹭飯？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;一定是因為罷工太久，而且罷工的人有好幾百人，就算有其他地區援助的物資，也支持不下去了啦！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;一定是因為罷工太久，而且罷工的人有好幾百人，就算有其他地區援助的物資，也支持不下去了啦！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 你也知道罷工沒有工作，就沒有收入，罷工從上個月開始到今天也快一個月了。那麼多天都沒收入，物資又不夠，罷工的人真的很難生活。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -1517,7 +1631,7 @@ width: 60%;
 那些罷工的人，一定是沒轍了，才想辦法用契約當藉口四處要飯吃！
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 [[所以「吃飯隊」的人吃飽就離開了？|事件1新聞1-3ask1]]
 [[所以「吃飯隊」的人是用契約當藉口來找麻煩？|事件1新聞1-3ask2]]
 &lt;&lt;/ctp&gt;&gt;
@@ -1526,13 +1640,13 @@ width: 60%;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="事件1新聞1-4" tags="center" position="1000,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="事件1新聞1-4" tags="center ch1" position="1000,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你對於上個月淺野水泥廠工人發起的罷工，怎麼看呢？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的罷工，大家都覺得一定會成功。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的罷工，大家都覺得一定會成功。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 結果都拖了快一個月，淺野會社還是不讓步。還好丈夫後來有聽我的話，回去工廠復工，老百姓不可能跟日本會社抗爭啦！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -1540,10 +1654,10 @@ width: 60%;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 州廳不可能放任罷工繼續，一定很快就會派警察大人來鎮壓罷工的人啦！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:green;【記者】@@&lt;&lt;/replace&gt;&gt;如果這消息屬實，罷工行動勢必會迎來更困難的挑戰！
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;如果這消息屬實，罷工行動勢必會迎來更困難的挑戰！
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q12 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[有沒有辦法可以阻止吃飯隊蹭飯|事件1新聞1-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q13 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[吃飯隊為什麼要來你家蹭飯|事件1新聞1-3]]&lt;&lt;/if&gt;&gt;
 [[採訪下一位|事件1新聞2-1]]
 &lt;&lt;/ctp&gt;&gt;
@@ -1553,8 +1667,8 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
-&lt;&lt;set $news1q14 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="事件1新聞2-1" tags="center" position="750,1450" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;&lt;set $news1q14 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="事件1新聞2-1" tags="center ch1" position="750,1450" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 非常感謝這位受害者的分享！看來「吃飯隊」真的不是空穴來風，而且竟然是罷工的人組織的！
 
@@ -1581,33 +1695,31 @@ width: 60%;
 
 @@color:red;[遊戲試玩已結束，感謝遊玩！]@@</tw-passagedata><tw-passagedata pid="28" name="選擇採訪主題" tags="center" position="750,200" size="100,100">請選擇你要進行採訪的主題
 
-[[「吃飯隊」出沒真相|事件1]]</tw-passagedata><tw-passagedata pid="29" name="採訪手冊" tags="center" position="400,400" size="100,100">選擇你要觀看的內容
+[[「吃飯隊」出沒真相|事件1]]</tw-passagedata><tw-passagedata pid="29" name="採訪手冊" tags="center noreturn" position="400,400" size="100,100">&lt;i class=&quot;fa fa-book&quot; style=&quot;font-size:36px&quot;&gt;&lt;/i&gt;
+選擇你要觀看的內容
 
-[[淺野洋灰工廠罷工事件介紹]]
-[[採訪任務]]
-[[採訪注意事項|遊戲教學]]</tw-passagedata><tw-passagedata pid="30" name="淺野洋灰工廠罷工事件介紹" tags="" position="525,525" size="100,100">@@.center;資料庫更新中，請等待5/1開放。@@
+[[淺野洋灰工廠罷工資料]]
+[[採訪注意事項|遊戲教學]]
 
-[[返回前頁|previous()]]</tw-passagedata><tw-passagedata pid="31" name="採訪任務" tags="center" position="525,400" size="100,100">&lt;&lt;if $choice is true&gt;&gt;
-【任務一】採訪到能佐證@@color:Chocolate;連警察都管不了@@的訪問內容
-【任務二】找出「吃飯隊」四處蹭飯的真正原因
-&lt;&lt;else&gt;&gt;
-請先選擇採訪主題。
-&lt;&lt;/if&gt;&gt;
-[[返回前頁|previous()]]</tw-passagedata><tw-passagedata pid="32" name="吃飯隊任務" tags="" position="400,1175" size="100,100">【任務一】採訪到能佐證@@color:red;連警察都管不了@@的訪問內容
-【任務二】找出「吃飯隊」四處蹭飯的真正原因</tw-passagedata><tw-passagedata pid="33" name="事件1開場" tags="center" position="750,525" size="100,100">你現在已經回到1928年5月6日的高雄壽山，
-根據同事的調查，有好幾戶人家都被「吃飯隊」上門蹭飯，
+[[返回前頁|$return]]</tw-passagedata><tw-passagedata pid="30" name="淺野洋灰工廠罷工資料" tags="" position="525,400" size="100,100">@@.center;資料庫更新中，請等待5/1開放。@@
+
+[[返回前頁|previous()]]</tw-passagedata><tw-passagedata pid="31" name="吃飯隊任務" tags="" position="300,1100" size="100,100">【任務一】採訪到能佐證@@color:gold;連警察都管不了@@的訪問內容
+【任務二】找出「吃飯隊」四處蹭飯的真正原因</tw-passagedata><tw-passagedata pid="32" name="事件1開場" tags="center" position="750,525" size="100,100">你現在已經回到1928年5月6日的高雄壽山，
+根據同事的調查，
+有好幾戶人家都被「吃飯隊」上門蹭飯，
 甚至還有一戶家裡的存糧被吃光光！
 
 同事留給你幾位已經聯絡好可以接受採訪人員名單，
-根據名單的建議，你前往採訪第一位受訪者，也是一名工人的妻子……
+根據名單的建議，你前往採訪第一位受訪者，
+也是一名工人的妻子……
 
-[[開始採訪|事件1新聞開始]]</tw-passagedata><tw-passagedata pid="34" name="事件1新聞1-3ask1" tags="center" position="675,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+[[開始採訪|事件1新聞開始]]</tw-passagedata><tw-passagedata pid="33" name="事件1新聞1-3ask1" tags="center ch1" position="675,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 所以「吃飯隊」的人吃飽就離開了？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;也不是，「吃飯隊」的每個人都吃了好幾碗飯，飯吃光了還叫我繼續煮，一直吃到家裡的米都沒了才離開。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;也不是，「吃飯隊」的每個人都吃了好幾碗飯，飯吃光了還叫我繼續煮，一直吃到家裡的米都沒了才離開。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我覺得他們就是故意的，現在家中一粒米都沒，都不知道下一餐該怎麼辦了！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -1616,7 +1728,7 @@ width: 60%;
 那些罷工的人，一定是沒轍了，才想辦法用契約當藉口四處要飯吃！
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q12 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[是否有嘗試阻止吃飯隊蹭飯|事件1新聞1-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q14 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[對罷工有什麼看法|事件1新聞1-4]]&lt;&lt;/if&gt;&gt;
 [[採訪下一位|事件1新聞2-1]]
 &lt;&lt;/ctp&gt;&gt;
@@ -1627,13 +1739,13 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q13 to true&gt;&gt;
-&lt;&lt;run $clue.push(&#39;吃光存糧&#39;)&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="事件1新聞1-3ask2" tags="center" position="825,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;@@color:green;【記者】@@&lt;/span&gt;
+&lt;&lt;run $clue.push(&#39;吃光存糧&#39;)&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="事件1新聞1-3ask2" tags="center ch1" position="825,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 所以「吃飯隊」的人是用契約當藉口來找麻煩？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;@@color:DarkSlateBlue;【受害婦女】@@&lt;&lt;/replace&gt;&gt;我覺得很有可能是淺野會社的「分化蟲」在搞事！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我覺得很有可能是淺野會社的「分化蟲」在搞事！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 丈夫跟我說過，他回工廠復工後，有聽到廠長跟會社高層討論，收買部分罷工的人成為「分化蟲」，讓他們想辦法破壞罷工的行動。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -1642,7 +1754,7 @@ width: 60%;
 「吃飯隊」一定是想用蹭飯的方式讓工人都沒辦法繼續支援罷工，斷了罷工的援助！
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#D68B00&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q12 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[是否有嘗試阻止吃飯隊蹭飯|事件1新聞1-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q14 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[對罷工有什麼看法|事件1新聞1-4]]&lt;&lt;/if&gt;&gt;
 [[採訪下一位|事件1新聞2-1]]
 &lt;&lt;/ctp&gt;&gt;
@@ -1653,7 +1765,10 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q13 to true&gt;&gt;
-&lt;&lt;run $clue.push(&#39;分化蟲&#39;)&gt;&gt;</tw-passagedata></tw-storydata>
+&lt;&lt;run $clue.push(&#39;分化蟲&#39;)&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="ALLCLUE" tags="" position="200,1100" size="100,100">/*
+&lt;&lt;set $clue to [契約蹭飯]&gt;&gt;
+
+*/</tw-passagedata><tw-passagedata pid="36" name="採訪筆記" tags="" position="300,1000" size="100,100">@@color:red;採訪筆記@@&lt;&lt;if $noteclue.includes(&#39;契約蹭飯&#39;)&gt;&gt;&lt;br&gt;「吃飯隊」以契約為憑藉向工人妻子家裡蹭飯&lt;&lt;/if&gt;&gt;&lt;&lt;if $noteclue.includes(&#39;拒絕無用&#39;)&gt;&gt;&lt;br&gt;工人妻子家裡沒有辦法拒絕煮飯給「吃飯隊」吃&lt;&lt;/if&gt;&gt;&lt;&lt;if $noteclue.includes(&#39;無法可管&#39;)&gt;&gt;&lt;br&gt;警察對「吃飯隊」到工人妻子家蹭飯吃沒轍&lt;&lt;/if&gt;&gt;&lt;&lt;if $noteclue.includes(&#39;罷工蹭飯&#39;)&gt;&gt;&lt;br&gt;工人妻子說「吃飯隊」是罷工的工人組成的&lt;&lt;/if&gt;&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:i,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e);if("function"==typeof e.clone)return e.clone(!0);if(e.nodeType&&"function"==typeof e.cloneNode)return e.cloneNode(!0);var r=void 0;return e instanceof Array?r=new Array(e.length):e instanceof Date?r=new Date(e.getTime()):e instanceof Map?(r=new Map,e.forEach(function(e,n){return r.set(n,t(e))})):e instanceof RegExp?r=new RegExp(e):e instanceof Set?(r=new Set,e.forEach(function(e){return r.add(t(e))})):r=Object.create(Object.getPrototypeOf(e)),Object.keys(e).forEach(function(n){return r[n]=t(e[n])}),r}function r(e){
