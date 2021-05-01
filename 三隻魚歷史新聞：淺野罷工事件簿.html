@@ -114,6 +114,19 @@ var saveAs=saveAs||navigator.msSaveBlob&&navigator.msSaveBlob.bind(navigator)||f
 .font-3 { font-family: 'cwTeXYen', sans-serif; }
 .font-4 { font-family: 'FontAwesome'; }
 
+/*按鈕樣式*/
+.detecttable button {
+	background-color: #4682B4; /* steelblue */
+	border: none;
+	color: white;
+	padding: 10px 30px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 8px;
+}
+
 /*拖拉組合版面*/
 #droppableText {
   	font: normal 20px/1 Arial Black, Gadget, sans-serif;
@@ -1959,7 +1972,14 @@ Macro.add('droppable', {
 /* 介面中文化結束 */</script><tw-tag name="CSS" color="purple"></tw-tag>,<tw-tag name="noreturn" color="red"></tw-tag><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="200,600" size="100,100">&lt;&lt;set $news1q12 to false&gt;&gt;
 &lt;&lt;set $news1q13 to false&gt;&gt;
 &lt;&lt;set $news1q14 to false&gt;&gt;
+&lt;&lt;set $news1q22 to false&gt;&gt;
+&lt;&lt;set $news1q23 to false&gt;&gt;
+&lt;&lt;set $news1q32 to false&gt;&gt;
+&lt;&lt;set $news1q33 to false&gt;&gt;
+&lt;&lt;set $news1q34 to true&gt;&gt;
 &lt;&lt;set $choice to false&gt;&gt;
+&lt;&lt;set $clue1 to []&gt;&gt;
+&lt;&lt;set $clue2 to []&gt;&gt;
 &lt;&lt;newinventory &#39;$inventory&#39;&gt;&gt;
 &lt;&lt;newinventory &#39;$clue&#39;&gt;&gt;
 
@@ -1967,15 +1987,14 @@ Macro.add('droppable', {
 &lt;&lt;preload &#39;media/img/player.jpg&#39; &#39;media/img/ch1people1.jpg&#39; &#39;media/img/ch1people2.jpg&#39; &#39;media/img/ch1people3.jpg&#39; &#39;media/img/bg.jpg&#39; &#39;media/img/bgch1.jpg&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪手冊]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100">&lt;br&gt;
 @@.center;淺野洋灰水泥廠罷工
 專題報導
-V2@@</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn" position="200,400" size="100,100">&lt;div class=&quot;sidewebnots-information sidewebnots-notification-box&quot;&gt;
+@@</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn" position="200,400" size="100,100">&lt;div class=&quot;sidewebnots-information sidewebnots-notification-box&quot;&gt;
 - 採訪任務 -
 &lt;&lt;if $choice is true&gt;&gt;
-【任務一】採訪到能佐證@@color:Chocolate;連警察都管不了@@的訪問內容
-【任務二】找出「吃飯隊」四處蹭飯的真正原因
+&lt;&lt;include &#39;吃飯隊任務&#39;&gt;&gt;
 &lt;&lt;else&gt;&gt;
 請先選擇採訪主題。
 &lt;&lt;/if&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="遊戲教學" tags="center" position="525,200" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="遊戲教學" tags="center noreturn" position="525,200" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;h3&gt;@@color:MidnightBlue;採訪教學@@&lt;/h3&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 遊戲中你扮演的是一位未來的歷史記者。
@@ -2038,10 +2057,11 @@ __底線__
 	&lt;div class=&quot;papertext&quot;&gt;&lt;&lt;include &#39;採訪筆記&#39;&gt;&gt;&lt;/div&gt;\
 &lt;/section&gt;
 &lt;&lt;/if&gt;&gt;\
-&lt;&lt;if tags().includes(&#39;combine&#39;)&gt;&gt;\
-&lt;div id = &quot;cluebox&quot;&gt;採訪筆記
-&lt;&lt;inventory &quot;&amp;nbsp;&quot; true&gt;&gt;。
-&lt;/div&gt;\
+&lt;&lt;if tags().includes(&#39;ch&#39;)&gt;&gt;\
+&lt;section class=&quot;paper&quot;&gt;\
+	&lt;article class=&quot;paperheader&quot;&gt;&lt;/article&gt;\
+	&lt;div class=&quot;papertext&quot;&gt;&lt;&lt;include &#39;採訪筆記&#39;&gt;&gt;&lt;/div&gt;\
+&lt;/section&gt;
 &lt;&lt;/if&gt;&gt;\</tw-passagedata><tw-passagedata pid="13" name="*PassageHeader" tags="noreturn" position="100,100" size="100,100"></tw-passagedata><tw-passagedata pid="14" name="*PassageDone" tags="noreturn" position="100,200" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="15" name="*PassageReady" tags="noreturn" position="100,300" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="16" name="自訂頁面樣式1" tags="CSS" position="700,0" size="100,100">/*自訂頁面樣式*/
 html, body {
 	width: -webkit-calc(100vw - 16px);
@@ -2220,7 +2240,28 @@ width: 60%;
 
 
 [[穿越時空進行採訪|事件1開場]]
-&lt;&lt;set $choice to true&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="事件2" tags="" position="1200,400" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="20" name="start" tags="center" position="400,200" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
+&lt;&lt;set $choice to true&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="事件1新聞2-1" tags="center ch1" position="1500,800" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+你好，我是三隻魚新聞台的歷史記者，對於您家中被「吃飯隊」蹭飯，有什麼看法？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;老實說「吃飯隊」的人來蹭飯，就算他們不用契約當理由，我是抱著互相幫忙的態度，不介意請他們吃飯啦。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+畢竟他們很多都是認識的同事，而且雖然我回去復工了，但可以幫到罷工，我也是很樂意的。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;支持罷工&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+[[吃飯隊只挑復工工人家蹭飯嗎|事件1新聞2-2]]
+[[為什麼要復工|事件1新聞2-3]]
+[[採訪下一位|事件1新聞2-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="start" tags="center" position="400,200" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
 這裡是三隻魚歷史新聞台！
 
 今日要報導的，
@@ -2278,7 +2319,7 @@ width: 60%;
 [[是否有嘗試阻止吃飯隊蹭飯？|事件1新聞1-2]]
 [[為什麼罷工的人要蹭飯？|事件1新聞1-3]]
 [[訪問對罷工的看法|事件1新聞1-4]]
-[[採訪下一位|事件1新聞2-1]]
+[[採訪下一位|事件1新聞1-end]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
@@ -2312,7 +2353,7 @@ width: 60%;
 &lt;&lt;ctpNext clear&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q13 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[吃飯隊為什麼要來你家蹭飯|事件1新聞1-3]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q14 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[對罷工有什麼看法|事件1新聞1-4]]&lt;&lt;/if&gt;&gt;
-[[採訪下一位|事件1新聞2-1]]
+[[採訪下一位|事件1新聞1-end]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
@@ -2353,17 +2394,11 @@ width: 60%;
 &lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的罷工，大家都覺得一定會成功。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 結果都拖了快一個月，淺野會社還是不讓步。還好丈夫後來有聽我的話，回去工廠復工，老百姓不可能跟日本會社抗爭啦！
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-你看現在罷工的人看起來是很多沒錯，但我偷偷跟你說，從叔叔那聽來的，就是日本皇室親王沒多久就要來高雄視察了。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;親王視察&#39;&gt;&gt;
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-州廳不可能放任罷工繼續，一定很快就會派警察大人來鎮壓罷工的人啦！
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;如果這消息屬實，罷工行動勢必會迎來更困難的挑戰！
 
 &lt;&lt;ctpNext clear&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q12 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[有沒有辦法可以阻止吃飯隊蹭飯|事件1新聞1-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q13 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[吃飯隊為什麼要來你家蹭飯|事件1新聞1-3]]&lt;&lt;/if&gt;&gt;
-[[採訪下一位|事件1新聞2-1]]
+[[採訪下一位|事件1新聞1-end]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
@@ -2371,7 +2406,7 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
-&lt;&lt;set $news1q14 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="事件1新聞2-1" tags="center ch1" position="750,1450" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;&lt;set $news1q14 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="事件1新聞1-end" tags="center ch1" position="750,1400" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 非常感謝這位受害者的分享！看來「吃飯隊」真的不是空穴來風，而且竟然是罷工的人組織的！
@@ -2383,18 +2418,17 @@ width: 60%;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 &lt;&lt;if $inventory.has(&#39;吃光存糧&#39;)&gt;&gt;讓人不禁懷疑他們的蹭飯行動不單單只是為了吃飽，而是還有其他目的。&lt;&lt;elseif $inventory.has(&#39;分化蟲&#39;)&gt;&gt;讓人覺得受訪者的懷疑並非空穴來風，很可能真的是淺野洋灰的陰謀。&lt;&lt;else&gt;&gt;還是另有其他企圖呢？&lt;&lt;/if&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-接下來還有兩位受訪者，要繼續還是結束採訪呢？
+接下來採訪旁邊這位民眾，是剛才受訪婦女的丈夫。他也是原本參與罷工、後來回工廠復工的工人。
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;goto &#39;結局&#39;&gt;&gt;
+[[採訪丈夫|事件1新聞2-1]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;
-[[組合]]</tw-passagedata><tw-passagedata pid="27" name="結局" tags="center" position="1000,200" size="100,100">你已經結束第一位受訪者的訪問！
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="27" name="結局" tags="center" position="1000,200" size="100,100">你已經結束第一位受訪者的訪問！
 
 其他的採訪者還在連絡途中，等到5/1就可以繼續採訪囉！
 
@@ -2403,12 +2437,23 @@ width: 60%;
 [[「吃飯隊」出沒真相|事件1]]</tw-passagedata><tw-passagedata pid="29" name="採訪手冊" tags="center noreturn" position="400,400" size="100,100">&lt;i class=&quot;fa fa-book&quot; style=&quot;font-size:36px&quot;&gt;&lt;/i&gt;
 選擇你要觀看的內容
 
-[[淺野洋灰工廠罷工資料]]
+[[採訪資料]]
 [[採訪注意事項|遊戲教學]]
 
-[[返回前頁|$return]]</tw-passagedata><tw-passagedata pid="30" name="淺野洋灰工廠罷工資料" tags="" position="525,400" size="100,100">@@.center;資料庫更新中，請等待5/1開放。@@
+[[返回前頁|$return]]</tw-passagedata><tw-passagedata pid="30" name="採訪資料" tags="noreturn" position="525,400" size="100,100">&lt;h2&gt;@@color:MidnightBlue;【採訪資料一：淺野水泥廠工人發起罷工的導火線】@@&lt;/h2&gt;
+1928年3月26日，淺野水泥工廠的工人吳石定因為長期曠職遭到解雇。吳石定曠職的原因，是在去年12月20日因為傷害罪被警察逮捕收押，被關了快三個月才被釋放，雖然當初有寫請假申請給工廠，也託友人向廠長說好釋放後可以照常上班，但廠方還是不照約定解雇他。
+高雄機械工友會知道後，召開大會討論，決定請黃賜當代表跟淺野洋灰高雄支店長陳情，可是淺野洋灰一方不承認黃賜的代表性，後來即使黃賜提出委任狀，店長還是拒絕接受黃賜陳情。
+4月6日高雄機械工友會淺野洋灰工廠會員300多人出面，證明黃賜的代表性，店長仍不讓步，還宣布水泥工廠停工一天，並解雇出面工人中的其中41人。
+淺野洋灰工廠工人知道後，都感到忿忿不平，於是在4月9日當天，選出代表後準備發起罷工，台灣工友總聯盟與台南總工會都有派人到高雄支援，蔣渭水、謝春木與盧丙丁都是其中一人。後來在4月14日，罷工行動正式發起，淺野洋灰工廠工人就有300多人參加。
+----
+&lt;h2&gt;@@color:MidnightBlue;【採訪資料二：淺野水泥罷工擴大發展與組織化】@@&lt;/h2&gt;
+淺野洋灰一方不打算妥協，要與罷工進行持久戰，所以在4月16日宣布調任山上挖石灰的工人到工廠內部，山上的工人基於團結拒絕被調任，不想搶罷工同事的工作。結果淺野洋灰方態度強硬，還表示工廠沒人的話就不需要挖這麼多石灰，乾脆大家停業，但停業期間不支付工資。於是山上挖石灰的300多名工人一起加入罷工。
+有了挖石灰工人的加入，罷工人數來到700多人，加上淺野洋灰強硬的態度，讓工人團結的聲勢達到高點。為了與淺野洋灰長期抗爭，罷工方在台灣民眾黨的協助下，成立「淺野洋灰罷業員工總指揮部」，設立宣傳、救濟、霸業、監視等部門（刊行新聞，頒發指令、海報、召開演講等），進行宣傳並號召團結。
+----
+&lt;h2&gt;@@color:MidnightBlue;【採訪資料三：吃飯隊】@@&lt;/h2&gt;
+根據偵查小組的調查，在5月初出現一個叫「吃飯隊」的組織，會擅自到別人家蹭飯吃，而且包含好幾個隊伍。每隊由十數名或數十名成員組成，而且據目擊者表示，曾看到同一家的人被好幾隊「吃飯隊」的人輪流上門蹭飯吃，找警察來處理也無用。
 
-[[返回前頁|previous()]]</tw-passagedata><tw-passagedata pid="31" name="吃飯隊任務" tags="" position="300,1100" size="100,100">【任務一】採訪到能佐證@@color:gold;連警察都管不了@@的訪問內容
+[[返回前頁|previous()]]</tw-passagedata><tw-passagedata pid="31" name="吃飯隊任務" tags="" position="300,1100" size="100,100">【任務一】採訪到能證實@@color:gold;連警察都管不了@@的訪問內容
 【任務二】找出「吃飯隊」四處蹭飯的真正原因</tw-passagedata><tw-passagedata pid="32" name="事件1開場" tags="center" position="750,525" size="100,100">你現在已經回到1928年5月6日的高雄壽山，
 根據同事的調查，
 有好幾戶人家都被「吃飯隊」上門蹭飯，
@@ -2430,12 +2475,12 @@ width: 60%;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 所以我丈夫本來有參加罷工，才會在前幾天回去工廠復工。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-那些罷工的人，一定是沒轍了，才想辦法用契約當藉口四處要飯吃！
+那些罷工的人，一定是沒轍了，才想辦法用契約當藉口四處要飯吃！&lt;&lt;pickup &#39;$inventory&#39; unique &#39;吃光存糧&#39;&gt;&gt;
 
 &lt;&lt;ctpNext clear&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q12 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[是否有嘗試阻止吃飯隊蹭飯|事件1新聞1-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q14 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[對罷工有什麼看法|事件1新聞1-4]]&lt;&lt;/if&gt;&gt;
-[[採訪下一位|事件1新聞2-1]]
+[[採訪下一位|事件1新聞1-end]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
@@ -2443,8 +2488,7 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
-&lt;&lt;set $news1q13 to true&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;吃光存糧&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="事件1新聞1-3ask2" tags="center ch1" position="825,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;&lt;set $news1q13 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="事件1新聞1-3ask2" tags="center ch1" position="825,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 所以「吃飯隊」的人是用契約當藉口來找麻煩？
@@ -2456,12 +2500,12 @@ width: 60%;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 其實也是有部分的工人，雖然沒有參加罷工繼續工作，卻用捐款或提供物資的方式來表示支持。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-「吃飯隊」一定是想用蹭飯的方式讓工人都沒辦法繼續支援罷工，斷了罷工的援助！
+「吃飯隊」一定是想用蹭飯的方式讓工人都沒辦法繼續支援罷工，斷了罷工的援助！&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲&#39;&gt;&gt;
 
 &lt;&lt;ctpNext clear&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;if $news1q12 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[是否有嘗試阻止吃飯隊蹭飯|事件1新聞1-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q14 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[對罷工有什麼看法|事件1新聞1-4]]&lt;&lt;/if&gt;&gt;
-[[採訪下一位|事件1新聞2-1]]
+[[採訪下一位|事件1新聞1-end]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
@@ -2469,47 +2513,377 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
-&lt;&lt;set $news1q13 to true&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="ALLCLUE" tags="" position="200,1100" size="100,100">/*
+&lt;&lt;set $news1q13 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="ALLCLUE" tags="" position="200,1100" size="100,100">/*
 &lt;&lt;set $clue to [契約蹭飯]&gt;&gt;
 
 */</tw-passagedata><tw-passagedata pid="36" name="採訪筆記" tags="" position="300,1000" size="100,100">@@color:red;採訪筆記@@
 &lt;&lt;if $inventory.length == 0&gt;&gt;
-&lt;&lt;else&gt;&gt;&lt;&lt;if $inventory.has(&#39;契約蹭飯&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」以契約為憑藉向工人妻子家裡蹭飯&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;拒絕無用&#39;)&gt;&gt;&lt;br&gt;*工人妻子家裡沒有辦法拒絕煮飯給「吃飯隊」吃&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;無法可管&#39;)&gt;&gt;&lt;br&gt;*警察對「吃飯隊」到工人妻子家蹭飯吃沒轍&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;罷工蹭飯&#39;)&gt;&gt;&lt;br&gt;*工人妻子說「吃飯隊」是罷工的工人組成的&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;吃光存糧&#39;)&gt;&gt;&lt;br&gt;*工人妻子說「吃飯隊」蓄意吃光她家中的存糧&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;分化蟲&#39;)&gt;&gt;&lt;br&gt;*工人妻子說「吃飯隊」是「分化蟲」在搞事&lt;&lt;/if&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="組合" tags="combine" position="500,1500" size="100,100">@@color:grey;//系統說明：拖拉線索並進行組合。//
-//使用方法：將下方灰色區塊內的線索，拖拉至橘色的組合區塊，點擊「進行組合」按鈕並觀看組合結果//@@
+&lt;&lt;else&gt;&gt;&lt;&lt;if $inventory.has(&#39;契約蹭飯&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」以契約為憑藉向工人妻子家裡蹭飯&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;拒絕無用&#39;)&gt;&gt;&lt;br&gt;*工人妻子家裡沒有辦法拒絕煮飯給「吃飯隊」吃&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;無法可管&#39;)&gt;&gt;&lt;br&gt;*警察對「吃飯隊」到工人妻子家蹭飯吃沒轍&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;罷工蹭飯&#39;)&gt;&gt;&lt;br&gt;*工人妻子說「吃飯隊」是罷工的工人組成的&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;吃光存糧&#39;)&gt;&gt;&lt;br&gt;*工人妻子說「吃飯隊」蓄意吃光她家中的存糧&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;分化蟲&#39;)&gt;&gt;&lt;br&gt;*工人妻子說「吃飯隊」是「分化蟲」在搞事&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;br&gt;*復工工人支持罷工，也願意用復工所得來協助罷工者&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;蹭飯復工者&#39;)&gt;&gt;&lt;br&gt;*吃飯隊蹭飯對象是復工工人&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;契約規定&#39;)&gt;&gt;&lt;br&gt;*契約規定復工者要負擔罷工者的生活費&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;復工理由&#39;)&gt;&gt;&lt;br&gt;*復工工人聽「總指揮部」幹部說罷工要結束才回去復工&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;罷工較省錢&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」吃光存糧導致復工工人不如回去罷工，還比較省錢&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;分化蟲搞事&#39;)&gt;&gt;&lt;br&gt;*「分化蟲」故意放出罷工結束的消息來誤導罷工的人回去復工&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;分化蟲搞蹭飯&#39;)&gt;&gt;&lt;br&gt;*復工工人猜「吃飯隊」是「分化蟲」吃垮支持罷工工人的手段&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;罷工組織吃飯隊&#39;)&gt;&gt;&lt;br&gt;*罷工者說吃飯隊正是罷工團組織的&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;契約避免糾紛&#39;)&gt;&gt;&lt;br&gt;*罷工者說契約是避免引起糾紛，證明只是去吃飯而已&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;懲罰復工1&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」故意吃光存糧懲罰復工工人，也警告那些打算復工的罷工者&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;懲罰復工2&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」故意吃光存糧懲罰復工工人，也促使部分罷工者放棄復工&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;懲罰復工3&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」故意吃光存糧懲罰不團結的復工工人&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;懲罰復工4&#39;)&gt;&gt;&lt;br&gt;*「吃飯隊」會故意吃光復工工人家中存糧，讓工人跟其他罷工者放棄復工&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;不工作支持&#39;)&gt;&gt;&lt;br&gt;*罷工團認為復工然後貢獻所得並非最佳的罷工支持方法&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="組合" tags="center ch" position="750,2300" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;&lt;if $inventory.has(&#39;無法可管&#39;)&gt;&gt;&lt;&lt;run $clue1.pushUnique(&#39;工人妻子找警察來處理「吃飯隊」蹭飯&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $inventory.has(&#39;契約規定&#39;)&gt;&gt;&lt;&lt;run $clue1.pushUnique(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $inventory.has(&#39;契約避免糾紛&#39;)&gt;&gt;&lt;&lt;run $clue1.pushUnique(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $inventory.has(&#39;分化蟲&#39;, &#39;分化蟲搞事&#39;)&gt;&gt;&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」阻斷罷工支持者的援助&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」懲罰復工工人&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」誤導罷工者回去復工&#39;)&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」尋找食物來源&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
+&lt;&lt;/nobr&gt;&gt;
+&lt;h2&gt;@@color:MidnightBlue;提交採訪任務@@&lt;/h2&gt;
+@@color:grey;&lt;em&gt;（利用下拉式選單，選擇要提交的採訪內容）&lt;/em&gt;@@
 
-&lt;&lt;nobr&gt;&gt;
+【任務一】採訪到能證實@@color:red;連警察都管不了@@的訪問內容
+提交完成任務的採訪：&lt;&lt;include &#39;任務1組合1&#39;&gt;&gt;
+
+【任務二】找出「吃飯隊」四處蹭飯的真正原因
+提交完成任務的採訪：&lt;&lt;include &#39;任務1組合2&#39;&gt;&gt;
 &lt;table class=&#39;detecttable&#39;&gt;
+&lt;&lt;button &#39;提交任務&#39;&gt;&gt;&lt;&lt;goto &#39;組合結果&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/table&gt;</tw-passagedata><tw-passagedata pid="38" name="事件1新聞2-2" tags="center ch1" position="1350,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+吃飯隊蹭飯的對象都是找復工工人家嗎？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒錯，他們去蹭飯就是去找那些曾罷工又回去復工的工人家，履行契約。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;蹭飯復工者&#39;&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+那份契約是加入罷工時都要簽的，上面有規定如果有人擅自回去復工，就要負擔罷工者的生活費用。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;契約規定&#39;&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+這也是為什麼叫警察來也沒用的原因，因為吃飯隊蹭飯只是在履約，沒有違法行為！
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q23 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[為什麼要復工|事件1新聞2-3]]&lt;&lt;/if&gt;&gt;
+[[採訪下一位|事件1新聞2-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
-		&lt;td&gt;&lt;&lt;droppable &quot;組合一&quot;&gt;&gt;\
-	&lt;&lt;item &quot;契約蹭飯&quot;&gt;&gt;\
-		&lt;&lt;set $keyword1 to &quot;契約蹭飯&quot;&gt;&gt;&lt;&lt;replace &quot;#chickenresponse&quot;&gt;&gt;契約蹭飯&lt;&lt;/replace&gt;&gt;\
-	&lt;&lt;item &quot;拒絕無用&quot;&gt;&gt;\
-		&lt;&lt;set $keyword1 to &quot;拒絕無用&quot;&gt;&gt;&lt;&lt;replace &quot;#chickenresponse&quot;&gt;&gt;拒絕無用&lt;&lt;/replace&gt;&gt;\
-	&lt;&lt;item &quot;無法可管&quot;&gt;&gt;\
-		&lt;&lt;set $keyword1 to &quot;無法可管&quot;&gt;&gt;&lt;&lt;replace &quot;#chickenresponse&quot;&gt;&gt;無法可管&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;/droppable&gt;&gt;&lt;/td&gt;
-		&lt;td&gt;&lt;&lt;droppable &quot;組合二&quot;&gt;&gt;\
-	&lt;&lt;item &quot;契約蹭飯&quot;&gt;&gt;\
-		&lt;&lt;set $keyword2 to &quot;契約蹭飯&quot;&gt;&gt;&lt;&lt;replace &quot;#chickenresponse&quot;&gt;&gt;契約蹭飯&lt;&lt;/replace&gt;&gt;\
-	&lt;&lt;item &quot;拒絕無用&quot;&gt;&gt;\
-		&lt;&lt;set $keyword2 to &quot;拒絕無用&quot;&gt;&gt;&lt;&lt;replace &quot;#chickenresponse&quot;&gt;&gt;拒絕無用&lt;&lt;/replace&gt;&gt;\
-	&lt;&lt;item &quot;無法可管&quot;&gt;&gt;\
-		&lt;&lt;set $keyword2 to &quot;無法可管&quot;&gt;&gt;&lt;&lt;replace &quot;#chickenresponse&quot;&gt;&gt;無法可管&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;/droppable&gt;&gt;&lt;/td&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;set $news1q22 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="事件1新聞2-3" tags="center ch1" position="1625,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+你當初為什麼要復工呢？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;剛才我妻子也說過，是因為家計問題，我才會回工廠復工。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+不過這只是其中一個原因，最重要的是當時「總指揮部」的幹部跟我說高雄機械工友會已經跟會社談妥了，準備要結束罷工。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;復工理由&#39;&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+像我這樣生計比較困難的，可以先回工廠復職，會社也會派車來載我們回去復工。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+我想說幹部說的應該沒錯，所以看到會社的自動車真的來載人，我就跟著其他人一起回去復工。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+但沒想到根本沒這回事，之後沒有聽到「總指揮部」宣布罷工結束，甚至罷工的人還指責我們復工的人不團結。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+現在還被吃飯隊找上門蹭飯，我真的搞不懂怎麼回事了！
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $inventory.has(&#39;吃光存糧&#39;)&gt;&gt;[[「吃飯隊」不是吃光你家存糧嗎？|事件1新聞2-3ask1]]&lt;&lt;elseif $inventory.has(&#39;分化蟲&#39;)&gt;&gt;[[剛才你妻子提到，「吃飯隊」是分化蟲在搞事？|事件1新聞2-3ask2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $news1q22 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[吃飯隊只挑復工工人家蹭飯嗎|事件1新聞2-2]]&lt;&lt;/if&gt;&gt;
+[[採訪下一位|事件1新聞2-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
-		&lt;td&gt;&lt;div id=&quot;chickenresponse&quot;/&gt;&lt;/td&gt;
-		&lt;td&gt;&lt;div id=&quot;pigresponse&quot;/&gt;&lt;/td&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;
-&lt;table class=&#39;detecttable&#39;&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;set $news1q23 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="事件1新聞2-end" tags="center ch1" position="1500,1400" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+感謝這位工人的分享！看來「吃飯隊」蹭飯的對象鎖定在復工工人身上！
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;if $inventory.has(&#39;罷工較省錢&#39;)&gt;&gt;而且「吃飯隊」吃光復工工人家中所有存糧的行為，讓這些復工工人覺得回去罷工還比較省錢。&lt;&lt;elseif $inventory.has(&#39;分化蟲搞蹭飯&#39;)&gt;&gt;而且「吃飯隊」吃光復工工人家中所有存糧的行為，讓這些工人難以繼續支援罷工行動，也破壞雙方之間的信任，可說是一箭雙鵰。看來復工工人的猜測可能性相當高，「吃飯隊」應該就是會社收買的「分化蟲」在搞事吧！&lt;&lt;else&gt;&gt;在心有餘力之下，復工工人卻是願意貢獻所得支持罷工。看來工人們即使沒有參與罷工，也是有其他方法支持罷工，讓罷工行動能繼續下去！&lt;&lt;/if&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+接下來電視台找到一群正在罷工的民眾，讓我們訪問其中一人，了解他們對「吃飯隊」的看法。
+
+&lt;&lt;ctpNext clear&gt;&gt;
+[[採訪罷工者|事件1新聞3-1]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
-		&lt;&lt;button &#39;進行組合&#39;&gt;&gt;&lt;&lt;goto &#39;組合結果&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;
-&lt;&lt;/nobr&gt;&gt;</tw-passagedata></tw-storydata>
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="事件1新聞2-3ask1" tags="center ch1" position="1550,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+「吃飯隊」不是吃光你家存糧嗎？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;是啊，「吃飯隊」這樣一吃，我回去復工跟罷工一樣，甚至罷工還更省錢，我在考慮要不還是回去罷工好了。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工較省錢&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q22 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[吃飯隊只挑復工工人家蹭飯嗎|事件1新聞2-2]]&lt;&lt;/if&gt;&gt;
+[[採訪下一位|事件1新聞2-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="事件1新聞2-3ask2" tags="center ch1" position="1700,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+剛才你妻子提到，「吃飯隊」是分化蟲在搞事？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒錯！我是真的有聽到廠長說要收買罷工的人搞破壞，剛剛提到那位跟我說可以回去復工的幹部，就是被收買的「分化蟲」！
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+所以我猜，這些蹭飯的「吃飯隊」，一定也是「分化蟲」搞破壞的手段。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲搞事&#39;&gt;&gt;&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲搞蹭飯&#39;&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+吃垮可以提供援助的工人，這樣罷工就會越來越難繼續下去！
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q22 is true&gt;&gt;&lt;&lt;else&gt;&gt;[[吃飯隊只挑復工工人家蹭飯嗎|事件1新聞2-2]]&lt;&lt;/if&gt;&gt;
+[[採訪下一位|事件1新聞2-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="43" name="事件1新聞3-1" tags="center ch1" position="750,1600" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+你好，我是三隻魚新聞台的歷史記者，請問你有聽過「吃飯隊」嗎？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我當然聽過，我自己就是吃飯隊的一員啦！
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+我簡單說明一下好了，吃飯隊是我們罷工團最近組成的，讓那些沒飯吃的罷工者，可以組隊去找復工的工人尋求幫忙，要食物吃！&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工組織吃飯隊&#39;&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+這是工人之間互幫互助的方法啦，也是讓沒加入罷工的人，也可以有支持的管道。
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+[[據說吃飯隊的人用契約當理由去蹭飯吃|事件1新聞3-2]]&lt;&lt;if $inventory.has(&#39;拒絕無用&#39;)&gt;&gt;&lt;br&gt;[[有人說拒絕吃飯隊蹭飯無用|事件1新聞3-3]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;br&gt;[[有些工人雖然沒有加入罷工，卻用其他方式來支持|事件1新聞3-4]]&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="44" name="事件1新聞3-2" tags="center ch1" position="500,1750" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+剛剛有被蹭飯的人提到，吃飯隊用契約作為蹭飯的理由，這不會讓人覺得有些強迫的意味嗎？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這是怕家裡人不了解狀況，會誤以為吃飯隊是流氓組織，所以才會帶著加入罷工時簽的契約，避免有紛爭。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;契約避免糾紛&#39;&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+契約上可是明白寫著逕自復職者必須負擔罷工者的生活費，可以用來證明吃飯隊只是去吃飯而已，不會有其他破壞的行為。
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $inventory.has(&#39;拒絕無用&#39;)&gt;&gt;&lt;&lt;if $news1q33 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有人說拒絕吃飯隊蹭飯無用|事件1新聞3-3]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;&lt;if $news1q34 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;if $news1q34 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有些工人雖然沒有加入罷工，卻用其他方式來支持|事件1新聞3-4]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;set $news1q32 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="事件1新聞3-3" tags="center ch1" position="750,1750" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+據我們了解，吃飯隊上門討飯吃時態度很硬，如果拒絕請吃飯，就會自己搜出食材煮飯吃，這是真的嗎？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這也不能怪我們，本來契約上就寫得很清楚，復工的人有義務負擔罷工者的生活費。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+拒絕的那些人因為自私不願意提供協助，我們當然氣不過，乾脆自己動手來，也是讓對方知道我們不是在開玩笑。
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $inventory.has(&#39;吃光存糧&#39;)&gt;&gt;[[如果是這樣，有必要吃到對方家中所有存糧都沒了？|事件1新聞3-3ask1]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;無法可管&#39;)&gt;&gt;&lt;br&gt;[[被蹭飯的人說找警察來卻拿你們沒轍，這是真的嗎？|事件1新聞3-3ask2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;分化蟲&#39;)&gt;&gt;&lt;br&gt;[[如果是這樣，那為何要故意把對方家中所有存糧都吃光？|事件1新聞3-3ask3]]&lt;&lt;/if&gt;&gt;
+[[所以你們不吃到飯就不罷休囉？|事件1新聞3-3ask4]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;set $news1q33 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="事件1新聞3-4" tags="center ch1" position="1000,1750" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+剛剛有位復工的工人提到，他本身是支持罷工的，不過因為生計問題，所以選擇回去工作，但還是會貢獻所得來支持罷工。你怎麼看待這件事？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這代表我們工人的團結啊！即使有些工人因故無法加入罷工，還是用其他的方式來支持。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+再加上工友總聯盟幫忙爭取，讓罷工團獲得許多援助物資，讓罷工能夠繼續跟會社打持久戰。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+可是不得不說，「罷工」才是根本，工廠不工作的工人夠多，會社才會感到威脅。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+所以罷工團還是希望工人不要回去復工，這才是對「罷工」最大的支持！&lt;&lt;pickup &#39;$inventory&#39; unique &#39;不工作支持&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q32 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[據說吃飯隊的人用契約當理由去蹭飯吃|事件1新聞3-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;拒絕無用&#39;)&gt;&gt;&lt;&lt;if $news1q33 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有人說拒絕吃飯隊蹭飯無用|事件1新聞3-3]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;set $news1q34 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="事件1新聞3-end" tags="center ch1" position="750,2125" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+感謝這位罷工者的分享！看來「吃飯隊」並非什麼不法組織，而是罷工者為了填飽肚子才組成的！
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;if $inventory.has(&#39;契約避免糾紛&#39;)&gt;&gt;「吃飯隊」利用契約來證明自己只是想討飯吃。&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;懲罰工人1&#39;)&gt;&gt;&lt;br&gt;「吃飯隊」也會故意吃光存糧，來懲罰復工工人，也導致部分罷工者放棄復工。&lt;&lt;elseif $inventory.has(&#39;懲罰工人2&#39;)&gt;&gt;&lt;br&gt;「吃飯隊」也會故意吃光存糧，來懲罰復工工人。&lt;&lt;elseif $inventory.has(&#39;懲罰工人3&#39;)&gt;&gt;&lt;br&gt;「吃飯隊」也會故意吃光存糧，來懲罰復工工人，也導致部分罷工者放棄復工。&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;不工作支持&#39;)&gt;&gt;&lt;br&gt;在心有餘力之下，復工工人卻是願意貢獻所得支持罷工。看來工人們即使沒有參與罷工，也是有其他方法支持罷工，讓罷工行動能繼續下去！&lt;&lt;/if&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+要採訪的對象已經都訪問完畢，是時候回去提交任務了！
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\[[提交任務|組合]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;button &#39;得到變數&#39;&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;工人妻子找警察來處理「吃飯隊」蹭飯&#39;)&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」阻斷罷工支持者的援助&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」懲罰復工工人&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」誤導罷工者回去復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」尋找食物來源&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="事件1新聞3-3ask1" tags="center ch1" position="525,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+如果是這樣，有必要吃到對方家中所有存糧都沒了？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;哎呀，這是看情況的啦。有些復工工人，單純就是牆頭草，會社給他們點好處就回去復職，拋棄當初罷工的理念。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+我們吃光他家中的存糧，只是懲罰這些破壞罷工團結的人，也給其他同樣打算復工的罷工者警告。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;懲罰復工1&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q32 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[據說吃飯隊的人用契約當理由去蹭飯吃|事件1新聞3-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;&lt;if $news1q34 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有些工人雖然沒有加入罷工，卻用其他方式來支持|事件1新聞3-4]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="事件1新聞3-3ask2" tags="center ch1" position="675,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+被蹭飯的人說找警察來卻拿你們沒轍，這是真的嗎？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;那是當然，我們只是去吃飯，也有契約為憑，又沒有做什麼不法的行為！
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+就算我們故意吃光復工工人家中的存糧，也不過是在履約而已。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+也因為這樣，我們吃飯隊可是成為能有效懲罰擅自復工工人的存在呢，聽說有打算復工的罷工者，知道後就放棄了，害怕同樣會被我們給吃垮。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;懲罰復工2&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q32 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[據說吃飯隊的人用契約當理由去蹭飯吃|事件1新聞3-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;&lt;if $news1q34 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有些工人雖然沒有加入罷工，卻用其他方式來支持|事件1新聞3-4]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="50" name="事件1新聞3-3ask3" tags="center ch1" position="825,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+如果是這樣，那為何要故意把對方家中所有存糧都吃光？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這是為了給那些破壞罷工團結的人懲罰！要跟會社爭取權益不是容易的事，如果我們工人不團結起來，很難成功。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+現在好不容易有台灣民眾黨跟高雄機械工友會幫忙，組成「總指揮部」來運作罷工，讓罷工可以長時間與會社抗衡。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+結果卻有人違反規定，擅自回去復職，所以對待這些復工的工人，我們吃飯隊就故意吃光存糧，讓他們知道繼續罷工還比較省錢，也讓其他罷工的人看見團結的力量有多大！&lt;&lt;pickup &#39;$inventory&#39; unique &#39;懲罰復工3&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q32 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[據說吃飯隊的人用契約當理由去蹭飯吃|事件1新聞3-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;&lt;if $news1q34 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有些工人雖然沒有加入罷工，卻用其他方式來支持|事件1新聞3-4]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="51" name="事件1新聞3-3ask4" tags="center ch1" position="975,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+所以你們不吃到飯就不罷休囉？
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;那當然啊！我們就是為了填飽肚子而去的嘛，而且我們還有另外一個目的，就是故意吃光復工工人家中的存糧。
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+讓他們感受到回去復工還不如繼續罷工，這樣也是讓其他罷工者放棄復工，增強團結。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;懲罰復工4&#39;&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【選擇提問】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;if $news1q32 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[據說吃飯隊的人用契約當理由去蹭飯吃|事件1新聞3-2]]&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;&lt;if $news1q34 is true&gt;&gt;&lt;&lt;else&gt;&gt;&lt;br&gt;[[有些工人雖然沒有加入罷工，卻用其他方式來支持|事件1新聞3-4]]&lt;&lt;/if&gt;&gt;&lt;&lt;/if&gt;&gt;
+[[結束採訪|事件1新聞3-end]]
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="52" name="任務1組合1" tags="" position="900,2300" size="100,100">&lt;&lt;listbox &quot;$cluef1&quot;&gt;&gt;
+&lt;&lt;optionsfrom $clue1&gt;&gt;
+&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="任務1組合2" tags="" position="900,2400" size="100,100">&lt;&lt;listbox &quot;$cluef2&quot;&gt;&gt;
+&lt;&lt;optionsfrom $clue2&gt;&gt;
+&lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="組合結果" tags="center" position="750,2400" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;img src=&quot;media/img/strikegamecover.jpg&quot; width=&quot;80%&quot;&gt;
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+&lt;&lt;if $cluef2.includes(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
+你將採訪的內容提交給主管，在對照新聞台資料室查詢到的資料後，證實在1928年淺野水泥罷工時出現的「吃飯隊」，正是罷工團為了應對當時有工人擅自回工廠復職的情況，減少罷工者復工的行動。
+&lt;&lt;else&gt;&gt;
+你將採訪的內容提交給主管，在對照新聞台資料室查詢到的資料後，卻找到與你提交內容不同的資料。資料上說明1928年淺野水泥罷工時出現的「吃飯隊」，是罷工團為了應對當時有工人擅自回工廠復職的情況，減少罷工者復工的行動。
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;if $cluef1.includes(&#39;工人妻子找警察來處理「吃飯隊」蹭飯&#39;)&gt;&gt;
+你採訪到工人妻子找警察來處理「吃飯隊」蹭飯的畫面，也突顯出受害者拿「吃飯隊」蹭飯行為沒轍的情況。
+&lt;&lt;elseif $cluef1.includes(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;
+你採訪到復工工人解釋契約規定的畫面，證實警察真的無法以違法為由，處置「吃飯隊」蹭飯的行為。
+&lt;&lt;elseif $cluef1.includes(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;
+你採訪到罷工者說明「吃飯隊」以契約為由四處蹭飯，但無法以此來呈現警察無法可管的情況。
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;ctpNext clear&gt;&gt;
+&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【遊戲結束】@@&lt;/div&gt;
+&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;感謝你的遊玩，如果想重新進行採訪，可以選擇側邊選單的&lt;img src=&quot;media/img/restart.png&quot; height=&quot;20px&quot;&gt;按鈕。
+&lt;&lt;/ctp&gt;&gt;
+&lt;table class=&#39;speechtable&#39;&gt;
+	&lt;tr&gt;
+		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+	&lt;/tr&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */
 	if(document.documentElement.getAttribute("data-init")==="loading"){!function(window,document,jQuery,undefined){"use strict";function _classCallCheck(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,r=Array(e.length);t<e.length;t++)r[t]=e[t];return r}return Array.from(e)}var _createClass=function(){function e(e,t){for(var r=0;r<t.length;r++){var n=t[r];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,r,n){return r&&e(t.prototype,r),n&&e(t,n),t}}(),_slicedToArray=function(){function e(e,t){var r=[],n=!0,a=!1,i=undefined;try{for(var o,s=e[Symbol.iterator]();!(n=(o=s.next()).done)&&(r.push(o.value),!t||r.length!==t);n=!0);}catch(e){a=!0,i=e}finally{try{!n&&s.return&&s.return()}finally{if(a)throw i}}return r}return function(t,r){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,r);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},errorPrologRegExp=/^(?:(?:uncaught\s+(?:exception:\s+)?)?\w*(?:error|exception|_err):\s+)+/i,Alert=function(){function e(e,t,r,n){var a="fatal"===e,i="Apologies! "+(a?"A fatal":"An")+" error has occurred.";i+=a?" Aborting.":" You may be able to continue, but some parts may not work properly.",null==t&&null==r||(i+="\n\nError",null!=t&&(i+=" ["+t+"]"),i+=null!=r?": "+r.replace(errorPrologRegExp,"")+".":": unknown error."),"object"===(void 0===n?"undefined":_typeof(n))&&null!==n&&n.stack&&(i+="\n\nStack Trace:\n"+n.stack),window.alert(i)}function t(t,r,n){e(null,t,r,n)}function r(t,r,n){e("fatal",t,r,n)}return function(e){window.onerror=function(n,a,i,o,s){"complete"===document.readyState?t(null,n,s):(r(null,n,s),window.onerror=e,"function"==typeof window.onerror&&window.onerror.apply(this,arguments))}}(window.onerror),Object.freeze(Object.defineProperties({},{error:{value:t},fatal:{value:r}}))}(),Patterns=function(){var e=function(){var e=new Map([[" ","\\u0020"],["\f","\\f"],["\n","\\n"],["\r","\\r"],["\t","\\t"],["\v","\\v"],[" ","\\u00a0"],[" ","\\u1680"],["᠎","\\u180e"],[" ","\\u2000"],[" ","\\u2001"],[" ","\\u2002"],[" ","\\u2003"],[" ","\\u2004"],[" ","\\u2005"],[" ","\\u2006"],[" ","\\u2007"],[" ","\\u2008"],[" ","\\u2009"],[" ","\\u200a"],["\u2028","\\u2028"],["\u2029","\\u2029"],[" ","\\u202f"],[" ","\\u205f"],["　","\\u3000"],["\ufeff","\\ufeff"]]),t=/^\s$/,r="";return e.forEach(function(e,n){t.test(n)||(r+=e)}),r?"[\\s"+r+"]":"\\s"}(),t="[\\u0020\\f\\t\\v\\u00a0\\u1680\\u180e\\u2000-\\u200a\\u202f\\u205f\\u3000\\ufeff]",r="\\s"===e?"\\S":e.replace(/^\[/,"[^"),n="[0-9A-Z_a-z\\-\\u00c0-\\u00d6\\u00d8-\\u00f6\\u00f8-\\u00ff\\u0150\\u0170\\u0151\\u0171]",a=n.replace("\\-",""),i=function(){return"("+n+"+)\\(([^\\)\\|\\n]+)\\):|"+t+"*("+n+"+)"+t+"*:([^;\\|\\n]+);|"+t+"*((?:[#.]"+n+"+"+t+"*)+);"}();return Object.freeze({space:e,spaceNoTerminator:t,lineTerminator:"[\\n\\r\\u2028\\u2029]",notSpace:r,anyChar:"(?:.|[\\n\\r\\u2028\\u2029])",anyLetter:n,anyLetterStrict:a,identifierFirstChar:"[$A-Z_a-z]",identifierNextChar:"[$0-9A-Z_a-z]",identifier:"[$A-Z_a-z][$0-9A-Z_a-z]*",variableSigil:"[$_]",variable:"[$_][$A-Z_a-z][$0-9A-Z_a-z]*",macroName:"[A-Za-z][\\w-]*|[=-]",templateName:"[A-Za-z][\\w-]*",cssIdOrClassSigil:"[#.]",cssImage:"\\[[<>]?[Ii][Mm][Gg]\\[(?:\\s|\\S)*?\\]\\]+",inlineCss:i,url:"(?:file|https?|mailto|ftp|javascript|irc|news|data):[^\\s'\"]+"})}();!function(){function e(e,t){var r=Number.parseInt(e,10)||0;if(r<1)return"";var n=void 0===t?"":String(t);for(""===n&&(n=" ");n.length<r;){var a=n.length,i=r-a;n+=a>i?n.slice(0,i):n}return n.length>r&&(n=n.slice(0,r)),n}var t=function(){function e(e,n){var a=String(e);if(!a)return a;switch(n){case"start":return t.test(a)?a.replace(t,""):a;case"end":return r.test(a)?a.replace(r,""):a;default:throw new Error('_trimString called with incorrect where parameter value: "'+n+'"')}}var t=new RegExp("^"+Patterns.space+Patterns.space+"*"),r=new RegExp(""+Patterns.space+Patterns.space+"*$");return e}();Array.prototype.flat||Object.defineProperty(Array.prototype,"flat",{configurable:!0,writable:!0,value:function(){function e(){if(null==this)throw new TypeError("Array.prototype.flat called on null or undefined");var t=0===arguments.length?1:Number(arguments[0])||0;return t<1?Array.prototype.slice.call(this):Array.prototype.reduce.call(this,function(r,n){return n instanceof Array?r.push.apply(r,_toConsumableArray(e.call(n,t-1))):r.push(n),r},[])}return e}()}),Array.prototype.flatMap||Object.defineProperty(Array.prototype,"flatMap",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatMap called on null or undefined");return Array.prototype.map.apply(this,arguments).flat()}}),Array.prototype.includes||Object.defineProperty(Array.prototype,"includes",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includes called on null or undefined");if(0===arguments.length)return!1;var e=this.length>>>0;if(0===e)return!1;var t=arguments[0],r=Number(arguments[1])||0;for(r<0&&(r=Math.max(0,e+r));r<e;++r){var n=this[r];if(n===t||n!==n&&t!==t)return!0}return!1}}),Object.entries||Object.defineProperty(Object,"entries",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.entries object parameter must be an object");return Object.keys(e).map(function(t){return[t,e[t]]})}}),Object.fromEntries||Object.defineProperty(Object,"fromEntries",{configurable:!0,writable:!0,value:function(e){return Array.from(e).reduce(function(e,t){if(Object(t)!==t)throw new TypeError("Object.fromEntries iterable parameter must yield objects");return t[0]in e?Object.defineProperty(e,t[0],{configurable:!0,enumerable:!0,writable:!0,value:t[1]}):e[t[0]]=t[1],e},{})}}),Object.getOwnPropertyDescriptors||Object.defineProperty(Object,"getOwnPropertyDescriptors",{configurable:!0,writable:!0,value:function(e){if(null==e)throw new TypeError("Object.getOwnPropertyDescriptors object parameter is null or undefined");var t=Object(e);return Reflect.ownKeys(t).reduce(function(e,r){var n=Object.getOwnPropertyDescriptor(t,r);return void 0!==n&&(r in e?Object.defineProperty(e,r,{configurable:!0,enumerable:!0,writable:!0,value:n}):e[r]=n),e},{})}}),Object.values||Object.defineProperty(Object,"values",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)throw new TypeError("Object.values object parameter must be an object");return Object.keys(e).map(function(t){return e[t]})}}),String.prototype.padStart||Object.defineProperty(String.prototype,"padStart",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padStart called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:e(i-a,r)+n}}),String.prototype.padEnd||Object.defineProperty(String.prototype,"padEnd",{configurable:!0,writable:!0,value:function(t,r){if(null==this)throw new TypeError("String.prototype.padEnd called on null or undefined");var n=String(this),a=n.length,i=Number.parseInt(t,10);return i<=a?n:n+e(i-a,r)}}),String.prototype.trimStart||Object.defineProperty(String.prototype,"trimStart",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimStart called on null or undefined");return t(this,"start")}}),String.prototype.trimLeft||Object.defineProperty(String.prototype,"trimLeft",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimLeft called on null or undefined");return t(this,"start")}}),String.prototype.trimEnd||Object.defineProperty(String.prototype,"trimEnd",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimEnd called on null or undefined");return t(this,"end")}}),String.prototype.trimRight||Object.defineProperty(String.prototype,"trimRight",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.trimRight called on null or undefined");return t(this,"end")}})}(),function(){function _random(){var e=void 0,t=void 0;switch(arguments.length){case 0:throw new Error("_random called with insufficient parameters");case 1:e=0,t=arguments[0];break;default:e=arguments[0],t=arguments[1]}if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.floor(_nativeMathRandom()*(t-e+1))+e}function _randomIndex(e,t){var r=void 0,n=void 0;switch(t.length){case 1:r=0,n=e-1;break;case 2:r=0,n=Math.trunc(t[1]);break;default:r=Math.trunc(t[1]),n=Math.trunc(t[2])}return Number.isNaN(r)?r=0:!Number.isFinite(r)||r>=e?r=e-1:r<0&&(r=e+r)<0&&(r=0),Number.isNaN(n)?n=0:!Number.isFinite(n)||n>=e?n=e-1:n<0&&(n=e+n)<0&&(n=e-1),_random(r,n)}function _getCodePointStartAndEnd(e,t){var r=e.charCodeAt(t);if(Number.isNaN(r))return{char:"",start:-1,end:-1};if(r<55296||r>57343)return{char:e.charAt(t),start:t,end:t};if(r>=55296&&r<=56319){var n=t+1;if(n>=e.length)throw new Error("high surrogate without trailing low surrogate");var a=e.charCodeAt(n);if(a<56320||a>57343)throw new Error("high surrogate without trailing low surrogate");return{char:e.charAt(t)+e.charAt(n),start:t,end:n}}if(0===t)throw new Error("low surrogate without leading high surrogate");var i=t-1,o=e.charCodeAt(i);if(o<55296||o>56319)throw new Error("low surrogate without leading high surrogate");return{char:e.charAt(i)+e.charAt(t),start:i,end:t}}var _nativeMathRandom=Math.random;Object.defineProperty(Array,"random",{configurable:!0,writable:!0,value:function(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e||!Object.prototype.hasOwnProperty.call(e,"length"))throw new TypeError("Array.random array parameter must be an array or array-lke object");var t=e.length>>>0;if(0!==t){return e[0===arguments.length?_random(0,t-1):_randomIndex(t,Array.prototype.slice.call(arguments,1))]}}}),Object.defineProperty(Array.prototype,"concatUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.concatUnique called on null or undefined");var e=Array.from(this);if(0===arguments.length)return e;var t=Array.prototype.reduce.call(arguments,function(e,t){return e.concat(t)},[]),r=t.length;if(0===r)return e;for(var n=Array.prototype.indexOf,a=Array.prototype.push,i=0;i<r;++i){var o=t[i];-1===n.call(e,o)&&a.call(e,o)}return e}}),Object.defineProperty(Array.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.count called on null or undefined");for(var e=Array.prototype.indexOf,t=arguments[0],r=Number(arguments[1])||0,n=0;-1!==(r=e.call(this,t,r));)++n,++r;return n}}),Object.defineProperty(Array.prototype,"delete",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.delete called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.concat.apply([],arguments),r=t.length,n=[],a=0;a<e;++a)for(var i=this[a],o=0;o<r;++o){var s=t[o];if(i===s||i!==i&&s!==s){n.push(a);break}}for(var u=[],l=0,c=n.length;l<c;++l)u[l]=this[n[l]];for(var d=Array.prototype.splice,f=n.length-1;f>=0;--f)d.call(this,n[f],1);return u}}),Object.defineProperty(Array.prototype,"deleteAt",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.deleteAt called on null or undefined");if(0===arguments.length)return[];var e=this.length>>>0;if(0===e)return[];for(var t=Array.prototype.splice,r=[].concat(_toConsumableArray(new Set(Array.prototype.concat.apply([],arguments).map(function(t){return t<0?Math.max(0,e+t):t})).values())),n=[].concat(_toConsumableArray(r)).sort(function(e,t){return t-e}),a=[],i=0,o=r.length;i<o;++i)a[i]=this[r[i]];for(var s=0,u=n.length;s<u;++s)t.call(this,n[s],1);return a}}),Object.defineProperty(Array.prototype,"deleteWith",{configurable:!0,writable:!0,value:function(e,t){if(null==this)throw new TypeError("Array.prototype.deleteWith called on null or undefined");if("function"!=typeof e)throw new Error("Array.prototype.deleteWith predicate parameter must be a function");var r=this.length>>>0;if(0===r)return[];for(var n=Array.prototype.splice,a=[],i=[],o=0;o<r;++o)e.call(t,this[o],o,this)&&(i.push(this[o]),a.push(o));for(var s=a.length-1;s>=0;--s)n.call(this,a[s],1);return i}}),Object.defineProperty(Array.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.first called on null or undefined");if(0!=this.length>>>0)return this[0]}}),Object.defineProperty(Array.prototype,"includesAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAll called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAll.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(!Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!1;return!0}}),Object.defineProperty(Array.prototype,"includesAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.includesAny called on null or undefined");if(1===arguments.length)return Array.isArray(arguments[0])?Array.prototype.includesAny.apply(this,arguments[0]):Array.prototype.includes.apply(this,arguments);for(var e=0,t=arguments.length;e<t;++e)if(Array.prototype.some.call(this,function(e){return e===this.val||e!==e&&this.val!==this.val},{val:arguments[e]}))return!0;return!1}}),Object.defineProperty(Array.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.last called on null or undefined");var e=this.length>>>0;if(0!==e)return this[e-1]}}),Object.defineProperty(Array.prototype,"pluck",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pluck called on null or undefined");var e=this.length>>>0;if(0!==e){var t=0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)));return Array.prototype.splice.call(this,t,1)[0]}}}),Object.defineProperty(Array.prototype,"pluckMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.pluckMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.pluckMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=Array.prototype.splice,a=[],i=t-1;do{a.push(n.call(this,_random(0,i--),1)[0])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"pushUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.pushUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.push,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Array.prototype,"random",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.random called on null or undefined");var e=this.length>>>0;if(0!==e){return this[0===arguments.length?_random(0,e-1):_randomIndex(e,[].concat(Array.prototype.slice.call(arguments)))]}}}),Object.defineProperty(Array.prototype,"randomMany",{configurable:!0,writable:!0,value:function(e){if(null==this)throw new TypeError("Array.prototype.randomMany called on null or undefined");var t=this.length>>>0;if(0===t)return[];var r=Math.trunc(e);if(!Number.isInteger(r))throw new Error("Array.prototype.randomMany want parameter must be an integer");if(r<1)return[];r>t&&(r=t);var n=new Map,a=[],i=t-1;do{var o=void 0;do{o=_random(0,i)}while(n.has(o));n.set(o,!0),a.push(this[o])}while(a.length<r);return a}}),Object.defineProperty(Array.prototype,"shuffle",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.shuffle called on null or undefined");var e=this.length>>>0;if(0===e)return this;for(var t=e-1;t>0;--t){var r=Math.floor(_nativeMathRandom()*(t+1));if(t!==r){var n=this[t];this[t]=this[r],this[r]=n}}return this}}),Object.defineProperty(Array.prototype,"unshiftUnique",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.unshiftUnique called on null or undefined");var e=arguments.length;if(0===e)return this.length>>>0;for(var t=Array.prototype.indexOf,r=Array.prototype.unshift,n=0;n<e;++n){var a=arguments[n];-1===t.call(this,a)&&r.call(this,a)}return this.length>>>0}}),Object.defineProperty(Function.prototype,"partial",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Function.prototype.partial called on null or undefined");var e=Array.prototype.slice,t=this,r=e.call(arguments,0);return function(){for(var n=[],a=0,i=0;i<r.length;++i)n.push(r[i]===undefined?arguments[a++]:r[i]);return t.apply(this,n.concat(e.call(arguments,a)))}}}),Object.defineProperty(Math,"clamp",{configurable:!0,writable:!0,value:function(e,t,r){var n=Number(e);return Number.isNaN(n)?NaN:n.clamp(t,r)}}),Object.defineProperty(Math,"easeInOut",{configurable:!0,writable:!0,value:function(e){return 1-(Math.cos(Number(e)*Math.PI)+1)/2}}),Object.defineProperty(Number.prototype,"clamp",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Number.prototype.clamp called on null or undefined");if(2!==arguments.length)throw new Error("Number.prototype.clamp called with an incorrect number of parameters");var e=Number(arguments[0]),t=Number(arguments[1]);if(e>t){var r=[t,e];e=r[0],t=r[1]}return Math.min(Math.max(this,e),t)}}),RegExp.escape||function(){var e=/[\\^$*+?.()|[\]{}]/g,t=new RegExp(e.source);Object.defineProperty(RegExp,"escape",{configurable:!0,writable:!0,value:function(r){var n=String(r);return n&&t.test(n)?n.replace(e,"\\$&"):n}})}(),function(){var e=/{(\d+)(?:,([+-]?\d+))?}/g,t=new RegExp(e.source);Object.defineProperty(String,"format",{configurable:!0,writable:!0,value:function(r){function n(e,t,r){if(!t)return e;var n=Math.abs(t)-e.length;if(n<1)return e;var a=String(r).repeat(n);return t<0?e+a:a+e}if(arguments.length<2)return 0===arguments.length?"":r;var a=2===arguments.length&&Array.isArray(arguments[1])?[].concat(_toConsumableArray(arguments[1])):Array.prototype.slice.call(arguments,1);return 0===a.length?r:t.test(r)?(e.lastIndex=0,r.replace(e,function(e,t,r){var i=a[t];if(null==i)return"";for(;"function"==typeof i;)i=i();switch(void 0===i?"undefined":_typeof(i)){case"string":break;case"object":i=JSON.stringify(i);break;default:i=String(i)}return n(i,r?Number.parseInt(r,10):0," ")})):r}})}(),Object.defineProperty(String.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.contains called on null or undefined");return-1!==String.prototype.indexOf.apply(this,arguments)}}),Object.defineProperty(String.prototype,"count",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.count called on null or undefined");var e=String(arguments[0]||"");if(""===e)return 0;for(var t=String.prototype.indexOf,r=e.length,n=Number(arguments[1])||0,a=0;-1!==(n=t.call(this,e,n));)++a,n+=r;return a}}),Object.defineProperty(String.prototype,"first",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.first called on null or undefined");return _getCodePointStartAndEnd(String(this),0).char}}),Object.defineProperty(String.prototype,"last",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.last called on null or undefined");var e=String(this);return _getCodePointStartAndEnd(e,e.length-1).char}}),Object.defineProperty(String.prototype,"splice",{configurable:!0,writable:!0,value:function(e,t,r){if(null==this)throw new TypeError("String.prototype.splice called on null or undefined");var n=this.length>>>0;if(0===n)return"";var a=Number(e);Number.isSafeInteger(a)?a<0&&(a+=n)<0&&(a=0):a=0,a>n&&(a=n);var i=Number(t);(!Number.isSafeInteger(i)||i<0)&&(i=0);var o=this.slice(0,a);return void 0!==r&&(o+=r),a+i<n&&(o+=this.slice(a+i)),o}}),Object.defineProperty(String.prototype,"splitOrEmpty",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.splitOrEmpty called on null or undefined");return""===String(this)?[]:String.prototype.split.apply(this,arguments)}}),Object.defineProperty(String.prototype,"toLocaleUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toLocaleUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toLocaleUpperCase()+e.slice(n+1)}}),Object.defineProperty(String.prototype,"toUpperFirst",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.toUpperFirst called on null or undefined");var e=String(this),t=_getCodePointStartAndEnd(e,0),r=t.char,n=t.end;return-1===n?"":r.toUpperCase()+e.slice(n+1)}}),Object.defineProperty(Date.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:date)",this.toISOString()]}}),Object.defineProperty(Function.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)","("+this.toString()+")"]}}),Object.defineProperty(Map.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:map)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(RegExp.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:eval)",this.toString()]}}),Object.defineProperty(Set.prototype,"toJSON",{configurable:!0,writable:!0,value:function(){return["(revive:set)",[].concat(_toConsumableArray(this))]}}),Object.defineProperty(JSON,"reviveWrapper",{configurable:!0,writable:!0,value:function(e,t){if("string"!=typeof e)throw new TypeError("JSON.reviveWrapper code parameter must be a string");return["(revive:eval)",[e,t]]}}),Object.defineProperty(JSON,"_real_parse",{value:JSON.parse}),Object.defineProperty(JSON,"parse",{configurable:!0,writable:!0,value:function value(text,reviver){return JSON._real_parse(text,function(key,val){var value=val;if(Array.isArray(value)&&2===value.length)switch(value[0]){case"(revive:set)":value=new Set(value[1]);break;case"(revive:map)":value=new Map(value[1]);break;case"(revive:date)":value=new Date(value[1]);break;case"(revive:eval)":try{if(Array.isArray(value[1])){var $ReviveData$=value[1][1];value=eval(value[1][0])}else value=eval(value[1])}catch(e){}}else if("string"==typeof value&&"@@revive@@"===value.slice(0,10))try{value=eval(value.slice(10))}catch(e){}if("function"==typeof reviver)try{value=reviver(key,value)}catch(e){}return value})}}),Object.defineProperty(Array.prototype,"contains",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.contains called on null or undefined");return Array.prototype.includes.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAll",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAll called on null or undefined");return Array.prototype.includesAll.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"containsAny",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.containsAny called on null or undefined");return Array.prototype.includesAny.apply(this,arguments)}}),Object.defineProperty(Array.prototype,"flatten",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("Array.prototype.flatten called on null or undefined");return Array.prototype.flat.call(this,1/0)}}),Object.defineProperty(String.prototype,"readBracketedList",{configurable:!0,writable:!0,value:function(){if(null==this)throw new TypeError("String.prototype.readBracketedList called on null or undefined");for(var e=new RegExp("(?:\\[\\[((?:\\s|\\S)*?)\\]\\])|([^\"'\\s]\\S*)","gm"),t=[],r=void 0;null!==(r=e.exec(this));)r[1]?t.push(r[1]):r[2]&&t.push(r[2]);return t}})}();var Browser=function(){var e=navigator.userAgent.toLowerCase(),t=e.includes("windows phone"),r=Object.freeze({Android:!t&&e.includes("android"),BlackBerry:/blackberry|bb10/.test(e),iOS:!t&&/ip(?:hone|ad|od)/.test(e),Opera:!t&&("object"===_typeof(window.operamini)||e.includes("opera mini")),Windows:t||/iemobile|wpdesktop/.test(e),any:function(){return r.Android||r.BlackBerry||r.iOS||r.Opera||r.Windows}}),n=!r.Windows&&!/khtml|trident|edge/.test(e)&&e.includes("gecko"),a=!e.includes("opera")&&/msie|trident/.test(e),i=a?function(){var t=/(?:msie\s+|rv:)(\d+\.\d)/.exec(e);return t?Number(t[1]):0}():null,o=e.includes("opera")||e.includes(" opr/"),s=o?function(){var t=new RegExp((/khtml|chrome/.test(e)?"opr":"version")+"\\/(\\d+\\.\\d+)"),r=t.exec(e);return r?Number(r[1]):0}():null,u=e.includes("vivaldi");return Object.freeze({userAgent:e,isMobile:r,isGecko:n,isIE:a,ieVersion:i,isOpera:o,operaVersion:s,isVivaldi:u})}(),Has=function(){var e=function(){try{return"function"==typeof document.createElement("audio").canPlayType}catch(e){}return!1}(),t=function(){try{return"Blob"in window&&"File"in window&&"FileList"in window&&"FileReader"in window&&!Browser.isMobile.any()&&(!Browser.isOpera||Browser.operaVersion>=15)}catch(e){}return!1}(),r=function(){try{return"geolocation"in navigator&&"function"==typeof navigator.geolocation.getCurrentPosition&&"function"==typeof navigator.geolocation.watchPosition}catch(e){}return!1}(),n=function(){try{return"MutationObserver"in window&&"function"==typeof window.MutationObserver}catch(e){}return!1}(),a=function(){try{return"performance"in window&&"function"==typeof window.performance.now}catch(e){}return!1}(),i=function(){try{return"ontouchstart"in window||!!window.DocumentTouch&&document instanceof window.DocumentTouch||!!navigator.maxTouchPoints||!!navigator.msMaxTouchPoints}catch(e){}return!1}(),o=function(){try{for(var e=new Map([["transition","transitionend"],["MSTransition","msTransitionEnd"],["WebkitTransition","webkitTransitionEnd"],["MozTransition","transitionend"]]),t=[].concat(_toConsumableArray(e.keys())),r=document.createElement("div"),n=0;n<t.length;++n)if(r.style[t[n]]!==undefined)return e.get(t[n])}catch(e){}return!1}();return Object.freeze({audio:e,fileAPI:t,geolocation:r,mutationObserver:n,performance:a,touch:i,transitionEndEvent:o})}(),Visibility=function(){function e(){return a}function t(){return a&&document[a.stateProperty]||"visible"}function r(){return Boolean(a)}function n(){return Boolean(a&&document[a.hiddenProperty])}var a=function(){try{return Object.freeze([{hiddenProperty:"hidden",stateProperty:"visibilityState",changeEvent:"visibilitychange"},{hiddenProperty:"webkitHidden",stateProperty:"webkitVisibilityState",changeEvent:"webkitvisibilitychange"},{hiddenProperty:"mozHidden",stateProperty:"mozVisibilityState",changeEvent:"mozvisibilitychange"},{hiddenProperty:"msHidden",stateProperty:"msVisibilityState",changeEvent:"msvisibilitychange"}].find(function(e){return e.hiddenProperty in document}))}catch(e){}return undefined}();return Object.freeze(Object.defineProperties({},{vendor:{get:e},state:{get:t},isEnabled:{value:r},isHidden:{value:n},hiddenProperty:{value:a&&a.hiddenProperty},stateProperty:{value:a&&a.stateProperty},changeEvent:{value:a&&a.changeEvent}}))}(),Fullscreen=function(){function e(e){var t=e||document.documentElement;return t===document.documentElement&&("msRequestFullscreen"===f.requestFn||Browser.isOpera&&Browser.operaVersion<15)&&(t=document.body),t}function t(){return f}function r(){return(f||null)&&document[f.element]}function n(){return Boolean(f&&document[f.isEnabled])}function a(){return Boolean(f&&document[f.element])}function i(t,r){var n=this;if(!f)return Promise.reject(new Error("fullscreen not supported"));var i=e(r);if("function"!=typeof i[f.requestFn])return Promise.reject(new Error("fullscreen not supported"));if(a())return Promise.resolve();if(p())return i[f.requestFn](t);var o=".Fullscreen_requestFullscreen";return new Promise(function(e,r){jQuery(i).off(o).one(""+f.errorEvent+o+" "+f.changeEvent+o,function(t){jQuery(n).off(o),t.type===f.errorEvent?r(new Error("unknown fullscreen request error")):e()}),i[f.requestFn](t)})}function o(){var e=this;if(!f||"function"!=typeof document[f.exitFn])return Promise.reject(new TypeError("fullscreen not supported"));if(!a())return Promise.reject(new TypeError("fullscreen mode not active"));if(p())return document[f.exitFn]();var t=".Fullscreen_exitFullscreen";return new Promise(function(r,n){jQuery(document).off(t).one(""+f.errorEvent+t+" "+f.changeEvent+t,function(a){jQuery(e).off(t),a.type===f.errorEvent?n(new Error("unknown fullscreen exit error")):r()}),document[f.exitFn]()})}function s(e,t){return a()?o():i(e,t)}function u(t,r){if(f){var n=e(r);$(n).on(f.changeEvent,t)}}function l(t,r){if(f){var n=e(r);t?$(n).off(f.changeEvent,t):$(n).off(f.changeEvent)}}function c(t,r){if(f){var n=e(r);$(n).on(f.errorEvent,t)}}function d(t,r){if(f){var n=e(r);t?$(n).off(f.errorEvent,t):$(n).off(f.errorEvent)}}var f=function(){try{return Object.freeze([{isEnabled:"fullscreenEnabled",element:"fullscreenElement",requestFn:"requestFullscreen",exitFn:"exitFullscreen",changeEvent:"fullscreenchange",errorEvent:"fullscreenerror"},{isEnabled:"webkitFullscreenEnabled",element:"webkitFullscreenElement",requestFn:"webkitRequestFullscreen",exitFn:"webkitExitFullscreen",changeEvent:"webkitfullscreenchange",errorEvent:"webkitfullscreenerror"},{isEnabled:"mozFullScreenEnabled",element:"mozFullScreenElement",requestFn:"mozRequestFullScreen",exitFn:"mozCancelFullScreen",changeEvent:"mozfullscreenchange",errorEvent:"mozfullscreenerror"},{isEnabled:"msFullscreenEnabled",element:"msFullscreenElement",requestFn:"msRequestFullscreen",exitFn:"msExitFullscreen",changeEvent:"MSFullscreenChange",errorEvent:"MSFullscreenError"}].find(function(e){return e.isEnabled in document}))}catch(e){}return undefined}(),p=function(){function e(){if(null!==t)return t;if(t=!1,f)try{var e=document.exitFullscreen();e.catch(function(){}),t=e instanceof Promise}catch(e){}return t}var t=null;return e}();return Object.freeze(Object.defineProperties({},{vendor:{get:t},element:{get:r},isEnabled:{value:n},isFullscreen:{value:a},request:{value:i},exit:{value:o},toggle:{value:s},onChange:{value:u},offChange:{value:l},onError:{value:c},offError:{value:d}}))}(),_ref3=function(){function e(e){for(var t=e.cloneNode(!0),r=document.createDocumentFragment(),n=void 0;null!==(n=t.firstChild);){if(n.nodeType===Node.ELEMENT_NODE)switch(n.nodeName.toUpperCase()){case"BR":case"DIV":case"P":r.appendChild(document.createTextNode(" "))}r.appendChild(n)}return r.textContent}function t(e){if("object"!==(void 0===e?"undefined":_typeof(e))||null===e)return e;if(e instanceof String)return String(e);if(e instanceof Number)return Number(e);if(e instanceof Boolean)return Boolean(e);if("function"==typeof e.clone)return e.clone(!0);if(e.nodeType&&"function"==typeof e.cloneNode)return e.cloneNode(!0);var r=void 0;return e instanceof Array?r=new Array(e.length):e instanceof Date?r=new Date(e.getTime()):e instanceof Map?(r=new Map,e.forEach(function(e,n){return r.set(n,t(e))})):e instanceof RegExp?r=new RegExp(e):e instanceof Set?(r=new Set,e.forEach(function(e){return r.add(t(e))})):r=Object.create(Object.getPrototypeOf(e)),Object.keys(e).forEach(function(n){return r[n]=t(e[n])}),r}function r(e){
