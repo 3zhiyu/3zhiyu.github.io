@@ -32,15 +32,6 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XTR1B36M1S"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XTR1B36M1S');
-</script>
 <script id="script-libraries" type="text/javascript">
 if(document.head&&document.addEventListener&&document.querySelector&&Object.create&&Object.freeze&&JSON){document.documentElement.setAttribute("data-init", "loading");
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
@@ -865,29 +856,34 @@ html {
   background-image: linear-gradient(to bottom,  hsl(70, 39%, 30%), black);
   background-image: -webkit-linear-gradient(top,  hsl(70, 39%, 30%), black);
   background-attachment: fixed;
-  background-color: black;
+  background-color: #A6BAC3 ;
   */
 }
 body {
   background-image: url("media/img/bg.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center;
+  background-position: left;
   background-size: cover;
 }
 
 #passages {
-  position: relative;
-  background: #F5DEB3;
-  width: 85%;
   margin:auto;
   margin-bottom: 5%;
-  padding: 2em;
-  box-shadow: 0px 2px 38px rgba(0, 0, 0, 0.2);
+  padding:2em;
+  width: 85%;
+  max-width: 500px;
+  min-height: 300px;
+  display:inline-block;
+  text-shadow:#595959 0px 1px 1px;
+  background: linear-gradient(rgba(72, 43, 0, 0.4), rgba(39, 39, 39, 0.7));
+  border: 6px solid #7cd8ff;
+  box-shadow: 0 0 20px #6bbafd;
+  border-radius: 10px;
     /* Text formatting */
   color: black;
   font-family:'Noto Sans TC'!important;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .passage:after, .passage:before {
@@ -953,22 +949,15 @@ hr {
 }
 
 /* Links */
-.passage a .char {
-  color: hsla(82, 39%, 20%, .75);
-  text-shadow: 0em 3px 0.2em hsla(82, 39%, 20%, .25), 0em 6px 0.4em hsla(82, 39%, 20%, .25);
+.passage a {
+    color: #68d;
+    text-shadow: 1px 1px 2px black;
 }
-.passage a:visited .char {
-  color: hsla(37, 39%, 20%, .75);
-  text-shadow: 0em 3px 0.2em hsla(37, 39%, 20%, .25), 0em 6px 0.4em hsla(37, 39%, 20%, .25);
-}
+
 .passage a:hover {
+  color: #8af;
+  text-shadow: 1px 1px 2px black;
   text-decoration: none;
-}
-.passage a:hover .char {
-  color: darkgreen !important;
-}
-.passage a:visited:hover .char {
-  color: darkred !important;
 }
 
 .passage input[type="text"] {
@@ -984,10 +973,7 @@ width: 60%;
 /*自訂背景*/
 body[data-tags~="ch1"]{
 	background-image: url("media/img/bgch1.jpg");
-}
-
-
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">
 
 /*禁用側邊欄前進、後退的按鈕*/
 Config.history.controls = false;
@@ -2016,7 +2002,7 @@ Macro.add('droppable', {
 點擊下方【觀看採訪手冊】的按鈕，觀看手冊內容。
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一則教學&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;回到過去之後，你就可以開始採訪工作。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一則教學&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;回到過去之後，你就可以開始採訪工作。
 選擇採訪的人，以及你要提問的問題，來進行採訪。
 內容中有底線的藍色字句，即是可以進行的行動，或是選擇的採訪對象與內容，
 透過點擊，來進行你的選擇吧！
@@ -2272,7 +2258,7 @@ width: 60%;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="start" tags="center" position="400,200" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="start" tags="center ch1" position="400,200" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
 這裡是三隻魚歷史新聞台！
 
 今日要報導的，
@@ -2402,7 +2388,7 @@ width: 60%;
 你對於上個月淺野水泥廠工人發起的罷工，怎麼看呢？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的支持，大家都覺得一定會成功。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的罷工，大家都覺得一定會成功。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 結果都拖了快一個月，淺野會社還是不讓步。還好丈夫後來有聽我的話，回去工廠復工，老百姓不可能跟日本會社抗爭啦！
 
@@ -2443,9 +2429,11 @@ width: 60%;
 
 其他的採訪者還在連絡途中，等到5/1就可以繼續採訪囉！
 
-@@color:red;[遊戲試玩已結束，感謝遊玩！]@@</tw-passagedata><tw-passagedata pid="28" name="選擇採訪主題" tags="center" position="750,200" size="100,100">請選擇你要進行採訪的主題
+@@color:red;[遊戲試玩已結束，感謝遊玩！]@@</tw-passagedata><tw-passagedata pid="28" name="選擇採訪主題" tags="center" position="750,200" size="100,100">&lt;div class=&quot;monitorscreen&quot;&gt;
+請選擇你要進行採訪的主題
 
-[[「吃飯隊」出沒真相|事件1]]</tw-passagedata><tw-passagedata pid="29" name="採訪手冊" tags="center noreturn" position="400,400" size="100,100">&lt;i class=&quot;fa fa-book&quot; style=&quot;font-size:36px&quot;&gt;&lt;/i&gt;
+[[「吃飯隊」出沒真相|事件1]]
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="29" name="採訪手冊" tags="center noreturn" position="400,400" size="100,100">&lt;i class=&quot;fa fa-book&quot; style=&quot;font-size:36px&quot;&gt;&lt;/i&gt;
 選擇你要觀看的內容
 
 [[採訪資料]]
@@ -2761,14 +2749,25 @@ width: 60%;
 要採訪的對象已經都訪問完畢，是時候回去提交任務了！
 
 &lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;[[提交任務|組合]]
+&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\[[提交任務|組合]]
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="事件1新聞3-3ask1" tags="center ch1" position="525,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;/table&gt;&lt;/div&gt;
+&lt;&lt;button &#39;得到變數&#39;&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;工人妻子找警察來處理「吃飯隊」蹭飯&#39;)&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」阻斷罷工支持者的援助&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」懲罰復工工人&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」誤導罷工者回去復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」尋找食物來源&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="事件1新聞3-3ask1" tags="center ch1" position="525,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 如果是這樣，有必要吃到對方家中所有存糧都沒了？
