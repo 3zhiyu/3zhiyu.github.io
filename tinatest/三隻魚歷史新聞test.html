@@ -1970,8 +1970,7 @@ Macro.add('droppable', {
 &lt;&lt;if $choice is true&gt;&gt;&lt;&lt;include &#39;吃飯隊任務&#39;&gt;&gt;&lt;&lt;else&gt;&gt;
 請先向主管了解採訪任務。
 &lt;&lt;/if&gt;&gt;
-&lt;/p&gt;</tw-passagedata><tw-passagedata pid="8" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="遊戲教學" tags="center noreturn" position="400,500" size="100,100">&lt;p data-title=&quot;訊息視窗&quot; class=&quot;dialog-box_success&quot; style=&quot;text-align:center&quot;&gt;\
-&lt;div id=&#39;speech&#39;&gt;
+&lt;/p&gt;</tw-passagedata><tw-passagedata pid="8" name="*StoryInterface" tags="noreturn" position="200,700" size="100,100"></tw-passagedata><tw-passagedata pid="9" name="遊戲教學" tags="center noreturn" position="400,500" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;h3&gt;@@color:Bisque;功能說明@@&lt;/h3&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 「偵視儀」是由新聞台配給的通訊、訪問用儀器。
@@ -2005,15 +2004,14 @@ Macro.add('droppable', {
 請開啟選單選擇@@color:Crimson;【功能說明】@@。
 
 &lt;&lt;if $choice is true&gt;&gt;[[返回前頁|$return]]&lt;&lt;else&gt;&gt;
-&lt;&lt;button &#39;採訪任務說明&#39; &#39;任務說明1&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
+&lt;&lt;button &#39;採訪任務說明&#39; &#39;遊戲教學5&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/if&gt;&gt;
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnTutorialR.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;
-&lt;/p&gt;</tw-passagedata><tw-passagedata pid="10" name="link" tags="" position="600,0" size="100,100">/*
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="link" tags="" position="600,0" size="100,100">/*
 [[點擊後到新的passage]]
 [[外連網址|https://www.google.com/]]
 &lt;&lt;link 點擊後到新passage的link連結&gt;&gt;&lt;&lt;goto 點擊後到新的passage&gt;&gt;&lt;&lt;/link&gt;&gt;
