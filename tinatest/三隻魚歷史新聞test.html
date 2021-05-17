@@ -1964,7 +1964,7 @@ Macro.add('droppable', {
 &lt;&lt;newinventory &#39;$clue&#39;&gt;&gt;
 
 /*預載圖片*/
-&lt;&lt;preload &#39;media/img/player.jpg&#39; &#39;media/img/ch1people1.jpg&#39; &#39;media/img/ch1people2.jpg&#39; &#39;media/img/ch1people3.jpg&#39; &#39;media/img/bg.jpg&#39; &#39;media/img/bgch1.jpg&#39; &#39;media/img/bgstart.jpg&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪任務]]
+&lt;&lt;preload &#39;media/img/player.png&#39; &#39;media/img/ch1people1.png&#39; &#39;media/img/ch1people2.png&#39; &#39;media/img/ch1people3.png&#39; &#39;media/img/bg.jpg&#39; &#39;media/img/bgch1.jpg&#39; &#39;media/img/bgstart.jpg&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪任務]]
 [[採訪資料]]
 [[功能說明|遊戲教學]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100">&lt;h3&gt;歷史採訪用偵視儀&lt;/h3&gt;</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn center" position="200,400" size="100,100">&lt;p data-title=&quot;採訪任務&quot; class=&quot;dialog-box_info&quot; style=&quot;text-align:center&quot;&gt;\
 &lt;img src=&quot;media/img/TITLE.png&quot; width=&quot;120%&quot;&gt;
@@ -2199,12 +2199,12 @@ width: 60%;
   font-family:&#39;cwTeXYen&#39;!important;
   font-size: 120%;
 }</tw-passagedata><tw-passagedata pid="18" name="事件1新聞2-1" tags="center ch1" position="1950,800" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你好，我是三隻魚新聞台的歷史記者，對於您家中被「吃飯隊」蹭飯，有什麼看法？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;老實說「吃飯隊」的人來蹭飯，就算他們不用契約當理由，我是抱著互相幫忙的態度，不介意請他們吃飯啦。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;老實說「吃飯隊」的人來蹭飯，就算他們不用契約當理由，我是抱著互相幫忙的態度，不介意請他們吃飯啦。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 畢竟他們很多都是認識的同事，而且雖然我回去復工了，但可以幫到罷工，我也是很樂意的。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;支持罷工&#39;&gt;&gt;
 
@@ -2228,7 +2228,7 @@ width: 60%;
 @@
 &lt;&lt;button &#39;進入新聞台&#39; &#39;遊戲教學1&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;run UI.stow()&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="事件1新聞開始" tags="center ch1" position="1200,650" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 我們現在已經回到1928年的5月6日，
 &lt;&lt;ctpNext 0.5s t8n&gt;&gt;
@@ -2250,13 +2250,13 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="事件1新聞1-1" tags="center ch1" position="1200,775" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你好，我是三隻魚新聞台的歷史記者。
 可以詳細講一下「吃飯隊」對你做了什麼事嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我人生中第一次遇到這麼誇張的行為，家裡直接被當免費食堂！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我人生中第一次遇到這麼誇張的行為，家裡直接被當免費食堂！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 這些「吃飯隊」的人，就是最近罷工的工人組成的，他們在昨天突然跑到我家，差不多來了10幾個人。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工蹭飯&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2279,12 +2279,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="事件1新聞1-2" tags="center ch1" position="950,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你有嘗試過阻止「吃飯隊」蹭飯嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;當然有，一開始我婆婆就跳出來拒絕煮飯給「吃飯隊」的人吃，沒想到他們竟然直接跑進廚房，把我家的米搬出來要自己開煮。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;拒絕無用&#39;&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;當然有，一開始我婆婆就跳出來拒絕煮飯給「吃飯隊」的人吃，沒想到他們竟然直接跑進廚房，把我家的米搬出來要自己開煮。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;拒絕無用&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我們當然不能放任他們亂來，只好假意配合煮飯拖延一下，另一方面則偷偷讓小姑去派出所請警察大人來維護秩序。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2294,9 +2294,9 @@ width: 60%;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 警察大人最後無法可管，只讓大家吃飯時不要搞破壞就回去了。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;無法可管&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒想到「吃飯隊」憑藉的契約這麼厲害！
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒想到「吃飯隊」憑藉的契約這麼厲害！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;對啊！後來丈夫跟我說，才知道原來契約是他參加罷工時簽的。
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;對啊！後來丈夫跟我說，才知道原來契約是他參加罷工時簽的。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我丈夫是淺野水泥工廠的工人，之前4月罷工時他有參加，那時候參加罷工的工人要簽過契約，來保障罷工團結。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2314,12 +2314,12 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q12 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="事件1新聞1-3" tags="center ch1" position="1200,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 妳說「吃飯隊」是罷工的人組成，為什麼他們要蹭飯？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;一定是因為罷工太久，而且罷工的人有好幾百人，就算有其他地區援助的物資，也支持不下去了啦！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;一定是因為罷工太久，而且罷工的人有好幾百人，就算有其他地區援助的物資，也支持不下去了啦！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 你也知道罷工沒有工作，就沒有收入，罷工從上個月開始到今天也快一個月了。那麼多天都沒收入，物資又不夠，罷工的人真的很難生活。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2338,12 +2338,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="事件1新聞1-4" tags="center ch1" position="1450,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你對於上個月淺野水泥廠工人發起的罷工，怎麼看呢？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的罷工，大家都覺得一定會成功。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我自己沒在關注這些，了解不多啦。不過我丈夫有參加，雖然前幾天復工了，可是罷工剛開始的時候，就聽他說過，罷工行動受到高雄機械工友會跟台灣民眾黨的罷工，大家都覺得一定會成功。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 結果都拖了快一個月，淺野會社還是不讓步。還好丈夫後來有聽我的話，回去工廠復工，老百姓不可能跟日本會社抗爭啦！
 
@@ -2359,7 +2359,7 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q14 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="事件1新聞1-end" tags="center ch1" position="1200,1400" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 非常感謝這位受害者的分享！看來「吃飯隊」真的不是空穴來風，而且竟然是罷工的人組織的！
 
@@ -2417,12 +2417,12 @@ width: 60%;
 也是一名工人的妻子……
 
 &lt;&lt;button &#39;開始採訪&#39; &#39;事件1新聞開始&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="事件1新聞1-3ask1" tags="center ch1" position="1125,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 所以「吃飯隊」的人吃飽就離開了？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;也不是，「吃飯隊」的每個人都吃了好幾碗飯，飯吃光了還叫我繼續煮，一直吃到家裡的米都沒了才離開。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;也不是，「吃飯隊」的每個人都吃了好幾碗飯，飯吃光了還叫我繼續煮，一直吃到家裡的米都沒了才離開。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我覺得他們就是故意的，現在家中一粒米都沒，都不知道下一餐該怎麼辦了！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2442,12 +2442,12 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q13 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="事件1新聞1-3ask2" tags="center ch1" position="1275,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 所以「吃飯隊」的人是用契約當藉口來找麻煩？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我覺得很有可能是淺野會社的「分化蟲」在搞事！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people1.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我覺得很有可能是淺野會社的「分化蟲」在搞事！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 丈夫跟我說過，他回工廠復工後，有聽到廠長跟會社高層討論，收買部分罷工的人成為「分化蟲」，讓他們想辦法破壞罷工的行動。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2493,12 +2493,12 @@ width: 60%;
 &lt;table class=&#39;detecttable&#39;&gt;
 &lt;&lt;button &#39;提交任務&#39;&gt;&gt;&lt;&lt;goto &#39;組合結果&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/table&gt;</tw-passagedata><tw-passagedata pid="36" name="事件1新聞2-2" tags="center ch1" position="1800,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 吃飯隊蹭飯的對象都是找復工工人家嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒錯，他們去蹭飯就是去找那些曾罷工又回去復工的工人家，履行契約。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;蹭飯復工者&#39;&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒錯，他們去蹭飯就是去找那些曾罷工又回去復工的工人家，履行契約。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;蹭飯復工者&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 那份契約是加入罷工時都要簽的，上面有規定如果有人擅自回去復工，就要負擔罷工者的生活費用。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;契約規定&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2516,12 +2516,12 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q22 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="事件1新聞2-3" tags="center ch1" position="2075,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你當初為什麼要復工呢？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;剛才我妻子也說過，是因為家計問題，我才會回工廠復工。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;剛才我妻子也說過，是因為家計問題，我才會回工廠復工。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 不過這只是其中一個原因，最重要的是當時「總指揮部」的幹部跟我說高雄機械工友會已經跟會社談妥了，準備要結束罷工。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;復工理由&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2545,7 +2545,7 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q23 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="事件1新聞2-end" tags="center ch1" position="1950,1400" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 感謝這位工人的分享！看來「吃飯隊」蹭飯的對象鎖定在復工工人身上！
 
@@ -2563,12 +2563,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="39" name="事件1新聞2-3ask1" tags="center ch1" position="2000,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 「吃飯隊」不是吃光你家存糧嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;是啊，「吃飯隊」這樣一吃，我回去復工跟罷工一樣，甚至罷工還更省錢，我在考慮要不還是回去罷工好了。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工較省錢&#39;&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;是啊，「吃飯隊」這樣一吃，我回去復工跟罷工一樣，甚至罷工還更省錢，我在考慮要不還是回去罷工好了。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工較省錢&#39;&gt;&gt;
 
 &lt;&lt;ctpNext clear&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;div style=&quot;color:#008080&quot;&gt;@@.fade-in-out;【訪談項目】@@&lt;/div&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
@@ -2581,12 +2581,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="40" name="事件1新聞2-3ask2" tags="center ch1" position="2150,1075" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 剛才你妻子提到，「吃飯隊」是分化蟲在搞事？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒錯！我是真的有聽到廠長說要收買罷工的人搞破壞，剛剛提到那位跟我說可以回去復工的幹部，就是被收買的「分化蟲」！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people2.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;沒錯！我是真的有聽到廠長說要收買罷工的人搞破壞，剛剛提到那位跟我說可以回去復工的幹部，就是被收買的「分化蟲」！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 所以我猜，這些蹭飯的「吃飯隊」，一定也是「分化蟲」搞破壞的手段。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲搞事&#39;&gt;&gt;&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲搞蹭飯&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2603,12 +2603,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="事件1新聞3-1" tags="center ch1" position="1200,1600" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 你好，我是三隻魚新聞台的歷史記者，請問你有聽過「吃飯隊」嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我當然聽過，我自己就是吃飯隊的一員啦！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;我當然聽過，我自己就是吃飯隊的一員啦！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我簡單說明一下好了，吃飯隊是我們罷工團最近組成的，讓那些沒飯吃的罷工者，可以組隊去找復工的工人尋求幫忙，要食物吃！&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工組織吃飯隊&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2625,12 +2625,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="42" name="事件1新聞3-2" tags="center ch1" position="950,1750" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 剛剛有被蹭飯的人提到，吃飯隊用契約作為蹭飯的理由，這不會讓人覺得有些強迫的意味嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這是怕家裡人不了解狀況，會誤以為吃飯隊是流氓組織，所以才會帶著加入罷工時簽的契約，避免有紛爭。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;契約避免糾紛&#39;&gt;&gt;
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這是怕家裡人不了解狀況，會誤以為吃飯隊是流氓組織，所以才會帶著加入罷工時簽的契約，避免有紛爭。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;契約避免糾紛&#39;&gt;&gt;
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 契約上可是明白寫著逕自復職者必須負擔罷工者的生活費，可以用來證明吃飯隊只是去吃飯而已，不會有其他破壞的行為。
 
@@ -2646,12 +2646,12 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q32 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="事件1新聞3-3" tags="center ch1" position="1200,1750" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 據我們了解，吃飯隊上門討飯吃時態度很硬，如果拒絕請吃飯，就會自己搜出食材煮飯吃，這是真的嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這也不能怪我們，本來契約上就寫得很清楚，復工的人有義務負擔罷工者的生活費。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這也不能怪我們，本來契約上就寫得很清楚，復工的人有義務負擔罷工者的生活費。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 拒絕的那些人因為自私不願意提供協助，我們當然氣不過，乾脆自己動手來，也是讓對方知道我們不是在開玩笑。
 
@@ -2667,12 +2667,12 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q33 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="事件1新聞3-4" tags="center ch1" position="1450,1750" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 剛剛有位復工的工人提到，他本身是支持罷工的，不過因為生計問題，所以選擇回去工作，但還是會貢獻所得來支持罷工。你怎麼看待這件事？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這代表我們工人的團結啊！即使有些工人因故無法加入罷工，還是用其他的方式來支持。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這代表我們工人的團結啊！即使有些工人因故無法加入罷工，還是用其他的方式來支持。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 再加上工友總聯盟幫忙爭取，讓罷工團獲得許多援助物資，讓罷工能夠繼續跟會社打持久戰。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2692,7 +2692,7 @@ width: 60%;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;set $news1q34 to true&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="事件1新聞3-end" tags="center ch1" position="1200,2125" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 感謝這位罷工者的分享！看來「吃飯隊」並非什麼不法組織，而是罷工者為了填飽肚子才組成的！
 
@@ -2721,12 +2721,12 @@ width: 60%;
 &lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
 &lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
 &lt;&lt;/button&gt;&gt;*/</tw-passagedata><tw-passagedata pid="46" name="事件1新聞3-3ask1" tags="center ch1" position="975,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 如果是這樣，有必要吃到對方家中所有存糧都沒了？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;哎呀，這是看情況的啦。有些復工工人，單純就是牆頭草，會社給他們點好處就回去復職，拋棄當初罷工的理念。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;哎呀，這是看情況的啦。有些復工工人，單純就是牆頭草，會社給他們點好處就回去復職，拋棄當初罷工的理念。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 我們吃光他家中的存糧，只是懲罰這些破壞罷工團結的人，也給其他同樣打算復工的罷工者警告。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;懲罰復工1&#39;&gt;&gt;
 
@@ -2741,12 +2741,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="47" name="事件1新聞3-3ask2" tags="center ch1" position="1125,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 被蹭飯的人說找警察來卻拿你們沒轍，這是真的嗎？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;那是當然，我們只是去吃飯，也有契約為憑，又沒有做什麼不法的行為！
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;那是當然，我們只是去吃飯，也有契約為憑，又沒有做什麼不法的行為！
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 就算我們故意吃光復工工人家中的存糧，也不過是在履約而已。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2763,12 +2763,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="48" name="事件1新聞3-3ask3" tags="center ch1" position="1275,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 如果是這樣，那為何要故意把對方家中所有存糧都吃光？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這是為了給那些破壞罷工團結的人懲罰！要跟會社爭取權益不是容易的事，如果我們工人不團結起來，很難成功。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;這是為了給那些破壞罷工團結的人懲罰！要跟會社爭取權益不是容易的事，如果我們工人不團結起來，很難成功。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 現在好不容易有台灣民眾黨跟高雄機械工友會幫忙，組成「總指揮部」來運作罷工，讓罷工可以長時間與會社抗衡。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
@@ -2785,12 +2785,12 @@ width: 60%;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="49" name="事件1新聞3-3ask4" tags="center ch1" position="1425,1900" size="100,100">&lt;div id=&#39;speech&#39;&gt;
-&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.jpg&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
+&lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;150px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 所以你們不吃到飯就不罷休囉？
 
 &lt;&lt;ctpNext clear t8n&gt;&gt;
-&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.jpg&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;那當然啊！我們就是為了填飽肚子而去的嘛，而且我們還有另外一個目的，就是故意吃光復工工人家中的存糧。
+&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;link [img[media/img/BtnConV1L.png]]&gt;&gt;&lt;&lt;ctpBack &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img src=&quot;media/img/ch1people3.png&quot; width=&quot;150px&quot;&gt;&lt;&lt;/replace&gt;&gt;那當然啊！我們就是為了填飽肚子而去的嘛，而且我們還有另外一個目的，就是故意吃光復工工人家中的存糧。
 &lt;&lt;ctpNext clear t8n&gt;&gt;
 讓他們感受到回去復工還不如繼續罷工，這樣也是讓其他罷工者放棄復工，增強團結。&lt;&lt;pickup &#39;$inventory&#39; unique &#39;懲罰復工4&#39;&gt;&gt;
 
