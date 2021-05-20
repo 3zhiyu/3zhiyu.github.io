@@ -2144,9 +2144,10 @@ Macro.add('droppable', {
 &lt;&lt;preload &#39;media/img/player.png&#39; &#39;media/img/ch1people1.png&#39; &#39;media/img/ch1people2.png&#39; &#39;media/img/ch1people3.png&#39; &#39;media/img/bg.jpg&#39; &#39;media/img/bgch1.jpg&#39; &#39;media/img/bgstart.jpg&#39; &#39;media/img/notetitle.png&#39; &#39;media/img/tasktitle.png&#39; &#39;media/img/Quest.png&#39; &#39;media/img/back.mp4&#39; &#39;media/img/1.png&#39; &#39;media/img/2.png&#39; &#39;media/img/3.png&#39; &#39;media/img/4.png&#39; &#39;media/img/5.png&#39; &#39;media/img/6.png&#39; &#39;media/img/7.png&#39; &#39;media/img/8.png&#39; &#39;media/img/9.png&#39; &#39;media/img/10.png&#39; &#39;media/img/11.png&#39; &#39;media/img/12.png&#39; &#39;media/img/13.png&#39; &#39;media/img/14.png&#39; &#39;media/img/15.png&#39; &#39;media/img/16.png&#39; &#39;media/img/17.png&#39; &#39;media/img/18.png&#39; &#39;media/img/21.png&#39; &#39;media/img/22.png&#39; &#39;media/img/23.png&#39; &#39;media/img/24.png&#39; &#39;media/img/25.png&#39; &#39;media/img/26.png&#39; &#39;media/img/27.png&#39; &#39;media/img/28.png&#39; &#39;media/img/29.png&#39; &#39;media/img/30.png&#39; &#39;media/img/31.png&#39; &#39;media/img/32.png&#39; &#39;media/img/33.png&#39; &#39;media/img/34.png&#39; &#39;media/img/35.png&#39; &#39;media/img/36.png&#39; &#39;media/img/37.png&#39; &#39;media/img/38.png&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪任務]]
 [[採訪資料]]
 [[功能說明|遊戲教學]]
-[[事件1新聞開始]]
-[[組合]]
-[[進行穿越3]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100">&lt;h3&gt;歷史採訪用偵視儀&lt;/h3&gt;</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn center" position="200,400" size="100,100">&lt;p data-title=&quot;　　　　　　　　&quot; class=&quot;dialog-box_info&quot; style=&quot;text-align:center;border: 0.2em solid #7cd8ff&quot;&gt;\
+[[以下是debug用連結]]
+[[開始穿越|進行穿越3]]
+[[回到過去|事件1新聞開始]]
+[[提交任務|組合]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100">&lt;h3&gt;歷史採訪用偵視儀&lt;/h3&gt;</tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn center" position="200,400" size="100,100">&lt;p data-title=&quot;　　　　　　　　&quot; class=&quot;dialog-box_info&quot; style=&quot;text-align:center;border: 0.2em solid #7cd8ff&quot;&gt;\
 &lt;img src=&quot;media/img/TITLE.png&quot; width=&quot;120%&quot;&gt;
 &lt;&lt;if $choice is true&gt;&gt;&lt;&lt;include &#39;吃飯隊任務&#39;&gt;&gt;&lt;&lt;else&gt;&gt;
 請先向主管了解採訪任務。
@@ -2678,7 +2679,19 @@ width: 60%;
 	&lt;tr&gt;
 		&lt;td&gt;&lt;&lt;button &#39;提交採訪任務&#39; &#39;提交任務&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="事件1新聞2-2" tags="center ch1" position="1800,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;/table&gt;&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;button &#39;得到變數&#39;&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;工人妻子找警察來處理「吃飯隊」蹭飯&#39;)&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;
+&lt;&lt;run $clue1.pushUnique(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」阻斷罷工支持者的援助&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」懲罰復工工人&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」誤導罷工者回去復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」尋找食物來源&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
+&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="事件1新聞2-2" tags="center ch1" position="1800,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;250px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 吃飯隊蹭飯憑藉的那份契約，真的是你簽的嗎？
@@ -2983,47 +2996,37 @@ width: 60%;
 &lt;&lt;optionsfrom $clue2&gt;&gt;
 &lt;&lt;/listbox&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="組合結果" tags="center" position="1200,2600" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;img src=&quot;media/img/strikegamecover.jpg&quot; width=&quot;80%&quot;&gt;
-&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
+
+&lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;&lt;span style=&quot;text-align:left&quot;&gt;
 你將任務報告提交給主管。
-從採訪內容中，你推論出「吃飯隊」與淺野罷工事件之間是@@color:#ffff33;$cluef3@@的。
+從採訪內容中，你推論出「吃飯隊」與淺野罷工事件之間是@@color:#ffff33;$cluef3@@的。&lt;/span&gt;
 
-&lt;&lt;ctpNext clear t8n&gt;&gt;
+&lt;&lt;ctpNext clear t8n&gt;&gt;&lt;span style=&quot;text-align:left&quot;&gt;
 主管實際比對報告與採訪內容之後，
-&lt;&lt;if $cluef3.includes(&#39;無關&#39;)&gt;&gt;指出你的推理有誤，「吃飯隊」是由罷工工人組成，&lt;&lt;else&gt;&gt;稱讚你的推理相當正確，「吃飯隊」正是罷工工人所組成，&lt;&lt;/if&gt;&gt;「吃飯隊」與淺野罷工事件之間是有關係的沒錯。
+&lt;&lt;if $cluef3.includes(&#39;無關&#39;)&gt;&gt;指出你的推理有誤，「吃飯隊」是由罷工工人組成，&lt;&lt;else&gt;&gt;稱讚你的推理相當正確，「吃飯隊」正是罷工工人所組成，&lt;&lt;/if&gt;&gt;「吃飯隊」與淺野罷工事件之間是有關係的沒錯。&lt;/span&gt;
 
-&lt;&lt;if $check1 is true&gt;&gt;
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-你提交工人妻子找警察來處理「吃飯隊」蹭飯的採訪作為佐證資料，突顯出受害者拿「吃飯隊」蹭飯行為沒轍的情況。
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $check2 is true&gt;&gt;
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-你提交復工工人解釋契約規定的採訪作為佐證資料，說明警察真的無法以違法為由，處置「吃飯隊」蹭飯的行為。
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $check3 is true&gt;&gt;
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-你提交罷工者說明「吃飯隊」以契約為由四處蹭飯，說明罷工者不是無故蹭飯，不過無法直接證實警察無法可管的情況。
-&lt;&lt;/if&gt;&gt;
-
+&lt;&lt;ctpNext clear t8n&gt;&gt;&lt;span style=&quot;text-align:left&quot;&gt;
+&lt;&lt;if $check1 is true&gt;&gt;你提交工人妻子找警察來處理「吃飯隊」蹭飯的採訪作為佐證資料，突顯出受害者拿「吃飯隊」蹭飯行為沒轍的情況。&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $check2 is true&gt;&gt;你提交復工工人解釋契約規定的採訪作為佐證資料，說明警察真的無法以違法為由，處置「吃飯隊」蹭飯的行為。&lt;&lt;/if&gt;&gt;
+&lt;&lt;if $check3 is true&gt;&gt;你提交罷工者說明「吃飯隊」以契約為由四處蹭飯，說明罷工者不是無故蹭飯，不過無法直接證實警察無法可管的情況。&lt;&lt;/if&gt;&gt;
 &lt;&lt;if $check1 is true and $check2 is true&gt;&gt;
-&lt;&lt;ctpNext clear t8n&gt;&gt;
 工人妻子與復工工人兩方的採訪資料，正好清楚說明由於契約的關係，所以即使被蹭飯者找警察來管制「吃飯隊」，警察卻因為是屢約的合法行為，沒有辦法制止「吃飯隊」蹭飯。
-那份古厝之中收集到的文件資料，其記錄確實有可信之處。&lt;&lt;/if&gt;&gt;
 
-&lt;&lt;ctpNext clear t8n&gt;&gt;
+那份古厝之中收集到的文件資料，其記錄確實有可信之處。&lt;&lt;/if&gt;&gt;&lt;/span&gt;
+
+&lt;&lt;ctpNext clear t8n&gt;&gt;&lt;span style=&quot;text-align:left&quot;&gt;
 至於「吃飯隊」蹭飯可能的真正原因，主管利用你的採訪內容，調閱出新聞台的歷史資料庫進行查找。
 &lt;&lt;if $cluef2.includes(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
 在資料庫中，確實找到與你採訪內容相符的紀錄。根據2020年蔣闊宇撰寫的《全島總罷工：殖民地臺灣工運史》，書中確實寫道1928年淺野水泥罷工時出現的「吃飯隊」，正是罷工團為了應對當時有工人擅自回工廠復職的情況，減少罷工者復工的行動。
 &lt;&lt;else&gt;&gt;
 在資料庫中，卻找到與你任務報告不同的說法。根據2020年蔣闊宇撰寫的《全島總罷工：殖民地臺灣工運史》，書中確實寫道1928年淺野水泥罷工時出現的「吃飯隊」，正是罷工團為了應對當時有工人擅自回工廠復職的情況，減少罷工者復工的行動。
-&lt;&lt;/if&gt;&gt;
+&lt;&lt;/if&gt;&gt;&lt;/span&gt;
 
-&lt;&lt;ctpNext clear t8n&gt;&gt;
-不過在21世紀的網路資料上，也找到「淺野會社將分化蟲組織成籠絡團及吃飯隊、毆打罷工者」的說法。這類屬於檯面下運作的陰謀詭計，較難有明確記錄證實，從常理來推斷，「吃飯隊」中有分化蟲的可能性確實蠻高的。
+&lt;&lt;ctpNext clear t8n&gt;&gt;&lt;span style=&quot;text-align:left&quot;&gt;
+不過在21世紀的網路資料上，也找到「淺野會社將分化蟲組織成籠絡團及吃飯隊、毆打罷工者」的說法。這類屬於檯面下運作的陰謀詭計，較難有明確記錄證實，從常理來推斷，「吃飯隊」中有分化蟲的可能性確實蠻高的。&lt;/span&gt;
 
-&lt;&lt;ctpNext clear&gt;&gt;
-&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;你已經觀看完這次採訪任務的結果，下一個採訪任務開始的時間，請留意「偵視儀」的通知。
+&lt;&lt;ctpNext clear&gt;&gt;&lt;span style=&quot;text-align:left&quot;&gt;
+&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &#39;#back&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;你已經觀看完這次採訪任務的結果，下一個採訪任務開始的時間，請留意「偵視儀」的通知。&lt;/span&gt;
 &lt;&lt;link &#39;結束本次任務。&#39;&gt;&gt;&lt;&lt;goto &#39;遊戲結束&#39;&gt;&gt;&lt;&lt;/link&gt;&gt;
 &lt;&lt;/ctp&gt;&gt;
 &lt;table class=&#39;speechtable&#39;&gt;
