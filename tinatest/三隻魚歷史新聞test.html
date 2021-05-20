@@ -955,7 +955,7 @@ body[data-tags~="back"]{
   padding: 0 1em;
   position: absolute;
   text-transform: uppercase;
-  top: -1.2em;
+  top: -1.5em;
   text-align: center;
   transform: translateX(-50%);
 }
@@ -966,7 +966,7 @@ body[data-tags~="back"]{
 .dialog-box_info:before {
   background-image: url(media/img/tasktitle.png);
   background-repeat: no-repeat;
-  height: 40px;
+  height: 50px;
   background-position: center;
   background-size: contain;
   text-shadow: 0 0 0.4em #05d5fc;
@@ -994,7 +994,7 @@ body[data-tags~="back"]{
 .dialog-box_success:before {
   background-image: url(media/img/notetitle.png);
   background-repeat: no-repeat;
-  height: 40px;
+  height: 50px;
   background-position: center;
   background-size: contain;
   text-shadow: 0 0 0.4em #05d5fc;
@@ -3140,11 +3140,11 @@ width: 60%;
 &lt;&lt;if $choice is true&gt;&gt;&lt;&lt;include &#39;吃飯隊任務&#39;&gt;&gt;&lt;&lt;else&gt;&gt;
 請先向主管了解採訪任務。&lt;&lt;/if&gt;&gt;
 &lt;div class=&quot;downtitle&quot;&gt;[img[media/img/tasktitle2.png]]&lt;/div&gt;&lt;/p&gt;&lt;/div&gt;
-技師看到後，便將你領到了該部門深處，
+&lt;&lt;timed 1s&gt;&gt;技師看到後，便將你領到了該部門深處，
 一座具有生活感的小門面前，
 打開門示意你走進去。
 
-你跟從指示[[走進小門。|進行穿越2]]</tw-passagedata><tw-passagedata pid="61" name="進行穿越2" tags="center office" position="900,350" size="100,100">進門後，你馬上看到了各式的衣帽、飾品，
+你跟從指示[[走進小門。|進行穿越2]]&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="進行穿越2" tags="center office" position="900,350" size="100,100">進門後，你馬上看到了各式的衣帽、飾品，
 甚至是採訪用的諸多文具用品，活像一個極大的衣帽間。
 
 它們被有條不紊地依序照時代、尺寸等分類法進行了整理，
@@ -3186,7 +3186,7 @@ width: 60%;
 		&lt;td class=&#39;back&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;/span&gt;&lt;/td&gt;
 		&lt;td class=&#39;next&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link [img[media/img/BtnConV1R.png]]&gt;&gt;&lt;&lt;ctpAdvance &quot;對話ID1&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="63" name="開啟訊息" tags="center office" position="1025,200" size="100,100">&lt;div class =&quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&lt;h2&gt;&lt;span class=&quot;title&quot;&gt;採訪部私訊&lt;/span&gt;&lt;/h2&gt;&lt;/div&gt;
+&lt;/table&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="63" name="開啟訊息" tags="center office" position="1025,198.33333333333334" size="100,100">&lt;div class =&quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&lt;h2&gt;&lt;span class=&quot;title&quot;&gt;採訪部私訊&lt;/span&gt;&lt;/h2&gt;&lt;/div&gt;
 
 &lt;&lt;timed 1s t8n&gt;&gt;&lt;img src=&quot;media/img/intropeople1.png&quot; width=&quot;250px&quot;&gt;
 您好，我是三隻魚歷史新聞台的採訪部門主管。
@@ -3200,9 +3200,9 @@ width: 60%;
 可能還不熟悉我們新聞台的工作模式，
 所以還是附上「偵視儀」功能的說明文件。
 
-再確認完任務資訊、熟悉偵視儀，
+等您確認完任務資訊、熟悉偵視儀，
 就會引導您前往穿越技術部門，
-到那裡，他們會再協助你穿越的相關事宜。
+到那裡，他們會再協助穿越的相關事宜。
 
 祝福您武運昌隆，採訪順利！
 &lt;table class=&#39;speechtable&#39;&gt;
