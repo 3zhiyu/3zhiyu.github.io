@@ -3328,19 +3328,22 @@ Countdown: &lt;span id=&quot;countdown&quot;&gt;$seconds seconds remaining&lt;/s
 &lt;&lt;/button&gt;&gt;
 */</tw-passagedata><tw-passagedata pid="69" name="提交任務" tags="center ch" position="1200,2500" size="100,100">&lt;div class =&quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&lt;h2&gt;&lt;span class=&quot;title&quot;&gt;提交採訪任務&lt;/span&gt;&lt;/h2&gt;&lt;/div&gt;
 &lt;&lt;timed 1s t8n&gt;&gt;
-@@color:#111090;&lt;em&gt;（利用下拉式選單，選擇任務的採訪結果）&lt;/em&gt;@@&lt;div style=&#39;text-align:left&#39;&gt;
+&lt;div style=&#39;text-align:left&#39;&gt;
 @@color:#ffff33;【任務一】找出「吃飯隊」是否與淺野水泥罷工有關@@
+@@color:#111090;&lt;em&gt;（利用下拉式選單，選擇任務的採訪結果）&lt;/em&gt;@@
 提交完成任務的採訪：&lt;&lt;include &#39;任務1組合3&#39;&gt;&gt;
 &lt;/div&gt;
-@@color:#111090;&lt;em&gt;（請勾選適合用來證實的採訪片段，或許不只有一個選擇！）&lt;/em&gt;@@&lt;div style=&#39;text-align:left&#39;&gt;
+
+&lt;div style=&#39;text-align:left&#39;&gt;
 @@color:#ffff33;【任務二】採訪到能證實警察無法可管的訪問內容與原因@@
+@@color:#111090;&lt;em&gt;（請勾選適合用來證實的採訪片段，或許不只有一個選擇！）&lt;/em&gt;@@
 提交完成任務的採訪：&lt;&lt;set $check1 = false&gt;&gt;&lt;&lt;set $check2 = false&gt;&gt;&lt;&lt;set $check3 = false&gt;&gt;
 &lt;&lt;checkboxPlus &quot;$check1&quot; &quot;工人妻子找警察來管制「吃飯隊」蹭飯，但警察沒轍&quot;&gt;&gt;&lt;br&gt;&lt;&lt;checkboxPlus &quot;$check2&quot; &quot;復工工人說明契約的內容，規定要負擔罷工者的生活費&quot;&gt;&gt;&lt;&lt;if $inventory.has(&#39;支持罷工&#39;)&gt;&gt;&lt;br&gt;&lt;&lt;checkboxPlus &quot;$check5&quot; &quot;復工工人說明自己是願意請「吃飯隊」吃飯的&quot;&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;br&gt;&lt;&lt;checkboxPlus &quot;$check3&quot; &quot;罷工者利用契約作為蹭飯的合法理由&quot;&gt;&gt;&lt;&lt;if $inventory.has(&#39;罷工組織吃飯隊&#39;)&gt;&gt;&lt;br&gt;&lt;&lt;checkboxPlus &quot;$check6&quot; &quot;受訪的罷工者證實「吃飯隊」是由罷工者組成&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;if $inventory.hasAll(&#39;分化蟲&#39;,&#39;分化蟲搞事&#39;)&gt;&gt;&lt;br&gt;&lt;&lt;checkboxPlus &quot;$check4&quot; &quot;工人與工人妻子認為「吃飯隊」是分化蟲的陰謀&quot;&gt;&gt;&lt;&lt;/if&gt;&gt;
-
 &lt;/div&gt;
 
-@@color:#111090;&lt;em&gt;（利用下拉式選單，選擇推論的原因）&lt;/em&gt;@@&lt;div style=&#39;text-align:left&#39;&gt;
+&lt;div style=&#39;text-align:left&#39;&gt;
 @@color:#ffff33;【任務三】推論「吃飯隊」四處蹭飯的最主要原因@@
+@@color:#111090;&lt;em&gt;（利用下拉式選單，選擇推論的原因）&lt;/em&gt;@@
 提交完成任務的採訪：&lt;&lt;include &#39;任務1組合2&#39;&gt;&gt;
 &lt;/div&gt;
 &lt;table class=&#39;detecttable&#39;&gt;
