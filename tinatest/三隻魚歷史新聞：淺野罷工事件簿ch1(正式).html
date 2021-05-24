@@ -32,6 +32,15 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XTR1B36M1S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XTR1B36M1S');
+</script>
 <script id="script-libraries" type="text/javascript">
 if(document.head&&document.addEventListener&&document.querySelector&&Object.create&&Object.freeze&&JSON){document.documentElement.setAttribute("data-init", "loading");
 /*! @source http://purl.eligrey.com/github/classList.js/blob/master/classList.js */
@@ -2148,11 +2157,7 @@ Macro.add('droppable', {
 /*預載圖片*/
 &lt;&lt;preload &#39;media/img/player.png&#39; &#39;media/img/ch1people1.png&#39; &#39;media/img/ch1people2.png&#39; &#39;media/img/ch1people3.png&#39; &#39;media/img/bg.jpg&#39; &#39;media/img/bgch1.jpg&#39; &#39;media/img/bgstart.jpg&#39; &#39;media/img/notetitle.png&#39; &#39;media/img/tasktitle.png&#39; &#39;media/img/Quest.png&#39; &#39;media/img/back.mp4&#39; &#39;media/img/1.png&#39; &#39;media/img/2.png&#39; &#39;media/img/3.png&#39; &#39;media/img/4.png&#39; &#39;media/img/5.png&#39; &#39;media/img/6.png&#39; &#39;media/img/7.png&#39; &#39;media/img/8.png&#39; &#39;media/img/9.png&#39; &#39;media/img/10.png&#39; &#39;media/img/11.png&#39; &#39;media/img/12.png&#39; &#39;media/img/13.png&#39; &#39;media/img/14.png&#39; &#39;media/img/15.png&#39; &#39;media/img/16.png&#39; &#39;media/img/17.png&#39; &#39;media/img/18.png&#39; &#39;media/img/21.png&#39; &#39;media/img/22.png&#39; &#39;media/img/23.png&#39; &#39;media/img/24.png&#39; &#39;media/img/25.png&#39; &#39;media/img/26.png&#39; &#39;media/img/27.png&#39; &#39;media/img/28.png&#39; &#39;media/img/29.png&#39; &#39;media/img/30.png&#39; &#39;media/img/31.png&#39; &#39;media/img/32.png&#39; &#39;media/img/33.png&#39; &#39;media/img/34.png&#39; &#39;media/img/35.png&#39; &#39;media/img/36.png&#39; &#39;media/img/37.png&#39; &#39;media/img/38.png&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="noreturn" position="200,500" size="100,100">[[採訪任務]]
 [[採訪資料]]
-[[功能說明|遊戲教學]]
-[[以下是debug用連結]]
-[[開始穿越|進行穿越3]]
-[[回到過去|事件1新聞開始]]
-[[提交任務|事件1新聞3-end]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100"></tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn center" position="200,400" size="100,100">&lt;p data-title=&quot;　　　　　　　　&quot; class=&quot;dialog-box_info&quot; style=&quot;text-align:center;border: 0.2em solid #7cd8ff&quot;&gt;\
+[[功能說明|遊戲教學]]</tw-passagedata><tw-passagedata pid="3" name="StoryBanner" tags="noreturn" position="200,0" size="100,100">&lt;img src=&quot;media/img/logo.png&quot; width=&quot;70%&quot;&gt;</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="200,100" size="100,100"></tw-passagedata><tw-passagedata pid="5" name="StorySubtitle" tags="noreturn" position="200,200" size="100,100"></tw-passagedata><tw-passagedata pid="6" name="*StoryAuthor" tags="noreturn" position="200,300" size="100,100"></tw-passagedata><tw-passagedata pid="7" name="StoryCaption" tags="noreturn center" position="200,400" size="100,100">&lt;p data-title=&quot;　　　　　　　　&quot; class=&quot;dialog-box_info&quot; style=&quot;text-align:center;border: 0.2em solid #7cd8ff&quot;&gt;\
 &lt;img src=&quot;media/img/TITLE.png&quot; width=&quot;100%&quot;&gt;
 &lt;&lt;if $choice is true&gt;&gt;&lt;&lt;include &#39;吃飯隊任務&#39;&gt;&gt;&lt;&lt;else&gt;&gt;
 請先向主管了解採訪任務。
@@ -2678,21 +2683,7 @@ width: 60%;
 	&lt;tr&gt;
 		&lt;td&gt;&lt;&lt;button &#39;提交採訪任務&#39; &#39;提交任務&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/td&gt;
 	&lt;/tr&gt;
-&lt;/table&gt;&lt;&lt;/timed&gt;&gt;
-
-&lt;&lt;button &#39;得到變數&#39;&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲&#39;&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲搞事&#39;&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;支持罷工&#39;&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;無法可管&#39;&gt;&gt;
-&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工組織吃飯隊&#39;&gt;&gt;
-&lt;&lt;run $clue1.pushUnique(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;
-&lt;&lt;run $clue1.pushUnique(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;
-&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」阻斷罷工支持者的援助&#39;)&gt;&gt;
-&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」誤導罷工者回去復工&#39;)&gt;&gt;
-&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
-&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="事件1新聞2-2" tags="center ch1" position="1800,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
+&lt;/table&gt;&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="事件1新聞2-2" tags="center ch1" position="1800,925" size="100,100">&lt;div id=&#39;speech&#39;&gt;
 &lt;span id=&#39;name&#39;&gt;&lt;img src=&quot;media/img/player.png&quot; width=&quot;250px&quot;&gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 剛才你妻子提到，你認為吃飯隊蹭飯憑藉的理由，是跟你簽的契約有關，為什麼會這麼說？
@@ -3332,13 +3323,15 @@ Countdown: &lt;span id=&quot;countdown&quot;&gt;$seconds seconds remaining&lt;/s
 
 /*
 &lt;&lt;button &#39;得到變數&#39;&gt;&gt;
-&lt;&lt;run $clue1.pushUnique(&#39;工人妻子找警察來處理「吃飯隊」蹭飯&#39;)&gt;&gt;
+&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲&#39;&gt;&gt;
+&lt;&lt;pickup &#39;$inventory&#39; unique &#39;分化蟲搞事&#39;&gt;&gt;
+&lt;&lt;pickup &#39;$inventory&#39; unique &#39;支持罷工&#39;&gt;&gt;
+&lt;&lt;pickup &#39;$inventory&#39; unique &#39;無法可管&#39;&gt;&gt;
+&lt;&lt;pickup &#39;$inventory&#39; unique &#39;罷工組織吃飯隊&#39;&gt;&gt;
 &lt;&lt;run $clue1.pushUnique(&#39;復工工人說明契約規定連警察都無法處理&#39;)&gt;&gt;
 &lt;&lt;run $clue1.pushUnique(&#39;罷工者說明用契約來避免紛爭&#39;)&gt;&gt;
 &lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」阻斷罷工支持者的援助&#39;)&gt;&gt;
-&lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」懲罰復工工人&#39;)&gt;&gt;
 &lt;&lt;run $clue2.pushUnique(&#39;分化蟲利用「吃飯隊」誤導罷工者回去復工&#39;)&gt;&gt;
-&lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」尋找食物來源&#39;)&gt;&gt;
 &lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」減少工人復工&#39;)&gt;&gt;
 &lt;&lt;run $clue2.pushUnique(&#39;罷工者利用「吃飯隊」宣傳罷工&#39;)&gt;&gt;
 &lt;&lt;/button&gt;&gt;
