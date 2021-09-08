@@ -3,6 +3,7 @@
 "productName": "New Unity Project (8)",
 "productVersion": "0.1",
 "dataUrl": "9.1.data.unityweb",
+"TOTAL_MEMORY":278435456,
 "wasmCodeUrl": "9.1.wasm.code.unityweb",
 "wasmFrameworkUrl": "9.1.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
