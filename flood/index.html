@@ -133,47 +133,56 @@ body {
 
 #story {
   margin-left:0em;
+  margin-right:0em;
 }
 
 #ui-bar.stowed~#story {
   margin-left:0em;
 }
 
+tw-passage[data-tags~="center"] {
+	text-align: center;
+}
+
 #passages {
-  color: black;
+  margin-bottom: 5%;
+  padding:2em;
+  width: 90%;
+  max-width: 700px;
+     /* Text formatting */
+  color: white;
   font-family:'Noto Sans TC'!important;
-  width: 100%;
 }
 
 #start {
   width: 100%;
   max-width: 700px;
-  top: 350px;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%,-50%);
+}
+
+img {
+    max-width: 100%;
 }
 
 /*首頁文字區塊*/
 #index {
-  top: 50%;
-  color: white;
-  font-size: 30px;
+  width: 80%;
+  max-width: 700px;
+  min-width: 500px;
   text-align: center;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  position: absolute; 
+  left: 0;        
+  right: 0;
+  margin: auto;
+  z-index: -1;
+}
+
+#indextext {
+  font-size: 30px;
 }
 
 /*並排按鈕*/
 #indexspeech {
-  width: 60%;
-  bottom:5px;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  width: 80%;
 }
 .speechtable {
   width: 100%;
@@ -242,11 +251,6 @@ body {
   border-color: #1ae3de #498399;
 }
 
-
-/*頁面所有文字置中(標籤加center)*/
-tw-passage[tags="center"] {
-	text-align: center;
-}
 
 
 /*動態語法整合*/
@@ -819,16 +823,14 @@ $(document).on(':passagerender', function (ev) {
     });
 }());
 
-</script><tw-passagedata pid="1" name="start" tags="center index" position="400,399" size="100,100">&lt;div id=&#39;start&#39;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounceIn&quot; src=&quot;media/img/floodlogo.png&quot; width=&quot;100%&quot;&gt;
-&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounceInUp  animate__slow&quot; src=&quot;media/img/textbg.jpg&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;index&quot;&gt;&lt;div class=&quot;animate__animated animate__zoomIn animate__delay-1s animate__slow&quot;&gt;
+</script><tw-passagedata pid="1" name="start" tags="center index" position="401,396" size="100,100">&lt;div id=&quot;start&quot;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounceIn&quot; src=&quot;media/img/floodlogo.png&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;
+&lt;div id=&quot;indextext&quot;&gt;&lt;div id=&quot;index&quot;&gt;&lt;img data-passage =&quot;start&quot; class =&quot;animate__animated animate__bounceInUp  animate__slow&quot; src=&quot;media/img/textbg.jpg&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;animate__animated animate__zoomIn animate__delay-1s animate__slow&quot;&gt;
 當洪水來臨
 沒有人可以置身事外
 
-&lt;span id=&quot;noIcon&quot;&gt;&lt;a href=&quot;https://3zhiyu.github.io/%E4%B8%89%E9%9A%BB%E9%AD%9A%E6%AD%B7%E5%8F%B2%E6%96%B0%E8%81%9E%EF%BC%9A%E6%B7%BA%E9%87%8E%E7%BD%B7%E5%B7%A5%E4%BA%8B%E4%BB%B6%E7%B0%BF.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;media/img/button.png&quot; width=&quot;100%&quot;&gt;&lt;/a&gt;&lt;/span&gt;
-&lt;/div&gt;&lt;/div&gt;
-
-&lt;div id=&quot;indexspeech&quot; class=&quot;animate__animated animate__fadeIn animate__delay-2s animate__slow&quot;&gt;
+&lt;span id=&quot;noIcon&quot;&gt;&lt;a href=&quot;https://3zhiyu.github.io/%E4%B8%89%E9%9A%BB%E9%AD%9A%E6%AD%B7%E5%8F%B2%E6%96%B0%E8%81%9E%EF%BC%9A%E6%B7%BA%E9%87%8E%E7%BD%B7%E5%B7%A5%E4%BA%8B%E4%BB%B6%E7%B0%BF.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;media/img/button.png&quot;&gt;&lt;/a&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;animate__animated animate__fadeIn animate__delay-2s animate__slow&quot;&gt;
 &lt;span id=&quot;noIcon&quot;&gt;&lt;a href=&quot;https://3zhiyu.github.io/flood/Notes.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;media/img/talkbtn.png&quot;&gt;&lt;/a&gt;&lt;/span&gt;
 &lt;span id=&quot;noIcon&quot;&gt;&lt;a href=&quot;https://3zhiyu.github.io/flood/Credits.html&quot; target=&quot;_blank&quot;&gt;&lt;img src=&quot;media/img/creditbtn.png&quot;&gt;&lt;/a&gt;&lt;/span&gt;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="" position="203,401" size="100,100">/*預載圖片*/
