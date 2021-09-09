@@ -3,6 +3,7 @@
 "productName": "HistoryGameWeb",
 "productVersion": "0.1",
 "dataUrl": "HistoryGameWeb.data.unityweb",
+"TOTAL_MEMORY":278435456,
 "wasmCodeUrl": "HistoryGameWeb.wasm.code.unityweb",
 "wasmFrameworkUrl": "HistoryGameWeb.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
