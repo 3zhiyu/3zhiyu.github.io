@@ -368,7 +368,9 @@ Macro.add('message', {
 &lt;&lt;button &#39;感應碎片&#39;&gt;&gt;&lt;&lt;if $haveclue&gt;&gt;&lt;&lt;run $clue1.pushUnique($getclue)&gt;&gt;&lt;&lt;replace &#39;#getsound&#39;&gt;&gt;找到碎片「$getclue」！&lt;&lt;/replace&gt;&gt;&lt;&lt;else&gt;&gt;&lt;&lt;replace &#39;#getsound&#39;&gt;&gt;沒有碎片！&lt;&lt;/replace&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;span id=&#39;getsound&#39;&gt;&lt;/span&gt;
 &lt;/div&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="*PassageDone" tags="" position="300,200" size="100,100">&lt;&lt;set $clueplay to $clueplay.concatUnique($clue1, $clue2)&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="*PassageReady" tags="" position="300,300" size="100,100">&lt;&lt;set $clueplay to []&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="start" tags="" position="700,400" size="100,100">[[獲得線索1]]
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="*PassageDone" tags="" position="300,200" size="100,100">&lt;&lt;set $clueplay to $clueplay.concatUnique($clue1, $clue2)&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="*PassageReady" tags="" position="300,300" size="100,100">&lt;&lt;set $clueplay to []&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="start" tags="" position="700,400" size="100,100">點擊獲得線索後，從側邊欄進入[[組合碎片|組合系統]]介面，進行線索組合
+
+[[獲得線索1]]
 [[獲得線索2]]
 [[獲得線索3]]
 [[獲得線索4]]</tw-passagedata><tw-passagedata pid="19" name="獲得線索1" tags="" position="475,550" size="100,100">尋找線索1（點擊「感應碎片」按鈕獲取碎片）&lt;&lt;set $haveclue to true&gt;&gt;&lt;&lt;set $getclue to &#39;線索1&#39;&gt;&gt;
