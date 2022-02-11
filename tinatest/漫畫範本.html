@@ -175,7 +175,6 @@ tw-passage[tags="center"] {
 	position: relative;
 	display: block;
 	width: 100%;
-  	height: 700px;
 	overflow: hidden;
 }
 #comic .comicframe {
@@ -187,11 +186,9 @@ tw-passage[tags="center"] {
   z-index: 5;
 }
 @media screen and (max-width: 768px) {
-#comic {
-  	height: 500px;
-}
 #comic .comicframe {
 	width: 100%;
+  	height: 500px;
 }
 }
 
@@ -2840,7 +2837,7 @@ html[data-debug-view] .debug.hidden .debug {
 [[上一頁|comic3]] [[返回首頁|start]]</tw-passagedata><tw-passagedata pid="27" name="comic3" tags="center" position="750,425" size="100,100">&lt;h2&gt;條漫(2格)&lt;/h2&gt;
 &lt;div id=&#39;comic&#39;&gt;&lt;&lt;include &#39;comicpage3&#39;&gt;&gt;&lt;/div&gt;
 [[上一頁|comic2]] [[下一頁|comic4]]</tw-passagedata><tw-passagedata pid="28" name="start" tags="" position="875,0" size="100,100">[[整頁漫畫效果|comic1]]
-[[單格漫畫效果|comicframe1]]</tw-passagedata><tw-passagedata pid="29" name="comicframe1" tags="center" position="975,125" size="100,100">&lt;h2&gt;漫畫逐格呈現（分鏡不規則）&lt;/h2&gt;&lt;div id=&#39;comic&#39;&gt;
+[[單格漫畫效果|comicframe1]]</tw-passagedata><tw-passagedata pid="29" name="comicframe1" tags="center" position="975,125" size="100,100">&lt;h2&gt;漫畫逐格呈現（分鏡不規則）&lt;/h2&gt;&lt;div id=&#39;comic&#39; style=&#39;height: 700px;&#39;&gt;
 &lt;&lt;ctp &quot;對話ID1&quot;&gt;&gt;
 &lt;div class=&#39;comicframe&#39;&gt;&lt;span id=&#39;comicframe&#39;&gt;&lt;&lt;include &#39;comicframe1-1&#39;&gt;&gt;&lt;/span&gt;&lt;/div&gt;
 &lt;&lt;ctpNext t8n redo nobr noclear&gt;&gt;
