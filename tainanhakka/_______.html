@@ -91,7 +91,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 <style id="style-ui" type="text/css">#ui-dialog-body.settings [id|=setting-body]>div:first-child{display:table;width:100%}#ui-dialog-body.settings [id|=setting-label]{display:table-cell;padding:.4em 2em .4em 0}#ui-dialog-body.settings [id|=setting-label]+div{display:table-cell;min-width:8em;text-align:right;vertical-align:middle;white-space:nowrap}#ui-dialog-body.list{padding:0}#ui-dialog-body.list ul{margin:0;padding:0;list-style:none;border:1px solid transparent}#ui-dialog-body.list li{margin:0}#ui-dialog-body.list li:not(:first-child){border-top:1px solid #444}#ui-dialog-body.list li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-decoration:none}#ui-dialog-body.list li a:hover{background-color:#333;border-color:#eee}#ui-dialog-body.saves{padding:0 0 1px}#ui-dialog-body.saves>:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves table{border-spacing:0;width:100%}#ui-dialog-body.saves tr:not(:first-child){border-top:1px solid #444}#ui-dialog-body.saves td{padding:.33em .33em}#ui-dialog-body.saves td:first-child{min-width:1.5em;text-align:center}#ui-dialog-body.saves td:nth-child(3){line-height:1.2}#ui-dialog-body.saves td:last-child{text-align:right}#ui-dialog-body.saves .empty{color:#999;speak:none;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves .datestamp{font-size:75%;margin-left:1em}#ui-dialog-body.saves ul.buttons li{padding:.4em}#ui-dialog-body.saves ul.buttons>li+li>button{margin-left:.2em}#ui-dialog-body.saves ul.buttons li:last-child{float:right}#ui-dialog-body.settings div[id|=header-body]{margin:1em 0}#ui-dialog-body.settings div[id|=header-body]:first-child{margin-top:0}#ui-dialog-body.settings div[id|=header-body]:not(:first-child){border-top:1px solid #444;padding-top:1em}#ui-dialog-body.settings div[id|=header-body]>*{margin:0}#ui-dialog-body.settings h2[id|=header-heading]{font-size:1.375em}#ui-dialog-body.settings p[id|=header-desc],#ui-dialog-body.settings p[id|=setting-desc]{font-size:87.5%;margin:0 0 0 .5em}#ui-dialog-body.settings div[id|=setting-body]+div[id|=setting-body]{margin:1em 0}#ui-dialog-body.settings [id|=setting-control]{white-space:nowrap}#ui-dialog-body.settings button[id|=setting-control]{color:#eee;background-color:transparent;border:1px solid #444;padding:.4em}#ui-dialog-body.settings button[id|=setting-control]:hover{background-color:#333;border-color:#eee}#ui-dialog-body.settings button[id|=setting-control].enabled{background-color:#282;border-color:#4a4}#ui-dialog-body.settings button[id|=setting-control].enabled:hover{background-color:#4a4;border-color:#6c6}#ui-dialog-body.settings input[type=range][id|=setting-control]{max-width:35vw}#ui-dialog-body.list a,#ui-dialog-body.settings span[id|=setting-input]{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#ui-dialog-body.saves button[id=saves-clear]:before,#ui-dialog-body.saves button[id=saves-export]:before,#ui-dialog-body.saves button[id=saves-import]:before,#ui-dialog-body.settings button[id|=setting-control].enabled:after,#ui-dialog-body.settings button[id|=setting-control]:after{font-family:tme-fa-icons!important;font-style:normal;font-weight:900;font-variant:normal;line-height:1;speak:never;text-rendering:auto;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#ui-dialog-body.saves button[id=saves-export]:before{content:"\e829\00a0"}#ui-dialog-body.saves button[id=saves-import]:before{content:"\e82a\00a0"}#ui-dialog-body.saves button[id=saves-clear]:before{content:"\e827\00a0"}#ui-dialog-body.settings button[id|=setting-control]:after{content:"\00a0\00a0\e830"}#ui-dialog-body.settings button[id|=setting-control].enabled:after{content:"\00a0\00a0\e831"}</style>
 <style id="style-ui-bar" type="text/css">#story{margin-left:20em;-webkit-transition:margin-left .2s ease-in;-o-transition:margin-left .2s ease-in;transition:margin-left .2s ease-in}#ui-bar.stowed~#story{margin-left:4.5em}@media screen and (max-width:1136px){#story{margin-left:19em}#ui-bar.stowed~#story{margin-left:3.5em}}@media screen and (max-width:768px){#story{margin-left:3.5em}}#ui-bar{position:fixed;z-index:50;top:0;left:0;width:17.5em;height:100%;margin:0;padding:0;-webkit-transition:left .2s ease-in;-o-transition:left .2s ease-in;transition:left .2s ease-in}#ui-bar.stowed{left:-15.5em}#ui-bar-tray{position:absolute;top:.2em;left:0;right:0}#ui-bar-body{height:90%;height:calc(100% - 2.5em);margin:2.5em 0;padding:0 1.5em}#ui-bar.stowed #ui-bar-body,#ui-bar.stowed #ui-bar-history{visibility:hidden;-webkit-transition:visibility .2s step-end;-o-transition:visibility .2s step-end;transition:visibility .2s step-end}@media (prefers-reduced-motion:reduce){#story{-webkit-transition:margin-left 0s;-o-transition:margin-left 0s;transition:margin-left 0s}#ui-bar{-webkit-transition:left 0s;-o-transition:left 0s;transition:left 0s}}#ui-bar{background-color:#222;border-right:1px solid #444;text-align:center}#ui-bar a{text-decoration:none}#ui-bar hr{border-color:#444}#ui-bar-history [id|=history],#ui-bar-toggle{font-size:1.2em;line-height:inherit;color:#eee;background-color:transparent;border:1px solid #444}#ui-bar-toggle{display:block;position:absolute;top:0;right:0;border-right:none;padding:.3em .45em .25em}#ui-bar.stowed #ui-bar-toggle{padding:.3em .35em .25em .55em}#ui-bar-toggle:hover{background-color:#444;border-color:#eee}#ui-bar-history{margin:0 auto}#ui-bar-history [id|=history]{padding:.2em .45em .35em}#ui-bar-history #history-jumpto{padding:.2em .665em .35em}#ui-bar-history [id|=history]:not(:first-child){margin-left:1.2em}#ui-bar-history [id|=history]:hover{background-color:#444;border-color:#eee}#ui-bar-history [id|=history]:disabled{color:#444;background-color:transparent;border-color:#444}#ui-bar-body{line-height:1.5;overflow:auto}#ui-bar-body>:not(:first-child){margin-top:2em}#story-title{margin:0;font-size:162.5%}#story-author{margin-top:2em;font-weight:700}#menu ul{margin:1em 0 0;padding:0;list-style:none;border:1px solid #444}#menu ul:empty{display:none}#menu li{margin:0}#menu li:not(:first-child){border-top:1px solid #444}#menu li a{display:block;padding:.25em .75em;border:1px solid transparent;color:#eee;text-transform:uppercase}#menu li a:hover{background-color:#444;border-color:#eee}#menu a,#ui-bar-history [id|=history],#ui-bar-toggle{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}#menu-core li[id|=menu-item] a:before,#ui-bar-history [id|=history],#ui-bar-toggle:before{font-family:tme-fa-icons!important;font-style:normal;font-weight:900;font-variant:normal;line-height:1;speak:never;text-rendering:auto;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#ui-bar-toggle:before{content:"\e81d"}#ui-bar.stowed #ui-bar-toggle:before{content:"\e81e"}#menu-item-saves a:before{content:"\e82b\00a0"}#menu-item-settings a:before{content:"\e82d\00a0"}#menu-item-restart a:before{content:"\e82c\00a0"}#menu-item-share a:before{content:"\e82f\00a0"}</style>
 <style id="style-ui-debug" type="text/css">#debug-bar{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:0;margin:0;max-height:75%;padding:.5em;position:fixed;right:0;z-index:99900}#debug-bar>div:not([id])+div{margin-top:.5em}#debug-bar>div>label{margin-right:.5em}#debug-bar>div>input[type=text]{min-width:0;width:8em}#debug-bar>div>select{width:15em}#debug-bar-toggle{color:#eee;background-color:#222;border:1px solid #444;height:101%;height:calc(100% + 1px);left:-2em;left:calc(-2em - 1px);position:absolute;top:-1px;width:2em}#debug-bar-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-hint{bottom:.175em;font-size:4.5em;opacity:.33;pointer-events:none;position:fixed;right:.6em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;white-space:nowrap}#debug-bar-watch{background-color:#222;border-left:1px solid #444;border-top:1px solid #444;bottom:102%;bottom:calc(100% + 1px);font-size:.9em;left:-1px;max-height:650%;max-height:65vh;position:absolute;overflow-x:hidden;overflow-y:scroll;right:0;z-index:99800}#debug-bar-watch[hidden]{display:none}#debug-bar-watch div{color:#999;font-style:italic;margin:1em auto;text-align:center}#debug-bar-watch table{width:100%}#debug-bar-watch tr:nth-child(2n){background-color:rgba(127,127,127,.15)}#debug-bar-watch td{padding:.2em 0}#debug-bar-watch td:first-child+td{padding:.2em .3em .2em .1em}#debug-bar-watch .watch-delete{background-color:transparent;border:none;color:#c00}#debug-bar-watch-all,#debug-bar-watch-none{margin-left:.5em}#debug-bar-views-toggle,#debug-bar-watch-toggle{color:#eee;background-color:transparent;border:1px solid #444;margin-right:1em;padding:.4em}#debug-bar-views-toggle:hover,#debug-bar-watch-toggle:hover{background-color:#333;border-color:#eee}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle,html[data-debug-view] #debug-bar-views-toggle{background-color:#282;border-color:#4a4}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:hover,html[data-debug-view] #debug-bar-views-toggle:hover{background-color:#4a4;border-color:#6c6}#debug-bar-hint:after,#debug-bar-toggle:before,#debug-bar-views-toggle:after,#debug-bar-watch .watch-delete:before,#debug-bar-watch-add:before,#debug-bar-watch-all:before,#debug-bar-watch-none:before,#debug-bar-watch-toggle:after{font-family:tme-fa-icons!important;font-style:normal;font-weight:900;font-variant:normal;line-height:1;speak:never;text-rendering:auto;text-transform:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}#debug-bar-toggle:before{content:"\e838"}#debug-bar-hint:after{content:"\e838\202f\e822"}#debug-bar-watch .watch-delete:before{content:"\e804"}#debug-bar-watch-add:before{content:"\e805"}#debug-bar-watch-all:before{content:"\e83a"}#debug-bar-watch-none:before{content:"\e827"}#debug-bar-views-toggle:after,#debug-bar-watch-toggle:after{content:"\00a0\00a0\e830"}#debug-bar-watch:not([hidden])~div #debug-bar-watch-toggle:after,html[data-debug-view] #debug-bar-views-toggle:after{content:"\00a0\00a0\e831"}html[data-debug-view] .debug{padding:.25em;background-color:#234}html[data-debug-view] .debug[title]{cursor:help}html[data-debug-view] .debug.block{display:inline-block;vertical-align:middle}html[data-debug-view] .debug.invalid{text-decoration:line-through}html[data-debug-view] .debug.hidden,html[data-debug-view] .debug.hidden .debug{background-color:#555}html:not([data-debug-view]) .debug.hidden{display:none}html[data-debug-view] .debug[data-name][data-type].nonvoid:after,html[data-debug-view] .debug[data-name][data-type]:before{background-color:rgba(0,0,0,.25);font-family:monospace,monospace;white-space:pre}html[data-debug-view] .debug[data-name][data-type]:before{content:attr(data-name)}html[data-debug-view] .debug[data-name][data-type|=macro]:before{content:"<<" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=macro].nonvoid:after{content:"<</" attr(data-name) ">>"}html[data-debug-view] .debug[data-name][data-type|=html]:before{content:"<" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type|=html].nonvoid:after{content:"</" attr(data-name) ">"}html[data-debug-view] .debug[data-name][data-type]:not(:empty):before{margin-right:.25em}html[data-debug-view] .debug[data-name][data-type].nonvoid:not(:empty):after{margin-left:.25em}html[data-debug-view] .debug[data-name][data-type|=special],html[data-debug-view] .debug[data-name][data-type|=special]:before{display:block}</style>
-<link rel="shortcut icon" type="image/png" href="media/img/favicon.png">
+<link rel="shortcut icon" type="image/png" href="media/img/favicon.png">																		
 </head>
 <body>
 	<div id="init-screen">
@@ -183,7 +183,8 @@ body{
 
 #passages {
     /* Text formatting */
-  color: black;
+  color: #3c3c3c;
+  text-shadow: #8d8d8d 0px 1px 1px;
   font-family: Noto Sans TC, -apple-system, BlinkMacSystemFont, Roboto, microsoft jhenghei, sans-serif;
 }
 
@@ -932,20 +933,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;臺南市客家文化會館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：客家會館的位置真好！就在水萍塭公園裡ㄟ。
-阿亮牯：是啊，而且館舍很寬敞，裡面有展示，看得到早期臺灣各地客家人的生活狀況。像這個叫「蟲梳子」，以前沒有農藥，稻子長蟲了怎麼辦？就拿這枝從稻子上方掃眼前這一排稻禾，蟲子會黏在蟲梳子的根桿上，再往桶子裡敲幾下，黏在上面的蟲子順著掉到桶子裡，農民就這樣在田裡來來回回梳理，全靠人力。妳知道收集到的蟲子後來怎麼處理嗎？
-阿琴妹：怎麼處理？
-阿亮牯：帶回去餵雞餵鴨餵鵝啊，牠們也要補充蛋白質。
-阿琴妹：好有趣喔。我覺得還有一個更特別的，進來這裡聽到很多人說客家話，如果聽不懂的人，還以為是到了外國呢！真好玩。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;客家會館的位置真好！就在水萍塭公園裡ㄟ。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是啊，而且館舍很寬敞，裡面有展示，看得到早期臺灣各地客家人的生活狀況。像這個叫「蟲梳子」，以前沒有農藥，稻子長蟲了怎麼辦？就拿這枝從稻子上方掃眼前這一排稻禾，蟲子會黏在蟲梳子的根桿上，再往桶子裡敲幾下，黏在上面的蟲子順著掉到桶子裡，農民就這樣在田裡來來回回梳理，全靠人力。妳知道收集到的蟲子後來怎麼處理嗎？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;怎麼處理？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;帶回去餵雞餵鴨餵鵝啊，牠們也要補充蛋白質。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;好有趣喔。我覺得還有一個更特別的，進來這裡聽到很多人說客家話，如果聽不懂的人，還以為是到了外國呢！真好玩。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/臺南市客家文化會館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -963,22 +964,22 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;媽媽油飯&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：你看這攤位掛的燈籠招牌上寫明「客家口味」，我猜老闆一定是客家人。
-阿亮牯：我也是看到這個才特地來。我第一次來的時候大排長龍，問前面的人：你們吃過嗎？前面幾個人都說吃過好多次。我又問他們好不好吃？他們都說好吃。我再問怎麼好吃？他們說就是好吃，你吃了就知道。
-阿琴妹：你有問老闆為什麼叫客家口味嗎？
-阿亮牯：有啊，老闆說自己是新竹客家人，做菜的廚藝是跟媽媽學的，就是傳承媽媽道地的客家味啊，而且鄰近新光三越，是櫃姐的私藏菜單，難怪到中午都要排隊。
-阿琴妹：你吃了之後覺得好吃嗎？
-阿亮牯：好吃。
-阿琴妹：怎麼好吃？
-阿亮牯：妳自己去吃就知道了。&lt;/div&gt;
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;你看這攤位掛的燈籠招牌上寫明「客家口味」，我猜老闆一定是客家人。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我也是看到這個才特地來。我第一次來的時候大排長龍，問前面的人：你們吃過嗎？前面幾個人都說吃過好多次。我又問他們好不好吃？他們都說好吃。我再問怎麼好吃？他們說就是好吃，你吃了就知道。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;你有問老闆為什麼叫客家口味嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;有啊，老闆說自己是新竹客家人，做菜的廚藝是跟媽媽學的，就是傳承媽媽道地的客家味啊，而且鄰近新光三越，是櫃姐的私藏菜單，難怪到中午都要排隊。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;你吃了之後覺得好吃嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;好吃。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;怎麼好吃？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;妳自己去吃就知道了。&lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/媽媽油飯.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -996,18 +997,18 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;歡喜樓&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，你看歡喜樓的菜單上有客家小炒、客家茄子、水蓮，搞不好這家餐廳跟客家有關係喔。
-阿亮牯：而且價格很平價，飯後還會送水果、冰淇淋，CP值超高的，吃一餐很划得來。菜色很多，有川菜、廣式燒臘、臺菜，各種料理都有，搞不好只是老闆多學了做客家菜的功夫而已。
-阿琴妹：我們去吃吃看，順便問一下老闆是不是客家人。
-阿亮牯、阿琴妹：親愛的朋友，你猜歡喜樓怎麼會做客家料理呢？&lt;/div&gt;
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，你看歡喜樓的菜單上有客家小炒、客家茄子、水蓮，搞不好這家餐廳跟客家有關係喔。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;而且價格很平價，飯後還會送水果、冰淇淋，CP值超高的，吃一餐很划得來。菜色很多，有川菜、廣式燒臘、臺菜，各種料理都有，搞不好只是老闆多學了做客家菜的功夫而已。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;我們去吃吃看，順便問一下老闆是不是客家人。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯、&lt;/span&gt;&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;親愛的朋友，你猜歡喜樓怎麼會做客家料理呢？&lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/歡喜樓.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1025,19 +1026,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;仁德三山宮&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：根據日本學者伊能嘉矩所寫的《臺灣文化誌》記載，清代廣東嘉應州的客家移民本來打算在府城開墾，但大部分土地都被閩南人開墾在先，最後到東門城外墾殖種菜。這個東門城外推論是現在仁德一帶。成大的歷史學者石萬壽在研究南部六堆客家歷史的時候，根據這個線索，找到後壁厝的三山國王廟，因此推論這裡是六堆客家人最早落腳的地方。
-阿亮牯：可是後來的研究顯示，三山國王廟原本在中國是潮汕地區拜的神祉，在臺灣客家庄雖然有很多人拜，但閩南庄也有ㄟ。像仁德這座三山國王廟，是劉氏宗親奉祀，後來對外開放建廟祭祀。而劉家是福建泉州同安人，並不是客家人。
-阿琴妹：是啊，所以很多事實都會因為更細緻的研究而更加明朗，這就是進步啊。
-阿亮牯：真有意思。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;根據日本學者伊能嘉矩所寫的《臺灣文化誌》記載，清代廣東嘉應州的客家移民本來打算在府城開墾，但大部分土地都被閩南人開墾在先，最後到東門城外墾殖種菜。這個東門城外推論是現在仁德一帶。成大的歷史學者石萬壽在研究南部六堆客家歷史的時候，根據這個線索，找到後壁厝的三山國王廟，因此推論這裡是六堆客家人最早落腳的地方。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;可是後來的研究顯示，三山國王廟原本在中國是潮汕地區拜的神祉，在臺灣客家庄雖然有很多人拜，但閩南庄也有ㄟ。像仁德這座三山國王廟，是劉氏宗親奉祀，後來對外開放建廟祭祀。而劉家是福建泉州同安人，並不是客家人。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，所以很多事實都會因為更細緻的研究而更加明朗，這就是進步啊。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;真有意思。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/仁德三山宮.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
   
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1055,19 +1056,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;大農莊炭烤排餐&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：哇，好好吃喔，只有鹽巴和蒜頭配料，這牛排吃起來更鮮甜美味ㄟ！
-阿亮牯：老闆本來做家族的外銷光學鏡片生意到阿根廷開發市場，結果回來臺灣就開了這間牛排館，我們真有口福。
-阿琴妹：是啊，老闆是高雄杉林的客家人，他說小時候去楠梓仙溪掌牛，把牛栓在一邊，他就到河壩抓魚抓蝦，在河邊生火又烘又煮。他說現在烤牛排跟早年童年用火的經驗很有關係。
-阿亮牯：老闆的故事一烳鑼，很精彩，跟牛排一樣令人回味。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;哇，好好吃喔，只有鹽巴和蒜頭配料，這牛排吃起來更鮮甜美味ㄟ！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;老闆本來做家族的外銷光學鏡片生意到阿根廷開發市場，結果回來臺灣就開了這間牛排館，我們真有口福。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，老闆是高雄杉林的客家人，他說小時候去楠梓仙溪掌牛，把牛栓在一邊，他就到河壩抓魚抓蝦，在河邊生火又烘又煮。他說現在烤牛排跟早年童年用火的經驗很有關係。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;老闆的故事一烳鑼，很精彩，跟牛排一樣令人回味。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/大農莊炭烤排餐.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1085,20 +1086,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;鍾氏客家料理&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，你不覺得走了這麼久的路，肚子又開始餓了嗎？
-阿亮牯：我有點想念阿婆以前做的炒粄條，不如今晚就吃這家鍾氏客家料理吧！
-阿琴妹：恩～這九層塔蛋也太香了吧！聽說這家店之前在客家餐飲選拔賽還有得名喔！
-阿亮牯：對啊！因為這裡的料理有媽媽的味道，所以大家還會叫老闆娘鍾媽媽喔！她是來自高雄美濃的客家人，雖然不太會講客家話，但從餐桌上的菜色就可以看出來，過去的客家記憶對她影響不少呢！
-阿琴妹：哇！好幸運，我們居然可以吃到這麼道地的口味，難怪過年時還會有外地人特別來訂桌圍爐呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，你不覺得走了這麼久的路，肚子又開始餓了嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我有點想念阿婆以前做的炒粄條，不如今晚就吃這家鍾氏客家料理吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;恩～這九層塔蛋也太香了吧！聽說這家店之前在客家餐飲選拔賽還有得名喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊！因為這裡的料理有媽媽的味道，所以大家還會叫老闆娘鍾媽媽喔！她是來自高雄美濃的客家人，雖然不太會講客家話，但從餐桌上的菜色就可以看出來，過去的客家記憶對她影響不少呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;哇！好幸運，我們居然可以吃到這麼道地的口味，難怪過年時還會有外地人特別來訂桌圍爐呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/鍾氏客家料理.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1116,20 +1117,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;田心手作紅豆餅&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：田心手作的紅豆餅很特別喔，裡面的餡料除了一般我們常吃的紅豆、奶油以外，還有抹茶、可可、卡士達珍珠，還有鹹的口味起司、肉鬆蛋、鮪魚洋蔥，你一定沒吃過。
-阿亮牯：很令人驚喜ㄟ。我看網路上她還有做蛋糕ㄟ。
-阿琴妹：是啊，各式各樣的甜點都有，也可以客製化。老闆娘是新竹的客家人，有一次我就請她做擂茶口味的起司蛋糕，真好吃。
-阿亮牯：我的好朋友研究所畢業舉辦慶祝會，特地請她做奶酪，好清甜可口，我到現在都還念念不忘。
-阿琴妹：那如果之後我順利考上交換學生，再來訂個巧克力蛋糕一起吃吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;田心手作的紅豆餅很特別喔，裡面的餡料除了一般我們常吃的紅豆、奶油以外，還有抹茶、可可、卡士達珍珠，還有鹹的口味起司、肉鬆蛋、鮪魚洋蔥，你一定沒吃過。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;很令人驚喜ㄟ。我看網路上她還有做蛋糕ㄟ。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，各式各樣的甜點都有，也可以客製化。老闆娘是新竹的客家人，有一次我就請她做擂茶口味的起司蛋糕，真好吃。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我的好朋友研究所畢業舉辦慶祝會，特地請她做奶酪，好清甜可口，我到現在都還念念不忘。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;那如果之後我順利考上交換學生，再來訂個巧克力蛋糕一起吃吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/田心手作紅豆餅.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1147,18 +1148,18 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;恆美攝影複合式咖啡館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：這家店好特別喔，是咖啡館、又是照相館，我看全臺灣只有這一家。
-阿亮牯：是啊，老闆原本讀的是工科，在念專科的時候很活耀，什麼社團都參加，登山社、康輔社、攝影社，結果後來在關廟的藤椅工廠工作時，意外頂下一間照相館，後來在歸仁再頂一間，攝影就變成了他的主業。30年前搬到市區，本來人生自此順利，卻因為一次小感冒檢查出鼻咽癌末期，開始進出醫院做各種手術化療，病情嚴重到好幾次急救，住院期間一次要吊四罐點滴，連護士都被嚇到。他說那時父母還在、小孩很小、老婆又年輕，不能就這樣倒下來，他用意志力撐過種種治療，終於挺過來。之後老闆感念受到醫療的照護，便到醫院和各個機構擔任志工。2年前，在新加坡從事餐飲的女兒回來陪伴爺爺，就把相館的前半部改裝成咖啡館，老闆兩夫妻假日回潮州種的百香果、火龍果、芒果，就給女兒作為製作點心的食材。
-阿琴妹：好勵志溫暖的人生，一家人互相珍惜扶持，真了不起！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這家店好特別喔，是咖啡館、又是照相館，我看全臺灣只有這一家。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是啊，老闆原本讀的是工科，在念專科的時候很活耀，什麼社團都參加，登山社、康輔社、攝影社，結果後來在關廟的藤椅工廠工作時，意外頂下一間照相館，後來在歸仁再頂一間，攝影就變成了他的主業。30年前搬到市區，本來人生自此順利，卻因為一次小感冒檢查出鼻咽癌末期，開始進出醫院做各種手術化療，病情嚴重到好幾次急救，住院期間一次要吊四罐點滴，連護士都被嚇到。他說那時父母還在、小孩很小、老婆又年輕，不能就這樣倒下來，他用意志力撐過種種治療，終於挺過來。之後老闆感念受到醫療的照護，便到醫院和各個機構擔任志工。2年前，在新加坡從事餐飲的女兒回來陪伴爺爺，就把相館的前半部改裝成咖啡館，老闆兩夫妻假日回潮州種的百香果、火龍果、芒果，就給女兒作為製作點心的食材。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;好勵志溫暖的人生，一家人互相珍惜扶持，真了不起！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/恆美攝影複合式咖啡館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1176,18 +1177,18 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;神茶油&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：這間油店跟我們一般人的印象很不一樣ㄟ，如果不說，還以為是飯店、百貨公司。
-阿亮牯：老闆是客家女婿，而且本來是科技業的董事長，幾年前跨足專研油品，一專研下去就不得了，從原料的取得到加工製油的機器，都非常講究。他跑遍全臺灣、中國大陸，挑選沒受汙染的山茶樹，茶籽從採摘、曬果、烘乾、洗滌、去殼、榨油，都是公司自主生產，過程中還以人工一一揀選，將發霉的茶籽挑掉，確保品質。為了保留茶籽大部分的營養成分，特別研發德國原裝榨油、濾油的機器系統，突破傳統工法，獨創冷壓技術以低溫物理冷壓過濾。每一個步驟都精心製作，很認真嚴謹，力求完美。
-阿琴妹：品質顧得這麼好，真是讓人由衷敬佩。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這間油店跟我們一般人的印象很不一樣ㄟ，如果不說，還以為是飯店、百貨公司。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;老闆是客家女婿，而且本來是科技業的董事長，幾年前跨足專研油品，一專研下去就不得了，從原料的取得到加工製油的機器，都非常講究。他跑遍全臺灣、中國大陸，挑選沒受汙染的山茶樹，茶籽從採摘、曬果、烘乾、洗滌、去殼、榨油，都是公司自主生產，過程中還以人工一一揀選，將發霉的茶籽挑掉，確保品質。為了保留茶籽大部分的營養成分，特別研發德國原裝榨油、濾油的機器系統，突破傳統工法，獨創冷壓技術以低溫物理冷壓過濾。每一個步驟都精心製作，很認真嚴謹，力求完美。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;品質顧得這麼好，真是讓人由衷敬佩。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/神茶油.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1205,20 +1206,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;卓也竹園町&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，臺南有很多老屋，但你知道眼前這間卓也竹園町的前身，其實是日本職員宿舍嗎？
-阿亮牯：是喔！要不是妳告訴我，我還真不曉得，不過我記得之前在逛「臺灣客家等路大街」的網站，有看過卓也小屋的介紹喔！它在苗栗三義客家庄那邊，想不到現在也進駐臺南了！
-阿琴妹：我覺得很棒的是，這邊不但有美食可以吃，還可以體驗藍染耶！
-阿亮牯：對啊！雖然我已經有藍染的褲子和手環，但再來個包包好像也不錯！
-阿琴妹：那我也要做一個藍染束口袋來紀念我們這次的旅行！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，臺南有很多老屋，但你知道眼前這間卓也竹園町的前身，其實是日本職員宿舍嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是喔！要不是妳告訴我，我還真不曉得，不過我記得之前在逛「臺灣客家等路大街」的網站，有看過卓也小屋的介紹喔！它在苗栗三義客家庄那邊，想不到現在也進駐臺南了！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;我覺得很棒的是，這邊不但有美食可以吃，還可以體驗藍染耶！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊！雖然我已經有藍染的褲子和手環，但再來個包包好像也不錯！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;那我也要做一個藍染束口袋來紀念我們這次的旅行！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/卓也竹園町.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1236,19 +1237,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;延平郡王祠&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，我來考考你，在阿婆講過那麼多的鄭成功故事中，你還記不記得他手下有位被稱作「劍官」的客籍大將，延平郡王祠裡有供奉他的神像喔！
-阿亮牯：這有什麼難的，到延平郡王祠裡找找看就知道啦！你看，是不是這尊手中持劍的萬禮將軍！
-阿琴妹：沒錯，當年他曾被南明皇帝封為建安伯，也在鄭成功麾下被任命為提督，力戰清兵無數。他跟另一位大將甘輝，是祭祀鄭成功的廟宇中常見的左右護法喔！而且你知道嗎？鄭成功的軍隊很多人是從中國沿海地區招兵買馬，有不少人是客家鄉親喔，你看這個牌位祭祀的江勝，同樣也是客籍將領呢！
-阿亮牯：原來客家人也有隨著鄭成功部隊來到臺灣的喔，真是長知識了！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，我來考考你，在阿婆講過那麼多的鄭成功故事中，你還記不記得他手下有位被稱作「劍官」的客籍大將，延平郡王祠裡有供奉他的神像喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;這有什麼難的，到延平郡王祠裡找找看就知道啦！你看，是不是這尊手中持劍的萬禮將軍！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;沒錯，當年他曾被南明皇帝封為建安伯，也在鄭成功麾下被任命為提督，力戰清兵無數。他跟另一位大將甘輝，是祭祀鄭成功的廟宇中常見的左右護法喔！而且你知道嗎？鄭成功的軍隊很多人是從中國沿海地區招兵買馬，有不少人是客家鄉親喔，你看這個牌位祭祀的江勝，同樣也是客籍將領呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來客家人也有隨著鄭成功部隊來到臺灣的喔，真是長知識了！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/延平郡王祠.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
   
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1268,20 +1269,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;義民祠記碑&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，剛剛你又亂跑沒聽到，這塊「義民祠記碑」背後的故事可是跟客家有關呢！
-阿亮牯：欸竟然，這不是跟清朝臺灣三大民變之一的林爽文事件有關嗎，難道客家人也有參與民變？
-阿琴妹：這個碑文其實是紀念林爽文事件中，響應臺灣府知府楊廷理號召守衛府城對抗民變的義民喔！林爽文事件爆發後，林爽文帶兵打下彰化、嘉義一帶，直逼臺南府城，還好有義民協助，府城才沒有被林爽文打下。
-阿亮牯：原來如此，你看碑文上寫著義民從「粵莊」來的，難不成就是他們跟客家有關？
-阿琴妹：沒錯，這群「粵莊」來的義民，就是客家人的先民喔！其實原本在府城鎮北坊有建造義民祠來紀念義民，「義民祠記碑」就是記錄義民祠建廟緣由的石碑，可惜義民祠沒有留存下來，石碑才移到赤崁樓這邊保存留念。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，剛剛你又亂跑沒聽到，這塊「義民祠記碑」背後的故事可是跟客家有關呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;欸竟然，這不是跟清朝臺灣三大民變之一的林爽文事件有關嗎，難道客家人也有參與民變？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這個碑文其實是紀念林爽文事件中，響應臺灣府知府楊廷理號召守衛府城對抗民變的義民喔！林爽文事件爆發後，林爽文帶兵打下彰化、嘉義一帶，直逼臺南府城，還好有義民協助，府城才沒有被林爽文打下。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來如此，你看碑文上寫著義民從「粵莊」來的，難不成就是他們跟客家有關？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;沒錯，這群「粵莊」來的義民，就是客家人的先民喔！其實原本在府城鎮北坊有建造義民祠來紀念義民，「義民祠記碑」就是記錄義民祠建廟緣由的石碑，可惜義民祠沒有留存下來，石碑才移到赤崁樓這邊保存留念。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/義民祠記碑.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1299,21 +1300,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;臺南祀典大天后宮&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，你還記得臺灣民主國的國旗嗎？
-阿亮牯：那隻黃虎的藍旗嗎？
-阿琴妹：嗯。1895年甲午戰爭清朝戰敗後，將臺灣割讓日本，臺灣很多人強烈反對，一些仕紳就鼓催臺灣巡撫唐景崧出來建國，唐景崧就是首任大總統。後來日本接收臺灣，引發乙未戰爭，唐景崧不久之後便逃亡廈門，第一共和就瓦解了。當年6月，劉永福被選出擔任第二任大總統，以臺南為基地建立第二共和，劉永福就是以大天后宮為總統府，劉永福是客家人喔。
-阿亮牯：原來如此，後來劉永福怎麼了？
-阿琴妹：那時候兩方激戰，但臺灣人還是不敵日軍。劉永福在1895年10月逃渡中國，兩天後臺南遭日軍攻陷，臺灣民主國就結束了。
-阿亮牯：那真是一段慘烈的客家抗日史啊。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，你還記得臺灣民主國的國旗嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;那隻黃虎的藍旗嗎？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;嗯。1895年甲午戰爭清朝戰敗後，將臺灣割讓日本，臺灣很多人強烈反對，一些仕紳就鼓催臺灣巡撫唐景崧出來建國，唐景崧就是首任大總統。後來日本接收臺灣，引發乙未戰爭，唐景崧不久之後便逃亡廈門，第一共和就瓦解了。當年6月，劉永福被選出擔任第二任大總統，以臺南為基地建立第二共和，劉永福就是以大天后宮為總統府，劉永福是客家人喔。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來如此，後來劉永福怎麼了？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;那時候兩方激戰，但臺灣人還是不敵日軍。劉永福在1895年10月逃渡中國，兩天後臺南遭日軍攻陷，臺灣民主國就結束了。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;那真是一段慘烈的客家抗日史啊。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/臺南祀典大天后宮.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1331,19 +1332,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;葉石濤文學紀念館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，我們以前念書的時候，雖然看過不少作家的文章，但是我好像沒特別有印象哪些作家是客家人耶！
-阿琴妹：其實知名作家葉石濤曾經肯定過幾位客屬作家的著作喔！像吳濁流、賴和、鍾理和、鍾肇政等等。戰後葉石濤與鍾肇政在文壇上號稱「北鍾南葉」，可見他們倆的文學地位非常崇高。
-阿亮牯：哇！這些名字我都聽過，卻不知道他們是客家人。
-阿琴妹：我也是後來才知道，這都是多虧了葉石濤。他認為，雖然大家已經在同一片土地一起生活了幾百年，族群界線早已經不太明顯，但是他很樂於看見不同族群在作品中，發揚他們各自特有的文化意識。對了！他的紀念館就在這邊啊！我們進去好好認識一下，這位在臺灣文學佔有一席之地的重要人物吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，我們以前念書的時候，雖然看過不少作家的文章，但是我好像沒特別有印象哪些作家是客家人耶！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;其實知名作家葉石濤曾經肯定過幾位客屬作家的著作喔！像吳濁流、賴和、鍾理和、鍾肇政等等。戰後葉石濤與鍾肇政在文壇上號稱「北鍾南葉」，可見他們倆的文學地位非常崇高。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇！這些名字我都聽過，卻不知道他們是客家人。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;我也是後來才知道，這都是多虧了葉石濤。他認為，雖然大家已經在同一片土地一起生活了幾百年，族群界線早已經不太明顯，但是他很樂於看見不同族群在作品中，發揚他們各自特有的文化意識。對了！他的紀念館就在這邊啊！我們進去好好認識一下，這位在臺灣文學佔有一席之地的重要人物吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/葉石濤文學紀念館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1361,20 +1362,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;度小月擔仔麵&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，我知道度小月擔仔麵很有名，但是它跟客家的關係是什麼啊？
-阿琴妹：你知道葉石濤這位作家吧？
-阿亮牯：那是當然啊！他可是我們臺南人的驕傲呢！
-阿琴妹：他有一篇小說〈度小月〉，裡面的經營者秀妹就是客家人喔！當時因為戰爭的關係，秀妹的丈夫在從軍後就失去聯繫，這些悲傷她只能獨自承受。另外，故事裡也有提到她的家族曾經號召六堆客家鄉親參加抗日行動喔！這些文字不只呈現了那個年代臺灣人的遭遇，也寫出客家女性在逆境生存的樣貌，這樣的經歷也讓我想起阿婆呢！不知道她當時是以什麼樣的心境，一邊守住家業、一邊拉拔孩子長大的呢？
-阿亮牯：恩～現在想想阿婆當時一定很不容易！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，我知道度小月擔仔麵很有名，但是它跟客家的關係是什麼啊？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;你知道葉石濤這位作家吧？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;那是當然啊！他可是我們臺南人的驕傲呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;他有一篇小說〈度小月〉，裡面的經營者秀妹就是客家人喔！當時因為戰爭的關係，秀妹的丈夫在從軍後就失去聯繫，這些悲傷她只能獨自承受。另外，故事裡也有提到她的家族曾經號召六堆客家鄉親參加抗日行動喔！這些文字不只呈現了那個年代臺灣人的遭遇，也寫出客家女性在逆境生存的樣貌，這樣的經歷也讓我想起阿婆呢！不知道她當時是以什麼樣的心境，一邊守住家業、一邊拉拔孩子長大的呢？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;恩～現在想想阿婆當時一定很不容易！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/度小月擔仔麵.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1392,21 +1393,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;客家莊客家美食&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：好想念阿婆煮的客家料理，像是「客家小炒」、「薑絲大腸」、「客家鹹豬肉」、「花生豆腐」等，那種「鹹、香、肥、熟」的好滋味，想到都口水直流。
-阿琴妹：市區有間客家莊客家美食，我們去吃吃看，看看有沒有記憶中阿婆客家菜的味道。
-阿亮牯：哈哈，上菜了！快點來吃吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;好想念阿婆煮的客家料理，像是「客家小炒」、「薑絲大腸」、「客家鹹豬肉」、「花生豆腐」等，那種「鹹、香、肥、熟」的好滋味，想到都口水直流。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;市區有間客家莊客家美食，我們去吃吃看，看看有沒有記憶中阿婆客家菜的味道。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哈哈，上菜了！快點來吃吧！
 什麼！用煎的花生豆腐，淋上薑與醬油調成的特製醬料；還有只用蛋黃做得像奶油一般香滑的鹹蛋苦瓜；跟清爽的炒板條，而且整體口味有偏甜一些......，如果客家人因為思念家鄉味而來，可能會有點疑惑：「這是客家菜嗎？」
-阿琴妹：我來問問老闆娘，老闆娘黃雪芳霸氣的回我說「我是客家人啊，客家人炒的菜不就是客家菜嗎？」
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;我來問問老闆娘，老闆娘黃雪芳霸氣的回我說「我是客家人啊，客家人炒的菜不就是客家菜嗎？」
 但想想也沒錯，誰說客家菜一定要有某種「客家樣」?
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/客家莊客家美食.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1424,21 +1425,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;窄門咖啡&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：你看看這窄窄的巷弄竟然有咖啡店藏身在裡面！我們進去看看吧！
-阿亮牯：哇！這巷子寬度大概只有38公分，如果我再胖一點可能要側身走進來。
-阿琴妹：想不到經過窄窄的巷弄有這麼一個咖啡館，空間幽靜，令人相當放鬆。
-阿亮牯：是阿，咖啡店所在建物原已有相當的歷史，聽到過這裡的朋友說，在老闆的堅持下，從評估、找到技法幾近失傳的老師傅，再到實際施工，才終於保住了它充滿歷史與獨到魅力的沉澱、穩重。
-阿琴妹：這菜單還有擂茶，好特別！
-阿亮牯：這裡老闆是客家人，店內除了知名招牌咖啡飲品外，老闆當初在規劃店內菜單時，想讓更多人透過餐點認識客家文化，因此加入擂茶飲品，讓客人現場用擂缽來搗碎、熱水沖泡擂茶，從飲食體驗客家文化。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;你看看這窄窄的巷弄竟然有咖啡店藏身在裡面！我們進去看看吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇！這巷子寬度大概只有38公分，如果我再胖一點可能要側身走進來。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;想不到經過窄窄的巷弄有這麼一個咖啡館，空間幽靜，令人相當放鬆。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是阿，咖啡店所在建物原已有相當的歷史，聽到過這裡的朋友說，在老闆的堅持下，從評估、找到技法幾近失傳的老師傅，再到實際施工，才終於保住了它充滿歷史與獨到魅力的沉澱、穩重。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這菜單還有擂茶，好特別！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;這裡老闆是客家人，店內除了知名招牌咖啡飲品外，老闆當初在規劃店內菜單時，想讓更多人透過餐點認識客家文化，因此加入擂茶飲品，讓客人現場用擂缽來搗碎、熱水沖泡擂茶，從飲食體驗客家文化。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/窄門咖啡.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1456,19 +1457,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;樹有風咖啡&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：這家咖啡店非常有質感，精品咖啡也很好喝，阿亮牯你是怎麼知道這間店？
-阿亮牯：就之前在網路上看過報導，在臺南成長的國際知名大導演李安也來過這裡喝咖啡喔！
-阿琴妹：為什麼取名「樹有風」呢？
-阿亮牯：「樹有風」這個店名，是客籍老闆楊松鵬早年創業前和太太誤打誤撞參加了白冷山的登山團，到山頂時累極，在一片高大的杜鵑林下吃便當時，突然來了一陣風，一朵朵杜鵑花也隨風飄落，沈浸在突如其來的美麗中，疲累也隨風消散。正好一旁有人驚呼：「樹有風的時候好美喔！」到了開店時，自然而然地用了「樹有風」當店名，就像樹有風一路以來不譁眾取寵的風格，需要靜下心來才能感受美麗正環繞身邊。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這家咖啡店非常有質感，精品咖啡也很好喝，阿亮牯你是怎麼知道這間店？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;就之前在網路上看過報導，在臺南成長的國際知名大導演李安也來過這裡喝咖啡喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;為什麼取名「樹有風」呢？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;「樹有風」這個店名，是客籍老闆楊松鵬早年創業前和太太誤打誤撞參加了白冷山的登山團，到山頂時累極，在一片高大的杜鵑林下吃便當時，突然來了一陣風，一朵朵杜鵑花也隨風飄落，沈浸在突如其來的美麗中，疲累也隨風消散。正好一旁有人驚呼：「樹有風的時候好美喔！」到了開店時，自然而然地用了「樹有風」當店名，就像樹有風一路以來不譁眾取寵的風格，需要靜下心來才能感受美麗正環繞身邊。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/樹有風咖啡.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1486,20 +1487,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;一源包子饅頭&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，你知道這家饅頭店的老闆也是客家人嗎？
-阿琴妹：我有在猜是不是耶！因為看到這裡有賣客家蘿蔔糕。
-阿亮牯：算妳聰明！老闆他原本住在新竹，後來才帶著家人到臺南發展，開始賣從小吃到大的包子饅頭。而且這還是跟他爸媽學的喔！
-阿琴妹：我剛剛會遲疑的原因是，有聽到老闆用臺語跟客人聊天耶！
-阿亮牯：對啊！老闆說那是因為做生意、要拉近和客人的距離，不過腔調沒有那麼道地，所以還讓不少人以為他是外省人呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，你知道這家饅頭店的老闆也是客家人嗎？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;我有在猜是不是耶！因為看到這裡有賣客家蘿蔔糕。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;算妳聰明！老闆他原本住在新竹，後來才帶著家人到臺南發展，開始賣從小吃到大的包子饅頭。而且這還是跟他爸媽學的喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;我剛剛會遲疑的原因是，有聽到老闆用臺語跟客人聊天耶！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊！老闆說那是因為做生意、要拉近和客人的距離，不過腔調沒有那麼道地，所以還讓不少人以為他是外省人呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/一源包子饅頭.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1517,19 +1518,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;邱惠美鳳梨酥&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹！這個鳳梨酥的味道，跟阿婆以前買給我們吃的好像！
-阿琴妹：對啊！一不小心就會吃掉好幾塊，但我還要留一點胃給古早味蛋糕。
-阿亮牯：妳邊吃邊聽我說剛剛打聽到的秘密。老闆娘阿美姐她是來自屏東的客家人喔！一開始來臺南的紡織廠工作，離職後為了照顧小孩才做起生意，鹹粿、蚵嗲、剉冰通通都賣過，現在會做起點心，是剛好朋友找她一起去報名烘焙課，就是當時打下基礎，加上這些年來的創意研發和品質把關，讓店裡的點心大受歡迎喔！甚至還被日本電視台採訪過呢！
-阿琴妹：那我要多買一點當伴手禮送給朋友，而且我看網路上說這裡端午節還會賣期間限定的客家粽耶！我們下次也來吃看看！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹！這個鳳梨酥的味道，跟阿婆以前買給我們吃的好像！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;對啊！一不小心就會吃掉好幾塊，但我還要留一點胃給古早味蛋糕。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;妳邊吃邊聽我說剛剛打聽到的秘密。老闆娘阿美姐她是來自屏東的客家人喔！一開始來臺南的紡織廠工作，離職後為了照顧小孩才做起生意，鹹粿、蚵嗲、剉冰通通都賣過，現在會做起點心，是剛好朋友找她一起去報名烘焙課，就是當時打下基礎，加上這些年來的創意研發和品質把關，讓店裡的點心大受歡迎喔！甚至還被日本電視台採訪過呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;那我要多買一點當伴手禮送給朋友，而且我看網路上說這裡端午節還會賣期間限定的客家粽耶！我們下次也來吃看看！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/邱惠美鳳梨酥.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1547,19 +1548,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;擇賢堂&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：這裡竟然也有另一個名字叫「客家人廟」，但它不是齋教先天派的齋堂嗎？難不成齋教跟客家有關？
-阿琴妹：阿亮牯你不要亂猜啦，它跟客家的淵源其實是跟信徒有關喔！擇賢堂據說在民國50年之前，信徒大多是六堆客家人，禮佛儀式多遵循客家規則，也常在儀式時穿著美濃客家藍衫。除了信徒，許多旅經臺南的六堆客家人士也會在此寄宿、寄食，還有廟宇增建的捐款人，很多是美濃、屏東內埔、萬巒、麟洛、高樹、新埤一帶的客家人喔！
-阿亮牯：哇！難怪堂內有個刻有「南師六堆一同」的供桌，我還覺得奇怪，為何從六堆來臺南師專讀書的客家學生要捐獻這張供桌，大概就跟這層淵源有關吧！
-阿琴妹：是啊，不管是過去還是現在，在臺南生活的客家人以外地旅居人士為主，所以像擇賢堂這樣的宗教場所，就成為臺南客家人重要的心靈與文化寄託場所！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;這裡竟然也有另一個名字叫「客家人廟」，但它不是齋教先天派的齋堂嗎？難不成齋教跟客家有關？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯你不要亂猜啦，它跟客家的淵源其實是跟信徒有關喔！擇賢堂據說在民國50年之前，信徒大多是六堆客家人，禮佛儀式多遵循客家規則，也常在儀式時穿著美濃客家藍衫。除了信徒，許多旅經臺南的六堆客家人士也會在此寄宿、寄食，還有廟宇增建的捐款人，很多是美濃、屏東內埔、萬巒、麟洛、高樹、新埤一帶的客家人喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇！難怪堂內有個刻有「南師六堆一同」的供桌，我還覺得奇怪，為何從六堆來臺南師專讀書的客家學生要捐獻這張供桌，大概就跟這層淵源有關吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，不管是過去還是現在，在臺南生活的客家人以外地旅居人士為主，所以像擇賢堂這樣的宗教場所，就成為臺南客家人重要的心靈與文化寄託場所！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/擇賢堂.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
  
  &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1577,19 +1578,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;客兄HaKkabro&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，今天帶妳去吃一間很特別的早餐店，店名是「客兄」。每個月的營業時間不固定，要看FB或IG貼文。為了不讓妳等太久，我有用Line提前預訂餐點喔！
-阿琴妹：哇！真貼心！從店名就知道老闆是客家人，對吧！
-阿亮牯：沒錯，老闆陳霖是屏東內埔的客家人。這裡每次來都有新的創意餐點，以客家常見的食材或醬料加入吐司或漢堡中，像是梅干扣肉、客家漢堡肉、客家鹹豬肉、客家桔醬豬等口味，和麵包搭配起來既特別又協調。
-阿琴妹：真的很好吃耶！感覺老闆是個從味覺記憶出發的無框架料理人！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，今天帶妳去吃一間很特別的早餐店，店名是「客兄」。每個月的營業時間不固定，要看FB或IG貼文。為了不讓妳等太久，我有用Line提前預訂餐點喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;哇！真貼心！從店名就知道老闆是客家人，對吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;沒錯，老闆陳霖是屏東內埔的客家人。這裡每次來都有新的創意餐點，以客家常見的食材或醬料加入吐司或漢堡中，像是梅干扣肉、客家漢堡肉、客家鹹豬肉、客家桔醬豬等口味，和麵包搭配起來既特別又協調。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;真的很好吃耶！感覺老闆是個從味覺記憶出發的無框架料理人！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/客兄HaKkabro.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1607,19 +1608,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;臺南三山國王廟&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：哇這間廟的建築好特別，我要用相機把它記錄下來，當成創作的靈感參考！
-阿琴妹：阿亮牯你真識貨，這間廟可是清朝時蓋的潮州式廟宇，潮州位於廣東，所以可以看到廣東建築的特色喔，你看屋頂側邊這個凸起像「馬背」的山牆，平頭式的造型就是典型的廣東建築特色！而且你知道嗎，這座廟宇除了祭祀三山國王，還曾經是潮汕會館，作為潮州商人在臺灣經商貿易的重要據點喔！
-阿亮牯：原來如此，看來這間廟跟潮州先民關係非常密切呢！不過我記得常有人說三山國王是客家信仰，所以這些潮州先民也是客家人嗎？
-阿琴妹：這個說法其實是種誤解呢。潮州地區有福佬人也有客家人，不過來臺的潮州先民大多是大埔縣、饒平縣的客家人，才產生這樣的誤會！但這間三山國王廟，確實和客家有淵源喔，像廟宇創建者楊允璽，是大埔縣的客家人；還有記載廟堂重修歷史的石碑上，也有雲林福佬客信徒的捐獻紀錄呢。雖然廟宇的信眾主體並不是客家人，還是能從各種線索中看見它作為旅南客家人信仰中心的證明呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇這間廟的建築好特別，我要用相機把它記錄下來，當成創作的靈感參考！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯你真識貨，這間廟可是清朝時蓋的潮州式廟宇，潮州位於廣東，所以可以看到廣東建築的特色喔，你看屋頂側邊這個凸起像「馬背」的山牆，平頭式的造型就是典型的廣東建築特色！而且你知道嗎，這座廟宇除了祭祀三山國王，還曾經是潮汕會館，作為潮州商人在臺灣經商貿易的重要據點喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來如此，看來這間廟跟潮州先民關係非常密切呢！不過我記得常有人說三山國王是客家信仰，所以這些潮州先民也是客家人嗎？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這個說法其實是種誤解呢。潮州地區有福佬人也有客家人，不過來臺的潮州先民大多是大埔縣、饒平縣的客家人，才產生這樣的誤會！但這間三山國王廟，確實和客家有淵源喔，像廟宇創建者楊允璽，是大埔縣的客家人；還有記載廟堂重修歷史的石碑上，也有雲林福佬客信徒的捐獻紀錄呢。雖然廟宇的信眾主體並不是客家人，還是能從各種線索中看見它作為旅南客家人信仰中心的證明呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/臺南三山國王廟.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1637,21 +1638,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;國立臺灣歷史博物館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：哇塞！臺史博裡面未免也太大了吧！阿琴妹，妳想從哪邊開始逛啊？
-阿琴妹：恩～我們從常設展開始好了，它講的是臺灣的故事，想必會有一些跟客家人有關的歷史吧！
-阿亮牯：妳說得沒錯，這裡果然有客家莊的介紹！而且這些模型和造景也太逼真了！
-阿琴妹：對啊！連服飾都有講究喔！這個人穿得好像是客家藍衫，裡面那個應該是正在砍樟樹的腦丁。
-阿亮牯：疑？妳怎麼都知道？
-阿琴妹：其實是我有偷偷做過功課啦！之前沒辦法來臺南，只能透過臺史博網站過過乾癮，上面有一些客家文物的介紹，不過今天實際來到現場，更能感受到那個身歷其境、穿越時空的氛圍，我們有安排這個景點真是太值得了！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇塞！臺史博裡面未免也太大了吧！阿琴妹，妳想從哪邊開始逛啊？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;恩～我們從常設展開始好了，它講的是臺灣的故事，想必會有一些跟客家人有關的歷史吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;妳說得沒錯，這裡果然有客家莊的介紹！而且這些模型和造景也太逼真了！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;對啊！連服飾都有講究喔！這個人穿得好像是客家藍衫，裡面那個應該是正在砍樟樹的腦丁。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;疑？妳怎麼都知道？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;其實是我有偷偷做過功課啦！之前沒辦法來臺南，只能透過臺史博網站過過乾癮，上面有一些客家文物的介紹，不過今天實際來到現場，更能感受到那個身歷其境、穿越時空的氛圍，我們有安排這個景點真是太值得了！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/國立臺灣歷史博物館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1669,19 +1670,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;棧留咖啡小館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，今晚我想來點……客家小炒、梅干蒸肉，還有一杯冰美式！
-阿琴妹：喔？在這間棧留咖啡居然也可以吃到客家料理？
-阿亮牯：對啊！因為這裡的老闆娘是來自新竹湖口的客家人喔！她說因為親戚們都還住在北部的客家庄，所以才可以拿到這些客家家常的原物料。
-阿琴妹：原來是這樣！我剛剛才發現這裡是由媽媽來料理掌廚，女兒負責煮咖啡、做甜點，兩位都好親切，難怪店裡散發著一種溫馨的氛圍，來過的人都紛紛稱讚有回家的感覺！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，今晚我想來點……客家小炒、梅干蒸肉，還有一杯冰美式！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;喔？在這間棧留咖啡居然也可以吃到客家料理？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊！因為這裡的老闆娘是來自新竹湖口的客家人喔！她說因為親戚們都還住在北部的客家庄，所以才可以拿到這些客家家常的原物料。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;原來是這樣！我剛剛才發現這裡是由媽媽來料理掌廚，女兒負責煮咖啡、做甜點，兩位都好親切，難怪店裡散發著一種溫馨的氛圍，來過的人都紛紛稱讚有回家的感覺！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/棧留咖啡小館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1699,19 +1700,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;府城永和豆漿&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：府城永和豆漿的蛋餅和鹹豆漿都好好吃喔！我吃得好飽！
-阿亮牯：是啊，早餐選擇很多又平價，而且都是店內製作。剛剛跟店員聊到，這裡的員工、師傅與老闆大多都是來自屏東大路關的客家鄉親。很多都是透過老闆媽媽介紹而來，老闆也基於照顧同鄉的情誼錄用他們，甚至還提供鄉親吃住，而且也不藏私的傳授他們製作餐點的技術，並協助開業。
-阿琴妹：偏鄉找工作真的不容易，老闆一家不但照顧鄉親也傳承手藝，真令人敬佩！
-阿亮牯：是啊，聽店員說他們也常常回屏東大路關探望長輩與親友喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;府城永和豆漿的蛋餅和鹹豆漿都好好吃喔！我吃得好飽！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是啊，早餐選擇很多又平價，而且都是店內製作。剛剛跟店員聊到，這裡的員工、師傅與老闆大多都是來自屏東大路關的客家鄉親。很多都是透過老闆媽媽介紹而來，老闆也基於照顧同鄉的情誼錄用他們，甚至還提供鄉親吃住，而且也不藏私的傳授他們製作餐點的技術，並協助開業。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;偏鄉找工作真的不容易，老闆一家不但照顧鄉親也傳承手藝，真令人敬佩！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是啊，聽店員說他們也常常回屏東大路關探望長輩與親友喔！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/府城永和豆漿.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1729,20 +1730,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;客家細妹&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，你看那邊有很多人在排隊耶！我們也去看看在賣什麼好不好？
-阿亮牯：是手工麻糬和客家仙草！那怎麼可以不買來吃看看？
-阿琴妹：紅豆、綠豆、花生、芝麻，你想吃什麼口味？
-阿亮牯：小孩子才做選擇，都買就對啦！而且剛剛聽老闆娘說，她是屏東客家人，這些手工麻糬就是她跟外婆學的喔！老闆娘想把小時候外婆做給她吃的麻糬、仙草這些客家小吃，分享給大家。我還有打聽到，這邊年節的時候，會賣一些客家的年糕和發糕喔！
-阿琴妹：恩～真的好吃耶！又不會太甜，這種古早味現在很少見了！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，你看那邊有很多人在排隊耶！我們也去看看在賣什麼好不好？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是手工麻糬和客家仙草！那怎麼可以不買來吃看看？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;紅豆、綠豆、花生、芝麻，你想吃什麼口味？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;小孩子才做選擇，都買就對啦！而且剛剛聽老闆娘說，她是屏東客家人，這些手工麻糬就是她跟外婆學的喔！老闆娘想把小時候外婆做給她吃的麻糬、仙草這些客家小吃，分享給大家。我還有打聽到，這邊年節的時候，會賣一些客家的年糕和發糕喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;恩～真的好吃耶！又不會太甜，這種古早味現在很少見了！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/客家細妹.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1760,18 +1761,18 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;左鎮簡家古厝&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹我很好奇，這棟老屋是簡家人的宅邸，在左鎮簡姓不僅是大姓，開拓左鎮的元老級人物簡漢超也姓簡，該不會他們之間有關係吧？
-阿琴妹：沒錯喔，這座古厝是出自左鎮簡家的簡商卿祖父所建，簡漢超就是他們家族的開基祖喔！簡漢超據說是跟隨鄭成功來臺開墾，並且從他的古墓，可以知道他是祖籍來自「永定」的客家人喔！
-阿亮牯：原來左鎮簡家是客家的後代呀！可惜簡家後代並不會講客語，簡家古厝雖然有許多吉祥、消災、祈福意含的藝術彩繪，但也沒有與客家相關的特色，還好有古墓留存祖籍，才能知道祖先的客家根源。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹我很好奇，這棟老屋是簡家人的宅邸，在左鎮簡姓不僅是大姓，開拓左鎮的元老級人物簡漢超也姓簡，該不會他們之間有關係吧？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;沒錯喔，這座古厝是出自左鎮簡家的簡商卿祖父所建，簡漢超就是他們家族的開基祖喔！簡漢超據說是跟隨鄭成功來臺開墾，並且從他的古墓，可以知道他是祖籍來自「永定」的客家人喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來左鎮簡家是客家的後代呀！可惜簡家後代並不會講客語，簡家古厝雖然有許多吉祥、消災、祈福意含的藝術彩繪，但也沒有與客家相關的特色，還好有古墓留存祖籍，才能知道祖先的客家根源。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/左鎮簡家古厝.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1789,20 +1790,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;玉井之門食品行&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，那包芒果乾你是去哪裡買的啊？
-阿亮牯：我在玉井之門買的啊！怎麼樣？是不是很好吃？
-阿琴妹：一吃就停不下來耶！而且我第一次看到黑糖芒果乾，好特別喔！
-阿亮牯：對啊！這家店品項很多，又沒有防腐劑，所以有被選為府城十大伴手禮喔！再告訴妳一個秘密，這間店的創辦人其實是客家人，過去雖然曾經投資失敗，但經過農會的協助，開啟製造果乾這條路，現在這些水果乾可以說是另類的臺灣之光，還參加過東京國際食品展喔！
-阿琴妹：而且我剛看了一下，這還可以線上訂購，很方便耶！
-阿亮牯：對啊，創辦人的兒子原本是老師，現在回來家裡幫忙經營電商，很不簡單！&lt;/div&gt;
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，那包芒果乾你是去哪裡買的啊？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我在玉井之門買的啊！怎麼樣？是不是很好吃？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;一吃就停不下來耶！而且我第一次看到黑糖芒果乾，好特別喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊！這家店品項很多，又沒有防腐劑，所以有被選為府城十大伴手禮喔！再告訴妳一個秘密，這間店的創辦人其實是客家人，過去雖然曾經投資失敗，但經過農會的協助，開啟製造果乾這條路，現在這些水果乾可以說是另類的臺灣之光，還參加過東京國際食品展喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;而且我剛看了一下，這還可以線上訂購，很方便耶！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊，創辦人的兒子原本是老師，現在回來家裡幫忙經營電商，很不簡單！&lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/玉井之門食品行.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1820,21 +1821,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;玉井北極殿&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：走訪這麼多楠西的景點，你應該也慢慢能夠串起這些地方與詔安江氏家族的關係了吧，阿亮牯？
-阿亮牯：是啊，沒走過就不知道呢！但該不會這間廟宇也跟江家有關，這邊不是玉井嗎？
-阿琴妹：其實詔安江氏家族的發展範圍可是有到玉井的喔！玉井當地重要的家族「竹圍江家」，祖先同樣來自詔安，而且據學者推論，他們祖先與位於楠西的鹿陶洋江家、油車江家兩家祖先，可能有族親關係呢！這三個家族又因為距離很近，彼此有往來聯絡，一旦發生亂事，家族也會互相照應喔。
-阿亮牯：原來是這樣，難怪在這座廟的捐獻紀錄中，看到好多姓江的人，大概很多都是詔安江家的族人吧！
-阿琴妹：是啊，你看這個嘉慶九年的「重修大武壟開基祖廟捐題碑記」上面的江會川，就是鹿陶洋江家開基祖江如南的二兒子「江日溝」喔！這個捐獻紀錄上的江武成，則是竹圍江家的族人！
-阿亮牯：雖然不是親耳聽江家人說，但從這些蛛絲馬跡，都反映出這間廟宇和詔安江家深厚的聯繫，也反映出詔安江家在地方與宗族之間的無私奉獻呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;走訪這麼多楠西的景點，你應該也慢慢能夠串起這些地方與詔安江氏家族的關係了吧，阿亮牯？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是啊，沒走過就不知道呢！但該不會這間廟宇也跟江家有關，這邊不是玉井嗎？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;其實詔安江氏家族的發展範圍可是有到玉井的喔！玉井當地重要的家族「竹圍江家」，祖先同樣來自詔安，而且據學者推論，他們祖先與位於楠西的鹿陶洋江家、油車江家兩家祖先，可能有族親關係呢！這三個家族又因為距離很近，彼此有往來聯絡，一旦發生亂事，家族也會互相照應喔。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來是這樣，難怪在這座廟的捐獻紀錄中，看到好多姓江的人，大概很多都是詔安江家的族人吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，你看這個嘉慶九年的「重修大武壟開基祖廟捐題碑記」上面的江會川，就是鹿陶洋江家開基祖江如南的二兒子「江日溝」喔！這個捐獻紀錄上的江武成，則是竹圍江家的族人！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;雖然不是親耳聽江家人說，但從這些蛛絲馬跡，都反映出這間廟宇和詔安江家深厚的聯繫，也反映出詔安江家在地方與宗族之間的無私奉獻呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/玉井北極殿.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1852,22 +1853,22 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;鹿陶洋江家聚落&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：鹿陶洋江家跟油車江家離得好近，要不是妳特別強調，我以前都把他們搞混在一起啦！
-阿琴妹：畢竟他們家族祖先同樣都來自福建詔安，要不是前面加上地名區分，真的很容易把兩個江家混為一談呢！
-阿亮牯：而且在古厝建築的規模上，兩個家族也是差很多呢！妳看這張平面圖，上面畫出的古厝宅院範圍超級大，而且古厝建築也保存得好完整啊，一排排蓋得超級整齊！
-阿琴妹：這可多虧於鹿陶洋江家遵守族規，家族經歷了十幾代的發展都沒有分家，隨著一代一代子孫擴建古厝，才有今天的聚落規模喔！而且古厝向外擴建的護龍也都有規定的高度跟方位，不能亂蓋，所以那一排排的護龍才會這麼整齊。護龍左邊有六條、右邊有七條，規模很大呢！
-阿亮牯：真的嗎？我們快一起來數數看！
-阿琴妹：還有更特別的喔，每年江家族人仍然沿襲以前「吃公」的傳統，在鹿陶洋的公廳用公費宴請江家子弟，江家婦女則會全員出動來洗菜、切菜，一起準備豐盛的料理。聽說以前有像客家小炒、東坡肉、五味魚等菜色，不知道現在還有沒有？
-阿亮牯：我也好好奇會有什麼特色料理出現，希望之後有機會可以開放給一般大眾體驗！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;鹿陶洋江家跟油車江家離得好近，要不是妳特別強調，我以前都把他們搞混在一起啦！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;畢竟他們家族祖先同樣都來自福建詔安，要不是前面加上地名區分，真的很容易把兩個江家混為一談呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;而且在古厝建築的規模上，兩個家族也是差很多呢！妳看這張平面圖，上面畫出的古厝宅院範圍超級大，而且古厝建築也保存得好完整啊，一排排蓋得超級整齊！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這可多虧於鹿陶洋江家遵守族規，家族經歷了十幾代的發展都沒有分家，隨著一代一代子孫擴建古厝，才有今天的聚落規模喔！而且古厝向外擴建的護龍也都有規定的高度跟方位，不能亂蓋，所以那一排排的護龍才會這麼整齊。護龍左邊有六條、右邊有七條，規模很大呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;真的嗎？我們快一起來數數看！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;還有更特別的喔，每年江家族人仍然沿襲以前「吃公」的傳統，在鹿陶洋的公廳用公費宴請江家子弟，江家婦女則會全員出動來洗菜、切菜，一起準備豐盛的料理。聽說以前有像客家小炒、東坡肉、五味魚等菜色，不知道現在還有沒有？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我也好好奇會有什麼特色料理出現，希望之後有機會可以開放給一般大眾體驗！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/鹿陶洋江家聚落.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
  
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1885,20 +1886,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;油車江家古厝&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：聽江家的人說，他們以前也不知道自己是客家人，一直到76年以後政府開放中國大陸探親後，他們回到中國大陸去尋根，才赫然發現原來自己是客家人。
-阿亮牯：是啊！他們說以前小時候聽到隔壁村的客家小朋友講客語，還會嘲笑他們是「客人仔」，殊不知原來自己也是客家人。
-阿琴妹：他們知道自己是客家人後才想起來，以前阿公輩的長者祭拜祖先時，都是全程使用客語和祖先交談，只不過當時都不以為意。
-阿琴妹：而且你知道嗎？其實油車江家古厝的建築風格，也有濃厚的客家色彩唷！之前拍攝「大陸尋奇」的導演劉建良一看到這古厝形式，便問江家人說，「你們是客家人對不對？」，因為江家建築是「七包三的四合二院」，厝身七間包著三間大公廳，兩個庭院，前有半月池，後有化胎，是非常標準的客家風格建築。
-阿亮牯：我們去看看吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;聽江家的人說，他們以前也不知道自己是客家人，一直到76年以後政府開放中國大陸探親後，他們回到中國大陸去尋根，才赫然發現原來自己是客家人。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是啊！他們說以前小時候聽到隔壁村的客家小朋友講客語，還會嘲笑他們是「客人仔」，殊不知原來自己也是客家人。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;他們知道自己是客家人後才想起來，以前阿公輩的長者祭拜祖先時，都是全程使用客語和祖先交談，只不過當時都不以為意。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;而且你知道嗎？其實油車江家古厝的建築風格，也有濃厚的客家色彩唷！之前拍攝「大陸尋奇」的導演劉建良一看到這古厝形式，便問江家人說，「你們是客家人對不對？」，因為江家建築是「七包三的四合二院」，厝身七間包著三間大公廳，兩個庭院，前有半月池，後有化胎，是非常標準的客家風格建築。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我們去看看吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/油車江家古厝.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1916,20 +1917,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;梅嶺風景區&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：疑？你有發現梅嶺山上的門牌，都寫著「香蕉山」嗎？梅嶺以前種很多香蕉嗎？
-阿亮牯：這個阿婆有跟我說過喔！日治時期的梅嶺，放眼望去都是香蕉樹，家家戶戶都是蕉農呢！因為啊！日本調查發現梅嶺一帶的氣候、土壤非常適合種植香蕉，於是啟動移居計畫，招募新竹、苗栗的客家人來梅嶺開墾種香蕉。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;疑？你有發現梅嶺山上的門牌，都寫著「香蕉山」嗎？梅嶺以前種很多香蕉嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;這個阿婆有跟我說過喔！日治時期的梅嶺，放眼望去都是香蕉樹，家家戶戶都是蕉農呢！因為啊！日本調查發現梅嶺一帶的氣候、土壤非常適合種植香蕉，於是啟動移居計畫，招募新竹、苗栗的客家人來梅嶺開墾種香蕉。
 尤其是灣丘香蕉，因為海拔七八百公尺，山上日夜溫差大，山區水源不足、灌溉不易，生長期拉長到十二到十四個月，讓香蕉口感特別Q彈，即使香蕉皮變黑，裡面的果肉仍是白皙水嫩、甜度加成，而且散發獨特的香氣，是日本皇室御用香蕉呢！
-阿琴妹：聽說當時有兩個香蕉集散市場，一個專門收購灣丘地區的香蕉，一個是收購灣丘之外的香蕉，用圓形和方形印章來區分產地呢！
-阿亮牯：後來發生了「金蕉案」政治事件，導致香蕉出口大量下滑，因為當時作物皆以出口日本為導向，於是農民紛紛改種經濟價值高的梅子樹，青梅則成為梅嶺重要的經濟作物。1981年，前副總統謝東閔到香蕉山，看到滿山的梅花非常壯麗，於是就將這地方改名為「梅嶺」。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;聽說當時有兩個香蕉集散市場，一個專門收購灣丘地區的香蕉，一個是收購灣丘之外的香蕉，用圓形和方形印章來區分產地呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;後來發生了「金蕉案」政治事件，導致香蕉出口大量下滑，因為當時作物皆以出口日本為導向，於是農民紛紛改種經濟價值高的梅子樹，青梅則成為梅嶺重要的經濟作物。1981年，前副總統謝東閔到香蕉山，看到滿山的梅花非常壯麗，於是就將這地方改名為「梅嶺」。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/梅嶺風景區.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1947,19 +1948,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;梅子雞餐廳&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：自從梅嶺的香蕉產業沒落後，當地農民紛紛改種出口日本經濟價值高的梅子，這地方的名稱也從「香蕉山」變成了「梅嶺」。
-阿琴妹：梅嶺的梅子不只外銷日本，在地的農民也自行發展各類的梅子加工產品，像是梅子乾、梅子醬、梅醋、梅酒、梅子料理包，應有盡有呢！
-阿亮牯：週休二日實施後，民眾開始會利用假期到處旅遊，梅嶺也因應這波趨勢，發展了休閒農業區，梅農開始經營梅子雞餐廳，並在餐廳周圍的登山步道種滿了各式各樣的花草樹木，讓民眾可以登山兼賞花，又可以就近享用梅嶺專屬的風味餐。
-阿琴妹：而且這裡也有不少客家人經營的梅子雞餐廳，像二層坪梅子雞、文川梅子雞、福來梅子雞都是呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;自從梅嶺的香蕉產業沒落後，當地農民紛紛改種出口日本經濟價值高的梅子，這地方的名稱也從「香蕉山」變成了「梅嶺」。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;梅嶺的梅子不只外銷日本，在地的農民也自行發展各類的梅子加工產品，像是梅子乾、梅子醬、梅醋、梅酒、梅子料理包，應有盡有呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;週休二日實施後，民眾開始會利用假期到處旅遊，梅嶺也因應這波趨勢，發展了休閒農業區，梅農開始經營梅子雞餐廳，並在餐廳周圍的登山步道種滿了各式各樣的花草樹木，讓民眾可以登山兼賞花，又可以就近享用梅嶺專屬的風味餐。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;而且這裡也有不少客家人經營的梅子雞餐廳，像二層坪梅子雞、文川梅子雞、福來梅子雞都是呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/梅子雞餐廳.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -1977,19 +1978,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;天喜悦溫泉會館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，泡完湯好舒服啊！為什麼我們以前都要捨近求遠跑到關子嶺泡溫泉？楠西轄內就有龜丹溫泉啊！
-阿琴妹：對啊！龜丹溫泉還有「美人湯」的稱號呢！泉質屬弱鹼性碳酸泉，清澈無色無味，浸泡後皮膚光滑剔透，除了有軟化角質層的功效，據說對神經痛、皮膚病、關節炎都具有療效唷！
-阿亮牯：而且，你知道嗎？這家「天喜悅溫泉會館」的老闆娘是東勢客家人耶！
-阿琴妹：怪不得，菜單上會有梅子雞火鍋、梅干扣肉、客家小炒，這些客家風味套餐的選項，想必一定是老闆娘拿手的客家菜！我們就來嚐嚐她的手藝吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，泡完湯好舒服啊！為什麼我們以前都要捨近求遠跑到關子嶺泡溫泉？楠西轄內就有龜丹溫泉啊！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;對啊！龜丹溫泉還有「美人湯」的稱號呢！泉質屬弱鹼性碳酸泉，清澈無色無味，浸泡後皮膚光滑剔透，除了有軟化角質層的功效，據說對神經痛、皮膚病、關節炎都具有療效唷！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;而且，你知道嗎？這家「天喜悅溫泉會館」的老闆娘是東勢客家人耶！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;怪不得，菜單上會有梅子雞火鍋、梅干扣肉、客家小炒，這些客家風味套餐的選項，想必一定是老闆娘拿手的客家菜！我們就來嚐嚐她的手藝吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/天喜悦溫泉會館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2007,20 +2008,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;楠西北極殿&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：楠西就是我的地盤啦，這邊我熟得很，想去哪由我來帶路就行！
-阿琴妹：不用你說我也看得出來，走到哪都有人跟你打招呼，根本人氣王啊！那我來考考你，正好來到這間不僅是油車江家與鹿陶洋江家會參拜的廟宇，也是楠西信仰中心的楠西北極殿，不如你來分享一個跟這間廟有關的故事吧！
-阿亮牯：剛好之前參觀鹿陶洋江家認識的江家朋友，跟我分享他們家族流傳的故事，就和這間廟有關呢！現在楠西看起來繁榮、和平的樣子，在日治時期這裡的居民可是差點因為一場抗日事件而被血洗，幸好這間廟的神明透過乩童發出警示，才避免一場禍事發生喔。
-阿琴妹：日治時期，該不會和噍吧哖事件有關吧！事件的起義者余清芳，就是以玉井為中心組織了一股抗日勢力，玉井離這不遠呢！
-阿亮牯：不愧是阿琴妹，歷史相關的就是考不倒妳！傳說當年就是楠西北極殿的玄天上帝透過乩童降旨，希望信眾不要參與抗日活動，來保全身家性命。也因為楠西地區參與程度低，所以油車江家、鹿陶洋江家的受害程度，反而沒有玉井的竹圍江家來得嚴重呢。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;楠西就是我的地盤啦，這邊我熟得很，想去哪由我來帶路就行！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;不用你說我也看得出來，走到哪都有人跟你打招呼，根本人氣王啊！那我來考考你，正好來到這間不僅是油車江家與鹿陶洋江家會參拜的廟宇，也是楠西信仰中心的楠西北極殿，不如你來分享一個跟這間廟有關的故事吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;剛好之前參觀鹿陶洋江家認識的江家朋友，跟我分享他們家族流傳的故事，就和這間廟有關呢！現在楠西看起來繁榮、和平的樣子，在日治時期這裡的居民可是差點因為一場抗日事件而被血洗，幸好這間廟的神明透過乩童發出警示，才避免一場禍事發生喔。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;日治時期，該不會和噍吧哖事件有關吧！事件的起義者余清芳，就是以玉井為中心組織了一股抗日勢力，玉井離這不遠呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;不愧是阿琴妹，歷史相關的就是考不倒妳！傳說當年就是楠西北極殿的玄天上帝透過乩童降旨，希望信眾不要參與抗日活動，來保全身家性命。也因為楠西地區參與程度低，所以油車江家、鹿陶洋江家的受害程度，反而沒有玉井的竹圍江家來得嚴重呢。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/楠西北極殿.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2038,20 +2039,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;猩猩草堂&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，這口曾經是東原墩仔腳與周圍車關寮居民重要飲水來源的百年老井，沒有親自來一趟的話，根本就不會知道呢。
-阿亮牯：對啊，光看「猩猩草堂」的名稱，也想不到原來它是當地鄭家古宅重新整理而成的社區空間，鄭家可是祖籍廣東大埔的客家後裔呢！據說草堂的名字來自古宅周圍長滿的猩猩草，還有牆壁上的「猩猩草堂」四個字，可是用當地製作龍眼乾剩下的龍眼子一粒粒貼成的喔！
-阿琴妹：你知道的真詳細，是不是又發揮你的社交才能跟社區居民閒聊知道的！
-阿亮牯：哎呀被妳猜到啦，居民才會知道在地的故事嘛！不管是「猩猩草堂」還是高原社區的發展，都跟一位「鄭皆能」老先生有關喔，「猩猩草堂」的古厝就是他家族所有，多虧鄭老先生無私奉獻出來，社區才能有完善的公共空間被使用。而且他也是推動當地社區發展的重要組織，「高原社區發展協會」的創會理事長呢！
-阿琴妹：在「高原社區發展協會」的監、理事名單，也能看到許多鄭家的族人，他們一家真的是非常盡心在造福鄉里呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，這口曾經是東原墩仔腳與周圍車關寮居民重要飲水來源的百年老井，沒有親自來一趟的話，根本就不會知道呢。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊，光看「猩猩草堂」的名稱，也想不到原來它是當地鄭家古宅重新整理而成的社區空間，鄭家可是祖籍廣東大埔的客家後裔呢！據說草堂的名字來自古宅周圍長滿的猩猩草，還有牆壁上的「猩猩草堂」四個字，可是用當地製作龍眼乾剩下的龍眼子一粒粒貼成的喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;你知道的真詳細，是不是又發揮你的社交才能跟社區居民閒聊知道的！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哎呀被妳猜到啦，居民才會知道在地的故事嘛！不管是「猩猩草堂」還是高原社區的發展，都跟一位「鄭皆能」老先生有關喔，「猩猩草堂」的古厝就是他家族所有，多虧鄭老先生無私奉獻出來，社區才能有完善的公共空間被使用。而且他也是推動當地社區發展的重要組織，「高原社區發展協會」的創會理事長呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;在「高原社區發展協會」的監、理事名單，也能看到許多鄭家的族人，他們一家真的是非常盡心在造福鄉里呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/猩猩草堂.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2069,20 +2070,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;竹栱仔厝&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，原來竹栱仔厝的老闆和老闆娘都是客家後裔！他們都不會講客語，要不是有進一步攀談，差點就錯過啦！
-阿亮牯：對啊，老闆娘說她來自花蓮，媽媽是客家人，而老闆的祖籍是彰化的福佬客，但是夫妻倆對於客家語言、文化都不是很了解。
-阿琴妹：不過他們夫妻倆很喜歡山林，而且因為老闆的父親以前在東山種竹子、賣竹子為生，有種自己好像是被竹子養大的感覺，才會在東山地區以竹子特色的環境來賣咖啡。
-阿亮牯：真的耶！不管是屋子的樑柱、椅子，還是屋外的籬笆，都是竹子製成！這咖啡喝起來也好順口！
-阿琴妹：老闆剛剛說，這裡是客人的「後頭厝」，下次客人光顧的時候，他們會幫我們多多推廣府城客家的文化唷！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，原來竹栱仔厝的老闆和老闆娘都是客家後裔！他們都不會講客語，要不是有進一步攀談，差點就錯過啦！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;對啊，老闆娘說她來自花蓮，媽媽是客家人，而老闆的祖籍是彰化的福佬客，但是夫妻倆對於客家語言、文化都不是很了解。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;不過他們夫妻倆很喜歡山林，而且因為老闆的父親以前在東山種竹子、賣竹子為生，有種自己好像是被竹子養大的感覺，才會在東山地區以竹子特色的環境來賣咖啡。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;真的耶！不管是屋子的樑柱、椅子，還是屋外的籬笆，都是竹子製成！這咖啡喝起來也好順口！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;老闆剛剛說，這裡是客人的「後頭厝」，下次客人光顧的時候，他們會幫我們多多推廣府城客家的文化唷！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/竹栱仔厝.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2100,19 +2101,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;南瀛客家文化會館&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，我們今天一起去新營區的南瀛客家文化會館逛逛吧！
-阿琴妹：南瀛客家文化會館？裡面一樣有很多以前的客家文物嗎？
-阿亮牯：是有一些展示，但南瀛會館最特別地方在於：這裡是北臺南地區客家人聚集的聚會所，北臺南這一帶，有不少從新竹、苗栗、高雄、屏東客家庄，為生活、就業、結婚而來的客家子弟，他鄉遇故知，他們在2002年就成立客家協會，經常辦活動，大家的感情都很好。南瀛客家文化會館就像客家人的大伙房，每天都有不少鄉親在這裡打逗敘，很溫暖，連閩南朋友也會來串門子，好熱鬧！
-阿琴妹：哇～那我們趕快去找這些客家鄉親聚一聚吧！說不定可以得到更多客家資訊！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，我們今天一起去新營區的南瀛客家文化會館逛逛吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;南瀛客家文化會館？裡面一樣有很多以前的客家文物嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;是有一些展示，但南瀛會館最特別地方在於：這裡是北臺南地區客家人聚集的聚會所，北臺南這一帶，有不少從新竹、苗栗、高雄、屏東客家庄，為生活、就業、結婚而來的客家子弟，他鄉遇故知，他們在2002年就成立客家協會，經常辦活動，大家的感情都很好。南瀛客家文化會館就像客家人的大伙房，每天都有不少鄉親在這裡打逗敘，很溫暖，連閩南朋友也會來串門子，好熱鬧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;哇～那我們趕快去找這些客家鄉親聚一聚吧！說不定可以得到更多客家資訊！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/南瀛客家文化會館.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2130,20 +2131,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;鹽水田寮臺灣詩路&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：來來來，阿亮牯，發揮眼力的時候到了！一起找找看這條臺灣詩路上的客籍詩人作品吧！
-阿亮牯：欸不是，詩路這麼長，沒有更多資訊的話很難找啊！
-阿琴妹：好啦我來查查看...這裡面有人稱客家女性主義文學「三芳」的三位女詩人，叫杜潘芳格、張芳慈及利玉芳，名字中正好都有芳字呢。
-阿亮牯：我剛好像有看到...有了，這個陶板上寫的，就是利玉芳的〈嫁之一〉！
-阿琴妹：真的耶，上面描寫女子的出嫁心情，連我都感到不捨了呢。出身屏東內埔的利玉芳，現在可是生活在臺南下營喔，之前還有經營白鵝生態農場，農場內也有訪客留下各種以鵝為主題的作品，雖然現在已經停止營業，我們還是可以從作品中去感受農場的氛圍喔。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;來來來，阿亮牯，發揮眼力的時候到了！一起找找看這條臺灣詩路上的客籍詩人作品吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;欸不是，詩路這麼長，沒有更多資訊的話很難找啊！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;好啦我來查查看...這裡面有人稱客家女性主義文學「三芳」的三位女詩人，叫杜潘芳格、張芳慈及利玉芳，名字中正好都有芳字呢。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我剛好像有看到...有了，這個陶板上寫的，就是利玉芳的〈嫁之一〉！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;真的耶，上面描寫女子的出嫁心情，連我都感到不捨了呢。出身屏東內埔的利玉芳，現在可是生活在臺南下營喔，之前還有經營白鵝生態農場，農場內也有訪客留下各種以鵝為主題的作品，雖然現在已經停止營業，我們還是可以從作品中去感受農場的氛圍喔。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/鹽水田寮臺灣詩路.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2161,18 +2162,18 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;岸內糖廠影視基地&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，妳之前有沒有追臺劇「斯卡羅」？戲裡面的女主角蝶妹，是客家與排灣族的混血兒唷！
-阿琴妹：當然有啊，這部戲的拍攝地點就在岸內糖廠，現場搭建的場景是以19世紀清朝統治的府城街景為時空背景，你現在還可以看到劇中蝶妹工作的洋行「海關醫館」，還有蝶妹與李仙得相遇的市集街道。
-阿亮牯：哇～這種感覺好像是坐著時光機回到19世紀一樣，好微妙啊！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，妳之前有沒有追臺劇「斯卡羅」？戲裡面的女主角蝶妹，是客家與排灣族的混血兒唷！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;當然有啊，這部戲的拍攝地點就在岸內糖廠，現場搭建的場景是以19世紀清朝統治的府城街景為時空背景，你現在還可以看到劇中蝶妹工作的洋行「海關醫館」，還有蝶妹與李仙得相遇的市集街道。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇～這種感覺好像是坐著時光機回到19世紀一樣，好微妙啊！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/岸內糖廠影視基地.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2190,20 +2191,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;甘宅鄭氏古厝&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿婆過去曾不只一次提過鄭成功的故事，但從來沒聽她提過這個隨鄭成功來臺，並遷居至白河甘宅的鄭氏家族。
-阿琴妹：對啊，而且古厝建築實在太驚艷了！在資料上看過的客家傳統建築特色，這邊都可以看到耶！你看這一排排整齊的護龍，就跟鹿陶洋江家古厝一樣完整呢！
-阿亮牯：真的耶，那棟門口上面寫著「榮陽衍派」四字的就是古厝的正身門口吧，我們快去看看！
-阿琴妹：別急，進門之前還有很多可以看的建築特色呢！寫著「榮陽衍派」四字門的叫作「山門」，在山門前的這個水池一般稱作「半月池」，客家建築中很常看到屋前有水池、屋後有隆起的「化胎」，也就是種植花草的花臺，這可是客家人重視風水地理的表現喔！
-阿亮牯：原來這水池也是客家建築的特色，裡面還有養魚耶！等等，那邊有位看起來像是鄭家長輩，我來去social一下，看有沒有更精采的客家故事可以聽。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿婆過去曾不只一次提過鄭成功的故事，但從來沒聽她提過這個隨鄭成功來臺，並遷居至白河甘宅的鄭氏家族。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;對啊，而且古厝建築實在太驚艷了！在資料上看過的客家傳統建築特色，這邊都可以看到耶！你看這一排排整齊的護龍，就跟鹿陶洋江家古厝一樣完整呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;真的耶，那棟門口上面寫著「榮陽衍派」四字的就是古厝的正身門口吧，我們快去看看！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;別急，進門之前還有很多可以看的建築特色呢！寫著「榮陽衍派」四字門的叫作「山門」，在山門前的這個水池一般稱作「半月池」，客家建築中很常看到屋前有水池、屋後有隆起的「化胎」，也就是種植花草的花臺，這可是客家人重視風水地理的表現喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來這水池也是客家建築的特色，裡面還有養魚耶！等等，那邊有位看起來像是鄭家長輩，我來去social一下，看有沒有更精采的客家故事可以聽。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/甘宅鄭氏古厝.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2221,20 +2222,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;張鑑公祭祀公業&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：據說明鄭時期，有對張氏兄弟一起來臺，從安平港登陸後，來到白河這帶開墾耕種，事業有成後，兩兄弟帶著光宗耀祖的心情回到祖籍福建省漳州市南靖縣，想要恭請祖先牌位，不料宗親父老反對，在無計可施的情況之下，兩兄弟便半夜偷偷潛入祖祠堂，將張鑑公及張太婆請回臺供奉。
-阿亮牯：而且據當地耆老說，他們以前也不知道自己有客家人的血統，一直到返鄉尋根，才確定他們是客家人。 
-阿琴妹：其實從祭拜祖先的習慣也可以看出他們是客家人喔！閩南人祭拜祖先通常是以簡單的菜飯為祭品，而客家人是準備三牲來祭拜，只是張家人沒有發現而已。
-阿亮牯：當地耆老還說，他們以前也有「吃公」文化，每年冬至家族都會齊聚一堂，祭祖完一起辦桌吃飯，只是近幾年土地租金政策的關係，公有收入減少，吃公也就跟著取消了。
-阿琴妹：是啊，真的有點可惜！不過當地還是有很多值得探討的客家文化唷！我們去看看吧！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;據說明鄭時期，有對張氏兄弟一起來臺，從安平港登陸後，來到白河這帶開墾耕種，事業有成後，兩兄弟帶著光宗耀祖的心情回到祖籍福建省漳州市南靖縣，想要恭請祖先牌位，不料宗親父老反對，在無計可施的情況之下，兩兄弟便半夜偷偷潛入祖祠堂，將張鑑公及張太婆請回臺供奉。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;而且據當地耆老說，他們以前也不知道自己有客家人的血統，一直到返鄉尋根，才確定他們是客家人。 
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;其實從祭拜祖先的習慣也可以看出他們是客家人喔！閩南人祭拜祖先通常是以簡單的菜飯為祭品，而客家人是準備三牲來祭拜，只是張家人沒有發現而已。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;當地耆老還說，他們以前也有「吃公」文化，每年冬至家族都會齊聚一堂，祭祖完一起辦桌吃飯，只是近幾年土地租金政策的關係，公有收入減少，吃公也就跟著取消了。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，真的有點可惜！不過當地還是有很多值得探討的客家文化唷！我們去看看吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/張鑑公祭祀公業.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2252,22 +2253,22 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;白河水庫&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，關子嶺附近有個順遊景點，那就是白河水庫，有山有水，還有白鷺鷥悠悠地在岸邊覓食，環境氛圍讓人很放鬆呢！
-阿亮牯：我記得以前阿婆說過，在我們爸媽還小的時候，白河水庫可是很多遊客會去參觀的景點，不但可以搭小船遊湖，還有不少人會特地去水庫釣魚呢！
-阿琴妹：可惜水庫近幾年淤積嚴重，阿婆講的現在都看不到了...不過你一定想不到，其實在蓋水庫前，這邊可是白水溪的河谷地，還有一個叫白水溪庄的聚落喔！
-阿亮牯：真的嗎，這麼一大片湖在以前竟然是有人居住的地方？！
-阿琴妹：是啊，《白河縣志》記載最早是平埔族人在這邊居住、建立聚落，後來有從北部移居來的客家墾民，像是苗栗頭屋鄉來的彭姓人家，他們在這邊可是有7、80多人的三代大家族呢！
-阿亮牯：那水庫興建後，客家人都搬去哪了？
-阿琴妹：他們有部分人搬到枋子林、三層崎、崎內居住，像汴頭「內枋子林」種菸的彭貴寶一家，就是彭家的後代喔！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，關子嶺附近有個順遊景點，那就是白河水庫，有山有水，還有白鷺鷥悠悠地在岸邊覓食，環境氛圍讓人很放鬆呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我記得以前阿婆說過，在我們爸媽還小的時候，白河水庫可是很多遊客會去參觀的景點，不但可以搭小船遊湖，還有不少人會特地去水庫釣魚呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;可惜水庫近幾年淤積嚴重，阿婆講的現在都看不到了...不過你一定想不到，其實在蓋水庫前，這邊可是白水溪的河谷地，還有一個叫白水溪庄的聚落喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;真的嗎，這麼一大片湖在以前竟然是有人居住的地方？！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，《白河縣志》記載最早是平埔族人在這邊居住、建立聚落，後來有從北部移居來的客家墾民，像是苗栗頭屋鄉來的彭姓人家，他們在這邊可是有7、80多人的三代大家族呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;那水庫興建後，客家人都搬去哪了？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;他們有部分人搬到枋子林、三層崎、崎內居住，像汴頭「內枋子林」種菸的彭貴寶一家，就是彭家的後代喔！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/白河水庫.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2285,21 +2286,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;關子嶺風景區&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，前陣子你們家才忙完對吧？剛從家裡的工作解脫，正好來泡關子嶺溫泉放鬆一下！
-阿亮牯：這邊的溫泉跟龜丹溫泉差好多喔！龜丹溫泉水很清澈、硫磺味比較淡，但關子嶺溫泉是泥漿溫泉，色濁、味道也比較重耶！
-阿琴妹：這就是關子嶺溫泉特別的地方啦！它的溫泉水從地層縫隙中流出後，帶點泥粒與礦物質，才會看起像泥漿。別看它黑黑的，它不僅能緩解肌肉痠痛，對部分疾病還有一定療效呢，聽說霧峰林家的林獻堂就曾為了養病而特地來泡喔！
-阿亮牯：除了溫泉，還有老街、廟宇古蹟、紫斑蝶、登山步道等豐富的自然人文風光，真的很適合安排假期在關子嶺好好地放鬆！
-阿琴妹：其實關子嶺不只這些喔！關子嶺以前因為有很多樟樹跟相思木，清朝開始就有不少北部客家人前來關子嶺打拼事業，搭設腦寮砍伐樟樹製作樟腦，或是採集相思木製作木炭。雖然現在已經看不到腦寮了，但那群曾在此努力打拼的客家人，還有後代繼續在此生活，我們要去探訪的木成香菇行，就是其一呢！
-阿亮牯：從阿婆認識的親戚、朋友口中，也能聽見不少類似外出他鄉打拼客家人的艱苦事蹟。看來關子嶺也是一處能深入探查客家先民足跡的地方呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，前陣子你們家才忙完對吧？剛從家裡的工作解脫，正好來泡關子嶺溫泉放鬆一下！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;這邊的溫泉跟龜丹溫泉差好多喔！龜丹溫泉水很清澈、硫磺味比較淡，但關子嶺溫泉是泥漿溫泉，色濁、味道也比較重耶！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這就是關子嶺溫泉特別的地方啦！它的溫泉水從地層縫隙中流出後，帶點泥粒與礦物質，才會看起像泥漿。別看它黑黑的，它不僅能緩解肌肉痠痛，對部分疾病還有一定療效呢，聽說霧峰林家的林獻堂就曾為了養病而特地來泡喔！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;除了溫泉，還有老街、廟宇古蹟、紫斑蝶、登山步道等豐富的自然人文風光，真的很適合安排假期在關子嶺好好地放鬆！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;其實關子嶺不只這些喔！關子嶺以前因為有很多樟樹跟相思木，清朝開始就有不少北部客家人前來關子嶺打拼事業，搭設腦寮砍伐樟樹製作樟腦，或是採集相思木製作木炭。雖然現在已經看不到腦寮了，但那群曾在此努力打拼的客家人，還有後代繼續在此生活，我們要去探訪的木成香菇行，就是其一呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;從阿婆認識的親戚、朋友口中，也能聽見不少類似外出他鄉打拼客家人的艱苦事蹟。看來關子嶺也是一處能深入探查客家先民足跡的地方呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/關子嶺風景區.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2317,21 +2318,21 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;詔安保安宮&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：廟名前不就是這邊的地名「詔安」嗎？阿琴妹，我記得妳曾說過，明清時期從中國大陸移民來臺的客家先民，就有從福建詔安來的，難不成這邊地名跟福建詔安有關？
-阿琴妹：阿亮牯不錯喔，竟然還記得！沒錯，這個地方就是因為以前移民來的客家先民，用家鄉的名字「詔安」來稱呼定居處，久而久之就成了當地地名「詔安厝」。
-阿亮牯：原來是這樣，但除了地名，客家先民在這邊還有留下什麼蹤跡嗎？
-阿琴妹：先帶你看看這間保安宮，廟中祭祀的太子爺哪吒，據說就是最初來詔安厝開墾的客家先民李萬成，從福建詔安的二都田寮分香來臺祭祀的喔！而李萬成所屬的李家，據學者研究，家族的祖厝宗祠應該是客家傳統護龍厝形式，從保安宮旁的路往後走，就可以看到李家宗祠護龍厝囉！
-阿亮牯：哇！和甘宅鄭家、鹿陶洋江家的古厝一樣，房子都一排排平行排列，不過有些已經不是傳統建材，而是用水泥來蓋。
-阿琴妹：是啊，這些一排排的房子，就是隨著家族人口增加而逐漸擴建，而使用水泥建材的，是民國70年代後、家族經濟狀況比較好才建造的喔！我們有時間再去看看吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;廟名前不就是這邊的地名「詔安」嗎？阿琴妹，我記得妳曾說過，明清時期從中國大陸移民來臺的客家先民，就有從福建詔安來的，難不成這邊地名跟福建詔安有關？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯不錯喔，竟然還記得！沒錯，這個地方就是因為以前移民來的客家先民，用家鄉的名字「詔安」來稱呼定居處，久而久之就成了當地地名「詔安厝」。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;原來是這樣，但除了地名，客家先民在這邊還有留下什麼蹤跡嗎？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;先帶你看看這間保安宮，廟中祭祀的太子爺哪吒，據說就是最初來詔安厝開墾的客家先民李萬成，從福建詔安的二都田寮分香來臺祭祀的喔！而李萬成所屬的李家，據學者研究，家族的祖厝宗祠應該是客家傳統護龍厝形式，從保安宮旁的路往後走，就可以看到李家宗祠護龍厝囉！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇！和甘宅鄭家、鹿陶洋江家的古厝一樣，房子都一排排平行排列，不過有些已經不是傳統建材，而是用水泥來蓋。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;是啊，這些一排排的房子，就是隨著家族人口增加而逐漸擴建，而使用水泥建材的，是民國70年代後、家族經濟狀況比較好才建造的喔！我們有時間再去看看吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/詔安保安宮.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2349,19 +2350,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;葉家菸樓&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：從林子內教會開始，沿著心靈步道逛了一下社區，看著那些從社區故事或回憶轉化而成的布置和裝置，以及聖經裡上帝的話語來作串聯，不僅看到社區生命力的展現，還能欣賞農村的純樸風情呢！
-阿琴妹：阿亮牯，你在逛的時候有看到菸樓嗎？我這邊查到的資料，菸樓在心靈步道上，但我走了半天都沒看到...菸樓不僅和這裡早期產業息息相關，更是在此種菸、烘菸的客家人葉吉瑞一家所有，沒有去探訪的話實在太可惜了！
-阿亮牯：我去林子內教會旁的社區生活館問問看好了，他們也可以申請導覽呢！有了，社區志工說沿著步道到田園靈修會館，再繼續走就會看到了，還教我們怎麼辨認菸樓呢！原來臺灣菸樓大多建於日治時期，有「大阪式」與「廣島式」兩種形式，這兩種形式的房子會特別挑高，並用土埆磚來建造。我們在找的葉家菸樓就是大阪式，屋頂上會有個凸出來的排煙氣窗，可以當成辨認的特徵！
-阿琴妹：事不宜遲，趕緊去看看吧！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;從林子內教會開始，沿著心靈步道逛了一下社區，看著那些從社區故事或回憶轉化而成的布置和裝置，以及聖經裡上帝的話語來作串聯，不僅看到社區生命力的展現，還能欣賞農村的純樸風情呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，你在逛的時候有看到菸樓嗎？我這邊查到的資料，菸樓在心靈步道上，但我走了半天都沒看到...菸樓不僅和這裡早期產業息息相關，更是在此種菸、烘菸的客家人葉吉瑞一家所有，沒有去探訪的話實在太可惜了！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我去林子內教會旁的社區生活館問問看好了，他們也可以申請導覽呢！有了，社區志工說沿著步道到田園靈修會館，再繼續走就會看到了，還教我們怎麼辨認菸樓呢！原來臺灣菸樓大多建於日治時期，有「大阪式」與「廣島式」兩種形式，這兩種形式的房子會特別挑高，並用土埆磚來建造。我們在找的葉家菸樓就是大阪式，屋頂上會有個凸出來的排煙氣窗，可以當成辨認的特徵！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;事不宜遲，趕緊去看看吧！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/葉家菸樓.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2379,20 +2380,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;火山碧雲寺&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：從外觀看，根本想不到它是清朝時建立、擁有200多年歷史的古廟呢！
-阿琴妹：沒辦法，寺院以前因為民變戰爭波及和地震的關係，經歷多次重建、整修，當然看不出來是古廟啦！但寺裡的匾額，還有文物典藏室裡收藏的器具，還是可以看到滿滿的歷史感呢！不過阿亮牯你知道嗎？火山碧雲寺能順利運作到現在，可是跟一位叫陳向義的客家先民有很大關係呢！
-阿亮牯：我記得廟誌裡好像有這麼一號人物，是不是某一任的寺院管理人？
-阿琴妹：沒錯，在清末時火山碧雲寺是由來自東山大客村的富商陳向義主管廟務。陳向義這位客家人可不得了，不僅非常有錢，還當過聯合保甲局的局長，可是既有財力又有政治實力。在他主管廟務期間，每當香油錢不夠廟裡支出，他就會拿自己的錢出來補貼。多虧有他，火山碧雲寺才能在動盪的時代維持運作呢！後來因為參與抗日行動，陳向義慘遭日本人殺害，廟務一度被其他信眾搞得烏煙瘴氣，直到兒子陳按察出面處理並取回經營權，寺院的經營才又重新上了軌道。
-阿亮牯：哇，這故事也太曲折離奇了，完全有拍成電影戲劇的潛力啊！像這種有情義又有奉獻的客家先民故事，和阿婆最喜歡講的鄭成功故事一樣精彩！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;從外觀看，根本想不到它是清朝時建立、擁有200多年歷史的古廟呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;沒辦法，寺院以前因為民變戰爭波及和地震的關係，經歷多次重建、整修，當然看不出來是古廟啦！但寺裡的匾額，還有文物典藏室裡收藏的器具，還是可以看到滿滿的歷史感呢！不過阿亮牯你知道嗎？火山碧雲寺能順利運作到現在，可是跟一位叫陳向義的客家先民有很大關係呢！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;我記得廟誌裡好像有這麼一號人物，是不是某一任的寺院管理人？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;沒錯，在清末時火山碧雲寺是由來自東山大客村的富商陳向義主管廟務。陳向義這位客家人可不得了，不僅非常有錢，還當過聯合保甲局的局長，可是既有財力又有政治實力。在他主管廟務期間，每當香油錢不夠廟裡支出，他就會拿自己的錢出來補貼。多虧有他，火山碧雲寺才能在動盪的時代維持運作呢！後來因為參與抗日行動，陳向義慘遭日本人殺害，廟務一度被其他信眾搞得烏煙瘴氣，直到兒子陳按察出面處理並取回經營權，寺院的經營才又重新上了軌道。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇，這故事也太曲折離奇了，完全有拍成電影戲劇的潛力啊！像這種有情義又有奉獻的客家先民故事，和阿婆最喜歡講的鄭成功故事一樣精彩！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/火山碧雲寺.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2410,20 +2411,20 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;木成香菇行&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿琴妹：阿亮牯，在關子嶺泡溫泉時我提到的客家先民後代，就是這裡啦！這間店創始人陳木成的父親，過去在日治時期是從北部來的客家人，本來是在關子嶺山區伐木燒製木炭，也做過石灰礦業的礦工，後來他們一家落腳在嶺頂一帶，定居下來並以採桂竹維生。之後輾轉改種椴木香菇，現在可是關子嶺當地頗具名聲的香菇品牌喔。
-阿亮牯：椴木香菇跟一般的太空包香菇有什麼不同啊？
-阿琴妹：這個就是學問了！椴木香菇是截取原木鑽孔，植入菌絲作為繁衍香菇的媒介，需要經過繁複工序才能長出香菇，較耗時費力且產量少，但椴木長出來的香菇肥碩甜美，吃起來菇味更濃郁唷！
-阿亮牯：哇～沒想到從燒炭變成種香菇，他們一家轉行也轉太大了！話說店裡那一包包的香菇，看起來就很新鮮呢！
-阿琴妹：阿亮牯你看，店旁邊還有香菇行的民宿耶！門口跟招牌都有可愛的香菇裝飾，整體很有家的溫馨感呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯，在關子嶺泡溫泉時我提到的客家先民後代，就是這裡啦！這間店創始人陳木成的父親，過去在日治時期是從北部來的客家人，本來是在關子嶺山區伐木燒製木炭，也做過石灰礦業的礦工，後來他們一家落腳在嶺頂一帶，定居下來並以採桂竹維生。之後輾轉改種椴木香菇，現在可是關子嶺當地頗具名聲的香菇品牌喔。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;椴木香菇跟一般的太空包香菇有什麼不同啊？
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;這個就是學問了！椴木香菇是截取原木鑽孔，植入菌絲作為繁衍香菇的媒介，需要經過繁複工序才能長出香菇，較耗時費力且產量少，但椴木長出來的香菇肥碩甜美，吃起來菇味更濃郁唷！
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;哇～沒想到從燒炭變成種香菇，他們一家轉行也轉太大了！話說店裡那一包包的香菇，看起來就很新鮮呢！
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;阿亮牯你看，店旁邊還有香菇行的民宿耶！門口跟招牌都有可愛的香菇裝飾，整體很有家的溫馨感呢！
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/木成香菇行.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2441,19 +2442,19 @@ $(document).on(':passageend', function () { hashChanged(); });
 
 &lt;h1&gt;邱爸爸傳統豆花&lt;/h1&gt;
 &lt;div class=&quot;lefttext&quot;&gt;\
-阿亮牯：阿琴妹，可別看阿源哥小小的豆花攤，他的生命很令人感動喔。
-阿琴妹：可以說給我聽嗎？
-阿亮牯：阿源哥在臺南出生長大，爸爸媽媽都是從屏東麟洛來的客家人，從小就說客家話。出社會後一開始做道路工程，後來整個單位收掉，阿源哥跟著失業了。於是他回老家麟洛跟表哥租一塊農地養雞，愈養愈好，整個就投資下去擴大經營，沒想到2009年遇到八八風災，整個全軍覆沒、血本無歸，坐在田邊三天三夜，完全不知怎麼辦才好。另外，他的兒子一出生就罹患罕見疾病「先天性表皮鬆解性水皰症」，就是俗稱的泡泡龍症，這種病症沒有根本治療方法，需要依賴每天換藥包紮來維持皮膚完整不受感染，醫藥龐大，又必須細心照顧。面對生活上這麼大的壓力，要是我可能就被打趴了。可是阿源哥很堅韌，努力地讓全家安頓下來。後來學做豆腐花。一開始也是很不順，做不好一整桶都要倒掉。他慢慢摸索，用傳統的石膏製作、堅持用加拿大進口的非基改黃豆，配料也都自己熬煮，非常講究，漸漸地才比較穩定。他的兒子現在長大了，病症也獲得控制，可以正常工作生活。
-阿琴妹：真的很不容易，生活困頓還能這麼堅持，用最好的料給客人。我也很感動啊。
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿琴妹，可別看阿源哥小小的豆花攤，他的生命很令人感動喔。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;可以說給我聽嗎？
+&lt;span style=&#39;color:#4d2500;font-weight:bold;&#39;&gt;阿亮牯：&lt;/span&gt;阿源哥在臺南出生長大，爸爸媽媽都是從屏東麟洛來的客家人，從小就說客家話。出社會後一開始做道路工程，後來整個單位收掉，阿源哥跟著失業了。於是他回老家麟洛跟表哥租一塊農地養雞，愈養愈好，整個就投資下去擴大經營，沒想到2009年遇到八八風災，整個全軍覆沒、血本無歸，坐在田邊三天三夜，完全不知怎麼辦才好。另外，他的兒子一出生就罹患罕見疾病「先天性表皮鬆解性水皰症」，就是俗稱的泡泡龍症，這種病症沒有根本治療方法，需要依賴每天換藥包紮來維持皮膚完整不受感染，醫藥龐大，又必須細心照顧。面對生活上這麼大的壓力，要是我可能就被打趴了。可是阿源哥很堅韌，努力地讓全家安頓下來。後來學做豆腐花。一開始也是很不順，做不好一整桶都要倒掉。他慢慢摸索，用傳統的石膏製作、堅持用加拿大進口的非基改黃豆，配料也都自己熬煮，非常講究，漸漸地才比較穩定。他的兒子現在長大了，病症也獲得控制，可以正常工作生活。
+&lt;span style=&#39;color:#e17900;font-weight:bold;&#39;&gt;阿琴妹：&lt;/span&gt;真的很不容易，生活困頓還能這麼堅持，用最好的料給客人。我也很感動啊。
 &lt;/div&gt;
 
-&lt;div style=&quot;background-color:white;&quot;&gt;
+&lt;!--&lt;div style=&quot;background-color:white;&quot;&gt;
 &lt;strong&gt;【聆聽客語導覽】&lt;/strong&gt;
 &lt;audio controls=&quot;controls&quot; style=&quot;width:300px;&quot;&gt;
   &lt;source src=&quot;media/sounds/邱爸爸傳統豆花.mp3&quot;&gt;
 &lt;/audio&gt;
 
-&lt;/div&gt;
+&lt;/div&gt;--&gt;
 
 &lt;&lt;button &#39;返回景點選單&#39;&gt;&gt;&lt;&lt;goto &#39;景點選擇&#39;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
@@ -2467,69 +2468,31 @@ $(document).on(':passageend', function () { hashChanged(); });
     loading=&quot;lazy&quot;
   &gt;&lt;/iframe&gt;
   &lt;/div&gt;</tw-passagedata><tw-passagedata pid="58" name="特別感謝" tags="" position="375,75" size="100,100">&lt;h3&gt;【感謝以下單位和景點允許張貼大臺南客家尋蹤旅遊線上尋蹤地圖之宣傳圖卡】&lt;/h3&gt;
-臺南航空站旅遊服務中心
-高鐵臺南站旅遊服務中心
-安平旅遊服務中心
-臺南火車站旅遊服務中心
-原合同廳舍旅遊服務中心
-虎頭埤風景區旅服中心
-德元埤旅遊服務中心
-月之美術館遊客旅服中心
-五妃廟
-南鯤鯓代天府
-新營火車站旅遊服務中心
-無米樂旅遊服務中心
-台江國家公園遊客中心
-七股遊客中心
-六孔遊客中心
-南化遊客中心
-官田遊客中心
-北門遊客中心
 藍晒圖文創園區
 水交社文化園區
-奇美博物館
-國立臺灣史前文化博物館
-楊逵文學紀念館
 歸仁文化中心
 臺南文化中心 
-臺南知事官邸
-西竹圍之丘文創園區
 臺南文化創意產業園區
-臺南美術館 1館
-臺南美術館 2館
-國立臺灣文學館
-噍吧哖事件紀念園區
-吳園藝文中心
-六合境大埔福德祠
-南瀛眷村文化館
-永成戲院
-文創PLUS臺南創意中心
-風神廟
-司法博物館
-南門電影書院
-1661台灣船園區
+國定古蹟臺南地方法院（司法博物館）
 烏樹林休閒園區
 台江文化中心
-蕭壠文化園區
+楊逵文學紀念館
+噍吧哖事件紀念園區
 總爺藝文中心
+永成戲院
 新營文化中心
-十鼓仁糖文創園區
-東山區農會咖啡文化館
-億載金城
-安平古堡
-安平樹屋
 安平定情碼頭德陽艦園區
+風神廟
 祀典武廟
 臺南孔廟
-普濟殿
 臺灣首廟天壇
 林百貨
 四草綠色隧道
 臺南左鎮化石園區
 七股鹽山
-山上花園水道博物館
 麻豆代天府
-龜丹溫泉體驗池</tw-passagedata><tw-passagedata pid="59" name="景點選擇" tags="center" position="375,175" size="100,100">&lt;img src=&quot;media/img/block.png&quot; width=&quot;100%&quot; &gt;
+龜丹溫泉體驗池
+東山區農會咖啡文化館</tw-passagedata><tw-passagedata pid="59" name="景點選擇" tags="center" position="375,175" size="100,100">&lt;img src=&quot;media/img/block.png&quot; width=&quot;100%&quot; &gt;
 &lt;img src=&quot;media/img/title.png&quot; width=&quot;100%&quot; &gt;
 &lt;&lt;set _classes = [&quot;南區&quot;,&quot;仁德區&quot;,&quot;東區&quot;,&quot;中西區&quot;,&quot;北區&quot;,&quot;安南區&quot;,&quot;永康區&quot;,&quot;左鎮區&quot;,&quot;玉井區&quot;,&quot;楠西區&quot;,&quot;東山區&quot;,&quot;新營區&quot;,&quot;鹽水區&quot;,&quot;白河區&quot;]&gt;&gt;&#39;&#39;選擇區域：&#39;&#39; &lt;&lt;listbox &quot;$class&quot;&gt;&gt;
 	&lt;&lt;optionsfrom _classes&gt;&gt;
