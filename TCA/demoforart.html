@@ -225,14 +225,14 @@ body {
   width: 80%;
   overflow-y: auto;
   box-sizing: border-box;
-  border: 1.8em solid rgb(74 57 41 / 0%);
+  border: 2em solid rgb(74 57 41 / 0%);
   border-radius: 20px;
   margin: 50px auto;
   padding: 0 1.2em .5em 2em;
 }
 .dm #passages {
   background-color: var(--dm-bg2);
-  border: 1.8em solid rgb(74 57 41 / 0%);
+  border: 2em solid rgb(74 57 41 / 0%);
 }
 #story hr {
   border: none;
@@ -256,11 +256,11 @@ body {
 }
 #passages::-webkit-scrollbar-track {
   background-color: var(--menu);
-  border: 1.8em solid rgb(74 57 41 / 0%);
+  border: 1px solid var(--bg2);
 }
 .dm #passages::-webkit-scrollbar-track {
   background-color: var(--dm-menu);
-  border: 1.8em solid rgb(74 57 41 / 0%);
+  border: 1px solid var(--dm-bg2);
 }
 #passages::-webkit-scrollbar-thumb {
   background-color: var(--menu);
@@ -292,8 +292,8 @@ body {
 
 /*links*/
 a {
-    color: #63e1f9;
-    text-shadow: 1px 1px 2px black;
+  color: #63e1f9;
+  text-decoration: none !important;
 }
 .dm a {
   color: var(--dm-text);
@@ -412,7 +412,7 @@ a:hover {
 /*header*/
 .header {
   background-color: var(--menu);
-  height: 5%;
+  height: 10%;
   width: 100%;
   transition: 0.75s;
   display: flex;
@@ -448,12 +448,6 @@ a:hover {
 }
 .author a:hover {
   font-weight: bold;
-}
-
-/*textinput*/
-.passage input[type="text"] {
-min-width: 60%;
-width: 60%;
 }
 
 /*function menu*/
@@ -899,10 +893,10 @@ width: 60%;
   }
   #passages {
 	max-height: 70%;
-	border: 2em solid rgb(74 57 41 / 0%);
+	border: 2.5em solid rgb(74 57 41 / 0%);
   }
   .dm #passages {
-	border: 2em solid rgb(74 57 41 / 0%);
+	border: 2.5em solid rgb(74 57 41 / 0%);
   }
   .stat-bar-group {
 	padding: 0 1em 2em;
@@ -919,10 +913,10 @@ width: 60%;
 /*mobile portrait*/
 @media screen and (max-width: 420px) {
   body {
-	background-color: var(--bg2);
+
   }
   .dm body {
-	background-color: var(--dm-bg2);
+
   }
   #story {
 	font-size: 70%;
@@ -1118,13 +1112,6 @@ width: 60%;
 	color: var(--dm-text);
   }
 }
-/*mobile background*/
-@media screen and (max-height: 1300px) {
-  body{
-	/*視窗寬度小於圖片寬度時的background-size為cover*/
-	background-size: cover;
-  }
-}
 /*mobile landscape*/
 @media screen and (max-height: 500px) {
   .passage {
@@ -1161,13 +1148,21 @@ width: 60%;
 	padding: 1em;
   }
   #footer-menu {
-    padding-top: 8em;
+    padding-top: 4em;
   }
   #notify {
 	width: 12em;
 	font-size: 70%;
 	font-weight: bold;
 	top: 5vh;
+  }
+}
+
+/*mobile background*/
+@media screen and (max-height: 1300px) {
+  body{
+	/*視窗寬度小於圖片寬度時的background-size為cover*/
+	background-size: cover;
   }
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">// import linearicons
 importStyles(
