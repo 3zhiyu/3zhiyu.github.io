@@ -264,6 +264,7 @@ body {
 #story {
   height: 100%;
   width: 100%;
+  max-width: 800px;
   display: flex;
   align-items: center;
   font-size: 1.2em;
@@ -272,6 +273,7 @@ body {
 .dm #story {
 
 }
+/*
 .serif .passage {
   font-family: var(--serif);
 }
@@ -281,8 +283,10 @@ body {
 .FangSong .passage {
   font-family: var(--FangSong);
 }
+*/
 .passage {
   line-height: 200%;
+  font-family: var(--sansserif);
   font-size: 1em;
   letter-spacing: 0.05em;
 }
@@ -291,6 +295,7 @@ body {
   max-height: 80%;
   min-height: 60%;
   width: 80%;
+  max-width: 600px;
   overflow-y: auto;
   box-sizing: border-box;
   border: 2em solid rgb(74 57 41 / 0%);
@@ -302,9 +307,7 @@ body {
   background-color: var(--dm-bg2);
   border: 2em solid rgb(74 57 41 / 0%);
 }
-#passages a img {
-  width: 150px;
-}
+
 #story hr {
   border: none;
   height: 2px;
@@ -459,11 +462,18 @@ a:hover {
 .dm #story .macro-textbox:focus {
   box-shadow: 4px 4px 0 var(--dm-menu);
 }
-
 .passage input[type="text"] {
 min-width: 50px;
 max-width: 400px;
 width: 70vw;
+}
+
+/*image*/
+#passages a img {
+  width: 150px;
+}
+.passages img {
+  max-width: 400px;
 }
 
 /*lists*/
@@ -586,8 +596,8 @@ width: 70vw;
 /*back button*/
 #back {
   color: var(--menu);
-  position: fixed;
-  left: 15%;
+  position: relative;
+  left: 120px;
   font-size: 1.5vw;
 }
 .dm #back {
