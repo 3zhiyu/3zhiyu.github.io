@@ -201,8 +201,8 @@ body[data-tags~="back"]{
 /*源朝明體*/
 @font-face {
   font-family: "GenRyuMin";
-  src: local("MgOpen Moderna Bold"),
-     url(font/MgOpenModernaBold.ttf);
+  src: local("GenRyu Min Regular"),
+     url(font/GenRyuMin-R.ttc);
 }
 
 /*put your theme colors & fonts here so that you don't have to type the codes over and over again!*/
@@ -447,6 +447,7 @@ a:hover {
   letter-spacing: .05em;
   padding: .5em;
   margin-right: .5em;
+  margin-bottom: 5px;
 }
 .dm #story .macro-textbox {
   color: var(--dm-text);
@@ -457,6 +458,11 @@ a:hover {
 }
 .dm #story .macro-textbox:focus {
   box-shadow: 4px 4px 0 var(--dm-menu);
+}
+
+.passage input[type="text"] {
+min-width: 50px;
+width: 70vw;
 }
 
 /*lists*/
@@ -1020,7 +1026,7 @@ a:hover {
 	height: 40px;
   }
   .header:hover {
-	height: 15vh;
+	height: 10vh;
   }
   .title {
 	font-size: 1.5em;
@@ -4080,7 +4086,6 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 	&lt;div class=&quot;mobile-menu&quot;&gt;
 	 &lt;span id=&quot;mob-menu&quot; class=&quot;lnr lnr-menu&quot;&gt;&lt;/span&gt;
 		&lt;div id=&quot;mob-function-menu&quot;&gt;
-		 &lt;span id=&quot;mob-settings&quot; class=&quot;lnr lnr-cog&quot;&gt;&lt;/span&gt;
 		 &lt;span id=&quot;mob-saves&quot; class=&quot;lnr lnr-download&quot;&gt;&lt;/span&gt;
 		 &lt;span id=&quot;mob-restart&quot; class=&quot;lnr lnr-redo&quot;&gt;&lt;/span&gt;
 		&lt;/div&gt;
