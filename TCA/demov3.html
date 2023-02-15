@@ -98,10 +98,43 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking">Your browser lacks required capabilities. Please upgrade it or switch to another to continue.</div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="文協一百點－南部場" startnode="62" creator="Twine" creator-version="2.3.14" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" zoom="1" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.lefttext {
+	<tw-storydata name="文協一百點－南部場" startnode="61" creator="Twine" creator-version="2.3.14" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" zoom="1" format="SugarCube" format-version="2.34.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*遊戲開頭版面*/
+body[data-tags~="start"] #passages {
+  background-image: url("media/passagebg_pc.png");
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+}
+body[data-tags~="start"] #passages a img {
+  width: 150px;
+}
+body[data-tags~="start"] #passages img {
+  padding-top: 20px;
+}
+
+@media screen and (max-width: 1300px) {
+	body[data-tags~="start"] #passages {
+	  background-image: url("media/passagebg_pad.png");
+	  background-size:100% 100%;
+	  background-repeat: no-repeat;
+	}
+}
+
+@media screen and (max-width: 800px) {
+	body[data-tags~="start"] #passages {
+	  background-image: url("media/passagebg.png");
+	  background-size:100% 100%;
+	  background-repeat: no-repeat;
+	}
+    body[data-tags~="start"] #passages img {
+    padding-top: 30px;
+	}
+}
+
+/*版面置中*/
+.lefttext {
  display: inline-block;
  position: relative;
-   text-align: left;
+ text-align: left;
 }
 
 .NPC_Name {
@@ -111,34 +144,1147 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
  font-size:28px;
 }
   
-.passage {
-  text-align: center;
-}
-
 #center {
   display: flex;
   justify-content: center;
 }
 
-/*頁面所有文字置中(標籤加center)*/
-tw-passage[tags="center"] {
+.passage {
   text-align: center;
 }
 
-/*直式顯示*/
+/*文字置中(標籤加center)*/
+tw-passage[tags="center"] {
+  text-align: center;
+}
+.center.passage {
+  text-align: center;
+}
+
+/*背景圖片*/
+body[data-tags~="XDD"]{
+  background-image: url("https://cdn.discordapp.com/attachments/706051912725954600/890804190627110932/unknown.png");
+}
+body[data-tags~="Background_01"]{
+  background-image: url("https://drive.google.com/uc?id=1GXzwB7EySzOl-0LQn5uWC4B4RaI961Fz");
+}
+body[data-tags~="Background_02"]{
+  background-image: url("media/Background_02.png");
+}
+body[data-tags~="Background_03"]{
+  background-image: url("media/Background_03.png");
+}
+body[data-tags~="Background_04"]{
+  background-image: url("media/Background_04.jpg");
+}
+body[data-tags~="Background_05"]{
+  background-image: url("media/Background_05.jpg");
+}
+body[data-tags~="Background_06"]{
+  background-image: url("media/Background_06.png");
+}
+body[data-tags~="Background_07"]{
+  background-image: url("media/Background_07.png");
+}
+body[data-tags~="back"]{
+  background: #000;
+}
+
+/* 思源黑體&思源宋體 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap');
+/* 楷體字體 */
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexkai.css);
+/* 圓體字體 */
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+/*仿宋體*/
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+/*源朝明體*/
+@font-face {
+  font-family: "GenRyuMin";
+  src: local("GenRyu Min Regular"),
+     url(font/GenRyuMin-R.ttc);
+}
+
+/*put your theme colors & fonts here so that you don't have to type the codes over and over again!*/
+:root {
+  /*light mode (default)*/
+  --bg: #8e6b54;
+  --bg2: rgb(247 241 237 / 85%);
+  --menu: #e38c48;
+  --text: #222;
+  --accent: #e8e8e8;
+  /*dark mode*/
+  --dm-bg: #212224;
+  --dm-bg2: rgb(74 57 41 / 80%);
+  --dm-menu: #564641;
+  --dm-text: #efefef;
+  --dm-accent: #212224;
+  /*fonts*/
+  --special: "GenRyuMin", serif;
+  --serif: "GenRyuMin", serif;
+  --sansserif: "Noto Sans TC", sans-serif;
+  --FangSong: "cwTeXFangSong", serif;
+}
+
+/*直書顯示*/
 #vertical-writing {
   -webkit-writing-mode: vertical-rl;
   writing-mode: vertical-rl;
+  width: 100%;
+  max-height: 360px;
+  text-align: justify;
+  text-justify: auto;
 }
 
-/* SlideWin styling v1.0 */
-/* SlideWin styling v1.0 */
+/*基本版面配置*/
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  width: 90vw;
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin: 0 auto;
+  
+  /*遊戲背景*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: contain;
+}
+.dm body {
+  background-color: var(--dm-bg);
+  color: var(--dm-text);
+}
+#ui-bar {
+  display: none;
+}
+#story {
+  height: 100%;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  margin: 0 auto;
+}
+.dm #story {
+
+}
+/*
+.serif .passage {
+  font-family: var(--serif);
+}
+.sansserif .passage {
+  font-family: var(--sansserif);
+}
+.FangSong .passage {
+  font-family: var(--FangSong);
+}
+*/
+.passage {
+  line-height: 200%;
+  font-family: var(--sansserif);
+  font-size: 1em;
+  letter-spacing: 0.05em;
+}
+#passages {
+  background-color: var(--bg2);
+  max-height: 80%;
+  min-height: 60%;
+  width: 80%;
+  max-width: 600px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  border: 2em solid rgb(74 57 41 / 0%);
+  border-radius: 20px;
+  margin: 50px auto;
+  padding: 0 1.2em 2em 2em;
+}
+.dm #passages {
+  background-color: var(--dm-bg2);
+  border: 2em solid rgb(74 57 41 / 0%);
+}
+
+#story hr {
+  border: none;
+  height: 2px;
+  margin-bottom: 1.5em;
+}
+#story hr::before {
+  background-color: var(--menu);
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+}
+.dm #story hr::before {
+  background-color: var(--dm-menu);
+}
+
+/*scrollbar*/
+#passages::-webkit-scrollbar {
+  width: 3px;
+}
+#passages::-webkit-scrollbar-track {
+  background-color: var(--menu);
+  border: 1px solid var(--bg2);
+}
+.dm #passages::-webkit-scrollbar-track {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-bg2);
+}
+#passages::-webkit-scrollbar-thumb {
+  background-color: var(--menu);
+}
+.dm #passages::-webkit-scrollbar-thumb {
+  background-color: var(--dm-menu);
+}
+
+/*headings*/
+#story h1 {
+  font-family: var(--special);
+  margin: .2em;
+  text-transform: uppercase;
+  font-weight: normal;
+  line-height:1.5
+}
+#story h2 {
+  color: var(--menu);
+  margin: .2em;
+  text-transform: uppercase;
+  line-height:1.5
+}
+.dm #story h2 {
+  color: var(--dm-menu);
+}
+#story h3 {
+  margin: .2em;
+  text-transform: lowercase;
+  letter-spacing: .2em;
+  line-height:1.5
+}
+
+/*links*/
+a {
+  color: #63e1f9;
+  text-decoration: none !important;
+}
+.dm a {
+  color: var(--dm-text);
+}
+a:hover {
+  color: var(--menu);
+}
+.dm a:hover {
+  color: var(--dm-menu);
+}
+.passage a {
+  font-weight: bold;
+}
+.passage a:hover {
+  color: var(--text);
+  font-style: italic;
+}
+.dm .passage a:hover {
+  color: var(--dm-text);
+}
+.header a:hover {
+  color: var(--accent) !important;
+  transition: .5s;
+}
+.dm .header a:hover {
+  color: var(--dm-accent) !important;
+}
+
+/*cycling*/
+#story .macro-cycle {
+  font-weight: bold;
+}
+#story .macro-cycle:hover {
+  font-style: italic;
+}
+#story .macro-cycle::after {
+  color: var(--menu);
+  content: "↴";
+  padding-left: .2em;
+}
+.dm #story .macro-cycle::after {
+  color: var(--dm-menu);
+}
+
+/*buttons*/
+.passage button {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .05em;
+  padding: .5em;
+}
+.dm .passage button {
+  color: var(--dm-text);
+  border: 1px solid var(--dm-text);
+}
+.passage button:hover {
+  box-shadow: 4px 4px 0 var(--menu);
+}
+.dm .passage button:hover {
+  box-shadow: 4px 4px 0 var(--dm-menu);
+}
+.next button {
+  display: flex;
+  margin: 0 auto;
+  transform: translateX(-10%);
+}
+
+/*textbox*/
+#story .macro-textbox {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--text);
+  letter-spacing: .05em;
+  padding: .5em;
+  margin-right: .5em;
+  margin-bottom: 5px;
+}
+.dm #story .macro-textbox {
+  color: var(--dm-text);
+  border: 1px solid var(--dm-text);
+}
+#story .macro-textbox:focus {
+  box-shadow: 4px 4px 0 var(--menu);
+}
+.dm #story .macro-textbox:focus {
+  box-shadow: 4px 4px 0 var(--dm-menu);
+}
+.passage input[type="text"] {
+min-width: 50px;
+max-width: 400px;
+width: 70vw;
+}
+
+/*image*/
+#passages a img {
+  width: 150px;
+}
+#name img {
+  max-width: 400px;
+}
+
+/*lists*/
+#story ul {
+  list-style: none;
+  padding-left: 2em;
+  margin: auto;
+  text-align: left;
+}
+#story ul li{
+  cursor: pointer;
+  letter-spacing: 0.1em;
+}
+#story ul li::before {
+  content: '|';
+  margin-right: .5em;
+  margin-left: -1em;
+}
+#story ul li:hover {
+  color: var(--menu);
+  font-weight: bold;
+}
+.dm #story ul li:hover {
+  color: var(--dm-menu);
+}
+
+/*header*/
+.header {
+  background-color: var(--menu);
+  height: 10%;
+  width: 100%;
+  transition: 0.75s;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.dm .header {
+  background-color: var(--dm-menu);
+}
+.header:hover {
+  height: 14%;
+}
+#header-text {
+  text-align: center;
+  margin: 0 auto;
+}
+.title {
+  color: var(--text);
+  font-family: var(--special);
+  text-transform: uppercase;
+  font-size: 3vw;
+}
+.dm .title {
+  color: var(--dm-text);
+}
+.author {
+  font-family: var(--sansserif);
+  text-transform: lowercase;
+  letter-spacing: .1em;
+  font-size: .7vw;
+}
+.author a:hover {
+  font-weight: bold;
+}
+
+/*function menu*/
+#function-menu {
+  display: flex;
+  position: fixed;
+  left: 2%;
+}
+#function-menu span {
+  color: transparent;
+  position: relative;
+  padding: 20px;
+  transition: 0.3s;
+  font-size: 1.5vw;
+}
+#menu {
+  color: var(--text) !important;
+}
+.dm #menu {
+  color: var(--dm-text);
+}
+.header:hover #function-menu span {
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.75s;
+}
+.dm .header:hover #function-menu span {
+  color: var(--dm-text);
+}
+.header:hover #settings:hover {
+  color: var(--accent);
+  transition: 0.5s;
+}
+.dm .header:hover #settings:hover {
+  color: var(--dm-accent);
+}
+.header:hover #saves:hover {
+  color: var(--accent);
+  transition: 0.5s;
+}
+.dm .header:hover #saves:hover {
+  color: var(--dm-accent);
+}
+.header:hover #restart:hover {
+  color: var(--accent);
+  transition: 0.5s;
+}
+.dm .header:hover #restart:hover {
+  color: var(--dm-accent);
+}
+.mobile-menu {
+  display: none;
+}
+
+/*back button*/
+#back {
+  color: var(--menu);
+  position: relative;
+  left: 120px;
+  font-size: 1.5vw;
+}
+.dm #back {
+  color: var(--dm-text);
+}
+#back:hover {
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.75s;
+}
+.dm #back:hover {
+  color: var(--dm-menu);
+}
+
+/*up button*/
+#up {
+  color: var(--text);
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5vw;
+}
+.dm #up {
+  color: var(--dm-text);
+}
+.footer:hover #up {
+  color: var(--menu);
+  bottom: 75%;
+}
+.dm .footer:hover #up {
+  color: var(--dm-menu);
+}
+
+/*footer*/
+.footer {
+  background-color: var(--menu);
+  height: 10%;
+  width: 100%;
+  transition: 0.75s;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.dm .footer {
+  background-color: var(--dm-menu);
+}
+.footer:hover {
+  height: 14%;
+}
+
+/*footer menu*/
+#footer-menu {
+  font-family: var(--special);
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+#footer-menu a {
+  color: transparent;
+  transition: 0.75s;
+  font-size: 2vw;
+}
+.footer:hover #footer-menu a {
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.75s;
+}
+.dm .footer:hover #footer-menu a {
+  color: var(--dm-text);
+}
+#footer-menu li {
+  list-style: none;
+  padding: 5%;
+}
+#footer-menu a:hover {
+  letter-spacing: .1em;
+}
+
+/*dialog boxes*/
+#ui-overlay {
+  background-color: var(--bg);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.dm #ui-overlay {
+  background-color: var(--dm-bg);
+}
+#ui-dialog {
+  background-color: var(--menu);
+  height: auto;
+  max-width: 60vw;
+  min-width: 300px;
+  padding: .5em;
+}
+.dm #ui-dialog {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-menu);
+}
+#ui-dialog-titlebar {
+  background-color: var(--menu);
+  position: relative;
+  padding: 2em;
+}
+.dm #ui-dialog-titlebar {
+  background-color: var(--dm-menu);
+}
+#ui-dialog-title {
+  font-family: var(--special);
+  font-size: 2em;
+  font-weight: normal;
+  text-align: center;
+  width: 100%;
+  padding: 0;
+}
+#ui-dialog-close {
+  background-color: transparent;
+  color: var(--text);
+  height: auto;
+  width: auto;
+  border: none;
+  font-size: 2em;
+  position: absolute;
+  top: .5em;
+  right: .5em;
+}
+.dm #ui-dialog-close {
+  color: var(--dm-text);
+}
+#ui-dialog-close:hover {
+  background-color: transparent;
+  color: var(--accent);
+}
+.dm #ui-dialog-close:hover {
+  color: var(--dm-accent);
+}
+#ui-dialog-body {
+  background-color: var(--bg2);
+  border: none;
+  color: var(--text);
+  height: auto;
+  width: 100%;
+  font-family: var(--sansserif);
+}
+.dm #ui-dialog-body {
+  background-color: var(--dm-bg2);
+  color: var(--dm-text);
+}
+#ui-dialog-body button {
+  background-color: var(--menu);
+  border: 1px solid var(--text);
+  color: var(--text);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+#ui-dialog-body button::before {
+  content: "" !important;
+}
+.dm #ui-dialog-body button {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+#ui-dialog-body button:hover {
+  box-shadow: 4px 4px 0 var(--text);
+}
+.dm #ui-dialog-body button:hover {
+  box-shadow: 4px 4px 0 var(--dm-text);
+}
+
+/*setting dropdowns*/
+#setting-control-theme, #setting-control-fontsize, #setting-control-fontfamily {
+  background-color: var(--bg);
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+.dm #setting-control-theme, .dm #setting-control-fontsize, .dm #setting-control-fontfamily {
+  background-color: var(--dm-bg);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+#setting-control-theme:hover, #setting-control-fontsize:hover, #setting-control-fontfamily:hover {
+  background-color: var(--menu);
+  border: 1px solid var(--text);
+  color: var(--text);
+}
+.dm #setting-control-theme:hover, .dm #setting-control-fontsize:hover, .dm #setting-control-fontfamily:hover {
+  background-color: var(--dm-menu);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+
+/*setting toggle buttons*/
+#ui-dialog-body.settings button[id|=setting-control] {
+  background-color: var(--bg);
+  border: 1px solid var(--text);
+  color: var(--text);
+  text-transform: none;
+  font-weight: normal;
+}
+.dm #ui-dialog-body.settings button[id|=setting-control] {
+  background-color: var(--dm-bg);
+  border: 1px solid var(--dm-text);
+  color: var(--dm-text);
+}
+#ui-dialog-body button[id|="setting-control"]:hover {
+  background-color: var(--bg) !important;
+  border: 1px solid var(--text) !important;
+  box-shadow: none;
+}
+.dm #ui-dialog-body button[id|="setting-control"]:hover {
+  background-color: var(--dm-bg) !important;
+  border: 1px solid var(--dm-text) !important;
+}
+#ui-dialog-body button[id|="setting-control"].enabled {
+  background-color: var(--menu) !important;
+  border: 1px solid var(--text) !important;
+}
+.dm #ui-dialog-body button[id|="setting-control"].enabled {
+  background-color: var(--dm-menu) !important;
+  border: 1px solid var(--dm-text) !important;
+}
+
+/*stat bars*/
+.stat-bar-group {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 1em 3em 3em;
+  border: 1px solid var(--menu);
+}
+.dm .stat-bar-group {
+  border: 1px solid var(--dm-menu);
+}
+.stat-bar-container {
+  background-color: var(--accent);
+  color: var(--text);
+  position: relative;
+  height: 3vh;
+  width: 100%;
+  padding: 1em 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .05em;
+}
+.dm .stat-bar-container {
+  background-color: var(--dm-accent);
+  color: var(--dm-text);
+}
+.stat-bar {
+  background-color: var(--menu);
+  max-width: 100%;
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.dm .stat-bar {
+  background-color: var(--dm-menu);
+}
+.stat-bar-overlay-right {
+  position: absolute;
+  right: .5em;
+  bottom: 20%;
+  z-index: 3;
+}
+.stat-bar-overlay-left {
+  position: absolute;
+  left: .5em;
+  bottom: 20%;
+  z-index: 3;
+}
+
+/*notifications*/
+#notify {
+  background-color: var(--bg2);
+  color: var(--text);
+  display: block;
+  width: 15em;
+  font-family: var(--sansserif);
+  text-align: left;
+  text-transform: lowercase;
+  letter-spacing: .05em;
+  padding : .5em;
+  -webkit-transition: right 1s;
+  -moz-transition: right 1s;
+  -o-transition: right 1s;
+  transition: right 1s;
+  position: fixed;
+  right: -20em;
+  top: 13%;
+}
+.dm #notify {
+  background-color: var(--dm-bg2);
+  color: var(--dm-text);
+}
+#notify.open {
+  right: 0;
+}
+
+/*tablet*/
+@media screen and (max-width: 1024px) {
+  .header {
+	height: 60px;
+  }
+  .header:hover {
+	height: 100px;
+  }
+  .title {
+	font-size: 2em;
+  }
+  .author {
+	font-size: .7em;
+  }
+  #function-menu {
+	display: block;
+  }
+  #function-menu span {
+	font-size: 3vw;
+	padding: .5em;
+  }
+  #back {
+	font-size: 3vw;
+  }
+  #up {
+	font-size: 3vw;
+  }
+  .footer {
+	height: 60px;
+  }
+  .footer:hover {
+	height: 100px;
+  }
+  #footer-menu {
+	padding-top: 10em;
+	transition: 1s;
+  }
+  #footer-menu a {
+	font-size: 4vw;
+  }
+  .footer:hover #footer-menu {
+	padding-top: 0;
+	transition: 1s;
+  }
+  #notify {
+	top: 12%;
+  }
+}
+@media screen and (max-width: 800px) {
+  #passages {
+	max-height: 70%;
+  }
+  #back {
+	left: 16%;
+  }
+  #up {
+	bottom: 50%;
+  }
+  #footer-menu li {
+	padding: 5%;
+  }
+  .stat-bar-group {
+	padding: .5em 2em 2.5em;
+  }
+  .stat-bar-container {
+	padding: .5em 0;
+  }
+  #notify {
+	top: 9%;
+  }
+}
+@media screen and (max-width: 600px) {
+  #story {
+	font-size: 80%
+  }
+   #story ul {
+	padding-left: .5em;
+  }
+  #passages {
+	max-height: 70%;
+	border: 2.5em solid rgb(74 57 41 / 0%);
+  }
+  .dm #passages {
+	border: 2.5em solid rgb(74 57 41 / 0%);
+  }
+  .stat-bar-group {
+	padding: 0 1em 2em;
+  }
+  .stat-bar-container {
+	padding: 1em 0;
+	font-size: 80%;
+  }
+  #notify {
+	top: 9.5%;
+  }
+}
+  
+/*mobile portrait*/
+@media screen and (max-width: 420px) {
+  body {
+
+  }
+  .dm body {
+
+  }
+  #story {
+	font-size: 70%;
+  }
+  .dm #story {
+	font-size: 70%;
+  }
+  #passages {
+	max-height: 70%;
+	width: 100%;
+	border: none;
+	padding: 1.5em;
+  }
+  .dm #passages {
+	border: none;
+  }
+  #passages::-webkit-scrollbar {
+	width: 2px;
+  }
+  #passages::-webkit-scrollbar-track {
+	border: .5px solid rgb(74 57 41 / 0%);
+  }
+  .dm #passages::-webkit-scrollbar-track {
+	border: .5px solid rgb(74 57 41 / 0%);
+  }
+  .header {
+	height: 40px;
+  }
+  .header:hover {
+	height: 10vh;
+  }
+  .title {
+	font-size: 1.5em;
+	transition: .75s;
+  }
+  .author {
+	display: none;
+	transition: .75s;
+  }
+  .dm .author {
+	color: transparent;
+  }
+  .author a {
+	color: transparent;
+  }
+  .dm .author a {
+	color: transparent;
+  }
+  .header:hover .title {
+	font-size: 4vh;
+  }
+  .header:hover .author {
+	display: block;
+	color: var(--text);
+	transition: .75s;
+  }
+  .dm .header:hover .author {
+	color: var(--dm-text);
+  }
+  .header:hover .author a {
+	color: var(--text);
+  }
+  .dm .header:hover .author a {
+	color: var(--dm-text);
+  }
+  #function-menu {
+	display: none;
+  }
+  #footer-menu {
+	display: none;
+  }
+  #back {
+	left: 2%;
+  }
+  .footer {
+	height: 40px;
+  }
+  .footer:hover {
+	height: 15vh;
+  }
+  #up {
+	display: none;
+  }
+  #notify {
+	background-color: var(--menu);
+	width: 12em;
+	font-size: 70%;
+	font-weight: bold;
+  }
+  .dm #notify {
+	background-color: var(--dm-menu);
+  }
+  /*mobile dialog boxes*/
+  #ui-overlay {
+	background-color: var(--menu);
+	opacity: 1 !important;
+  }
+  .dm #ui-overlay {
+	background-color: var(--dm-menu);
+  }
+  #ui-dialog {
+	min-width: 100vw;
+	position: absolute;
+	top: 2em !important;
+	left: 0 !important;
+	padding: 1px;
+  }
+  #ui-dialog-close {
+	font-size: 1.2em;
+	top: -10%;
+	right: 10%;
+  }
+   #ui-dialog-body {
+	background-color: var(--menu);
+	font-size: 80%;
+	padding: 30px;
+  }
+  .dm #ui-dialog-body {
+	background-color: var(--dm-menu);
+  }
+  #ui-dialog-body.saves {
+	font-size: 60%;
+	padding: 10px;
+  }
+  #ui-dialog-body button {
+	background-color: var(--bg2);
+  }
+  .dm #ui-dialog-body button {
+	background-color: var(--dm-bg2);
+  }
+  /*mobile menu*/
+  .mobile-menu {
+	height: 100px;
+	width: 100%;
+	display: block;
+	position: fixed;
+	left: 0;
+	bottom: -70px;
+  }
+  .footer:hover .mobile-menu {
+	height: 13vh;
+	bottom: 0;
+  }
+  #mob-menu {
+	transition: .75s;
+	position: absolute;
+  	left: 50%;
+  	transform: translateX(-50%);
+  }
+  .footer:hover #mob-menu {
+	color: transparent;
+	transition: 0s;
+  }
+  #mob-function-menu {
+	margin: 2.2vh auto 1vh;
+	color: transparent;
+	text-align: center;
+	font-size: 2.5vh;
+	padding-top: 20em;
+	transition: 1s;
+  }
+  .footer:hover #mob-function-menu {
+	color: var(--text);
+	padding-top: 0;
+	transition: 1s;
+  }
+  .dm .footer:hover #mob-function-menu {
+	color: var(--dm-text);
+  }
+  #mob-function-menu span {
+	padding: 5px;
+  }
+  #mob-footer-menu {
+	display: none;
+	transition: 1s;
+  }
+  #mob-footer-menu li {
+	font-family: var(--special);
+	font-size: 3vh;
+	padding: .2vh 1vh;
+  }
+  .footer:hover #mob-footer-menu {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	transition: 1s;
+  }
+ .footer:hover #mob-footer-menu a {
+   color: var(--text);
+  }
+  .dm .footer:hover #mob-footer-menu a {
+	color: var(--dm-text);
+  }
+}
+/*mobile landscape*/
+@media screen and (max-height: 500px) {
+  .passage {
+	font-size: 80%;
+  }
+  #story ul {
+	padding-left: 1em;
+  }
+  #ui-dialog-titlebar {
+	padding: 1em;
+  }
+  #ui-dialog-close {
+	top: 0;
+  }
+  #ui-dialog-body {
+	max-height: 65vh;
+	font-size: 80%;
+  }
+  #ui-dialog-body::-webkit-scrollbar-track {
+	background-color: var(--menu);
+	border: 1px solid var(--bg2);
+  }
+  .dm #ui-dialog-body::-webkit-scrollbar-track {
+	background-color: var(--dm-menu);
+	border: 1px solid var(--dm-bg2);
+  }
+  #ui-dialog-body::-webkit-scrollbar-thumb {
+	background-color: var(--menu);
+  }
+  .dm #ui-dialog-body::-webkit-scrollbar-thumb {
+	background-color: var(--dm-menu);
+  }
+  #ui-dialog-body.saves {
+	padding: 1em;
+  }
+  #footer-menu {
+    padding-top: 4em;
+  }
+  #notify {
+	width: 12em;
+	font-size: 70%;
+	font-weight: bold;
+	top: 5vh;
+  }
+}
+
+/*mobile background*/
+@media screen and (max-width: 1300px) {
+  body{
+	/*視窗寬度小於圖片寬度時的background-size為cover*/
+	background-size: cover;
+  }
+}
+
+/*對話插件*/
+/*詳細 https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/click-to-proceed  */
+.macro-ctp-entry {
+    display: inline-block;
+}
+
+.macro-ctp-entry-t8n {
+    animation: macro-ctp-fade-in 0.4s ease;
+}
+
+@keyframes macro-ctp-fade-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+* SlideWin styling v1.0 */
 body.slideWin {
 	overflow: hidden;
 }
 #slideWin {
 	position: fixed;
 	top: 0;
+  	left: 0;
 	-webkit-transform: translateX(-101vw);
 	   -moz-transform: translateX(-101vw);
 		-ms-transform: translateX(-101vw);
@@ -149,7 +1295,7 @@ body.slideWin {
 	height: calc(100vh - 30px);
 	padding: 30px 10vw;
 	overflow: hidden auto;
-	background-color: rgba(17, 17, 17, 0.97);
+	background-color: rgb(24 9 2 / 97%);;
 	line-height: 1.75;
 	z-index: 100;
 }
@@ -160,7 +1306,7 @@ body.slideWin {
 	position: relative;
 	top: -46px;
 	padding: 24px;
-	background-color: #222;
+	background-color: #6c5342;
 }
 .ur {  /* Upper-right "close" button */
 	position: sticky;
@@ -244,161 +1390,253 @@ body.slideWin {
 		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
 				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
 	}
-}
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*輸出最終文件*/
 
-body {
-/*
-遊戲背景圖版面設定
- background-image: 背景圖位址
- background-color: 背景底色
- background-repeat: 背景圖是否重複(no-repeat → 不重複)
- background-attachment: 背景圖固定模式( scroll → 默認預設，隨視窗畫面捲動而移動；fixed → 固定不動)
- background-position: 背景圖片位置(水平位置 垂直位置)
- background-size: 背景圖大小(寬度 高度；contain → 圖片不變形、等比例且不裁切地佈滿視窗畫面，不佈滿的會留白；cover → 圖片不變形、等比例地佈滿視窗畫面，必要時局部裁切不留白)
-*/
-  background-image: url("media/img/bgstart.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 15px;
-  background-size: cover;
-}
-
-/*雅婷備註：
-以目前美術設定的直式版面，基本上background-position改成 center top 、background-size改成 contain ，電腦平台上就會是背景圖在正中間、圖兩邊填黑的版面(如果沒有改背景顏色的話預設為黑)，但手機、平板上要好看background-size還是必須用cover，所以必須增加"@media screen and (max-width: 768px)"部分響應式CSS語法，設定當視窗寬度768px以下時background-size為cover，這部分語法如下*/
-
-@media screen and (max-width: 768px) {
-/*
-手機平板瀏覽時的background-size為cover
-*/
-  body{
-	background-size: cover;}
-}
+importScripts("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js","https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js","https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js");
 
 
-/*對話插件*/
-/*詳細 https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/click-to-proceed  */
-.macro-ctp-entry {
-    display: inline-block;
-}
+//https://cdn.rawgit.com/MrRio/jsPDF/master/libs/html2pdf.js
+//https://cdn.rawgit.com/MrRio/jsPDF/master/libs/html2canvas/dist/html2canvas.js
 
-.macro-ctp-entry-t8n {
-    animation: macro-ctp-fade-in 0.4s ease;
-}
+// import linearicons
+importStyles(
+	"https://cdn.linearicons.com/free/1.0.0/icon-font.min.css");
+// end linearicons
 
-@keyframes macro-ctp-fade-in {
-    0% {
-        opacity: 0;
+// reset passage to top
+$(document).on(":passagedisplay", function() {
+	$("#passages").scrollTop(0);
+});
+// end reset passage
+
+// function menu
+$(document).ready(function() {
+	$("#saves").click(function() {
+		UI.saves();
+	});	
+	$("#settings").click(function() {
+		UI.settings();
+	});
+	$("#restart").click(function() {
+		UI.restart();
+	});	
+	$("#back").click(function() {
+		Engine.backward();
+	});
+	$("#mob-saves").click(function() {
+		UI.saves();
+	});
+	$("#mob-settings").click(function() {
+		UI.settings();
+	});
+	$("#mob-restart").click(function() {
+		UI.restart();
+	});	
+});
+// function menu
+
+// force fullscreen portrait mode on mobile
+function lock (orientation) {
+	if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  } else if (document.documentElement.mozRequestFullScreen) {
+    document.documentElement.mozRequestFullScreen();
+  } else if (document.documentElement.webkitRequestFullscreen) {
+    document.documentElement.webkitRequestFullscreen();
+  } else if (document.documentElement.msRequestFullscreen) {
+    document.documentElement.msRequestFullscreen();
+  }
+	screen.orientation.lock(orientation);
+};
+// end force fullscreen
+
+// tag passage 'noreturn' to avoid return loop errors
+$(document).on(':passagestart', function (ev) {
+    if (!ev.passage.tags.includes('noreturn')) {
+        State.variables.return = ev.passage.title;
     }
+});
+// end noreturn
 
-    100% {
-        opacity: 1;
-    }
-}
-
-/*背景圖片*/
-body[data-tags~="XDD"]{
-  background-image: url("https://cdn.discordapp.com/attachments/706051912725954600/890804190627110932/unknown.png");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 15px;
-  background-size: cover;
-}
-
-body[data-tags~="Background_01"]{
-  background-image: url("media/Background_01.jpg");
-}
-body[data-tags~="Background_02"]{
-  background-image: url("media/Background_02.png");
-}
-body[data-tags~="Background_03"]{
-  background-image: url("media/Background_03.png");
-}
-body[data-tags~="Background_04"]{
-  background-image: url("media/Background_04.jpg");
-}
-body[data-tags~="Background_05"]{
-  background-image: url("media/Background_05.jpg");
-}
-body[data-tags~="Background_06"]{
-  background-image: url("media/Background_06.png");
-}
-body[data-tags~="Background_07"]{
-  background-image: url("media/Background_07.png");
-}
-
-
-body[data-tags~="back"]{
-  background: #000;
-}
-
-/*自訂頁面樣式*/
-html, body {
-	width: -webkit-calc(100vw - 16px);
-	width: -moz-calc(100vw - 16px);
-	width: calc(100vw - 16px);
-
-}
-body {
-	background-image: url("media/textbox.png");
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-  	background-size:cover;
-}
-/*
-A linear gradient of color
-Generate gradient CSS here: colorzilla.com/gradient-editor
-*/
-body.linear-gradient {
-	background: linear-gradient(135deg, red, blue);
-}
-/*
-A radial gradient of color
-Generate gradient CSS here: colorzilla.com/gradient-editor
-*/
-body.radial-gradient {
-	background: radial-gradient(circle, #fcb900, #ff2b2b);
-}
-/* Text box styling */
-#passages {
-  /* An outline around the textbox */
-	border: 5px solid white;
-  /* A semi-transparent background color */
-	background-color: rgba(0, 0, 0, 0.85);
-  /* Space between the edges of the textbox and the text */
-	padding: 20px 50px 40px 50px;
-  /* Round off the edges of the textbox */
-	border-radius: 5px;
-  /* Center the box */
-	margin: 0 auto;
-}
-
-#passages button {
-  background-color: #4682B4; /* steelblue */
-  border: none;
-  color: white;
-  padding: 10px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 8px;
-}
-
-.passage input[type="text"] {
-min-width: 60%;
-width: 60%;
-}
-
-@media screen and (max-width: 768px) {
-	#story {
-		margin-right: 10px !important;
+// autosaves - tag passage 'autosave' to trigger saving
+config.saves.autosave = true;
+config.saves.isAllowed = function () {
+	if (tags().includes('noreturn')) {
+		return false;
 	}
-	#passages {
-		/* Space between the edges of the textbox and the text */
-		padding: 20px 15px 40px 15px;
+	return true;
+};
+// end autosaves
+
+// name saves - allows players to change name of save file
+Config.saves.onSave = function (save, details) {
+	if (settings.autoname) {
+		save.title = State.getVar("$chapter");
+	} else if (details.type == "autosave") {
+		save.title = "Autosave";
+	} else {
+		save.title = prompt("輸入存檔名稱:", save.title);
 	}
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* SlideWin v1.0 - Start */
+}
+// end name saves
+
+// STAT BARS (just an example!)//
+// stat one
+$(document).on(":passagedisplay", function() {
+	$("#story").scrollTop(0);
+	var statbarStat = State.getVar("$statone") + "%";
+	$("#statone-stat").attr("style", "width: " + statbarStat);
+});
+// end stat one
+
+//SETTINGS//
+// change font size
+var settingFontSize = ["100%", "130%", "150%"];
+var resizeFont = function() {
+	var size = document.getElementById("passages");
+	switch (settings.fontSize) {
+		case "100%":
+			size.style.fontSize = "100%";
+			break;
+	}
+	switch (settings.fontSize) {
+		case "130%":
+			size.style.fontSize = "130%";
+			break;
+	}
+	switch (settings.fontSize) {
+		case "150%":
+			size.style.fontSize = "150%";
+			break;
+	}
+};
+Setting.addList("fontSize", {
+	label		: "變更字體大小",
+	list		: settingFontSize,
+	onInit		: resizeFont,
+	onChange	: resizeFont
+});
+// end change font size
+
+// change font family
+var settingFontFamily = ["Serif","Sans-serif","FangSong"];
+var fontFamily = function() {
+	var $html = $("html");
+		$html.removeClass("serif sansserif FangSong");
+	switch (settings.fontFamily) {
+		case "Sans-serif":
+			$html.addClass("sansserif");
+			break;
+		case "Serif":
+			$html.addClass("serif");
+			break;
+			case "FangSong":
+			$html.addClass("FangSong");
+			break;
+	}
+};
+Setting.addList("fontFamily", {
+	label		: "變更字體",
+	list		: settingFontFamily,
+	default: "Sans-serif",
+	onInit		: fontFamily,
+	onChange	: fontFamily
+});
+// end change font family
+
+// change theme
+var settingThemeNames = ["Dark", "Light"];
+var settingThemeHandler = function () {
+	var $html = $("html");
+	$html.removeClass("dm");
+	switch (settings.theme) {
+	case "Dark":
+		$html.addClass("dm");
+		break;
+	}
+};
+Setting.addList("theme", {
+	label    : "變更主題",
+	list     : settingThemeNames,
+	default	 : "Light",
+	onInit   : settingThemeHandler,
+	onChange : settingThemeHandler
+});
+// end change theme
+
+// name saves toggle
+Setting.addToggle("autoname", {
+	label : "自動存檔",
+	default  : true,
+}); 
+// end name saves toggle
+
+// enable/disable notifications toggle
+Setting.addToggle("notifications", {
+	label : "允許通知",
+	default : true,
+});
+// end enable/disable notifications
+
+//MACROS//
+// notify.min.js, for SugarCube 2, by Chapel
+// v1.1.1, 2021-01-22, 404cc7678295ca61a8b0b8bc3fa5d54dba6ac858
+;!function(){var s=/\d+m?s$/;function e(s,e,t){"string"==typeof s&&("number"!=typeof e&&(e=!1),$(document).trigger({type:":notify",message:s,delay:e,class:t||""}))}$(document.body).append("<div id='notify'></div>"),$(document).on(":notify",(function(s){s.message&&"string"==typeof s.message&&(s.message.trim(),s.class?"string"==typeof s.class?s.class="open macro-notify "+s.class:Array.isArray(s.class)?s.class="open macro-notify "+s.class.join(" "):s.class="open macro-notify":s.class="open macro-notify",s.delay?("number"!=typeof s.delay&&(s.delay=Number(s.delay)),Number.isNaN(s.delay)&&(s.delay=2e3)):s.delay=2e3,$("#notify").empty().wiki(s.message).addClass(s.class),setTimeout((function(){$("#notify").removeClass()}),s.delay))})),Macro.add("notify",{tags:null,handler:function(){var t=this.payload[0].contents,a=!1,n=!1;if(this.args.length>0){var i=s.test(this.args[0]);"number"==typeof this.args[0]||i?(a=i?Util.fromCssTime(this.args[0]):this.args[0],n=this.args.length>1&&this.args.slice(1).flatten()):n=this.args.flatten().join(" ")}e(t,a,n)}}),setup.notify=e}();
+// end notify.min.js
+
+// live update js by Cycy
+(function () {
+	"use strict";
+	$(document).on(":liveupdate", function () {
+		$(".macro-live").trigger(":liveupdateinternal");
+	});
+	Macro.add(['update', 'upd'], {
+		handler: function handler() {
+			$(document).trigger(":liveupdate");
+		}
+	});
+	Macro.add(['live', 'l', 'lh'], {
+		skipArgs: true,
+		handler: function handler() {
+			if (this.args.full.length === 0) {
+				return this.error('no expression specified');
+			}
+			try {
+				var statement = this.args.full;
+				var result = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+				if (result !== null) {
+					var lh = this.name === "lh";
+					var $el = $("<span></span>").addClass("macro-live").wiki(lh ? Util.escape(result) : result).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						var out = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+						$el.empty().wiki(lh ? Util.escape(out) : out);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+	Macro.add(['liveblock', 'lb'], {
+		tags: null,
+		handler: function handler() {
+			try {
+				var content = this.payload[0].contents.trim();
+				if (content) {
+					var $el = $("<span></span>").addClass("macro-live macro-live-block").wiki(content).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						$el.empty().wiki(content);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+})();
+// end live update js
+
+/* SlideWin v1.0 - Start */
 // Add the SlideWin window to the page.
 var el = document.createElement("div");
 el.id = "slideWin";
@@ -684,8 +1922,7 @@ window.slideWin = function (dir) {
 
 /* 介面中文化開始 */
 !function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔/讀檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
-/* 介面中文化結束 */
-</script><tw-tag name="Background_01" color="purple"></tw-tag>,<tw-tag name="Background_03" color="green"></tw-tag>,<tw-tag name="Background_04" color="blue"></tw-tag>,<tw-tag name="Background_05" color="red"></tw-tag>,<tw-tag name="Background_06" color="yellow"></tw-tag>,<tw-tag name="Background_07" color="orange"></tw-tag>,<tw-tag name="center" color="yellow"></tw-tag>,<tw-tag name="第一章" color="red"></tw-tag>,<tw-tag name="第三章" color="orange"></tw-tag>,<tw-tag name="第二章" color="purple"></tw-tag>,<tw-tag name="第五章" color="yellow"></tw-tag>,<tw-tag name="第四章" color="blue"></tw-tag>,<tw-tag name="系統" color="green"></tw-tag><tw-passagedata pid="1" name="1-1" tags="第一章 Background_01" position="700,399" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+/* 介面中文化結束 */</script><tw-tag name="Background_01" color="purple"></tw-tag>,<tw-tag name="Background_03" color="green"></tw-tag>,<tw-tag name="Background_04" color="blue"></tw-tag>,<tw-tag name="Background_05" color="red"></tw-tag>,<tw-tag name="Background_06" color="yellow"></tw-tag>,<tw-tag name="Background_07" color="orange"></tw-tag>,<tw-tag name="center" color="yellow"></tw-tag>,<tw-tag name="第一章" color="red"></tw-tag>,<tw-tag name="第三章" color="orange"></tw-tag>,<tw-tag name="第二章" color="purple"></tw-tag>,<tw-tag name="第五章" color="yellow"></tw-tag>,<tw-tag name="第四章" color="blue"></tw-tag>,<tw-tag name="系統" color="green"></tw-tag><tw-passagedata pid="1" name="1-1" tags="第一章 Background_01" position="700,399" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !國立臺灣文學館
 &lt;/DIV&gt;（1-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -717,9 +1954,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 &lt;/span&gt;
-&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryMenu" tags="系統" position="102,540" size="100,100">&lt;&lt;link &quot;道具說明&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;道具說明&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;
-
-&lt;&lt;link &quot;章節選擇&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;章節選擇&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="道具說明" tags="" position="300,701" size="100,100">
+&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="2" name="道具說明" tags="" position="300,701" size="100,100">
 &lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !背包
 &lt;/DIV&gt;
@@ -749,8 +1984,25 @@ src=&quot;media/Item_01_2.png&quot; width=&quot;300px&quot; style=&quot;display:
 &lt;DIV style=&quot;text-align:center;line-height:50px;font-size:32px;&quot;&gt;
 	「臺南市區地圖」
 &lt;/DIV&gt;
+&lt;&lt;if $map == 0&gt;&gt;
 &lt;img
-src=&quot;media/Item_01_3.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+src=&quot;media/Item_01_3_0.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 1&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_1.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 2&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_2.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 3&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_3.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 4&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_4.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;else&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_0.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;/if&gt;&gt;
 &lt;DIV style=&quot;text-align:center;line-height:24px;&quot;&gt;
 簡介：你目前只看到地圖上標註臺南州廳
 &lt;&lt;link &quot;地圖放大&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;地圖放大&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;
@@ -788,11 +2040,11 @@ src=&quot;media/Item_01_5.png&quot; width=&quot;300px&quot; style=&quot;display:
 &lt;img
 src=&quot;media/Item_02_1.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
 &lt;DIV style=&quot;text-align:center;line-height:24px;&quot;&gt;
-	說明說明說明說明說明說明說明說明說明說明說明說明
-	說明說明說明說明說明說明說明說明說明說明說明說明
-	說明說明說明說明說明說明說明說明說明說明說明說明
+/*
+暫無說明
+*/
 &lt;/DIV&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="1-2" tags="第一章 Background_01" position="825,399" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="1-2" tags="第一章 Background_01" position="825,399" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !國立臺灣文學館
 &lt;/DIV&gt;（1-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -811,7 +2063,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;goto 1-2-2&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="5" name="1-3" tags="第一章 Background_01" position="950,398" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="1-3" tags="第一章 Background_01" position="950,398" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -908,7 +2160,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="6" name="1-4" tags="第一章 Background_01" position="1076,397" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="5" name="1-4" tags="第一章 Background_01" position="1076,397" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -949,7 +2201,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;/ctp&gt;&gt;
 
-</tw-passagedata><tw-passagedata pid="7" name="1-5" tags="第一章 Background_01" position="1200,397" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="6" name="1-5" tags="第一章 Background_01" position="1200,397" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-5）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -977,7 +2229,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;goto 1-5-3&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="2-1" tags="第二章 Background_03" position="1454,525" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="2-1" tags="第二章 Background_03" position="1454,525" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -989,11 +2241,12 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 
 &lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/space/93567&quot; target=_blank;&gt;&lt;&lt;button &quot;打卡！&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;2-1-1&quot;&gt;&gt;
+	&lt;&lt;set $map to 2&gt;&gt;
 	&lt;&lt;goto 2-1-1&gt;&gt;
 &lt;&lt;/button&gt;&gt;&lt;/a&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="9" name="2-2" tags="第二章 Background_03" position="1581,528" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="8" name="2-2" tags="第二章 Background_03" position="1581,528" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1024,7 +2277,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="10" name="2-3" tags="第二章 Background_03" position="1700,523" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="9" name="2-3" tags="第二章 Background_03" position="1700,523" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1091,7 +2344,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="11" name="2-4" tags="第二章 Background_03" position="1829,523" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="10" name="2-4" tags="第二章 Background_03" position="1829,523" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-4）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1175,7 +2428,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="12" name="2-4-1" tags="第二章 Background_03" position="1828,650" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="11" name="2-4-1" tags="第二章 Background_03" position="1828,650" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-4-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1238,7 +2491,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="13" name="3-1" tags="第三章 Background_04" position="2199,653" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="12" name="3-1" tags="第三章 Background_04" position="2199,653" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1249,11 +2502,12 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 
 &lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/space/93564&quot; target=_blank;&gt;&lt;&lt;button &quot;打卡！&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;3-1-1&quot;&gt;&gt;
+	&lt;&lt;set $map to 3&gt;&gt;
 	&lt;&lt;goto 3-1-1&gt;&gt;
 &lt;&lt;/button&gt;&gt;&lt;/a&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="14" name="3-2" tags="第三章 Background_04" position="2323,656" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="13" name="3-2" tags="第三章 Background_04" position="2323,656" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1303,7 +2557,7 @@ src=&quot;media/Character_08.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="15" name="3-3" tags="第三章 Background_04" position="2575,649" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="14" name="3-3" tags="第三章 Background_04" position="2575,649" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1376,7 +2630,7 @@ src=&quot;media/Null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="16" name="3-4" tags="第三章 Background_06" position="2699,651" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="15" name="3-4" tags="第三章 Background_06" position="2699,651" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-4）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1393,7 +2647,7 @@ src=&quot;media/report.png&quot; width=&quot;800px&quot; style=&quot;display:blo
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="17" name="4-1" tags="第四章 Background_05" position="3073,775" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="16" name="4-1" tags="第四章 Background_05" position="3073,775" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1404,11 +2658,12 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 
 &lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/space/93574&quot; target=_blank;&gt;&lt;&lt;button &quot;打卡！&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;4-1-1&quot;&gt;&gt;
+	&lt;&lt;set $map to 4&gt;&gt;
 	&lt;&lt;goto 4-1-1&gt;&gt;
 &lt;&lt;/button&gt;&gt;&lt;/a&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="18" name="4-2" tags="第四章 Background_05" position="3201,777" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="17" name="4-2" tags="第四章 Background_05" position="3201,777" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1481,7 +2736,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="19" name="4-3" tags="第四章 Background_05" position="3326,779" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="18" name="4-3" tags="第四章 Background_05" position="3326,779" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1553,7 +2808,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="20" name="4-4" tags="第四章 Background_06" position="3451,777" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="19" name="4-4" tags="第四章 Background_06" position="3451,777" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-4）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1572,7 +2827,7 @@ src=&quot;media/report.png&quot; width=&quot;800px&quot; style=&quot;display:blo
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="21" name="4-5" tags="第四章 Background_06" position="3574,776" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="20" name="4-5" tags="第四章 Background_06" position="3574,776" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-5）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1587,7 +2842,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="22" name="5-1" tags="第五章 Background_01" position="3699,899" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="21" name="5-1" tags="第五章 Background_01" position="3699,899" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1602,7 +2857,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;/button&gt;&gt;&lt;/a&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="23" name="5-2" tags="第五章 Background_01" position="3826,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="22" name="5-2" tags="第五章 Background_01" position="3826,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1634,7 +2889,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="24" name="5-3" tags="第五章 Background_01" position="3949,903" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="23" name="5-3" tags="第五章 Background_01" position="3949,903" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1663,7 +2918,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="25" name="StoryInit" tags="系統" position="101,417" size="100,100">「當前所在頁面判定」設定
+</tw-passagedata><tw-passagedata pid="24" name="StoryInit" tags="系統" position="101,417" size="100,100">「當前所在頁面判定」設定
 	&lt;&lt;set $Now to &quot;1-1&quot;&gt;&gt;
 
 「查看道具」設定
@@ -1673,6 +2928,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;set $check1_4_3 to false&gt;&gt;
 	&lt;&lt;set $check1_4_4 to false&gt;&gt;
 	&lt;&lt;set $check1_4_5 to false&gt;&gt;
+	&lt;&lt;set $map to 0&gt;&gt;
 	
 「玩家名字」設定
 	&lt;&lt;set $Name to &quot;&quot;&gt;&gt;
@@ -1702,7 +2958,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 「音檔」設定
 &lt;&lt;cacheaudio &#39;文明&#39; &#39;media/文明-Bûn-bîng.m4a&#39;&gt;&gt;
 &lt;&lt;cacheaudio &#39;世界&#39; &#39;media/世界-Sè-kài.m4a&#39;&gt;&gt;
-&lt;&lt;cacheaudio &#39;臺灣&#39; &#39;media/臺灣-Tâi-uân.m4a&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="2-5" tags="第二章 Background_06" position="1950,520" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;&lt;cacheaudio &#39;臺灣&#39; &#39;media/臺灣-Tâi-uân.m4a&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="2-5" tags="第二章 Background_06" position="1950,520" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-5）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1734,9 +2990,9 @@ src=&quot;media/report.png&quot; width=&quot;800px&quot; style=&quot;display:blo
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="27" name="錯誤訊息" tags="" position="427,701" size="100,100">錯誤訊息
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="26" name="錯誤訊息" tags="" position="427,701" size="100,100">錯誤訊息
 
-【當前位置】$Now</tw-passagedata><tw-passagedata pid="28" name="製作筆記" tags="" position="550,698" size="100,100">【2023/01/16（一）】 21:29
+【當前位置】$Now</tw-passagedata><tw-passagedata pid="27" name="製作筆記" tags="" position="550,698" size="100,100">【2023/01/16（一）】 21:29
 完成初步架構
 出示道具功能完成，但還沒連接到選項
 X-X-X的部分還沒製作（選項連接到下一個小節）
@@ -1820,14 +3076,14 @@ X-X-X的部分還沒製作（選項連接到下一個小節）
 ＞初始教學頁面及打卡跳轉頁面，麻煩再文本那邊幫我貼一下網址，我還沒有看到&quot;連結&quot;
 ＞地圖放大功能
 ＞文本劇情修正（等其他問題都處理完我會再檢查一次文本）
-＞有些按鈕還沒置中，待處理</tw-passagedata><tw-passagedata pid="29" name="1-2-1" tags="第一章 Background_01" position="826,521" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+＞有些按鈕還沒置中，待處理</tw-passagedata><tw-passagedata pid="28" name="1-2-1" tags="第一章 Background_01" position="826,521" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !國立臺灣文學館
 &lt;/DIV&gt;（1-2-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 
-&lt;div class=&quot;NPC_Name&quot;&gt;【蔡培火】&lt;/div&gt;啊，你知道我是甚麼。
+&lt;div class=&quot;NPC_Name&quot;&gt;【蔡培火】&lt;/div&gt;啊，你知道我是誰。
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
@@ -1837,12 +3093,12 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
 src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;
-&lt;div class=&quot;NPC_Name&quot;&gt;【蔡培火】&lt;/div&gt;想起來了，你認識你。
+&lt;div class=&quot;NPC_Name&quot;&gt;【蔡培火】&lt;/div&gt;想起來了，我認識你。
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
 src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;
-當你想和蔡培火對話時，發現蔡培轉身就走入光暈裡，你跟上去，眼前一陣白光……
+當你想和蔡培火對話時，發現蔡培火轉身就走入光暈裡，你跟上去，眼前一陣白光……
 
 &lt;&lt;button &quot;下一頁&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;1-3&quot;&gt;&gt;
@@ -1857,7 +3113,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="30" name="1-2-2" tags="第一章 Background_01" position="825,650" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="29" name="1-2-2" tags="第一章 Background_01" position="825,650" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !國立臺灣文學館
 &lt;/DIV&gt;（1-2-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1894,7 +3150,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="31" name="1-4-1" tags="第一章 Background_01" position="1075,521" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="30" name="1-4-1" tags="第一章 Background_01" position="1075,521" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1921,7 +3177,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="32" name="1-4-2" tags="第一章 Background_01" position="1078,649" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="31" name="1-4-2" tags="第一章 Background_01" position="1078,649" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1948,7 +3204,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="33" name="1-4-3" tags="第一章 Background_01" position="1074,772" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="32" name="1-4-3" tags="第一章 Background_01" position="1074,772" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -1975,7 +3231,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="34" name="1-4-4" tags="第一章 Background_01" position="1073,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="33" name="1-4-4" tags="第一章 Background_01" position="1073,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-4）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2007,7 +3263,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="1-4-5" tags="第一章 Background_01" position="1075,1023" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="34" name="1-4-5" tags="第一章 Background_01" position="1075,1023" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-5）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2034,7 +3290,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="36" name="1-4-6" tags="第一章 Background_01" position="1074,1150" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="35" name="1-4-6" tags="第一章 Background_01" position="1074,1150" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-5）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2047,7 +3303,6 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;goto 1-4&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/ctp&gt;&gt;
 
 &lt;span id=&#39;next&#39;&gt;
@@ -2055,7 +3310,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="37" name="1-5-1" tags="第一章 Background_01" position="1201,519" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="36" name="1-5-1" tags="第一章 Background_01" position="1201,519" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-5-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2081,7 +3336,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="38" name="1-5-2" tags="第一章 Background_01" position="1202,647" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="37" name="1-5-2" tags="第一章 Background_01" position="1202,647" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2107,7 +3362,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="1-5-3" tags="第一章 Background_01" position="1201,773" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="38" name="1-5-3" tags="第一章 Background_01" position="1201,773" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（1-4-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2133,7 +3388,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="40" name="2-2-2" tags="第二章 Background_03" position="1573,776" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="2-2-2" tags="第二章 Background_03" position="1573,776" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-2-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2148,7 +3403,7 @@ src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="41" name="2-3-1" tags="第二章 Background_03" position="1702,650" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="40" name="2-3-1" tags="第二章 Background_03" position="1702,650" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-3-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2208,7 +3463,7 @@ src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="42" name="2-3-2" tags="第二章 Background_03" position="1701,774" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="41" name="2-3-2" tags="第二章 Background_03" position="1701,774" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-3-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2258,7 +3513,7 @@ src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="43" name="2-3-3" tags="第二章 Background_03" position="1701,897" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="42" name="2-3-3" tags="第二章 Background_03" position="1701,897" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-3-3）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2273,7 +3528,7 @@ src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="44" name="2-2-1" tags="第二章 Background_03" position="1577,649" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="43" name="2-2-1" tags="第二章 Background_03" position="1577,649" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-2-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2304,7 +3559,7 @@ src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="45" name="3-2-1" tags="第三章 Background_04" position="2447,775" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="44" name="3-2-1" tags="第三章 Background_04" position="2447,775" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-2-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2362,7 +3617,7 @@ src=&quot;media/Character_08.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="3-2-2" tags="第三章 Background_04" position="2447,900" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="45" name="3-2-2" tags="第三章 Background_04" position="2447,900" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-2-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2396,7 +3651,7 @@ src=&quot;media/Null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="47" name="3-2-3" tags="第三章 Background_04" position="2448,1024" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="46" name="3-2-3" tags="第三章 Background_04" position="2448,1024" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-2-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2411,7 +3666,7 @@ src=&quot;media/Character_08.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="48" name="4-3-1" tags="第四章 Background_05" position="3326,900" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="47" name="4-3-1" tags="第四章 Background_05" position="3326,900" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-3-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2462,7 +3717,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="49" name="5-4" tags="第五章 Background_01" position="4076,899" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="48" name="5-4" tags="第五章 Background_01" position="4076,899" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-4）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2491,7 +3746,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="50" name="5-5" tags="第五章 Background_01" position="4202,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="49" name="5-5" tags="第五章 Background_01" position="4202,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-5）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2520,7 +3775,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="51" name="5-6" tags="第五章 Background_01" position="4326,899" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="50" name="5-6" tags="第五章 Background_01" position="4326,899" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-6）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2539,7 +3794,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="52" name="5-6-1" tags="第五章 Background_01" position="4453,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:50px;font-size:32px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="51" name="5-6-1" tags="第五章 Background_01" position="4453,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:50px;font-size:32px;&quot;&gt;
 當你走向臺南州廳大門，發現大門外不是日常的景象，而是一道白光。
 好像有人站在白光之中，對你說話：
 無論你做了甚麼選擇，十分感謝你參與整個過程。
@@ -2558,7 +3813,9 @@ $Answer_4_1
 $Answer_5_1
 $Answer_5_2
 $Answer_5_3
-$Answer_5_4</tw-passagedata><tw-passagedata pid="53" name="3-3-1" tags="第三章 Background_04" position="2574,774" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+$Answer_5_4
+
+</tw-passagedata><tw-passagedata pid="52" name="3-3-1" tags="第三章 Background_04" position="2574,774" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-3-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2585,7 +3842,7 @@ src=&quot;media/Character_08.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="54" name="3-2-1-1" tags="第三章 Background_04" position="2451,654" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="53" name="3-2-1-1" tags="第三章 Background_04" position="2451,654" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2624,7 +3881,7 @@ src=&quot;media/Character_08.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="55" name="2-3-3-1" tags="第二章 Background_03" position="1701,1028" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="54" name="2-3-3-1" tags="第二章 Background_03" position="1701,1028" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-3-2）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2653,7 +3910,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="56" name="章節選擇" tags="" position="180,699" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="55" name="章節選擇" tags="" position="180,699" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !章節選擇
 
 &lt;&lt;link &#39;【序章】國立臺灣文學館&#39;&gt;&gt;
@@ -2668,6 +3925,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;set $inventory to []&gt;&gt;
 	&lt;&lt;script&gt;&gt;UIBar.stow()&lt;&lt;/script&gt;&gt;
 	&lt;&lt;run slideWin(&quot;hide&quot;)&gt;&gt;
+	&lt;&lt;set $map to 1&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &#39;【第二章】文協鐵三角&#39;&gt;&gt;
@@ -2680,6 +3938,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;run $inventory.push(&#39;Item_01_3&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_01_4&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_01_5&#39;)&gt;&gt;
+	&lt;&lt;set $map to 1&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &#39;【第三章】識字真有力&#39;&gt;&gt;
@@ -2693,6 +3952,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;run $inventory.push(&#39;Item_01_4&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_01_5&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_02_1&#39;)&gt;&gt;
+	&lt;&lt;set $map to 2&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &#39;【第四章】臺灣是臺灣人的臺灣&#39;&gt;&gt;
@@ -2706,6 +3966,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;run $inventory.push(&#39;Item_01_4&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_01_5&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_02_1&#39;)&gt;&gt;
+	&lt;&lt;set $map to 3&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
 &lt;&lt;link &#39;【第五章】撰寫「犯罪紀錄」&#39;&gt;&gt;
@@ -2719,9 +3980,10 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;run $inventory.push(&#39;Item_01_4&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_01_5&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_02_1&#39;)&gt;&gt;
+	&lt;&lt;set $map to 4&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 
-&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="57" name="人物清單" tags="" position="97,901" size="100,100">Character_01 蔡培火
+&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="56" name="人物清單" tags="" position="97,901" size="100,100">Character_01 蔡培火
 Character_02 山田巡查「次要－日人警官」
 Character_03 玩家
 Character_04 路人（假素材－未來移除）
@@ -2732,32 +3994,32 @@ Character_08 次要－臺人民眾
 Character_09 次要－臺人病人
 Character_10 次要－學歌民眾
 
-</tw-passagedata><tw-passagedata pid="58" name="背景清單" tags="" position="95,1008" size="100,100">Background_01 臺南州廳
+</tw-passagedata><tw-passagedata pid="57" name="背景清單" tags="" position="95,1008" size="100,100">Background_01 臺南州廳
 Background_02 臺南警署
 Background_03 韓內科（外）
 Background_04 祀典武廟
 Background_05 臺南公會堂
 Background_06 寫報告時背景
-Background_07 初始頁面</tw-passagedata><tw-passagedata pid="59" name="StoryBanner" tags="系統" position="99,301" size="100,100">&lt;img src=&quot;media/logo.png&quot; width=&quot;100%&quot;&gt;</tw-passagedata><tw-passagedata pid="60" name="道具清單" tags="" position="94,1117" size="100,100">Item_01_1 「臺灣白話字第一回研究會紀念會員合照」
+Background_07 初始頁面</tw-passagedata><tw-passagedata pid="58" name="StoryBanner" tags="系統" position="99,301" size="100,100">&lt;img src=&quot;media/logo.png&quot; width=&quot;100%&quot;&gt;</tw-passagedata><tw-passagedata pid="59" name="道具清單" tags="" position="94,1117" size="100,100">Item_01_1 「臺灣白話字第一回研究會紀念會員合照」
 Item_01_2 「蔡培火及其友人合照」
 Item_01_3 「臺南市區地圖」
 Item_01_4 「警察手冊」
 Item_01_5 「素行紀錄表」
-Item_02_1 「僅有一角的秘密暗號」</tw-passagedata><tw-passagedata pid="61" name="0-1" tags="Background_07" position="323,278" size="100,100">貼心提醒：本遊戲必須先註冊文協一百點的&lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/&quot; target=_blank;&gt;網站&lt;/a&gt;，並在實體打卡才可以進行。
+Item_02_1 「僅有一角的秘密暗號」</tw-passagedata><tw-passagedata pid="60" name="0-1" tags="Background_07" position="323,278" size="100,100">貼心提醒：本遊戲必須先註冊文協一百點的&lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/&quot; target=_blank;&gt;網站&lt;/a&gt;，並在實體打卡才可以進行。
 
 註冊步驟：請先點選網站右上角的連結，依照系統指示註冊。
 
 &lt;&lt;button &quot;註冊完成！&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;0-2&quot;&gt;&gt;
 	&lt;&lt;goto 0-2&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="0-0" tags="Background_07" position="202,277" size="100,100">&lt;DIV style=&quot;text-align:center;&quot;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="61" name="0-0" tags="Background_07 start" position="202,277" size="100,100">&lt;DIV style=&quot;text-align:center;&quot;&gt;
 
 &lt;img src=&quot;media/logo.png&quot; width=&quot;100%&quot;&gt;
 
   &lt;&lt;button &#39;開始遊戲&#39;&gt;&gt;
 		&lt;&lt;goto &quot;0-1&quot;&gt;&gt;
   &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="63" name="1-1-1" tags="第一章 Background_01" position="701,526" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="62" name="1-1-1" tags="第一章 Background_01" position="701,526" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !國立臺灣文學館
 &lt;/DIV&gt;（1-1-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2776,20 +4038,38 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;goto &quot;1-2&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 &lt;/DIV&gt;
-&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="地圖放大" tags="" position="299,826" size="100,100">&lt;img
-src=&quot;media/Item_01_3.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="地圖放大" tags="" position="299,826" size="100,100">&lt;&lt;if $map == 0&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_0.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 1&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_1.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 2&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_2.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 3&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_3.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 4&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_4.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;else&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_0.png&quot; width=&quot;800px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;/if&gt;&gt;
 
 &lt;DIV style=&quot;text-align:center;line-height:24px;&quot;&gt;
 &lt;&lt;link &quot;返回道具說明&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;道具說明&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="65" name="0-2" tags="Background_07" position="449,276" size="100,100">
+&lt;/DIV&gt;</tw-passagedata><tw-passagedata pid="64" name="0-2" tags="Background_07" position="449,276" size="100,100">
 
 國立臺灣文學館在哪裡？方便打卡告訴我嗎？
 
 
 &lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/space/93581&quot; target=_blank;&gt;&lt;&lt;button &quot;打卡！&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;0-3&quot;&gt;&gt;
+	&lt;&lt;set $map to 1&gt;&gt;
 	&lt;&lt;goto 0-3&gt;&gt;
-&lt;&lt;/button&gt;&gt;&lt;/a&gt;</tw-passagedata><tw-passagedata pid="66" name="0-3" tags="Background_07" position="575,274" size="100,100">
+&lt;&lt;/button&gt;&gt;&lt;/a&gt;</tw-passagedata><tw-passagedata pid="65" name="0-3" tags="Background_07" position="575,274" size="100,100">
 
 打完卡了？記得看一下臺文館附近有沒有其他文協景點。
 
@@ -2798,7 +4078,7 @@ src=&quot;media/Item_01_3.png&quot; width=&quot;800px&quot; style=&quot;display:
 &lt;&lt;button &quot;開始遊戲！&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;1-1&quot;&gt;&gt;
 	&lt;&lt;goto 1-1&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="2-1-1" tags="第二章 Background_03" position="1453,648.5" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="2-1-1" tags="第二章 Background_03" position="1453,648" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !韓內科醫院
 &lt;/DIV&gt;（2-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2813,7 +4093,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="68" name="3-1-1" tags="第三章 Background_04" position="2199,777" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="67" name="3-1-1" tags="第三章 Background_04" position="2199,777" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !祀典武廟
 &lt;/DIV&gt;（3-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2828,7 +4108,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="69" name="4-1-1" tags="第四章 Background_05" position="3074,898" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="68" name="4-1-1" tags="第四章 Background_05" position="3074,898" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南公會堂
 &lt;/DIV&gt;（4-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2843,7 +4123,7 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="70" name="5-1-1" tags="第五章 Background_01" position="3701,1023" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="69" name="5-1-1" tags="第五章 Background_01" position="3701,1023" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !臺南州廳
 &lt;/DIV&gt;（5-1）
 &lt;span id=&#39;name&#39;&gt;&lt;img
@@ -2858,6 +4138,120 @@ src=&quot;media/null.png&quot; width=&quot;200px&quot; style=&quot;display:block
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;/ctp&gt;&gt;
+</tw-passagedata><tw-passagedata pid="70" name="1" tags="" position="3411,1299" size="100,100">&lt;html&gt;
+	&lt;head&gt;
+    	&lt;title&gt;素行紀錄表首頁&lt;/title&gt;
+     &lt;/head&gt;
+     &lt;body&gt;
+     	
+        	&lt;p&gt;&lt;div name=recorderDiv&gt;請填寫紀錄者名稱:&lt;/div&gt;&lt;/p&gt; &lt;input type=&quot;text&quot; id=&quot;recorderName&quot; name=&quot;recorderName&quot; placeholder=&quot;紀錄者名稱&quot; required
+           size=&quot;20&quot;&gt;
+		   
+			
+&lt;/html&gt;
+
+&lt;&lt;button &#39;給我去下一頁&#39;&gt;&gt;
+&lt;&lt;goto &quot;Test create file&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;
+	importScripts(
+   &quot;js/getContent.js&quot;,
+	);
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+</tw-passagedata><tw-passagedata pid="71" name="Test create file" tags="" position="3826,1300" size="100,100">&lt;html&gt;
+	&lt;head&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/printTablePDF.css&quot;&gt;
+	&lt;title&gt;素行紀錄表&lt;/title&gt;    
+	&lt;/head&gt;
+	&lt;body&gt;
+		&lt;div id=&quot;action_table&quot;&gt;
+			&lt;img src = &quot;img/actionTable.png&quot; id=&quot;actionTable&quot;&gt;
+                &lt;div id = &quot;content_all&quot;&gt;
+                    &lt;!--div id=&quot;reson_three_input&quot; name=&quot;reson_three_input[]&quot; class=&quot;textarea&quot; contenteditable=&quot;true&quot; maxlength=&quot;50&quot;&gt;&lt;/div--&gt;
+                    &lt;textarea id=&quot;reason_three_input&quot; name=&quot;reason_three_input&quot; maxlength=&quot;50&quot;&gt;&lt;/textarea&gt;
+                    &lt;textarea id=&quot;reason_one_input&quot; name=&quot;reason_one_input&quot; maxlength=&quot;50&quot;&gt;&lt;/textarea&gt;
+                    &lt;textarea id=&quot;reason_four_input&quot; name=&quot;reason_four_input&quot; maxlength=&quot;50&quot;&gt;&lt;/textarea&gt;
+                    &lt;textarea id=&quot;reason_two_input&quot; name=&quot;reason_two_input&quot; maxlength=&quot;50&quot;&gt;&lt;/textarea&gt;
+                    &lt;textarea id=&quot;timeRecord&quot; name=&quot;timeRecord&quot; maxlength=&quot;50&quot;&gt;&lt;/textarea&gt;
+                    &lt;textarea id=&quot;recorder&quot; name=&quot;recorder&quot; maxlength=&quot;50&quot; style=&quot;display:none&quot; &gt;&lt;/textarea&gt;
+                    &lt;textarea id=&quot;finalDecision&quot; name=&quot;finalDicision&quot; maxlength=&quot;10&quot;&gt;&lt;/textarea&gt;
+		          &lt;/div&gt;
+            &lt;button id=&quot;downloadPDF&quot;&gt;印出結果&lt;/button&gt;
+        &lt;/div&gt;
+	&lt;/body&gt;
+&lt;/html&gt;
+
+&lt;&lt;script&gt;&gt;
+    
+	importScripts(
+   &quot;js/iansuiRegular.js&quot;,
+   &quot;js/actionTable.js&quot;,
+   &quot;js/printTablePDF.js&quot;
+	);
+    
+   
+&lt;&lt;/script&gt;&gt;
+
+
+
+
+
+</tw-passagedata><tw-passagedata pid="72" name="2" tags="" position="3599,1300" size="100,100">&lt;html&gt;
+	&lt;head&gt;
+    	&lt;title&gt;素行紀錄表首頁&lt;/title&gt;
+     &lt;/head&gt;
+     &lt;body&gt;
+     
+&lt;p&gt;&lt;div name=recorderDiv&gt;問題一:&lt;/div&gt;&lt;/p&gt; &lt;input type=&quot;text&quot; id=&quot;contentR1&quot; name=&quot;contentR1&quot; placeholder=&quot;紀錄者名稱&quot; required
+           size=&quot;20&quot;&gt;
+			
+&lt;/html&gt;
+
+&lt;&lt;button &#39;給我去下一頁&#39;&gt;&gt;
+&lt;&lt;goto &quot;Test create file&quot;&gt;&gt;
+&lt;&lt;script&gt;&gt;
+	importScripts(
+   &quot;js/getContentR1.js&quot;
+	);
+&lt;&lt;/script&gt;&gt;
+&lt;&lt;/button&gt;&gt;
+</tw-passagedata><tw-passagedata pid="73" name="header-text" tags="系統" position="199,98.5" size="100,100">&lt;span class=&quot;title&quot;&gt;蔡培火的犯罪紀錄&lt;/span&gt;
+&lt;span class=&quot;author&quot;&gt;&lt;a href=&quot;https://forms.gle/TFcyjp2SC8dMNW1i7&quot; target=&quot;_blank&quot;&gt;串聯文協一百點&lt;/a&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="74" name="footer-menu" tags="系統" position="326,99.5" size="100,100">&lt;&lt;nobr&gt;&gt;
+&lt;li&gt;&lt;&lt;link &quot;道具說明&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;道具說明&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;&lt;link &quot;章節選擇&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;章節選擇&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;
+&lt;li&gt;&lt;&lt;link &quot;關於&quot;&gt;&gt;&lt;&lt;script&gt;&gt;
+	Dialog.setup(&quot;關於&quot;);
+	Dialog.wiki(Story.get(&quot;關於&quot;).processText());
+	Dialog.open();
+&lt;&lt;/script&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/li&gt;
+&lt;&lt;/nobr&gt;&gt;</tw-passagedata><tw-passagedata pid="75" name="StoryInterface" tags="系統" position="449,97.5" size="100,100">&lt;div class=&quot;header&quot;&gt;
+	&lt;div id=&quot;header-text&quot; data-passage=&quot;header-text&quot;&gt;&lt;/div&gt;
+	&lt;div id=&quot;function-menu&quot;&gt;
+		&lt;span id=&quot;menu&quot; class=&quot;lnr lnr-menu&quot;&gt;&lt;/span&gt;
+		&lt;span id=&quot;saves&quot; class=&quot;lnr lnr-download&quot;&gt;&lt;/span&gt;
+		&lt;span id=&quot;restart&quot; class=&quot;lnr lnr-redo&quot;&gt;&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;story&quot;&gt;
+	&lt;span id=&quot;back&quot; class=&quot;lnr lnr-chevron-left&quot;&gt;&lt;/span&gt;
+	&lt;div id=&quot;passages&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;footer&quot;&gt;
+	&lt;span id=&quot;up&quot; class=&quot;lnr lnr-chevron-up&quot;&gt;&lt;/span&gt;
+	&lt;span id=&quot;footer-menu&quot; data-passage=&quot;footer-menu&quot;&gt;&lt;/span&gt;
+	&lt;div class=&quot;mobile-menu&quot;&gt;
+	 &lt;span id=&quot;mob-menu&quot; class=&quot;lnr lnr-menu&quot;&gt;&lt;/span&gt;
+		&lt;div id=&quot;mob-function-menu&quot;&gt;
+		 &lt;span id=&quot;mob-saves&quot; class=&quot;lnr lnr-download&quot;&gt;&lt;/span&gt;
+		 &lt;span id=&quot;mob-restart&quot; class=&quot;lnr lnr-redo&quot;&gt;&lt;/span&gt;
+		&lt;/div&gt;
+	 &lt;span id=&quot;mob-footer-menu&quot; data-passage=&quot;footer-menu&quot;&gt;&lt;/span&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="76" name="關於" tags="系統" position="573,99.5" size="100,100">主辦單位｜國立臺灣文學館
+協辦單位｜三知餘文化
 </tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
 	/*! SugarCube JS */

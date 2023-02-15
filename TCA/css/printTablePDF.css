@@ -1,0 +1,92 @@
+#action_table{
+            /*background-color: black;*/
+            width: 1241px;
+            height: 1754px;
+            float:left;
+            position: absolute;
+}
+#content_all{
+            width: 311px;
+            height: 263px;
+            top: 479px;
+            left: 77px;
+            position: absolute;
+}
+
+#reason_three_input{
+    width: 265px;
+    height: 222px;
+    left: 20px;
+    top: 20px;
+    position: relative;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+#reason_one_input{
+    width: 265px;
+    height: 222px;
+    left: 335px;
+    top: 20px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;  
+}
+
+#reason_four_input{
+    width: 265px;
+    height: 205px;
+    left: 20px;
+    top: 595px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+#reason_two_input{
+    width: 265px;
+    height: 205px;
+    left: 335px;
+    top: 595px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+#timeRecord{
+    width: 200px;
+    height: 180px;
+    left: 883px;
+    top: 533px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+#recorder{
+    width: 200px;
+    height: 220px;
+    left: 883px;
+    top: 923px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+#finalDecision{
+    width: 265px;
+    height: 75px;
+    left: 20px;
+    top: 1100px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+}
+
+[contenteditable]:focus{outline: none;}
+
+#downloadPDF{
+    width: 200px;
+    height: 50px;
+    font-size: 30px;
+}
