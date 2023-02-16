@@ -301,9 +301,10 @@ body {
   overflow-y: auto;
   box-sizing: border-box;
   border: 2em solid rgb(74 57 41 / 0%);
-  border-radius: 20px;
-  margin: 50px auto;
+  border-radius: 15px 0 0 15px;
+  margin: 30px auto 50px auto;
   padding: 0 1.2em 2em 2em;
+  position: relative;
 }
 .dm #passages {
   background-color: var(--dm-bg2);
@@ -598,8 +599,8 @@ width: 70vw;
 /*back button*/
 #back {
   color: var(--menu);
-  position: relative;
-  left: 120px;
+  position: fixed;
+  padding: 0 0 0 110px;
   font-size: 1.5vw;
 }
 .dm #back {
@@ -959,7 +960,7 @@ width: 70vw;
 	max-height: 70%;
   }
   #back {
-	left: 16%;
+	padding: 0 0 0 10%;
   }
   #up {
 	bottom: 50%;
@@ -1082,7 +1083,7 @@ width: 70vw;
 	display: none;
   }
   #back {
-	left: 4%;
+	padding: 0 0 0 0.8em;
   }
   .footer {
 	height: 40px;
