@@ -104,7 +104,6 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	overflow: hidden;
 	line-height: 0;
 	resize: both;
-  	height: 62vh;
 }
 .resizable img {
 	width: 100%;
@@ -122,9 +121,15 @@ area:focus {
 /*遊戲開頭版面*/
 body[data-tags~="start"] #passages {
   background-color: transparent;
+  max-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
 }
 body[data-tags~="start"] #back {
     color: transparent;
+}
+body[data-tags~="start"] .resizable {
+  	height: 70vh;
 }
 
 /*版面置中*/
@@ -1016,7 +1021,7 @@ width: 70vw;
 	max-height: 70%;
 	width: 100%;
 	border: none;
-	padding: 1.5em;
+	padding: 1.8em;
   }
   .dm #passages {
 	border: none;
@@ -1077,7 +1082,7 @@ width: 70vw;
 	display: none;
   }
   #back {
-	left: 2%;
+	left: 4%;
   }
   .footer {
 	height: 40px;
