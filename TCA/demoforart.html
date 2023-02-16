@@ -2181,24 +2181,27 @@ src=&quot;media/Item_01_2.png&quot; width=&quot;300px&quot; style=&quot;display:
 &lt;DIV style=&quot;text-align:center;line-height:50px;font-size:32px;&quot;&gt;
 	「臺南市區地圖」
 &lt;/DIV&gt;
+&lt;&lt;if $map == 0&gt;&gt;
 &lt;img
-src=&quot;media/Item_01_3.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+src=&quot;media/Item_01_3_0.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 1&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_1.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 2&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_2.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 3&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_3.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;elseif $map == 4&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_4.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;else&gt;&gt;
+&lt;img
+src=&quot;media/Item_01_3_0.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
+&lt;&lt;/if&gt;&gt;
 &lt;DIV style=&quot;text-align:center;line-height:24px;&quot;&gt;
 簡介：你目前只看到地圖上標註臺南州廳
-&lt;&lt;link &quot;地圖放大&quot;&gt;&gt;&lt;&lt;run slideWin(&quot;地圖放大&quot;)&gt;&gt;&lt;&lt;/link&gt;&gt;
-&lt;/DIV&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;if $inventory.includes(&#39;Item_01_4&#39;)&gt;&gt;
-&lt;DIV style=&quot;text-align:center;line-height:50px;font-size:32px;&quot;&gt;
-	「警察手冊」
-&lt;/DIV&gt;
-&lt;img
-src=&quot;media/Item_01_4.png&quot; width=&quot;300px&quot; style=&quot;display:block; margin:auto;&quot; &gt;
-&lt;DIV style=&quot;text-align:center;line-height:24px;&quot;&gt;
-簡介：
-你的名字：$Name
-位階：警手
 &lt;/DIV&gt;
 &lt;&lt;/if&gt;&gt;
 
