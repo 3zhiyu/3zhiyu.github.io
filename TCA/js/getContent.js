@@ -1,1 +1,1 @@
-let recorderName = document.getElementById("recorderName").value.replace(/(.{9})/g, "$1\n");
+var recorderName = document.getElementById("recorderName").value.replace(/(.{9})/g, "$1\n");

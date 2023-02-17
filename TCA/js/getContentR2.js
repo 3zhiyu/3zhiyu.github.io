@@ -1,0 +1,1 @@
+var contentR2 = document.getElementById("contentR2").value.replace(/(.{9})/g, "$1\n");

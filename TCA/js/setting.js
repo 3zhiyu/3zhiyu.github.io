@@ -1,0 +1,14 @@
+//recorderName=名字
+//R1=事由一
+//R2=事由二
+//R3=事由三
+//R4=事由四
+//time=年月日
+//final=最後審判
+var recorderName = '';
+var contentR1 = '';
+var contentR2 = '';
+var contentR3 = '';
+var contentR4 = '';
+var timeRecord = '';
+var finalDecision = '';
