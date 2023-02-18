@@ -11,6 +11,14 @@ var timeRecord = '';
 var finalDecision = '';
 */
 
+function getDate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd ; 
+    return today;
+}
 
 function downloadAsPDF(){
     var doc = new jsPDF('p', 'pt', 'a4');
@@ -28,18 +36,19 @@ function downloadAsPDF(){
 	doc.setFont('iansuiRegular');
     html2canvas(document.body, {
     onrendered: function(canvas) {
-            //<img src="img/actionTable.png" id="actionTable">
-        doc.addImage(actionTable, 'JPEG', 0, 0, 595, 870);
-        doc.text(contentR3, 40, 260);
-        doc.text(contentR1, 195, 260);
-        doc.text(contentR4, 40, 550);
-        doc.text(contentR2, 195, 550);
-        doc.text(taiwanEmpire, 40, 730); //台灣帝國
-        doc.text(peh_oe_ji, 205, 710);   //白話字
-        doc.text(tsai_poe_hoe, 205, 820) //蔡培火
-        doc.text(timeRecord, 460, 520);  
+        //<img src="img/actionTable.png" id="actionTable">
+		doc.addImage(actionTable, 'JPEG', 0, 0, 595, 840);
+        doc.setTextColor(117,28,28);
+        doc.text(contentR3, 40, 240);
+        doc.text(contentR1, 195, 240);
+        doc.text(contentR4, 40, 530);
+        doc.text(contentR2, 195, 530);
+        doc.text(taiwanEmpire, 40, 690); //台灣帝國
+        doc.text(peh_oe_ji, 205, 680);   //白話字
+        doc.text(tsai_poe_hoe, 205, 790) //蔡培火
+        doc.text(getDate(), 460, 520);
         doc.text(recorderName, 460, 710);
-        doc.text(finalDecision, 40, 820);
+        doc.text(finalDecision, 40, 790);
         doc.save('素行紀錄表.pdf');
     }     
   });	

@@ -1,1 +1,1 @@
-var tsai_poe_hoe = "反政府份子。";
+var tsai_poe_hoe = "反政府份子。".replace(/(.{8})/g, "$1\n");

@@ -1,1 +1,1 @@
-var peh_oe_ji = document.getElementById("getContentR5_peh_oe_ji").value.replace(/(.{9})/g, "$1\n");
+var peh_oe_ji = document.getElementById("getContentR5_peh_oe_ji").value.replace(/(.{8})/g, "$1\n");
