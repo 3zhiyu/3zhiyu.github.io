@@ -141,13 +141,6 @@
 
 [contenteditable]:focus{outline: none;}
 
-#downloadPDF{
-    width: 200px;
-    height: 50px;
-    font-size: 30px;
-}
-
-
 textarea:(:disabled):hover {
     background-color: #EDEDED;
     border-color: #eee;
