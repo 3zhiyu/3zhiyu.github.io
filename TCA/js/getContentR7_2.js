@@ -1,0 +1,1 @@
+var tsai_poe_hoe = "熱心愛臺者。";

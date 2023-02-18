@@ -1,0 +1,1 @@
+var taiwanEmpire = document.getElementById("getContentR6_taiwanEmpire").value.replace(/(.{9})/g, "$1\n");

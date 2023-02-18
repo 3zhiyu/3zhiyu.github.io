@@ -14,53 +14,63 @@
 }
 
 #reason_three_input{
-    width: 265px;
+    width: 275px;
     height: 222px;
-    left: 20px;
-    top: 20px;
+    left: 0px;
+    top: 5px;
     position: relative;
     font-size: 22px;
     overflow: hidden;
+    resize:none;
+    min-width:auto;
 }
 
 #reason_one_input{
-    width: 265px;
+    width: 255px;
     height: 222px;
     left: 335px;
-    top: 20px;
+    top: 5px;
     position: absolute;
     font-size: 22px;
-    overflow: hidden;  
+    overflow: hidden; 
+    resize:none;
+    min-width:auto;
 }
 
 #reason_four_input{
-    width: 265px;
-    height: 205px;
-    left: 20px;
-    top: 595px;
+    width: 275px;
+    height: 180px;
+    left: 0px;
+    top: 600px;
     position: absolute;
     font-size: 22px;
     overflow: hidden;
+    resize:none;
+    min-width:auto;
 }
 
 #reason_two_input{
-    width: 265px;
-    height: 205px;
+    width: 255px;
+    height: 180px;
     left: 335px;
-    top: 595px;
+    top: 600px;
     position: absolute;
     font-size: 22px;
     overflow: hidden;
+    resize:none;
+    min-width:auto;
 }
 
 #timeRecord{
     width: 200px;
     height: 180px;
     left: 883px;
-    top: 533px;
+    top: 527px;
     position: absolute;
     font-size: 22px;
     overflow: hidden;
+    resize:none;
+    min-width:auto;
 }
 
 #recorder{
@@ -71,16 +81,60 @@
     position: absolute;
     font-size: 22px;
     overflow: hidden;
+    resize:none;
+    min-width:auto;
 }
 
 #finalDecision{
     width: 265px;
     height: 75px;
-    left: 20px;
-    top: 1100px;
+    left: 0px;
+    top: 1135px;
     position: absolute;
     font-size: 22px;
     overflow: hidden;
+    resize:none;
+    min-width:auto;
+}
+
+#peh_oe_ji{
+    width: 255px;
+    height: 85px;
+    left: 335px;
+    top: 900px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto;
+}
+
+#taiwanEmpire{
+    width: 275px;
+    height: 100px;
+    left: 0px;
+    top: 935px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto
+}
+
+#tsai_poe_hoe{
+    width: 255px;
+    height: 75px;
+    left: 335px;
+    top: 1130px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto;
+}
+
+#recorderName{
+    width: 200px;
 }
 
 [contenteditable]:focus{outline: none;}
@@ -89,4 +143,22 @@
     width: 200px;
     height: 50px;
     font-size: 30px;
+}
+
+
+textarea:(:disabled):hover {
+    background-color: #EDEDED;
+    border-color: #eee;
+    
+}
+
+input, select, textarea {
+    color: black;
+    background-color: transparent;
+    border: 1px solid #444;
+    padding: 0.4em;
+}
+textarea:not(:disabled):focus, textarea:not(:disabled):hover {
+    background-color: #eee; 
+    border-color: #eee;
 }

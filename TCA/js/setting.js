@@ -12,3 +12,6 @@ var contentR3 = '';
 var contentR4 = '';
 var timeRecord = '';
 var finalDecision = '';
+var peh_oe_ji = '';
+var taiwanEmpire = '';
+var tsai_poe_hoe = '';

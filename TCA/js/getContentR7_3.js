@@ -1,0 +1,1 @@
+var tsai_poe_hoe = document.getElementById("getContentR7_3").value.replace(/(.{9})/g, "$1\n");

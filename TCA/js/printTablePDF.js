@@ -34,9 +34,12 @@ function downloadAsPDF(){
         doc.text(contentR1, 195, 260);
         doc.text(contentR4, 40, 550);
         doc.text(contentR2, 195, 550);
-        doc.text(timeRecord, 460, 520);
+        doc.text(taiwanEmpire, 40, 730); //台灣帝國
+        doc.text(peh_oe_ji, 205, 710);   //白話字
+        doc.text(tsai_poe_hoe, 205, 820) //蔡培火
+        doc.text(timeRecord, 460, 520);  
         doc.text(recorderName, 460, 710);
-        doc.text(finalDecision, 40, 800);
+        doc.text(finalDecision, 40, 820);
         doc.save('素行紀錄表.pdf');
     }     
   });	
