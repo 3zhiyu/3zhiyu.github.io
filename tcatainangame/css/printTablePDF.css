@@ -1,18 +1,3 @@
-#action_table{
-            /*background-color: black;*/
-            width: 1241px;
-            height: 1754px;
-            float:left;
-            position: absolute;
-}
-#content_all{
-            width: 311px;
-            height: 263px;
-            top: 479px;
-            left: 77px;
-            position: absolute;
-}
-
 #reason_three_input{
     width: 275px;
     height: 222px;
@@ -140,12 +125,6 @@
 }
 
 [contenteditable]:focus{outline: none;}
-
-#downloadPDF{
-    width: 200px;
-    height: 50px;
-    font-size: 30px;
-}
 
 
 textarea:(:disabled):hover {
