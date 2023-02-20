@@ -2184,7 +2184,7 @@ src=&quot;media/Background_08.png&quot; width=&quot;200px&quot; style=&quot;disp
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
 src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;&lt;div class=&quot;NPC_Name&quot;&gt;【？？？】&lt;/div&gt;你叫甚麼名字？
-&lt;input type=&quot;text&quot; id=&quot;recorderName&quot; name=&quot;recorderName&quot; placeholder=&quot;紀錄者名稱&quot; required=&quot;required&quot; size=&quot;20&quot; maxlength=&quot;10&quot;&gt;
+&lt;input type=&quot;text&quot; id=&quot;recorderName&quot; name=&quot;recorderName&quot; placeholder=&quot;紀錄者名稱&quot; required=&quot;required&quot; size=&quot;20&quot; maxlength=&quot;10&quot; οnkeyup=&quot;this.value=this.value.replace(/[, ]/g,&#39;&#39;)&quot;&gt;
 
 &lt;DIV id=&quot;center&quot;&gt;
 	&lt;&lt;button &quot;報上大名&quot;&gt;&gt;
