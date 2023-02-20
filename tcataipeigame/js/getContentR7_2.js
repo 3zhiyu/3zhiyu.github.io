@@ -1,1 +1,0 @@
-var tsai_poe_hoe = "熱心愛臺者。".replace(/(.{8})/g, "$1\n");

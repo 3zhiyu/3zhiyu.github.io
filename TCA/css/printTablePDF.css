@@ -141,6 +141,7 @@
 
 [contenteditable]:focus{outline: none;}
 
+
 textarea:(:disabled):hover {
     background-color: #EDEDED;
     border-color: #eee;
