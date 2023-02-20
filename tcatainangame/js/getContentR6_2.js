@@ -1,0 +1,1 @@
+var taiwanEmpire = "反對，臺灣人教育知識低落，沒有人管會亂。".replace(/(.{9})/g, "$1\n");
