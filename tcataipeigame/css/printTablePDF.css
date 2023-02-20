@@ -1,0 +1,179 @@
+#action_table{
+            /*background-color: black;*/
+            width: 1241px;
+            height: 1754px;
+            float:left;
+            position: absolute;
+}
+#content_all{
+            width: 311px;
+            height: 263px;
+            top: 479px;
+            left: 77px;
+            position: absolute;
+}
+
+#reason_three_input{
+    width: 275px;
+    height: 222px;
+    left: 0px;
+    top: 5px;
+    position: relative;
+    font-size: 22px;
+    overflow: hidden;
+    resize:none;
+    min-width:auto;
+}
+
+#reason_one_input{
+    width: 255px;
+    height: 222px;
+    left: 335px;
+    top: 5px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden; 
+    resize:none;
+    min-width:auto;
+}
+
+#reason_four_input{
+    width: 275px;
+    height: 180px;
+    left: 0px;
+    top: 600px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize:none;
+    min-width:auto;
+}
+
+#reason_two_input{
+    width: 255px;
+    height: 180px;
+    left: 335px;
+    top: 600px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize:none;
+    min-width:auto;
+}
+
+#timeRecord{
+    width: 200px;
+    height: 180px;
+    left: 883px;
+    top: 527px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize:none;
+    min-width:auto;
+}
+
+#recorder{
+    width: 200px;
+    height: 220px;
+    left: 893px;
+    top: 963px;
+    position: absolute;
+    font-size: 32px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto;
+    color: #751C1C;
+}
+
+
+#finalDecision{
+    width: 265px;
+    height: 75px;
+    left: 0px;
+    top: 1135px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize:none;
+    min-width:auto;
+}
+
+#peh_oe_ji{
+    width: 255px;
+    height: 85px;
+    left: 335px;
+    top: 900px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto;
+}
+
+#taiwanEmpire{
+    width: 275px;
+    height: 100px;
+    left: 0px;
+    top: 935px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto
+}
+
+#tsai_poe_hoe{
+    width: 255px;
+    height: 75px;
+    left: 335px;
+    top: 1130px;
+    position: absolute;
+    font-size: 22px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto;
+}
+
+#recorderName{
+    width: 200px;
+}
+
+[contenteditable]:focus{outline: none;}
+
+#downloadPDF{
+    width: 200px;
+    height: 50px;
+    font-size: 30px;
+}
+
+
+textarea:(:disabled):hover {
+    background-color: #EDEDED;
+    border-color: #eee;
+    
+}
+
+input, select, textarea {
+    color: #751C1C;
+    background-color: transparent;
+    border: 1px solid #444;
+    padding: 0.4em;
+}
+textarea:not(:disabled):focus, textarea:not(:disabled):hover {
+    background-color: #eee; 
+    border-color: #eee;
+}
+
+#currentDate{
+    width: 200px;
+    height: 60px;
+    left: 893px;
+    top: 553px;
+    position: absolute;
+    font-size: 32px;
+    overflow: hidden;
+    resize: none;
+    min-width: auto;
+    color: #751C1C;
+}
