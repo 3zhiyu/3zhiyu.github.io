@@ -129,6 +129,7 @@
 
 textarea:(:disabled):hover {
     background-color: #EDEDED;
+    color:white;
     border-color: #eee;
     
 }
