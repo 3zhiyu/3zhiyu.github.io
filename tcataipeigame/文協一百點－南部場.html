@@ -2193,6 +2193,9 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 		&lt;&lt;script&gt;&gt;
 			var recorderName = document.getElementById(&quot;recorderName&quot;).value.replace(/(.{7})/g, &quot;$1\n&quot;);
 			State.temporary.keys = recorderName;
+            var inputName = document.getElementById(&quot;recorderName&quot;);
+ 
+if (inputName) var recorderName = inputName.value.replace(/(.{7})/g, &quot;$1\n&quot;);
 		&lt;&lt;/script&gt;&gt;
 		&lt;&lt;set $Name to _keys&gt;&gt;
 		&lt;&lt;goto &quot;1-2&quot;&gt;&gt;
