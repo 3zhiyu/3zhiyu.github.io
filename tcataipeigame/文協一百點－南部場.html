@@ -4369,11 +4369,11 @@ src=&quot;media/handcuffs.png&quot; width=100% style=&quot;display:block; margin
 
 &lt;&lt;button &quot;報上大名&quot;&gt;&gt;
 		&lt;&lt;set $Now to &quot;1-2&quot;&gt;&gt;
-		&lt;&lt;done&gt;&gt;&lt;&lt;script&gt;&gt;
+		&lt;&lt;script&gt;&gt;
             var recorderName = document.getElementById(&quot;recorderName&quot;).value.replace(/(.{7})/g, &quot;$1\n&quot;);
              State.temporary.keys = recorderName;
              importScripts(&quot;js/getContent.js&quot;,);
-        &lt;&lt;/script&gt;&gt;&lt;&lt;/done&gt;&gt;
+        &lt;&lt;/script&gt;&gt;
 		&lt;&lt;set $Name to _keys&gt;&gt;
 		&lt;&lt;goto &quot;1-2&quot;&gt;&gt;
 	&lt;&lt;/button&gt;&gt;</tw-passagedata></tw-storydata>
