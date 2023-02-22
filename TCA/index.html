@@ -1415,7 +1415,10 @@ body.slideWin {
 		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
 				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
 	}
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*輸出最終文件*/
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*設置favicon*/
+$(document.head).append("<link rel='icon' href='media/favicon.png'>");
+
+/*輸出最終文件*/
 
 importScripts("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js","https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js","https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js","js/iansuiRegular.js","js/actionTable.js","js/printTablePDF.js");
 
