@@ -138,7 +138,7 @@ body[data-tags~="start"] .resizable {
 body[data-tags~="start"] .resizable img {
 	height: auto;
   	max-height: 70vh;
-	max-width: 33vh;
+	max-width: 350px;
 }
 
 /*版面置中*/
@@ -1417,7 +1417,7 @@ body.slideWin {
 	}
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*輸出最終文件*/
 
-importScripts("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js","https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js","https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js","js/iansuiRegular.js","js/actionTable.js",);
+importScripts("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js","https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js","https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js","js/iansuiRegular.js","js/actionTable.js","js/printTablePDF.js");
 
 
 
@@ -2192,11 +2192,13 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;button &quot;報上大名&quot;&gt;&gt;
 		&lt;&lt;set $Now to &quot;1-2&quot;&gt;&gt;
 		&lt;&lt;script&gt;&gt;
-			var recorderName = document.getElementById(&quot;recorderName&quot;).value.replace(/(.{7})/g, &quot;$1\n&quot;);
+			  var inputName = document.getElementById(&quot;recorderName&quot;);
+ 
+			if (inputName) var recorderName = inputName.value.replace(/(.{7})/g, &quot;$1\n&quot;);
 			State.temporary.keys = recorderName;
-			importScripts(
-  			 &quot;js/getContent.js&quot;,
-			);
+            State.variables.recorderName = recorderName;
+			
+          
 		&lt;&lt;/script&gt;&gt;
 		&lt;&lt;set $Name to _keys&gt;&gt;
 		&lt;&lt;goto &quot;1-2&quot;&gt;&gt;
@@ -2787,10 +2789,13 @@ src=&quot;media/report.png&quot; width=100% style=&quot;display:block; margin:au
 &lt;&lt;button &quot;完成&quot;&gt;&gt;
 	&lt;&lt;set $Now to &quot;3-4-1&quot;&gt;&gt;
 	&lt;&lt;goto 3-4-1&gt;&gt;
-	&lt;&lt;script&gt;&gt;
-			importScripts(
-  			 &quot;js/getContentR3.js&quot;,
-			);
+		&lt;&lt;script&gt;&gt;
+			var inputR3 = document.getElementById(&quot;contentR3&quot;);
+			
+            if(inputR3) var contentR3 = inputR3.value.replace(/(.{9})/g, &quot;$1\n&quot;);
+            
+            State.variables.contentR3 = contentR3;
+        
 	&lt;&lt;/script&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
@@ -2940,9 +2945,11 @@ src=&quot;media/report.png&quot; width=100% style=&quot;display:block; margin:au
 	&lt;&lt;set $Now to &quot;4-5&quot;&gt;&gt;
 	&lt;&lt;goto 4-5&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-			importScripts(
-  			 &quot;js/getContentR4.js&quot;,
-			);
+            var inputR4 = document.getElementById(&quot;contentR4&quot;);
+
+			if (inputR4)  var contentR4 = inputR4.value.replace(/(.{9})/g, &quot;$1\n&quot;);
+            
+            State.variables.contentR4 = contentR4;
 	&lt;&lt;/script&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
@@ -3002,10 +3009,9 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;button &quot;臺灣人接收新知的管道。&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR5_1.js&quot;
-	);
-	&lt;&lt;/script&gt;&gt;
+	peh_oe_ji = &quot;臺灣人接收新知的管道。&quot;.replace(/(.{8})/g, &quot;$1\n&quot;);
+    State.variables.peh_oe_ji = peh_oe_ji;
+    &lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-4&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_1 to &quot;臺灣人接收新知的管道&quot;&gt;&gt;
 	&lt;&lt;goto 5-4&gt;&gt;
@@ -3013,9 +3019,8 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;button &quot;密謀推翻政府的工具。&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR5_2.js&quot;
-	);
+	peh_oe_ji = &quot;密謀推翻政府的工具。&quot;.replace(/(.{8})/g, &quot;$1\n&quot;);
+    State.variables.peh_oe_ji = peh_oe_ji;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-4&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_1 to &quot;還是密謀推翻政府的工具&quot;&gt;&gt;
@@ -3027,9 +3032,11 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
            size=&quot;20&quot; maxlength=&quot;20&quot;&gt;
 &lt;&lt;button &quot;送出填寫內容&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR5_3.js&quot;
-	);
+      var input_peh_oe_ji = document.getElementById(&quot;getContentR5_peh_oe_ji&quot;);
+      
+      if(input_peh_oe_ji) var peh_oe_ji = input_peh_oe_ji.value.replace(/(.{8})/g, &quot;$1\n&quot;);
+      
+      State.variables.peh_oe_ji = peh_oe_ji;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-4&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_1 to $Answer_5_1.trim()&gt;&gt;
@@ -3105,9 +3112,14 @@ src=&quot;media/report.png&quot; width=100% style=&quot;display:block; margin:au
 	&lt;&lt;set $Now to &quot;2-5-1&quot;&gt;&gt;
 	&lt;&lt;goto 2-5-1&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-			importScripts(
-  			 &quot;js/getContentR1.js&quot;,
-			);
+			var inputR1 = document.getElementById(&quot;contentR1&quot;);
+			var inputR2 = document.getElementById(&quot;contentR2&quot;);
+
+            if (inputR1) var contentR1 = inputR1.value.replace(/(.{7})/g, &quot;$1\n&quot;);
+            if (inputR2) var contentR2 = inputR2.value.replace(/(.{8})/g, &quot;$1\n&quot;);
+            
+			State.variables.contentR1 = contentR1;
+            State.variables.contentR2 = contentR2;
 	&lt;&lt;/script&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
@@ -3117,7 +3129,16 @@ src=&quot;media/report.png&quot; width=100% style=&quot;display:block; margin:au
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="26" name="錯誤訊息" tags="" position="427,701" size="100,100">錯誤訊息
+&lt;/DIV&gt;&lt;/span&gt;&lt;&lt;script&gt;&gt;
+			var inputR1 = document.getElementById(&quot;contentR1&quot;);
+			var inputR2 = document.getElementById(&quot;contentR2&quot;);
+
+            if (inputR1) var contentR1 = inputR1.value.replace(/(.{7})/g, &quot;$1\n&quot;);
+            if (inputR2) var contentR2 = inputR2.value.replace(/(.{8})/g, &quot;$1\n&quot;);
+            
+			State.variables.contentR1 = contentR1;
+            State.variables.contentR2 = contentR1;
+	&lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="錯誤訊息" tags="" position="427,701" size="100,100">錯誤訊息
 
 【當前位置】$Now</tw-passagedata><tw-passagedata pid="27" name="製作筆記" tags="" position="550,698" size="100,100">【2023/01/16（一）】 21:29
 完成初步架構
@@ -3716,9 +3737,8 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;button &quot;贊同，日本殖民母國必須傾聽臺灣人的聲音。&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR6_1.js&quot;
-	);
+		taiwanEmpire = &quot;贊同，日本殖民母國必須傾聽臺灣人的聲音。&quot;.replace(/(.{9})/g, &quot;$1\n&quot;);
+        State.variables.taiwanEmpire = taiwanEmpire;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-5&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_2 to &quot;贊同，日本殖民母國必須傾聽臺灣人的聲音。&quot;&gt;&gt;
@@ -3727,9 +3747,8 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;button &quot;反對，臺灣人教育知識低落，沒有人管會亂。&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR6_2.js&quot;
-	);
+	taiwanEmpire = &quot;反對，臺灣人教育知識低落，沒有人管會亂。&quot;.replace(/(.{9})/g, &quot;$1\n&quot;);
+    State.variables.taiwanEmpire = taiwanEmpire;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-5&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_2 to &quot;反對，臺灣人教育知識低落，沒有人管會亂。&quot;&gt;&gt;
@@ -3741,9 +3760,11 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
            size=&quot;20&quot; maxlength=&quot;20&quot;&gt;
 &lt;&lt;button &quot;送出填寫內容&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR6_3.js&quot;
-	);
+	var inputTaiwanEmpire = document.getElementById(&quot;getContentR6_taiwanEmpire&quot;);
+
+	if(inputTaiwanEmpire) var taiwanEmpire = inputTaiwanEmpire.value.replace(/(.{9})/g, &quot;$1\n&quot;);
+    
+    State.variables.taiwanEmpire = taiwanEmpire;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-5&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_2 to $Answer_5_2.trim()&gt;&gt;
@@ -3759,9 +3780,8 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;button &quot;反政府份子。&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR7_1.js&quot;
-	);
+	 	tsai_poe_hoe = &quot;反政府份子。&quot;.replace(/(.{8})/g, &quot;$1\n&quot;);
+         State.variables.tsai_poe_hoe = tsai_poe_hoe;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-6&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_3 to &quot;反政府份子。&quot;&gt;&gt;
@@ -3770,9 +3790,8 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;button &quot;熱心愛臺者。&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR7_2.js&quot;
-	);
+		tsai_poe_hoe = &quot;熱心愛臺者。&quot;.replace(/(.{8})/g, &quot;$1\n&quot;);
+        State.variables.tsai_poe_hoe = tsai_poe_hoe;
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-6&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_3 to &quot;熱心愛臺者。&quot;&gt;&gt;
@@ -3784,9 +3803,12 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
            size=&quot;20&quot; maxlength=&quot;15&quot;&gt;
 &lt;&lt;button &quot;送出填寫內容&quot;&gt;&gt;
 	&lt;&lt;script&gt;&gt;
-	importScripts(
-   	&quot;js/getContentR7_3.js&quot;
-	);
+    var input_tsai_poe_hoe = document.getElementById(&quot;getContentR7_3&quot;);
+    
+	if (input_tsai_poe_hoe) var tsai_poe_hoe = input_tsai_poe_hoe.value.replace(/(.{8})/g, &quot;$1\n&quot;);
+    
+    State.variables.tsai_poe_hoe = tsai_poe_hoe;
+   
 	&lt;&lt;/script&gt;&gt;
 	&lt;&lt;set $Now to &quot;5-6&quot;&gt;&gt;
 	&lt;&lt;set $Answer_5_3 to $Answer_5_3.trim()&gt;&gt;
@@ -3823,7 +3845,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
         &lt;/tr&gt;
 &lt;/table&gt;
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="51" name="5-6-1" tags="第五章 Background_02" position="4453,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:36px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="51" name="5-6-1" tags="第五章 Background_02" position="4450,900" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:36px;font-size:24px;&quot;&gt;
 當你走向臺南州廳大門，發現大門外不是日常的景象，而是一道白光。
 好像有人站在白光之中，對你說話：
 無論你做了甚麼選擇，十分感謝你參與整個過程。
@@ -3831,7 +3853,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;
 身處現代的你，發現了展品中，居然多了一份你曾見到過的素行紀錄表。
 &lt;div id=&quot;action_table&quot;&gt;&lt;div id = &quot;content_all&quot;&gt;
-	&lt;button id=&quot;downloadPDF&quot;&gt;查看素行紀錄表&lt;/button&gt;
+	&lt;button id=&quot;downloadPDF&quot; onclick=&quot;downloadAsPDF()&quot;&gt;查看素行紀錄表&lt;/button&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;lefttext&quot;&gt;
 謝謝每一位熱愛臺灣文史的研究者、愛好者，有這些人的熱心研究、保存，才有許多事蹟讓我們記憶。蔡培火家屬、韓石泉家屬，以及過往參與臺灣文化協會的前輩，有你們的挺身而出，讓我們看到臺灣人的氣魄。
 &lt;/div&gt;
@@ -3850,64 +3872,15 @@ src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:a
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;script&gt;&gt;
-$(document).one(&quot;:passagedisplay&quot;, function (event) {
-	var recorderName = State.variables.Name;
-    var downloadPDF = document.getElementById(&quot;downloadPDF&quot;);
-    downloadPDF.addEventListener(&#39;click&#39;, downloadAsPDF);
+	recorderName = State.variables.recorderName; 
+	contentR1 = State.variables.contentR1; 
+    contentR2 = State.variables.contentR2; 
+    contentR3 = State.variables.contentR3; 
+    contentR4 = State.variables.contentR4;
+	peh_oe_ji = State.variables.peh_oe_ji;
+	tsai_poe_hoe = State.variables.tsai_poe_hoe;
+	taiwanEmpire = State.variables.taiwanEmpire; 
 
-
-    /*
-    var contentR1 = &#39;&#39;;
-    var contentR2 = &#39;&#39;;
-    var contentR3 = &#39;&#39;;
-    var contentR4 = &#39;&#39;;
-    var timeRecord = &#39;&#39;;
-    var finalDecision = &#39;&#39;;
-    */
-
-    function getDate() {
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, &#39;0&#39;);
-        var mm = String(today.getMonth() + 1).padStart(2, &#39;0&#39;); //January is 0!
-        var yyyy = today.getFullYear();
-        today = yyyy + &#39;-&#39; + mm + &#39;-&#39; + dd ; 
-        return today;
-    }
-
-    function downloadAsPDF(){
-        var doc = new jsPDF(&#39;p&#39;, &#39;pt&#39;, &#39;a4&#39;);
-        //var actionTable = canvas.toDataURL(&quot;img/actionTable.png&quot;);
-        /*
-        contentR1 = document.getElementById(&#39;reason_one_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
-        contentR2 = document.getElementById(&#39;reason_two_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
-        contentR3 = document.getElementById(&#39;reason_three_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
-        contentR4 = document.getElementById(&#39;reason_four_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
-        timeRecord = document.getElementById(&#39;timeRecord&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
-        finalDecision = document.getElementById(&#39;finalDecision&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
-        */
-        doc.addFileToVFS(&#39;iansuiRegular.ttf&#39;, font);
-        doc.addFont(&#39;iansuiRegular.ttf&#39;, &#39;iansuiRegular&#39;, &#39;normal&#39;);
-        doc.setFont(&#39;iansuiRegular&#39;);
-        html2canvas(document.body, {
-        onrendered: function(canvas) {
-            //&lt;img src=&quot;img/actionTable.png&quot; id=&quot;actionTable&quot;&gt;
-            doc.addImage(actionTable, &#39;JPEG&#39;, 0, 0, 595, 840);
-            doc.setTextColor(117,28,28);
-            doc.text(contentR3, 40, 240);
-            doc.text(contentR1, 195, 240);
-            doc.text(contentR4, 40, 530);
-            doc.text(contentR2, 195, 530);
-            doc.text(taiwanEmpire, 40, 690); //台灣帝國
-            doc.text(peh_oe_ji, 205, 680);   //白話字
-            doc.text(tsai_poe_hoe, 205, 790) //蔡培火
-            doc.text(getDate(), 460, 520);
-            doc.text(recorderName, 460, 710);
-            doc.text(finalDecision, 40, 790);
-            doc.save(&#39;素行紀錄表.pdf&#39;);
-        }     
-      });	
-    }
-});
 &lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="3-3-1" tags="第三章 Background_04" position="2574,774" size="100,100">!!祀典武廟
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
