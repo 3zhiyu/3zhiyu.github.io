@@ -3852,9 +3852,61 @@ src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:a
 &lt;&lt;script&gt;&gt;
 $(document).one(&quot;:passagedisplay&quot;, function (event) {
 	var recorderName = State.variables.Name;
-	importScripts(
-   &quot;js/printTablePDF.js&quot;
-	);
+    var downloadPDF = document.getElementById(&quot;downloadPDF&quot;);
+    downloadPDF.addEventListener(&#39;click&#39;, downloadAsPDF);
+
+
+    /*
+    var contentR1 = &#39;&#39;;
+    var contentR2 = &#39;&#39;;
+    var contentR3 = &#39;&#39;;
+    var contentR4 = &#39;&#39;;
+    var timeRecord = &#39;&#39;;
+    var finalDecision = &#39;&#39;;
+    */
+
+    function getDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, &#39;0&#39;);
+        var mm = String(today.getMonth() + 1).padStart(2, &#39;0&#39;); //January is 0!
+        var yyyy = today.getFullYear();
+        today = yyyy + &#39;-&#39; + mm + &#39;-&#39; + dd ; 
+        return today;
+    }
+
+    function downloadAsPDF(){
+        var doc = new jsPDF(&#39;p&#39;, &#39;pt&#39;, &#39;a4&#39;);
+        //var actionTable = canvas.toDataURL(&quot;img/actionTable.png&quot;);
+        /*
+        contentR1 = document.getElementById(&#39;reason_one_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
+        contentR2 = document.getElementById(&#39;reason_two_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
+        contentR3 = document.getElementById(&#39;reason_three_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
+        contentR4 = document.getElementById(&#39;reason_four_input&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
+        timeRecord = document.getElementById(&#39;timeRecord&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
+        finalDecision = document.getElementById(&#39;finalDecision&#39;).value.replace(/(.{9})/g, &quot;$1\n&quot;);
+        */
+        doc.addFileToVFS(&#39;iansuiRegular.ttf&#39;, font);
+        doc.addFont(&#39;iansuiRegular.ttf&#39;, &#39;iansuiRegular&#39;, &#39;normal&#39;);
+        doc.setFont(&#39;iansuiRegular&#39;);
+        html2canvas(document.body, {
+        onrendered: function(canvas) {
+            //&lt;img src=&quot;img/actionTable.png&quot; id=&quot;actionTable&quot;&gt;
+            doc.addImage(actionTable, &#39;JPEG&#39;, 0, 0, 595, 840);
+            doc.setTextColor(117,28,28);
+            doc.text(contentR3, 40, 240);
+            doc.text(contentR1, 195, 240);
+            doc.text(contentR4, 40, 530);
+            doc.text(contentR2, 195, 530);
+            doc.text(taiwanEmpire, 40, 690); //台灣帝國
+            doc.text(peh_oe_ji, 205, 680);   //白話字
+            doc.text(tsai_poe_hoe, 205, 790) //蔡培火
+            doc.text(getDate(), 460, 520);
+            doc.text(recorderName, 460, 710);
+            doc.text(finalDecision, 40, 790);
+            doc.save(&#39;素行紀錄表.pdf&#39;);
+        }     
+      });	
+    }
 });
 &lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="3-3-1" tags="第三章 Background_04" position="2574,774" size="100,100">!!祀典武廟
 &lt;span id=&#39;name&#39;&gt;&lt;img
