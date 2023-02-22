@@ -138,6 +138,7 @@ body[data-tags~="start"] .resizable {
 body[data-tags~="start"] .resizable img {
 	height: auto;
   	max-height: 70vh;
+	max-width: 33vh;
 }
 
 /*版面置中*/
@@ -2174,7 +2175,7 @@ window.slideWin = function (dir) {
 
 /* 介面中文化開始 */
 !function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔/讀檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
-/* 介面中文化結束 */</script><tw-tag name="Background_01" color="purple"></tw-tag><tw-tag name="Background_03" color="green"></tw-tag><tw-tag name="Background_04" color="blue"></tw-tag><tw-tag name="Background_05" color="red"></tw-tag><tw-tag name="Background_06" color="yellow"></tw-tag><tw-tag name="Background_07" color="orange"></tw-tag><tw-tag name="Background_08" color="green"></tw-tag><tw-tag name="center" color="yellow"></tw-tag><tw-tag name="第一章" color="red"></tw-tag><tw-tag name="第三章" color="orange"></tw-tag><tw-tag name="第二章" color="purple"></tw-tag><tw-tag name="第五章" color="yellow"></tw-tag><tw-tag name="第四章" color="blue"></tw-tag><tw-tag name="系統" color="green"></tw-tag><tw-passagedata pid="1" name="1-1" tags="第一章 Background_08" position="700,399" size="100,100">!!國立臺灣文學館
+/* 介面中文化結束 */</script><tw-tag name="Background_01" color="purple"></tw-tag><tw-tag name="Background_03" color="green"></tw-tag><tw-tag name="Background_04" color="blue"></tw-tag><tw-tag name="Background_05" color="red"></tw-tag><tw-tag name="Background_06" color="yellow"></tw-tag><tw-tag name="Background_07" color="orange"></tw-tag><tw-tag name="Background_08" color="green"></tw-tag><tw-tag name="center" color="yellow"></tw-tag><tw-tag name="第一章" color="red"></tw-tag><tw-tag name="第三章" color="orange"></tw-tag><tw-tag name="第二章" color="purple"></tw-tag><tw-tag name="第五章" color="yellow"></tw-tag><tw-tag name="第四章" color="blue"></tw-tag><tw-tag name="系統" color="green"></tw-tag><tw-tag name="Background_02" color="green"></tw-tag><tw-passagedata pid="1" name="1-1" tags="第一章 Background_08" position="700,399" size="100,100">!!國立臺灣文學館
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Background_08.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 &lt;div class=&quot;lefttext&quot;&gt;
@@ -2339,7 +2340,7 @@ src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
-src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;&lt;div class=&quot;NPC_Name&quot;&gt;【山田巡查】&lt;/div&gt;你沒聽過「北水南火」嗎？你住的臺北市，是蔣渭水負責和總督府唱反調。而在臺南，蔡培火就是我們的頭號頑劣分子。他們組織起來，想了非常多的花招，表現上是演講、辦報紙。
+src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;&lt;div class=&quot;NPC_Name&quot;&gt;【山田巡查】&lt;/div&gt;你沒聽過「北水南火」嗎？你住的臺北市，是蔣渭水負責和總督府唱反調。而在臺南，蔡培火就是我們的頭號頑劣分子。他們組織起來，想了非常多的花招，表面上是演講、辦報紙。
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
@@ -2460,7 +2461,7 @@ src=&quot;media/Item_01_3_2.png&quot; width=100% style=&quot;display:block; marg
 &lt;&lt;/ctp&gt;&gt;
 </tw-passagedata><tw-passagedata pid="8" name="2-2" tags="第二章 Background_03" position="1581,528" size="100,100">!!韓內科醫院
 &lt;span id=&#39;name&#39;&gt;&lt;img
-src=&quot;media/Character_09.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
+src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 
 當你走近韓內科醫院，發現前來看診的居民紛紛對你投以異樣的眼光。你身上的制服，代表著殖民政府，但你的臉卻是臺灣人。由於看診的臺灣人很多，你要小心不要插入排隊看病的隊伍，然後走到韓內科裡面。
 
@@ -2622,7 +2623,7 @@ src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
 src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;
-你看著韓石泉，發現他對你有所隱瞞，更加深含醫生與蔡培火的壞印象。他們可能不是真心想讓臺灣人自立，而是依照一個說法，來迷惑民眾。
+你看著韓石泉，發現他對你有所隱瞞，更加深韓醫生與蔡培火的壞印象。他們可能不是真心想讓臺灣人自立，而是依照一個說法，來迷惑民眾。
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
@@ -3443,7 +3444,7 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;button &quot;下一段對話&quot;&gt;&gt;
 	&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="2-2-2" tags="第二章 Background_03" position="1573,776" size="100,100">!!韓內科醫院
+&lt;/DIV&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="39" name="2-2-2" tags="第二章 Background_03" position="1580,773" size="100,100">!!韓內科醫院
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 （出示道具）
@@ -3822,17 +3823,17 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
         &lt;/tr&gt;
 &lt;/table&gt;
 &lt;&lt;/ctp&gt;&gt;
-</tw-passagedata><tw-passagedata pid="51" name="5-6-1" tags="第五章 Background_08" position="4453,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:36px;font-size:24px;&quot;&gt;
+</tw-passagedata><tw-passagedata pid="51" name="5-6-1" tags="第五章 Background_02" position="4453,901" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:36px;font-size:24px;&quot;&gt;
 當你走向臺南州廳大門，發現大門外不是日常的景象，而是一道白光。
 好像有人站在白光之中，對你說話：
 無論你做了甚麼選擇，十分感謝你參與整個過程。
 &lt;/DIV&gt;&lt;img
 src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;
-身處現代的你，發現了展品中，居然多了一份你曾見到過的素行紀錄簿。
+身處現代的你，發現了展品中，居然多了一份你曾見到過的素行紀錄表。
 &lt;div id=&quot;action_table&quot;&gt;&lt;div id = &quot;content_all&quot;&gt;
-	&lt;button id=&quot;downloadPDF&quot;&gt;查看素行紀錄簿&lt;/button&gt;
+	&lt;button id=&quot;downloadPDF&quot;&gt;查看素行紀錄表&lt;/button&gt;
 &lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;lefttext&quot;&gt;
-謝謝每一位熱愛臺灣文史的研究者、愛好者，有這些人的熱心研究、保存，才有許多事蹟讓我們記憶。以及蔡培火家屬、韓石泉家屬，以及過往參與臺灣文化協會的前輩，有你們的挺身而出，讓我們看到臺灣人的氣魄。
+謝謝每一位熱愛臺灣文史的研究者、愛好者，有這些人的熱心研究、保存，才有許多事蹟讓我們記憶。蔡培火家屬、韓石泉家屬，以及過往參與臺灣文化協會的前輩，有你們的挺身而出，讓我們看到臺灣人的氣魄。
 &lt;/div&gt;
 
 如果你喜歡這個遊戲，也許可以看看後續的延伸討論。
@@ -3849,9 +3850,12 @@ src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:a
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;script&gt;&gt;
+$(document).one(&quot;:passagerender&quot;, function (event) {
+	var recorderName = State.variables.Name;
 	importScripts(
    &quot;js/printTablePDF.js&quot;
 	);
+});
 &lt;&lt;/script&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="3-3-1" tags="第三章 Background_04" position="2574,774" size="100,100">!!祀典武廟
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
@@ -4092,7 +4096,7 @@ src=&quot;media/Item_01_3_0.png&quot; width=100% style=&quot;display:block; marg
 	&lt;&lt;goto 1-1&gt;&gt;
 &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="2-1-1" tags="第二章 Background_03" position="1453,648" size="100,100">!!韓內科醫院
 &lt;span id=&#39;name&#39;&gt;&lt;img
-src=&quot;media/Item_01_3_2.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
+src=&quot;media/Background_03.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 
 掛號完畢。
 
@@ -4104,7 +4108,7 @@ src=&quot;media/Item_01_3_2.png&quot; width=100% style=&quot;display:block; marg
 &lt;&lt;/ctp&gt;&gt;
 </tw-passagedata><tw-passagedata pid="67" name="3-1-1" tags="第三章 Background_04" position="2199,777" size="100,100">!!祀典武廟
 &lt;span id=&#39;name&#39;&gt;&lt;img
-src=&quot;media/Item_01_3_3.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
+src=&quot;media/Background_04.jpg&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 
 來廟前聽演講
 
@@ -4116,7 +4120,7 @@ src=&quot;media/Item_01_3_3.png&quot; width=100% style=&quot;display:block; marg
 &lt;&lt;/ctp&gt;&gt;
 </tw-passagedata><tw-passagedata pid="68" name="4-1-1" tags="第四章 Background_05" position="3074,898" size="100,100">!!臺南公會堂
 &lt;span id=&#39;name&#39;&gt;&lt;img
-src=&quot;media/Item_01_3_4.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
+src=&quot;media/Background_05.jpg&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 
 你是誰……日本人還是臺灣人？
 
@@ -4128,7 +4132,7 @@ src=&quot;media/Item_01_3_4.png&quot; width=100% style=&quot;display:block; marg
 &lt;&lt;/ctp&gt;&gt;
 </tw-passagedata><tw-passagedata pid="69" name="5-1-1" tags="第五章 Background_01" position="3702,1025" size="100,100">!!臺南州廳
 &lt;span id=&#39;name&#39;&gt;&lt;img
-src=&quot;media/Item_01_3_4.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
+src=&quot;media/Background_01.jpg&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 
 帶著你的意見，回到現在吧！
 
@@ -4297,7 +4301,7 @@ src=&quot;media/Item_01_3_4.png&quot; width=100% style=&quot;display:block; marg
 	&lt;&lt;goto 4-1&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="延伸討論" tags="Background_08" position="4452,1024" size="100,100">!延伸討論
+&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="延伸討論" tags="Background_02" position="4452,1024" size="100,100">!延伸討論
 
 歷史出場人物介紹
 
@@ -4320,7 +4324,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 &lt;&lt;/button&gt;&gt;
 
 &lt;img
-src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;</tw-passagedata><tw-passagedata pid="81" name="景點資訊" tags="Background_08" position="4450,1151" size="100,100">!!景點資訊
+src=&quot;media/report2.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;</tw-passagedata><tw-passagedata pid="81" name="景點資訊" tags="Background_02" position="4450,1151" size="100,100">!!景點資訊
 
 &lt;a href=&quot;https://tca100.nmtl.gov.tw/home/zh-tw/space/93581&quot; target=_blank;&gt;&lt;&lt;button &quot;臺南州廳&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;&lt;/a&gt;
