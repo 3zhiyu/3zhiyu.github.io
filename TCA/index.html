@@ -1419,43 +1419,6 @@ body.slideWin {
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*設置favicon*/
 $(document.head).append("<link rel='icon' href='media/favicon.png'>");
 
-/* Google Analytics */
-var lockID = LoadScreen.lock(); // Lock loading screen
-importScripts('https://www.googletagmanager.com/gtag/js?id=G-JGT2K2HY6S');
-.then(function () {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-        dataLayer.push(arguments);
-    };
-    gtag('js', new Date());
-    gtag('config', 'G-JGT2K2HY6S');
-    $(document).on('click', 'a[data-passage]', function () {
-        gtag('event', 'Navigation', {
-            event_label    : $(this).attr('data-passage'),
-            event_category : 'GuestClick'
-        });
-    });
-    if (State.size > 0) {
-        Engine.show();
-    }
-    LoadScreen.unlock(lockID); // Unlock loading screen
-})
-.catch(function (error) {
-    console.warn('Could not load "gtag" library.');
-    LoadScreen.unlock(lockID); // Unlock loading screen
-});
-$(document).on('click', 'a', function (ev) {
-    // Get the destination of the clicked link var passage 
-    var passage = $(this).attr('data-passage');
-    // Send the message to google analytics
-    if (passage!=null && passage!='') { 
-      gtag('event', 'Navigation', {
-        event_label    : passage,
-        event_category : 'GuestClick'
-      });
-    }
-});
-
 /*輸出最終文件*/
 
 importScripts("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js","https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js","https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js","js/iansuiRegular.js","js/actionTable.js","js/printTablePDF.js");
