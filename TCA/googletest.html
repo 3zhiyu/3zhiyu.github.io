@@ -1430,7 +1430,7 @@ importScripts('https://www.googletagmanager.com/gtag/js?id=G-JGT2K2HY6S')
     gtag('js', new Date());
     gtag('config', 'G-JGT2K2HY6S');
     $(document).on('click', 'a[data-passage]', function () {
-        gtag('event', 'Navigation', {
+        gtag('event', 'Navigation_GuestClick', {
             event_label    : $(this).attr('data-passage'),
             event_category : 'GuestClick'
         });
@@ -1444,17 +1444,7 @@ importScripts('https://www.googletagmanager.com/gtag/js?id=G-JGT2K2HY6S')
     console.warn('Could not load "gtag" library.');
     LoadScreen.unlock(lockID); // Unlock loading screen
 });
-$(document).on('click', 'a', function (ev) {
-    // Get the destination of the clicked link var passage 
-    var passage = $(this).attr('data-passage');
-    // Send the message to google analytics
-    if (passage!=null && passage!='') { 
-      gtag('event', 'Navigation_GuestClick', {
-        event_label    : passage,
-        event_category : 'GuestClick'
-      });
-    }
-});
+
 
 /*輸出最終文件*/
 
