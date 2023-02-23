@@ -99,7 +99,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
 	<tw-storydata name="串聯文協一百點─蔡培火的犯罪紀錄" startnode="61" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*素行紀錄表CSS匯入*/
-@import url('https://3zhiyu.github.io/tcatainangame/css/printTablePDF.css');
+@import url('css/printTablePDF.css');
 
 /* Resizable element style */
 .resizable {
@@ -1418,6 +1418,43 @@ body.slideWin {
 	}
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*設置favicon*/
 $(document.head).append("<link rel='icon' href='media/favicon.png'>");
+
+/* Google Analytics */
+var lockID = LoadScreen.lock(); // Lock loading screen
+importScripts('https://www.googletagmanager.com/gtag/js?id=G-JGT2K2HY6S');
+.then(function () {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () {
+        dataLayer.push(arguments);
+    };
+    gtag('js', new Date());
+    gtag('config', 'G-JGT2K2HY6S');
+    $(document).on('click', 'a[data-passage]', function () {
+        gtag('event', 'Navigation', {
+            event_label    : $(this).attr('data-passage'),
+            event_category : 'GuestClick'
+        });
+    });
+    if (State.size > 0) {
+        Engine.show();
+    }
+    LoadScreen.unlock(lockID); // Unlock loading screen
+})
+.catch(function (error) {
+    console.warn('Could not load "gtag" library.');
+    LoadScreen.unlock(lockID); // Unlock loading screen
+});
+$(document).on('click', 'a', function (ev) {
+    // Get the destination of the clicked link var passage 
+    var passage = $(this).attr('data-passage');
+    // Send the message to google analytics
+    if (passage!=null && passage!='') { 
+      gtag('event', 'Navigation', {
+        event_label    : passage,
+        event_category : 'GuestClick'
+      });
+    }
+});
 
 /*輸出最終文件*/
 
