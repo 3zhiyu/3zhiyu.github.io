@@ -1449,7 +1449,7 @@ $(document).on('click', 'a', function (ev) {
     var passage = $(this).attr('data-passage');
     // Send the message to google analytics
     if (passage!=null && passage!='') { 
-      gtag('event', 'Navigation', {
+      gtag('event', 'Navigation_GuestClick', {
         event_label    : passage,
         event_category : 'GuestClick'
       });
