@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="文協一百點遊戲" startnode="10" creator="Twine" creator-version="2.6.1" format="SugarCube" format-version="2.36.1" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Resizable element style */
+	<tw-storydata name="文協一百點遊戲" startnode="10" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* Resizable element style */
 .resizable {
 	display: inline-block;
 	overflow: hidden;
@@ -135,6 +135,7 @@ body[data-tags~="start"] .resizable {
 body[data-tags~="start"] .resizable img {
 	height: auto;
   	max-height: 70vh;
+	max-width: 33vh;
 }
 
 /*版面置中*/
@@ -213,7 +214,8 @@ body[data-tags~="back"]{
 @font-face {
   font-family: "GenRyuMin";
   src: local("GenRyu Min Regular"),
-     url(font/GenRyuMin-R.ttc);
+       url(font/GenRyuMin-R.woff) format("woff"),
+       url(font/GenRyuMin-R.ttc) format("TrueType");
 }
 
 /*put your theme colors & fonts here so that you don't have to type the codes over and over again!*/
@@ -2247,7 +2249,52 @@ src=&quot;media/Item_02_1.png&quot; width=&quot;300px&quot; style=&quot;display:
 因何這个台灣島（In-hô tsit-ê Tâi-uân tó）
 舊相到今猶原在（Kū-siùnn kàu-tann iáu guân-tsāi）
 &lt;/DIV&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="系統" position="101,417" size="100,100"></tw-passagedata><tw-passagedata pid="3" name="錯誤訊息" tags="" position="427,701" size="100,100">錯誤訊息
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="2" name="StoryInit" tags="系統" position="101,417" size="100,100">「當前所在頁面判定」設定
+	&lt;&lt;set $Now to &quot;1-1&quot;&gt;&gt;
+
+「查看道具」設定
+	&lt;&lt;set $inventory to []&gt;&gt;
+	&lt;&lt;set $check1_4_1 to false&gt;&gt;
+	&lt;&lt;set $check1_4_2 to false&gt;&gt;
+	&lt;&lt;set $check1_4_3 to false&gt;&gt;
+	&lt;&lt;set $check1_4_4 to false&gt;&gt;
+	&lt;&lt;set $check1_4_5 to false&gt;&gt;
+	&lt;&lt;set $map to 0&gt;&gt;
+	
+「玩家名字」設定
+	&lt;&lt;set $Name to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $year to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $month to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $day to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $timerecord=&quot;&quot;&gt;&gt;
+	
+「答案設定」設定
+	&lt;&lt;set $Answer_2_1 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_2_2 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_3_1 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_4_1 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_5_1 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_5_2 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_5_3 to &quot;&quot;&gt;&gt;
+	&lt;&lt;set $Answer_5_4 to &quot;&quot;&gt;&gt;
+	
+&lt;&lt;widget &quot;Delete&quot;&gt;&gt;
+	&lt;&lt;run $inventory.delete(&#39;Item_01_1&#39;)&gt;&gt;
+	&lt;&lt;run $inventory.delete(&#39;Item_02_1&#39;)&gt;&gt;
+	&lt;&lt;run $inventory.delete(&#39;Item_03_1&#39;)&gt;&gt;
+	&lt;&lt;run $inventory.delete(&#39;Item_04_1&#39;)&gt;&gt;
+	&lt;&lt;run $inventory.delete(&#39;Item_05_1&#39;)&gt;&gt;
+	&lt;&lt;run $inventory.delete(&#39;Item_02_1&#39;)&gt;&gt;
+&lt;&lt;/widget&gt;&gt;
+
+「音檔」設定
+	&lt;&lt;cacheaudio &#39;文明&#39; &#39;media/文明-Bûn-bîng.m4a&#39;&gt;&gt;
+	&lt;&lt;cacheaudio &#39;世界&#39; &#39;media/世界-Sè-kài.m4a&#39;&gt;&gt;
+	&lt;&lt;cacheaudio &#39;臺灣&#39; &#39;media/臺灣-Tâi-uân.m4a&#39;&gt;&gt;
+
+
+預載圖片
+&lt;&lt;preload &#39;media/arrest.png&#39; &#39;media/Background_01.jpg&#39; &#39;media/Background_02.png&#39; &#39;media/Background_03.png&#39; &#39;media/Background_04.jpg&#39; &#39;media/Background_05.jpg&#39; &#39;media/Background_06.png&#39; &#39;media/Background_07.png&#39; &#39;media/Background_08.png&#39; &#39;media/Character_01.png&#39; &#39;media/Character_02.png&#39; &#39;media/Character_03.png&#39; &#39;media/Character_04.png&#39; &#39;media/Character_05.png&#39; &#39;media/Character_06.png&#39; &#39;media/Character_07.png&#39; &#39;media/Character_08.png&#39; &#39;media/Character_09.png&#39; &#39;media/Character_10.png&#39; &#39;media/gamestart.png&#39; &#39;media/handcuffs.png&#39; &#39;media/Item_01_1.png&#39; &#39;media/Item_01_2.png&#39; &#39;media/Item_01_3.png&#39; &#39;media/Item_01_3_0.png&#39; &#39;media/Item_01_3_1.png&#39; &#39;media/Item_01_3_2.png&#39; &#39;media/Item_01_3_3.png&#39; &#39;media/Item_01_3_4.png&#39; &#39;media/Item_01_4.png&#39; &#39;media/Item_01_5.png&#39; &#39;media/Item_02_1.png&#39; &#39;media/Item_02_2.png&#39; &#39;media/liberate.png&#39; &#39;media/report.png&#39; &#39;media/report2.png&#39; &#39;media/textbox.png&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="錯誤訊息" tags="" position="427,701" size="100,100">錯誤訊息
 
 【當前位置】$Now</tw-passagedata><tw-passagedata pid="4" name="製作筆記" tags="" position="550,698" size="100,100">【2023/01/16（一）】 21:29
 完成初步架構
