@@ -138,7 +138,7 @@ body[data-tags~="start"] .resizable {
 body[data-tags~="start"] .resizable img {
 	height: auto;
   	max-height: 70vh;
-	max-width: 350px;
+	max-width: 33vh;
 }
 
 /*版面置中*/
@@ -217,7 +217,8 @@ body[data-tags~="back"]{
 @font-face {
   font-family: "GenRyuMin";
   src: local("GenRyu Min Regular"),
-     url(font/GenRyuMin-R.ttc);
+       url(font/GenRyuMin-R.woff) format("woff"),
+       url(font/GenRyuMin-R.ttc) format("TrueType");
 }
 
 /*put your theme colors & fonts here so that you don't have to type the codes over and over again!*/
@@ -1415,7 +1416,10 @@ body.slideWin {
 		   -moz-box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
 				box-shadow: 1px 3px 0px 0px grey, 0 2px 5px rgba(255, 255, 255, 0), inset 0 2px 5px rgb(26, 3, 3);
 	}
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*輸出最終文件*/
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*設置favicon*/
+$(document.head).append("<link rel='icon' href='media/favicon.png'>");
+
+/*輸出最終文件*/
 
 importScripts("https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js","https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js","https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.js","js/iansuiRegular.js","js/actionTable.js","js/printTablePDF.js");
 
@@ -3043,7 +3047,17 @@ src=&quot;media/Character_02.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;goto 5-4&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="StoryInit" tags="系統" position="101,417" size="100,100">「當前所在頁面判定」設定
+&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="StoryInit" tags="系統" position="101,417" size="100,100">素行紀錄表變數設定
+&lt;&lt;set $recorderName to &quot;姓名未填&quot;&gt;&gt;
+&lt;&lt;set $contentR1 to &quot;未填&quot;&gt;&gt;
+&lt;&lt;set $contentR2 to &quot;未填&quot;&gt;&gt;
+&lt;&lt;set $contentR3 to &quot;未填&quot;&gt;&gt;
+&lt;&lt;set $contentR4 to &quot;未填&quot;&gt;&gt;
+&lt;&lt;set $peh_oe_ji to &quot;未填&quot;&gt;&gt;
+&lt;&lt;set $tsai_poe_hoe to &quot;未填&quot;&gt;&gt;
+&lt;&lt;set $taiwanEmpire to &quot;未填&quot;&gt;&gt;
+
+「當前所在頁面判定」設定
 	&lt;&lt;set $Now to &quot;1-1&quot;&gt;&gt;
 
 「查看道具」設定
