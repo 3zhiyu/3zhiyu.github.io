@@ -949,9 +949,7 @@ CSS教學
 別人作品參考
 * [[線上藝術展覽|https://3zhiyu.github.io/host/]]
 **[[官網|https://hostproject.net/]]已關閉，上面連結為自己下載的檔案，圖片不全
-*[[《Project Alexia 艾雷夏計畫》ARG互動解謎遊戲|https://erensiecontact.itch.io/project-alexia-ii-twine-remake]]
-*[[sugarcube範本1|https://3zhiyu.github.io/tinatest/itch]]
-*[[sugarcube範本2|https://3zhiyu.github.io/tinatest/Sugarcube2Template.html]]</tw-passagedata><tw-passagedata pid="10" name="背包功能" tags="" position="1700,0" size="200,200">1.背包PASSAGE：
+*[[《Project Alexia 艾雷夏計畫》ARG互動解謎遊戲|https://erensiecontact.itch.io/project-alexia-ii-twine-remake]]</tw-passagedata><tw-passagedata pid="10" name="背包功能" tags="" position="1700,0" size="200,200">1.背包PASSAGE：
 @@color:grey;
 {{{
 &lt;&lt;if $inventory.length is 0&gt;&gt;\
@@ -2811,11 +2809,49 @@ animate__faster  → 動畫變超快(變成500毫秒)
 }}}
 [[返回|previous()]]</tw-passagedata><tw-passagedata pid="55" name="CSS基本概念" tags="" position="500,1000" size="100,100">因為Twine開發的遊戲為html格式，支援CSS語法。
 故事文本的文字樣式、對齊方式，都可以透過CSS語法來設定。
+要怎麼使用CSS，基本觀念可以參考[[此文章說明|https://intfiction.org/t/scaling-images-to-fit/46165/2]]
 
 CSS在twine中不需要再透過特殊語法來控制，可直接沿用html、CSS原本的語法來設定。
 詳細可參考[[MDN文件說明|https://developer.mozilla.org/zh-TW/docs/Web/CSS]]
 
-[[返回首頁|start]]</tw-passagedata><tw-passagedata pid="56" name="版面設定" tags="" position="500,1100" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="57" name="進階&lt;&lt;for&gt;&gt;運用" tags="" position="900,700" size="100,100">!!!!&lt;&lt;message &#39;根據變數內容生成可連結到新頁面的項目&#39;&gt;&gt;
+如果你不喜歡Twine的預設版面，你可以在&quot;StoryInterface&quot;的passage中重設UI。
+* 關於sugarcube版面使用的markup可以參考[[此文件|http://www.motoslave.net/sugarcube/2/docs/html.html]]
+* 關於sugarcube版面的預設CSS可以參考[[此文件|https://www.motoslave.net/sugarcube/2/docs/#css]]
+
+
+假設你只希望在特定script觸發時才改變版面樣式，你必須透過javascript來做到，例如：
+* 這是觸發的script：
+@@color:green;
+{{{
+&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt; 
+}}}
+@@
+* 這是改變觸發script的CSS的javascript代碼（在Story Javascript中置入代碼）：
+@@color:green;
+{{{
+// script觸發的&quot;Restart&quot;對話視窗標題文字變成紅色
+$(document).on(&#39;:dialogopened&#39;, function (ev) {
+	if ($(&#39;#ui-dialog-title&#39;).text() == &#39;Restart&#39;) {
+		$(&#39;#ui-dialog-title&#39;).css(&#39;color&#39;, &#39;red&#39;);
+	} else {
+		$(&#39;#ui-dialog-title&#39;).css(&#39;color&#39;, &#39;inherit&#39;);
+	}
+})
+}}}
+@@
+
+[[返回首頁|start]]</tw-passagedata><tw-passagedata pid="56" name="版面設定" tags="" position="600,1000" size="100,100">一些版面範本收集
+
+*[[100% Good Twine Sugarcube Templates|https://manonamora.itch.io/twine-sugarcube-templates]]
+*[[Sugarcube Template|https://nyehilism.itch.io/sugarcube-template]]
+*[[twine sugarcube template|https://ccrberus.itch.io/twine-sugarcube-template]]
+*[[Twine/Sugarcube 2 Template|https://awmorgan.itch.io/twine-sugarcube-template]]
+*[[Fallen London Twine Template|https://thesharkwrites.itch.io/fallen-london-twine-template]]
+*Twine Template[[1|https://vahnya.itch.io/twine-template]、[[2|https://vahnya.itch.io/twine-template-ii]]]
+*[[Simple Visual Novel Template for Twine|https://sunlabyrinth.itch.io/simple-vn-template-for-twine]]
+*[[PC98 Layout for Twine|https://fiaglas.itch.io/pc98-layout]]
+*[[A Quick Guide to Character Pages|https://gamesbyalbie.itch.io/character-page-tutorial]]
+*[[]]</tw-passagedata><tw-passagedata pid="57" name="進階&lt;&lt;for&gt;&gt;運用" tags="" position="900,700" size="100,100">!!!!&lt;&lt;message &#39;根據變數內容生成可連結到新頁面的項目&#39;&gt;&gt;
 * 搭配&quot;&quot;&quot;&lt;&lt;link&gt;&gt;&quot;&quot;&quot;，讓呈列的每個項目都可以連結到新頁面(或替換成執行行動)：
 &lt;table class=&quot;border-table&quot;&gt;
 【語法如下】
