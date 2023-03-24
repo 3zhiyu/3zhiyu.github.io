@@ -98,34 +98,18 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="twine範本" startnode="9" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* 思源黑體 */
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
-/* 楷體字體 */
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexkai.css);
-/* 圓體字體 */
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
-/* 仿宋體 */
-@import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
-
-.font-1 { font-family: 'Noto Sans TC', sans-serif; }
-.font-2 { font-family: 'cwTeXKai', sans-serif; }
-.font-3 { font-family: 'cwTeXYen', sans-serif; }
-.font-4 { font-family: 'cwTeXFangSong'; }
-
-
-/*自訂背景*/
-body[data-tags~="specialbg"]{
-	background-image: url("img/background2.jpg");
-    background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-position: center;
-	background-size:cover;
-	margin:0;
+	<tw-storydata name="twine範本" startnode="9" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*自訂背景-(標籤為bg1)*/
+body.bg1::before {
+	background-image: url("https://drive.google.com/uc?id=1qW46ZMO-bfXIV88vsq230W4Lu2tCew7q");
 }
+
 
 /*頁面所有文字置中(標籤加center)*/
 tw-passage[tags="center"] {
-	text-align: center;
+  text-align: center;
+}
+.center.passage {
+  text-align: center;
 }
 
 
@@ -169,6 +153,496 @@ tw-passage[tags="center"] {
 .dm .choice:hover {
   background-color: var(--dm-accent);
 }
+
+
+/* twine-user-stylesheet #1: "assets.css" */
+/* Fonts */
+/* 思源黑體&思源宋體 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400&display=swap");
+/* 楷體字體 https://fonts.googleapis.com/earlyaccess/cwtexkai.css */
+@font-face {
+  font-family: 'cwTeXKai';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.eot);
+  src: url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf) format('truetype');
+}
+/* 圓體字體 https://fonts.googleapis.com/earlyaccess/cwtexyen.css */
+@font-face {
+  font-family: 'cwTeXYen';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot);
+  src: url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.ttf) format('truetype');
+}
+/* 內海字體 https://github.com/max32002/naikaifont */
+@font-face {
+  font-family: 'naikaifont';
+  src: url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.0/webfont/NaikaiFont-Regular-Lite.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.89/webfont/NaikaiFont-Regular.woff2) format("woff2");
+}
+
+/* twine-user-stylesheet #10: "custom.css" */
+/* Customizer Variables */
+:root {
+  --text-font: Arial, 'Noto Sans TC', -apple-system, BlinkMacSystemFont, Roboto, microsoft jhenghei, sans-serif;
+  --title-font: 'Helvetica Neue', 'Noto Sans TC', serif !important;
+  --sidebarbutton-font: 'cwTeXYen', sans-serif !important;
+  --button-font: 'Noto Serif TC', serif !important;
+  --background-color: hsl(var(--background-color-h), var(--background-color-s), var(--background-color-l));
+  --background-color-h: 26;
+  --background-color-s: 10.1%;
+  --background-color-l: 13.5%;
+  --background-color-a: 1.00;
+  --background-text: hsl(var(--background-text-h), var(--background-text-s), var(--background-text-l));
+  --background-text-h: 30;
+  --background-text-s: 10.3%;
+  --background-text-l: 88.6%;
+  --background-text-a: 1.00;
+  --sidebar-color: hsl(var(--sidebar-color-h), var(--sidebar-color-s), var(--sidebar-color-l));
+  --sidebar-color-h: 12;
+  --sidebar-color-s: 5.4%;
+  --sidebar-color-l: 18.2%;
+  --sidebar-color-a: 0.75;
+  --sidebar-text: hsl(var(--sidebar-text-h), var(--sidebar-text-s), var(--sidebar-text-l));
+  --sidebar-text-h: 30;
+  --sidebar-text-s: 5.6%;
+  --sidebar-text-l: 92.9%;
+  --sidebar-text-a: 1.00;
+  --accent-color: hsl(var(--accent-color-h), var(--accent-color-s), var(--accent-color-l));
+  --accent-color-h: 0;
+  --accent-color-s: 69.9%;
+  --accent-color-l: 51.8%;
+  --accent-color-a: 1.00;
+  --accent-text: hsl(var(--accent-text-h), var(--accent-text-s), var(--accent-text-l));
+  --accent-text-h: 0;
+  --accent-text-s: 0.0%;
+  --accent-text-l: 100.0%;
+  --accent-text-a: 1.00;
+  --sidebar-color-hsla: hsla(var(--sidebar-color-h), var(--sidebar-color-s), var(--sidebar-color-l), var(--sidebar-color-a));
+}
+/* twine-user-stylesheet #2: "base.css" */
+/* Common style options */
+body {
+    background-color: var(--background-color);
+    color: var(--background-text);
+    font-family: var(--text-font);
+}
+
+body::before {
+    background-attachment: fixed;
+    background-color: var(--background-color);
+    background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    content: ' ';
+    display: block;
+    inset: 0;
+    position: fixed;
+    opacity: var(--background-color-a);
+    z-index: -1;
+}
+
+body h1,
+body h2,
+body h3,
+body h4 {
+    font-family: var(--title-font);
+}
+
+body a,
+body a:hover {
+    color: var(--accent-color);
+}
+
+/* Icon rendering */
+#ui-bar a::before,
+#ui-bar button::before,
+#ui-bar #ui-bar-tray button,
+#ui-dialog button::before,
+#ui-dialog #ui-dialog-close,
+a.link-external::after {
+    font-weight: normal !important;
+}
+
+#ui-bar.stowed #ui-bar-toggle::before {
+    content: "\e82e";
+}
+
+#menu-item-saves a::before {
+    content: "\e814\00a0";
+}
+/* twine-user-stylesheet #3: "clean-addons.css" */
+/* crossfade */
+/* ctp */
+/* fading */
+/* live-update */
+/* message */
+/* notify */
+body #notify {
+    backdrop-filter: blur(2px);
+    background-color: var(--sidebar-color);
+    border-radius: var(--radius);
+    box-shadow: 1px 1px 3px #0002;
+    color: var(--sidebar-text);
+    margin-right: 0.5em;
+    padding: 1em;
+}
+
+/* preload */
+/* replacelink */
+/* shake */
+/* twine-user-stylesheet #4: "clean-base.css" */
+:root {
+    --accent-color-20: hsla(var(--accent-color-h), var(--accent-color-s), var(--accent-color-l), 0.2);
+    --background-text-20: hsla(var(--background-text-h), var(--background-text-s), var(--background-text-l), 0.2);
+    --background-text-50: hsla(var(--background-text-h), var(--background-text-s), var(--background-text-l), 0.5);
+    --radius: 4px;
+}
+
+body input,
+body select,
+body textarea,
+body button,
+body button[type="button"] {
+    background-color: var(--sidebar-color);
+    border-radius: var(--radius);
+    border: none !important;
+    box-shadow: 1px 1px 3px #0002;
+    color: var(--sidebar-text);
+    font-family: var(--button-font);
+}
+
+body select {
+    line-height: 1em;
+}
+
+body textarea,
+body input[type="text"] {
+    background-color: var(--accent-color-20);
+    box-shadow: 1px 1px 3px inset #0002;
+	font-family: var(--button-font);
+}
+
+body input[type="range"] {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+body input:disabled,
+body select:disabled,
+body textarea:disabled,
+body button:disabled {
+    background-color: var(--sidebar-color);
+    opacity: 0.33;
+}
+
+body input:hover:not(:disabled),
+body input:focus:not(:disabled),
+body button:hover:not(:disabled),
+body button:focus:not(:disabled),
+body select:hover:not(:disabled),
+body select:focus:not(:disabled),
+body textarea:hover:not(:disabled),
+body textarea:focus:not(:disabled) {
+    background-color: var(--accent-color);
+    box-shadow: 1px 1px 3px inset #0002;
+    color: var(--accent-text);
+}
+
+body input[type="range"]:hover:not(disabled),
+body input[type="range"]:focus:not(disabled) {
+    background-color: transparent;
+}
+
+body fieldset {
+    margin: 1em 0;
+    padding: 1em 1.5em;
+    border-radius: var(--radius);
+    border-color: var(--background-text-20);
+}
+
+body fieldset legend {
+    color: var(--background-text-50);
+    font-size: 0.9em;
+}
+
+body #passages {
+    max-width: 42em;
+}
+
+body #passages input,
+body #passages select,
+body #passages textarea,
+body #passages button,
+body #passages button[type="button"] {
+    margin: 0 4px 4px 0;
+    backdrop-filter: blur(2px);
+}
+
+body #passages img {
+    border-radius: var(--radius);
+    box-shadow: 1px 1px 3px #0002;
+}
+
+body #passages hr {
+    border-color: var(--background-text-20);
+}
+/* twine-user-stylesheet #5: "clean-debug.css" */
+html[data-debug-view] .debug {
+    background-color: var(--accent-color-20);
+}
+
+html[data-debug-view] .debug.hidden,
+html[data-debug-view] .debug.hidden .debug {
+    background-color: var(--accent-color-20);
+}
+
+html[data-debug-view] .debug[data-name][data-type].nonvoid::after,
+html[data-debug-view] .debug[data-name][data-type]::before {
+    background-color: var(--background-text-20);
+}
+
+html[data-debug-view] #debug-bar {
+    color: #fff;
+    font-family: monospace;
+}
+/* twine-user-stylesheet #6: "clean-dialog.css" */
+#ui-dialog {
+    background-color: var(--background-color);
+    color: var(--background-text);
+    border-radius: calc(var(--radius) * 2);
+    overflow: hidden;
+}
+
+#ui-dialog #ui-dialog-titlebar {
+    background-color: var(--sidebar-color);
+    box-shadow: 1px 1px 2px #0002;
+    color: var(--sidebar-text);
+    padding: 0.5em 0 0.25em;
+}
+
+#ui-dialog #ui-dialog-close {
+    box-shadow: none;
+}
+
+#ui-dialog #ui-dialog-body {
+    background-color: transparent;
+    border: none;
+}
+
+#ui-dialog #ui-dialog-body.saves tr:not(:first-child) {
+    border-top: 1px dotted var(--background-text-20);
+}
+
+#ui-dialog #ui-dialog-body.saves> :not(:first-child) {
+    border-top: 1px dotted var(--background-text-20);
+}
+/* twine-user-stylesheet #7: "clean-sidebar.css" */
+#ui-bar,
+#ui-bar #menu ul,
+#ui-bar #menu li,
+#ui-bar #menu li a,
+#ui-bar #ui-bar-tray button {
+	background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#ui-bar {
+    backdrop-filter: blur(3px);
+    box-shadow: 1px 1px 3px #0002;
+    background-color: var(--sidebar-color-hsla);
+    color: var(--sidebar-text);
+}
+
+#ui-bar #menu li a,
+#ui-bar #ui-bar-toggle,
+#ui-bar #ui-bar-history [id|="history"] {
+    color: var(--sidebar-text);
+    padding: 5px 10px;
+}
+
+#ui-bar #menu li a:hover,
+#ui-bar #ui-bar-toggle:hover,
+#ui-bar #ui-bar-history [id|="history"]:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    border-radius: var(--radius);
+    box-shadow: 1px 1px 3px inset #0002;
+    color: var(--accent-text);
+    filter: none;
+}
+
+#ui-bar #ui-bar-history [id|="history"]:disabled {
+    opacity: 0.25;
+}
+
+#ui-bar #ui-bar-body {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 4.5em);
+    margin: 3em 0 1.5em;
+}
+
+#ui-bar #ui-bar-body nav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: end;
+	font-family: var(--sidebarbutton-font);
+	font-size: 1.2em;
+}
+
+#ui-bar #menu {
+    text-align: left;
+}
+/* twine-user-stylesheet #8: "crossfade.css" */
+.macro-crossfade {
+	position: relative;
+}
+
+.macro-crossfade > .macro-crossfade-image {
+	width: 100%;
+}
+
+.macro-crossfade > .macro-crossfade-image:not([src]) {
+	visibility: hidden;
+}
+
+.macro-crossfade > .macro-crossfade-image:last-of-type {
+	position: absolute;
+	top: 0; left: 0;
+}
+/* twine-user-stylesheet #9: "click-to-proceed.css" */
+.macro-ctp-entry {
+	display: inline-block;
+}
+
+.macro-ctp-entry-t8n {
+	animation: macro-ctp-fade-in 0.4s ease;
+}
+
+@keyframes macro-ctp-fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+/* twine-user-stylesheet #11: "notify.css" */
+/*
+    notify.min.css, by chapel; for use with notify.js
+    version 1.0.0
+ */
+#notify {
+    position : fixed;
+    display : block;
+    width : 16em;
+    right : -20em; top : 2em;
+    padding : 0.5em;
+    background-color : #fff;
+    color : #000;
+    -webkit-transition : right 0.3s;
+    -moz-transition : right 0.3s;
+    -o-transition : right 0.3s;
+    transition : right 0.3s;
+}
+#notify.open { right : 0; }
+/* twine-user-stylesheet #12: "replacelink-macro-set.css" */
+/*! <<replacelink>> macro set for SugarCube 2.x */
+.revision-span-in {
+	opacity: 0;
+}
+.revision-span:not(.revision-span-out) {
+	-webkit-transition: 1s;
+	transition: 1s;
+}
+.revision-span-out {
+	position: absolute;
+	opacity: 0;
+}
+/* twine-user-stylesheet #13: "shake-macro-set.css" */
+/*! <<shake>> macro set for SugarCube 2.x */
+@-webkit-keyframes shakeanim {
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@-o-keyframes shakeanim {
+	0% { -o-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -o-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -o-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -o-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -o-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -o-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -o-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -o-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -o-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -o-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -o-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@keyframes shakeanim {
+	0% { transform: translate(2px, 1px) rotate(0deg); }
+	10% { transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { transform: translate(-3px, 0px) rotate(1deg); }
+	30% { transform: translate(0px, 2px) rotate(0deg); }
+	40% { transform: translate(1px, -1px) rotate(1deg); }
+	50% { transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { transform: translate(-3px, 1px) rotate(0deg); }
+	70% { transform: translate(2px, 1px) rotate(-1deg); }
+	80% { transform: translate(-1px, -1px) rotate(1deg); }
+	90% { transform: translate(2px, 2px) rotate(0deg); }
+	100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake-block,
+.shake {
+	-webkit-animation-duration: 0.8s;
+	     -o-animation-duration: 0.8s;
+	        animation-duration: 0.8s;
+	-webkit-animation-iteration-count: infinite;
+	     -o-animation-iteration-count: infinite;
+	        animation-iteration-count: infinite;
+	-webkit-animation-name: shakeanim;
+	     -o-animation-name: shakeanim;
+	        animation-name: shakeanim;
+	-webkit-animation-timing-function: linear;
+	     -o-animation-timing-function: linear;
+	        animation-timing-function: linear;
+	-webkit-transform-origin: 50% 50%;
+	    -ms-transform-origin: 50% 50%;
+	     -o-transform-origin: 50% 50%;
+	        transform-origin: 50% 50%;
+}
+.shake-block {
+	display: block;
+}
+.shake {
+	display: inline-block;
+}
+/* twine-user-stylesheet #14: "Add-ons Preview Style" */
+.by-line {
+    float: right;
+    font-size: .8em;
+    font-weight: normal;
+}
+
 
 /*動態效果整合*/
 /* 文字置中 */
@@ -334,7 +808,6 @@ tw-passage[tags="center"] {
 	88% { filter: blur(1px); text-shadow: 5px 0 0 grey; }
 	90% { filter: blur(0px); text-shadow: 0 0 0 grey; }
 }
-
 
 /* 發抖效果 */
 /* The "clip" in ".glitch" is depreciated, so technically you should use the "clip-path" that's in ".glitchy" instead, however IE doesn't support "clip-path", and most browsers still support "clip". */
@@ -664,34 +1137,59 @@ tw-passage[tags="center"] {
     clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
   }
 }
-/*動態效果整合*/</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*Animate.css*/
-importStyles("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+/*　動態效果整合結束　*/
 
-
-/*禁用側邊欄前進、後退的按鈕*/
-/*
-Config.history.controls = false;
-*/
-
-
-/*起始時側邊欄收合*/
-UIBar.stow();
-
-
-/*自動存檔*/
-// 在passage標籤加上'autosave'以啟動功能
-config.saves.autosave = "autosave";
-
-
-/* 返回前頁 */
-predisplay["Menu Return"] = function (taskName) {
-	if (! tags().contains("noreturn")) {
-		State.variables.return = passage();
-	}
-};
-
-
-/* 側邊選單系統設定內容 */
+/* Paper - Start */
+.paperheader {
+	background-color: #FFF;
+	margin-top: -5px;
+	margin-left: -42px;
+	min-height: 60px;
+	padding-left: 42px;
+}
+.paper {
+	font: italic 16px cursive, naikaifont, sans-serif !important;
+	line-height: 20px;
+	position: relative;
+	margin: 0 auto;
+	padding: 8px 5px 4px 42px;
+	color: #444;
+	border: 1px solid #d2d2d2;
+	background: #fff;
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+	background: -webkit-gradient(linear, left top, left bottom, from(#d9eaf3), color-stop(8%, #fff)) 0 4px;
+	background: -webkit-linear-gradient(#d9eaf3 0%, #fff 8%) 0 4px;
+	background: -moz-linear-gradient(#d9eaf3 0%, #fff 8%) 0 4px;
+	background: -o-linear-gradient(#d9eaf3 0%, #fff 8%) 0 4px;
+	background: linear-gradient(#d9eaf3 0%, #fff 8%) 0 4px;
+	-webkit-background-size: 100% 20px;
+	   -moz-background-size: 100% 20px;
+		-ms-background-size: 100% 20px;
+		 -o-background-size: 100% 20px;
+			background-size: 100% 20px;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+			border-radius: 3px;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+	   -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+			box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+}
+.paper::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 30px;
+	width: 4px;
+	bottom: 0;
+	border: 1px solid;
+	border-color: transparent #efe4e4;
+}
+.papertext {
+	display: inline-block;
+	position: relative;
+	top: 4px;
+}
+/* Paper - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 側邊選單系統設定內容 */
 // 改變字體大小
 var settingFontSize = ["100%", "130%", "150%"];
 var resizeFont = function() {
@@ -739,8 +1237,610 @@ Setting.addList("theme", {
 });
 //end change theme
 
+/* WebFont Loader */
+importScripts("https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js")
+	.then(function () {
+		// Code that depends on the script goes here.
+  		WebFont.load({
+      google: {
+        families: ["Noto Sans TC", "Noto Serif TC", "cwTeXYen", "cwTeXKai"]
+      }
+  });
+	})
+	.catch(function (err) {
+		// There was an error loading the script, log it to the console.
+		console.log(err);
+	});
 
-/*預載圖片*/
+/*Animate.css*/
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+
+/*禁用側邊欄前進、後退的按鈕*/
+/*
+Config.history.controls = false;
+*/
+
+/*起始時側邊欄收合*/
+/*
+UIBar.stow();
+*/
+
+/* 返回前頁 */
+predisplay["Menu Return"] = function (taskName) {
+	if (! tags().contains("noreturn")) {
+		State.variables.return = passage();
+	}
+};
+
+/* 動態效果：delay */
+$(document).on(':passagerender', function (ev) {
+	// Find all elements containing the delayed class.
+	var elems = $(ev.content).find('.delayed');
+	// Appearance delay (in milliseconds) between each delayed text block.
+	var delay = 1000; // 1 second fade-in
+	if (elems.length > 0) {
+		elems.each(function (i) {
+			$(this)
+				.delay(delay * (i + 1))
+				.fadeTo(delay, 1);
+		});
+	}
+});
+
+/* twine-user-script #1: "config.js" */
+Config.history.controls = true;
+Config.history.maxStates = 40;
+Config.saves.slots = 8;
+Config.saves.autosave = true;
+Config.addVisitedLinkClass = true;
+Config.ui.stowBarInitially = true;
+
+/* twine-user-script #2: "crossfade.js" */
+; (function () {
+	"use-strict";
+	var crossfade = {};
+
+	function crossfadeContainer(id) {
+		var image = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+		if (!id) throw new Error("No ID specified!");
+		var $el = $("<div />").addClass("macro-crossfade").attr("data-macro-crossfade-id", id);
+		var imgBack = $("<img />").addClass("macro-crossfade-image").attr("src", image).appendTo($el);
+		var imgFront = $("<img />").addClass("macro-crossfade-image").attr("src", image).appendTo($el);
+		return $el.get(0);
+	}
+	crossfade.container = crossfadeContainer;
+
+	function crossfadeSelector(id) {
+		return '.macro-crossfade[data-macro-crossfade-id="' + id + '"]';
+	}
+	crossfade.selector = crossfadeSelector;
+
+	function fade(element, img) {
+		var duration = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 400;
+		if (!element) throw new Error("No element specified!");
+		var $el = $(element);
+		if (!$el.length) throw new Error(_typeof(element) === "string" ? 'No elements matched selector "' + selector + '"!' : 'Specified element not found!');
+		if (!$el.hasClass("macro-crossfade")) $el.addClass("macro-crossfade");
+		if ($el.children("img").length === 0) $("<img /><img />").addClass("macro-crossfade-image").appendTo($el);
+		var images = $el.children("img");
+		var backBefore = images.eq(0);
+		var frontBefore = images.eq(1);
+		img = img || null;
+		if (Number(frontBefore.css("opacity")) < 1) frontBefore.stop(true, true);
+		backBefore.attr("src", img).stop().fadeOut(0).appendTo(images.parent()).fadeIn(img ? duration : 0, function () {
+			var backAfter = images.eq(1);
+			if (img) {
+				backAfter.attr("src", img);
+			} else {
+				backAfter.fadeOut(duration, function () {
+					backAfter.attr("src", img).fadeIn(0);
+				});
+			}
+		});
+	}
+	crossfade.fade = fade;
+
+	Macro.add("crossfadecontainer", {
+		handler: function handler() {
+			var id = this.args[0];
+			var img = this.args[1];
+
+			try {
+				this.output.append(crossfadeContainer(id, img));
+			} catch (ex) {
+				return this.error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	Macro.add("crossfade", {
+		handler: function handler() {
+			var _this$args$;
+			if (this.args.length === 0) return this.error("No ID specified!");
+			if (this.args.length === 1) return this.error("No image path specified!");
+			var selector = crossfadeSelector(this.args[0]);
+			if (!$(selector).length) return this.error('No "<<crossfadecontainer>>" with ID "' + this.args[0] + '" found!');
+			var img = this.args[1];
+			var duration = Util.fromCssTime((_this$args$ = this.args[2]) !== null && _this$args$ !== void 0 ? _this$args$ : "400ms");
+			fade(selector, img, duration);
+		}
+	});
+
+	setup.crossfade = crossfade;
+})();
+/* twine-user-script #3: "click-to-proceed.js" */
+(function () {
+	"use strict";
+	window.CTP = function (config) {
+		this.id = "";
+		this.selector = "";
+		this.stack = [];
+		this.head = "";
+		this.tail = "";
+		this.log = {
+			clear: 0,
+			index: 0,
+			seen: 0,
+			delayed: false
+		};
+		Object.keys(config).forEach(function (pn) {
+			this[pn] = clone(config[pn]);
+		}, this);
+	};
+
+	CTP.prototype.clone = function () {
+		return new CTP(this);
+	};
+
+	CTP.prototype.toJSON = function () {
+		var ownData = {};
+		Object.keys(this).forEach(function (pn) {
+			ownData[pn] = clone(this[pn]);
+		}, this);
+		return JSON.reviveWrapper('new CTP($ReviveData$)', ownData);
+	};
+
+	CTP.getCTP = function (id) {
+		var clone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (!id || !id.trim()) throw new Error("No ID specified!");
+		variables()["#macro-ctp-dump"] = variables()["#macro-ctp-dump"] || {};
+		if (!variables()["#macro-ctp-dump"][id]) throw new Error("No CTP with ID '" + id + "' found!");
+		return clone ? variables()["#macro-ctp-dump"][id].clone() : variables()["#macro-ctp-dump"][id];
+	};
+
+	CTP.contentObject = function (content) {
+		var mods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		mods = mods.split(/\s+/g);
+		return {
+			clear: mods.includes("clear") && !mods.includes("noClear"),
+			nobr: mods.includes("nobr") && !mods.includes("br"),
+			transition: mods.includesAny("t8n", "transition") && !mods.includesAny("noT8n", "noTransition"),
+			delay: Util.fromCssTime(mods.find(function (el) {
+				return /[0-9\.]+m?s/.test(el);
+			}) || "0s"),
+			re: mods.includes("redo"),
+			content: content
+		};
+	};
+
+	CTP.prototype.add = function (content) {
+		var mods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		var contentObj = CTP.contentObject(content, mods);
+		contentObj.index = this.stack.length;
+		this.stack.push(contentObj);
+		return this;
+	};
+
+	CTP.item = function (item) {
+		var noT8n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (!item) return "";
+		var t8n = noT8n ? "" : item.transition ? "macro-ctp-entry-t8n" : "";
+		var br = item.index === 0 || item.index === "head" || item.clear ? " " : item.nobr ? " " : '<br class="macro-ctp-entry-index-' + item.index + '">';
+		var brAfter = item.index === "head" && !item.nobr ? "<br>" : " ";
+		return br + '<span class="macro-ctp-visible macro-ctp-entry macro-ctp-entry-index-' + item.index + ' ' + t8n + '">' + item.content + '</span>' + brAfter;
+	};
+
+	CTP.prototype.entry = function (index) {
+		var noT8n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (index < 0 || index >= this.stack.length) return "";
+		var entry = this.stack[index];
+		return CTP.item(entry, noT8n);
+	};
+
+	CTP.prototype.out = function () {
+		return '<span class="macro-ctp-wrapper">' + '<span class="ctp-head"></span>' + '<span class="ctp-body">' + this.entry(0) + '</span>' + '<span class="ctp-tail"></span>' + '</span>';
+	};
+
+	CTP.prototype.go = function (diff) {
+		if (!Number.isInteger(diff)) throw new Error(`Cannot move by non-integral amounts!`);
+		if (diff > 0) {
+			for (var i = 0; i < diff; i++) {
+				this.advance(true);
+			}
+		} else if (diff < 0) {
+			for (var _i = 0; _i < -diff; _i++) {
+				this.back();
+			}
+		}
+	};
+
+	CTP.prototype.goTo = function (index) {
+		this.go(index - this.log.index);
+	};
+
+	CTP.prototype.advance = function () {
+		var noDelay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var _this = this;
+		if (this.log.index === this.stack.length - 1 || this.log.delayed) return;
+		var index = ++this.log.index;
+		this.log.seen = Math.max(this.log.seen, index);
+		var _el = $(this.selector).children(".ctp-body");
+		if (this.stack[index].clear) {
+			_el.children().removeClass("macro-ctp-visible").hide();
+			this.log.clear = index - 1;
+		}
+		function delay(ctp) {
+			ctp.log.delayed = false;
+			$(ctp.selector).children(".ctp-body").wiki(ctp.entry(ctp.log.index)).siblings(".ctp-head").empty().wiki(CTP.item(ctp.head)).siblings(".ctp-tail").empty().wiki(CTP.item(ctp.tail));
+		}
+		if (noDelay) {
+			delay(_this);
+		} else {
+			this.log.delayed = true;
+			return new Promise(function (resolve, reject) {
+				setTimeout(function () {
+					delay(_this);
+					resolve("advanced");
+				}, _this.stack[index].delay);
+			});
+		}
+	};
+
+	CTP.prototype.back = function () {
+		var _this3 = this;
+		if (this.log.index <= 0 || this.log.delayed) return this;
+		if (this.log.clear >= --this.log.index) {
+			var clearIndex = 0;
+			var _clear = this.stack.filter(function (el) {
+				return el.clear && el.index < _this3.log.index + 1;
+			});
+			if (_clear.length) clearIndex = _clear[_clear.length - 1].index;
+			this.stack.slice(clearIndex, this.log.index + 1).forEach(function (el) {
+				$(_this3.selector).children(".ctp-body").children(".macro-ctp-entry-index-" + el.index).addClass("macro-ctp-visible").show();
+			}, this);
+		}
+		var item = this.stack[this.log.index];
+		if (item.re) $(this.selector).children(".ctp-body").children(".macro-ctp-entry.macro-ctp-entry-index-" + item.index).empty().wiki(item.content);
+		this.stack.slice(this.log.index + 1, this.log.seen + 1).forEach(function (el) {
+			$(_this3.selector).children(".ctp-body").children(".macro-ctp-entry-index-" + el.index).remove();
+		}, this);
+		$(this.selector).children(".ctp-head").empty().wiki(CTP.item(this.head)).siblings(".ctp-tail").empty().wiki(CTP.item(this.tail));
+		return this;
+	};
+
+	Macro.add("ctp", {
+		tags: ["ctpNext", "ctpHead", "ctpTail"],
+		handler: function handler() {
+			if (this.args.length === 0) return this.error("No ID specified!");
+			var _id = this.args[0];
+			var _data = 'data-ctp="' + Util.escape(_id) + '"';
+			var ctp = new CTP({
+				id: _id,
+				selector: '[' + _data + ']'
+			});
+			var _overArgs = this.payload[0].args;
+			_overArgs.reverse().pop();
+			_overArgs = " " + _overArgs.join(" ");
+			this.payload.forEach(function (el, index) {
+				var _args = el.args.join(" ");
+				switch (el.name) {
+					case "ctpHead":
+						{
+							var _head = CTP.contentObject(el.contents.trim(), _args + _overArgs);
+							_head.index = "head";
+							ctp.head = _head;
+							break;
+						}
+					case "ctpTail":
+						{
+							var _tail = CTP.contentObject(el.contents.trim(), _args + _overArgs);
+							_tail.index = "tail";
+							ctp.tail = _tail;
+							break;
+						}
+					default:
+						{
+							ctp.add(el.contents.trim(), (el.name === "ctp" ? "" : _args) + _overArgs);
+							break;
+						}
+				}
+			});
+			variables()["#macro-ctp-dump"] = variables()["#macro-ctp-dump"] || {};
+			variables()["#macro-ctp-dump"][_id] = ctp;
+			let out = $("<div />");
+			out.wiki(ctp.out()).children(".macro-ctp-wrapper").attr("data-ctp", Util.escape(_id)).children(".ctp-head").wiki(CTP.item(ctp.head)).siblings(".ctp-tail").wiki(CTP.item(ctp.tail));
+			$(this.output).append(out.children().unwrap());
+		}
+	});
+
+	Macro.add("ctpAdvance", {
+		handler: function handler() {
+			try {
+				var ctp = CTP.getCTP(this.args[0]);
+				if (ctp) ctp.advance();
+			} catch (ex) {
+				throw new Error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	Macro.add("ctpBack", {
+		handler: function handler() {
+			try {
+				var ctp = CTP.getCTP(this.args[0]);
+				if (ctp) ctp.back();
+			} catch (ex) {
+				throw new Error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	$(document).on(':passageinit', function () {
+		delete variables()["#macro-ctp-dump"];
+	});
+})();
+/* twine-user-script #4: "fading-macro-set.js" */
+// fading macro set, by chapel; for SugarCube 2
+// version 1.1.0
+// see the documentation: https://github.com/ChapelR/custom-macros-for-sugarcube-2#fading-macros
+
+// <<fadein>> macro
+Macro.add('fadein', {
+       tags : null,
+    handler : function () {
+
+        var $wrapper = $(document.createElement('span'));
+        var content  = this.payload[0].contents, time, delay;
+
+        if (this.args.length === 0) {
+            return this.error('no arguments given');
+        }
+        
+        time  = Util.fromCssTime(this.args[0]);
+        delay = (this.args.length > 1) ?  Util.fromCssTime(this.args[1]) : 0;
+
+        $wrapper
+            .wiki(content)
+            .addClass('macro-' + this.name)
+            .appendTo(this.output)
+            .hide()
+            .delay(delay)
+            .fadeIn(time);
+
+    }
+});
+
+// <<fadeout>> macro
+Macro.add('fadeout', {
+       tags : null,
+    handler : function () {
+
+        var $wrapper = $(document.createElement('span'));
+        var content  = this.payload[0].contents, time, delay;
+
+        if (this.args.length === 0) {
+            return this.error('no arguments given');
+        }
+        
+        time  = Util.fromCssTime(this.args[0]);
+        delay = (this.args.length > 1) ?  Util.fromCssTime(this.args[1]) : 0;
+
+        $wrapper
+            .wiki(content)
+            .addClass('macro-' + this.name)
+            .appendTo(this.output)
+            .delay(delay)
+            .fadeOut(time);
+
+    }
+});
+/* twine-user-script #5: "live-update.js" */
+(function () {
+	"use strict";
+
+	$(document).on(":liveupdate", function () {
+		$(".macro-live").trigger(":liveupdateinternal");
+	});
+
+	Macro.add(['update', 'upd'], {
+		handler: function handler() {
+			$(document).trigger(":liveupdate");
+		}
+	});
+
+	Macro.add(['live', 'l', 'lh'], {
+		skipArgs: true,
+		handler: function handler() {
+			if (this.args.full.length === 0) {
+				return this.error('no expression specified');
+			}
+			try {
+				var statement = this.args.full;
+				var result = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+				if (result !== null) {
+					var lh = this.name === "lh";
+					var $el = $("<span></span>").addClass("macro-live").wiki(lh ? Util.escape(result) : result).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						var out = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+						$el.empty().wiki(lh ? Util.escape(out) : out);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+
+	Macro.add(['liveblock', 'lb'], {
+		tags: null,
+		handler: function handler() {
+			try {
+				var content = this.payload[0].contents.trim();
+				if (content) {
+					var $el = $("<span></span>").addClass("macro-live macro-live-block").wiki(content).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						$el.empty().wiki(content);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+})();
+/* twine-user-script #6: "message-macro.js" */
+// message macro, by chapel (with help from T.M. Edwards); for sugarcube 2
+// version 1.0.1
+// see the documentation: https://github.com/ChapelR/custom-macros-for-sugarcube-2#message-macro
+
+//intialize namespace
+setup.messageMacro = {};
+
+// default text option:
+setup.messageMacro.default = 'Help';
+
+// <<message>> macro
+Macro.add('message', {
+    tags    : null,
+    handler : function () {
+        var message  = this.payload[0].contents;
+        var $wrapper = $(document.createElement('span'));
+        var $link    = $(document.createElement(this.args.includes('btn') ? 'button' : 'a'));
+        var $content = $(document.createElement('span'));
+
+        $link
+            .wiki(this.args.length > 0 && this.args[0] !== 'btn' ? this.args[0] : setup.messageMacro.default)
+            .ariaClick( this.createShadowWrapper( function () {
+                if ($wrapper.hasClass('open')) {
+                    $content
+                        .css('display', 'none')
+                        .empty();
+                }
+                else {
+                    $content
+                        .css('display', 'block')
+                        .wiki(message);
+                }
+
+                $wrapper.toggleClass('open');
+            }));
+
+        $wrapper
+            .attr('id', 'macro-' + this.name + '-' + this.args.join('').replace(/[^A-Za-z0-9]/g, ''))
+            .addClass('message-text')
+            .append($link)
+            .append($content)
+            .appendTo(this.output);
+    }
+});
+/* twine-user-script #7: "notify.js" */
+(function () {
+    // notify.js, by chapel; for sugarcube 2
+    // version 1.1.1
+    // requires notify.css / notify.min.css
+
+    var DEFAULT_TIME = 2000; // default notification time (in MS)
+
+    var isCssTime = /\d+m?s$/;
+
+    $(document.body).append("<div id='notify'></div>");
+    $(document).on(':notify', function (ev) {
+        if (ev.message && typeof ev.message === 'string') {
+            // trim message
+            ev.message.trim();
+            // classes
+            if (ev.class) {
+                if (typeof ev.class === 'string') {
+                    ev.class = 'open macro-notify ' + ev.class;
+                } else if (Array.isArray(ev.class)) {
+                    ev.class = 'open macro-notify ' + ev.class.join(' ');
+                } else {
+                    ev.class = 'open macro-notify';
+                }
+            } else {
+                ev.class = 'open macro-notify';
+            }
+            
+            // delay
+            if (ev.delay) {
+                if (typeof ev.delay !== 'number') {
+                    ev.delay = Number(ev.delay);
+                }
+                if (Number.isNaN(ev.delay)) {
+                    ev.delay = DEFAULT_TIME;
+                }
+            } else {
+                ev.delay = DEFAULT_TIME;
+            }
+            
+            $('#notify')
+                .empty()
+                .wiki(ev.message)
+                .addClass(ev.class);
+                    
+            setTimeout(function () {
+                $('#notify').removeClass();
+            }, ev.delay);
+        }
+    });
+
+    function notify (message, time, classes) {
+        if (typeof message !== 'string') {
+            return;
+        }
+
+        if (typeof time !== 'number') {
+            time = false;
+        }
+
+        $(document).trigger({
+            type    : ':notify',
+            message : message,
+            delay   : time,
+            class   : classes || ''
+        });
+    }
+
+    // <<notify delay 'classes'>> message <</notify>>
+    Macro.add('notify', {
+           tags : null,
+        handler : function () {
+            
+            // set up
+            var msg     = this.payload[0].contents, 
+                time    = false, 
+                classes = false, i;
+            
+            // arguments
+            if (this.args.length > 0) {
+                var cssTime = isCssTime.test(this.args[0]);
+                if (typeof this.args[0] === 'number' || cssTime) {
+                    time    = cssTime ? Util.fromCssTime(this.args[0]) : this.args[0];
+                    classes = (this.args.length > 1) ? this.args.slice(1).flatten() : false;
+                } else {
+                    classes = this.args.flatten().join(' ');
+                }
+            }
+            
+            // fire event
+            notify(msg, time, classes);
+            
+        }
+    });
+
+    setup.notify = notify;
+}());
+/* twine-user-script #8: "preload.js" */
 (function () {
     'use strict';
     // v1.0.0
@@ -756,6 +1856,9 @@ Setting.addList("theme", {
     function preloadAll (urls, cb) {
         var loaded = 0;
         var toBeLoaded = urls.length;
+        if (toBeLoaded === 0) {
+            throw new Error("No URLs to preload!");
+        }
         urls.forEach( function (url) {
             preloadImage( url, function () {
                 loaded++;
@@ -797,10 +1900,102 @@ Setting.addList("theme", {
         }
     });
 }());
+/* twine-user-script #9: "replacelink-macro-set.min.js" */
+/*! <<replacelink>> macro set for SugarCube 2.x */
+!function(){"use strict";function showVer(n,notrans){n&&(n.innerHTML="",new Wikifier(n,n.tweecode),n.setAttribute("data-enabled","true"),n.style.display="inline",n.classList.remove("revision-span-out"),notrans||(n.classList.add("revision-span-in"),n.timeout&&clearTimeout(n.timeout),n.timeout=setTimeout(function(){n.classList.remove("revision-span-in"),n=null},20)))}function hideVer(n,notrans){n&&(n.setAttribute("data-enabled","false"),n.classList.remove("revision-span-in"),n.timeout&&clearTimeout(n.timeout),notrans?(n.style.display="none",n.innerHTML="",n=null):(n.classList.add("revision-span-out"),n.timeout=setTimeout(function(){"false"===n.getAttribute("data-enabled")&&(n.classList.remove("revision-span-out"),n.style.display="none",n.innerHTML=""),n=null},1e3)))}function tagcontents(b,starttags,desttags,endtags,k){function tagfound(i,e,endtag){for(var j=0;j<e.length;j++)if(a.indexOf("<<"+e[j]+(endtag?">>":""),i)===i)return e[j]}for(var tg,l=0,c="",a=b.source.slice(k),i=0;i<a.length;i++){if(tg=tagfound(i,starttags))l++;else{if((tg=tagfound(i,desttags,!0))&&0===l)return b.nextMatch=k+i+tg.length+4,[c,tg];if((tg=tagfound(i,endtags,!0))&&(l--,l<0))return null}c+=a.charAt(i)}return null}function revisionSpanHandler(g,e,f,b){function mkspan(vtype){return h=insertElement(m,"span",null,"revision-span "+vtype),h.setAttribute("data-enabled",!1),h.style.display="none",h.tweecode="",h}var becomes,c,cn,m,h,vsn,k=b.source.indexOf(">>",b.matchStart)+2,vsns=[],vtype=e,flen=f.length;if(this.shorthand&&flen)for(;f.length>0;)vsns.push([f.shift(),"insert"===this.flavour?"gains":"becomes"]);else("insert"===this.flavour||"continue"===this.flavour&&"time"===this.trigger)&&vsns.push(["","becomes"]);if("continue"===this.flavour&&flen)b.nextMatch=k+b.source.slice(k).length,vsns.push([b.source.slice(k),vtype]);else{if(becomes=["becomes","gains"],c=tagcontents(b,begintags,becomes.concat(endtags),endtags,k),c&&endtags.indexOf(c[1])===-1){for(;c;)vsns.push(c),c=tagcontents(b,begintags,becomes,endtags,b.nextMatch);c=tagcontents(b,begintags,["/"+e,"end"+e],endtags,b.nextMatch)}if(!c)return void throwError(g,"<<"+e+">>: cannot find a matching close tag");vsns.push(c),"continue"===this.flavour&&(k=b.nextMatch,b.nextMatch=k+b.source.slice(k).length,vsns.push([b.source.slice(k),""]))}for("remove"===this.flavour&&vsns.push(["","becomes"]),cn=0,m=insertElement(g,"span",null,e),m.setAttribute("data-flavour",this.flavour),h=mkspan("initial"),vsn=vsns.shift(),h.tweecode=vsn[0],showVer(h,!0);vsns.length>0;)vsn&&(vtype=vsn[1]),vsn=vsns.shift(),h=mkspan(vtype),h.tweecode=vsn[0];"function"==typeof this.setup&&this.setup(m,g,e,f)}function revisionSetup(m,g,e,f){m.className+=" "+f[0].replace(" ","_")}function keySetup(m,g,e,f){f[0];m.setEventListener("keydown",function l(e){var done=!revise("revise",m);done&&m.removeEventListener("keydown",l)})}function timeSetup(m,g,e,f){function cssTimeUnit(s){if("string"==typeof s){if("ms"===s.slice(-2).toLowerCase())return Number(s.slice(0,-2))||0;if("s"===s.slice(-1).toLowerCase())return 1e3*Number(s.slice(0,-1))||0}return throwError(g,"<<"+e+'>>: "'+s+'" is not a valid CSS time unit'),0}var tm=cssTimeUnit(f[0]),s=passage();setTimeout(function timefn(){if(passage()===s){var done=!revise("revise",m);done||setTimeout(timefn,tm)}},tm)}function hoverSetup(m){var fn,noMouseEnter=null!==document.head.onmouseenter,m1=m.children[0],m2=m.children[1],gains=m2.className.indexOf("gains")>-1;m1&&m2&&(m1.onmouseenter=function(e){for(var efp=document.elementFromPoint(e.clientX,e.clientY);efp&&efp!==this;)efp=efp.parentNode;efp&&"false"!==this.getAttribute("data-enabled")&&revise("revise",this.parentNode)},m2.onmouseleave=function(e){for(var efp=document.elementFromPoint(e.clientX,e.clientY);efp&&efp!==this;)efp=efp.parentNode;efp||"false"!==this.getAttribute("data-enabled")&&revise("revert",this.parentNode)},gains&&(m1.onmouseleave=m2.onmouseleave),noMouseEnter&&(fn=function(n){return function(e){event.relatedTarget&&(event.relatedTarget===this||this.compareDocumentPosition(event.relatedTarget)&Node.DOCUMENT_POSITION_CONTAINED_BY)||this[n]()}},m1.onmouseover=fn("onmouseenter"),m2.onmouseout=fn("onmouseleave"),gains&&(m1.onmouseout=m2.onmouseout)),m=null)}function mouseSetup(m){var evt=null===document.head.onmouseenter?"onmouseenter":"onmouseover";m[evt]=function(){var done=!revise("revise",this);done&&(this[evt]=null)},m=null}function linkSetup(m,g,e,f){var l=document.createElement("a"),p=m.parentNode;l.className="link-internal replaceLink",p.insertBefore(l,m),l.insertBefore(m,null),jQuery(l).ariaClick(function(){var done=!1;m&&m.parentNode===this&&(done=!revise("revise",m),scrollWindowTo(m)),done&&(this.parentNode.insertBefore(m,this),this.parentNode.removeChild(this))}),l=null}function visitedSetup(m,g,e,f){var done,sav=State.variables,os="once seen",d=m.firstChild&&("insert"===this.flavour?m.firstChild.nextSibling:m.firstChild).tweecode;if(sav[os]=sav[os]||{},d&&!sav[os].hasOwnProperty(d))sav[os][d]=1;else{for(var i=sav[os][d];i>0&&!done;i--)done=!revise("revise",m,!0);sav[os].hasOwnProperty(d)&&(sav[os][d]+=1)}}function insideDepartingSpan(elem){for(var r=elem.parentNode;!r.classList.contains("passage");){if(r.classList.contains("revision-span-out"))return!0;r=r.parentNode}}function reviseAll(rt,rname){for(var rall=document.querySelectorAll(".passage [data-flavour]."+rname),ret=!1,i=0;i<rall.length;i++)insideDepartingSpan(rall[i])||(ret=revise(rt,rall[i])||ret);return ret}function revise(rt,r,notrans){function doToGainerSpans(n,fn){for(var k=n-1;k>=0&&rc[k+1].classList.contains("gains");k--)fn(rc[k],notrans)}for(var ind2,curr,next,ind=-1,rev="revert"===rt,rnd=rt.indexOf("random")>-1,fl=r.getAttribute("data-flavour"),rc=r.childNodes,cyc="cycle"===fl,rcl=rc.length-1,k=0;k<=rcl;k++)"true"===rc[k].getAttribute("data-enabled")&&(ind=k);rev&&(ind-=1),curr=ind>=0?rc[ind]:cyc?rc[rcl]:null,ind2=ind,rnd&&(ind2=(ind+Math.floor(Math.random()*rcl))%rcl),next=ind2<rcl?rc[ind2+1]:cyc?rc[0]:null;var docurr=rev?showVer:hideVer,donext=rev?hideVer:showVer,currfn=function(){next&&next.classList.contains("gains")&&!rnd||(docurr(curr,notrans),doToGainerSpans(ind,docurr,notrans))},nextfn=function(){donext(next,notrans),rnd&&doToGainerSpans(ind2+1,donext,notrans)};return rev?(nextfn(),currfn()):(currfn(),nextfn()),!!cyc||(rev?ind>0:ind2<rcl-1)}if("undefined"==typeof version||"undefined"==typeof version.title||"SugarCube"!==version.title||"undefined"==typeof version.major||version.major<2)throw new Error("<<replacelink>> macro set requires SugarCube 2.0.0 or greater, aborting load");version.extensions.replacelinkMacroSet={major:1,minor:1,revision:7};var begintags=[],endtags=[];[{name:"insertlink",flavour:"insert",trigger:"link",setup:linkSetup},{name:"timedinsert",flavour:"insert",trigger:"time",setup:timeSetup},{name:"insertion",flavour:"insert",trigger:"revisemacro",setup:revisionSetup},{name:"later",flavour:"insert",trigger:"visited",setup:visitedSetup},{name:"keyinsert",flavour:"insert",trigger:"key",setup:keySetup},{name:"replacelink",flavour:"replace",trigger:"link",setup:linkSetup},{name:"timedreplace",flavour:"replace",trigger:"time",setup:timeSetup},{name:"mousereplace",flavour:"replace",trigger:"mouse",setup:mouseSetup},{name:"hoverreplace",flavour:"replace",trigger:"hover",setup:hoverSetup},{name:"revision",flavour:"replace",trigger:"revisemacro",setup:revisionSetup},{name:"keyreplace",flavour:"replace",trigger:"key",setup:keySetup},{name:"timedremove",flavour:"remove",trigger:"time",setup:timeSetup},{name:"mouseremove",flavour:"remove",trigger:"mouse",setup:mouseSetup},{name:"hoverremove",flavour:"remove",trigger:"hover",setup:hoverSetup},{name:"removal",flavour:"remove",trigger:"revisemacro",setup:revisionSetup},{name:"once",flavour:"remove",trigger:"visited",setup:visitedSetup},{name:"keyremove",flavour:"remove",trigger:"key",setup:keySetup},{name:"continuelink",flavour:"continue",trigger:"link",setup:linkSetup},{name:"timedcontinue",flavour:"continue",trigger:"time",setup:timeSetup},{name:"mousecontinue",flavour:"continue",trigger:"mouse",setup:mouseSetup},{name:"keycontinue",flavour:"continue",trigger:"key",setup:keySetup},{name:"cycle",flavour:"cycle",trigger:"revisemacro",setup:revisionSetup},{name:"mousecycle",flavour:"cycle",trigger:"mouse",setup:mouseSetup},{name:"timedcycle",flavour:"cycle",trigger:"time",setup:timeSetup},{name:"keycycle",flavour:"replace",trigger:"key",setup:keySetup}].forEach(function(e){e.handler=revisionSpanHandler,e.shorthand=["link","mouse","hover"].indexOf(e.trigger)>-1,macros[e.name]=e,Macro.tags.register(e.name),begintags.push(e.name),endtags.push("/"+e.name,"end"+e.name)}),macros.revertlink=macros.reviselink=macros.randomiselink=macros.randomizelink={handler:function(a,b,c){function disableLink(l){l.style.display="none"}function enableLink(l){l.style.display="inline"}function updateLink(l){if(l.className.indexOf("random")>-1)return void enableLink(l);for(var cannext,canprev,r,fl,rall=document.querySelectorAll(".passage [data-flavour]."+rname),i=0;i<rall.length;i++)r=rall[i],fl=r.getAttribute("data-flavour"),insideDepartingSpan(r)||("cycle"===fl?cannext=canprev=!0:("false"===r.firstChild.getAttribute("data-enabled")&&(canprev=!0),"false"===r.lastChild.getAttribute("data-enabled")&&(cannext=!0)));var can=l.classList.contains("revert")?canprev:cannext;(can?enableLink:disableLink)(l)}function toggleText(w){w.classList.toggle(rl+"Enabled"),w.classList.toggle(rl+"Disabled"),w.style.display="none"===w.style.display?"inline":"none"}if(c.length<2)return void throwError(a,"<<"+b+">>: insufficient arguments (requires at least 2)");var l,rname,actName=b.slice(0,-4),rl="reviseLink",v="",end=!1,out=!1;switch(rname=c.shift().replace(" ","_"),l=insertElement(a,"a"),l.className="link-internal "+rl+" "+rl+"_"+rname+" "+actName,c.length>1&&"$"===c[0][0]&&(v=c[0].slice(1),c.shift()),c[c.length-1]){case"end":end=!0,c.pop();break;case"out":out=!0,c.pop()}for(var h=State.variables,i=0;i<c.length;i++){var on=i===Math.max(c.indexOf(h[v]),0),d=insertElement(null,"span",null,rl+(on?"En":"Dis")+"abled");on?(h[v]=c[i],l.setAttribute("data-cycle",i)):d.style.display="none",insertText(d,c[i]),l.appendChild(d)}jQuery(l).ariaClick(function(){reviseAll(actName,rname);var lall,t=this.childNodes,u=this.getAttribute("data-cycle")-0,m=t.length;if((end||out)&&u>=m-(end?2:1)){if(!end)return void this.parentNode.removeChild(this);var n=this.removeChild(t[u+1]||t[u]);n.className=rl+"End",n.style.display="inline",this.parentNode.replaceChild(n,this)}else toggleText(t[u]),u=(u+1)%m,v&&(h[v]=c[u]),toggleText(t[u]),this.setAttribute("data-cycle",u);lall=document.getElementsByClassName(rl+"_"+rname);for(var i=0;i<lall.length;i++)updateLink(lall[i])}),disableLink(l),setTimeout(function(l){return function(){updateLink(l)}}(l),1),l=null}},macros.mouserevise=macros.hoverrevise={handler:function(a,b,c,d){var endtags=["/"+b,"end"+b],evt=null===window.onmouseenter?"onmouseenter":"onmouseover",t=tagcontents(d,[b],endtags,endtags,d.source.indexOf(">>",d.matchStart)+2);if(t){var rname=c[0].replace(" ","_"),h=insertElement(a,"span",null,"hoverrevise hoverrevise_"+rname),f=function(){var done=!reviseAll("revise",rname);"hoverrevise"!=b&&done&&(this[evt]=null)};new Wikifier(h,t[0]),"hoverrevise"===b?(h.onmouseover=f,h.onmouseout=function(){reviseAll("revert",rname)}):h[evt]=f,h=null}}},Macro.tags.register("mouserevise"),Macro.tags.register("hoverrevise"),macros.instantrevise={handler:function(a,b,c,d){reviseAll("revise",c[0].replace(" ","_"))}}}();
+/* twine-user-script #10: "shake-macro-set.min.js" */
+/*! <<shake>> macro set for SugarCube 2.x */
+!function(){"use strict";if("undefined"==typeof version||"undefined"==typeof version.title||"SugarCube"!==version.title||"undefined"==typeof version.major||version.major<2||"undefined"==typeof version.minor||version.minor<5)throw new Error("<<shake>> macro requires SugarCube 2.5.0 or greater, aborting load");Macro.add("shake",{tags:null,handler:function(){var duration=this.args.length>0?this.args[0]:1/0,shakeClass="shake";if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}Config.debug&&this.debugView.modes({block:!0});var $wrapper=jQuery(document.createElement("span"));$wrapper.addClass("macro-"+this.name+" "+shakeClass).wiki(this.payload[0].contents).appendTo(this.output),1/0!==duration&&setTimeout(function(){$wrapper.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}}),Macro.add(["shakescreen","shaketarget"],{handler:function(){var $targets,duration,shakeClass;if("shakescreen"===this.name)$targets=jQuery("#passages"),duration=this.args.length>0?this.args[0]:1/0,shakeClass="shake-block";else{if(0===this.args.length)return this.error("no selector specified");if($targets=jQuery(this.args[0]),0===$targets.length)return this.error('no elements matched the selector "'+this.args[0]+'"');duration=this.args.length>1?this.args[1]:1/0,shakeClass="block"===jQuery($targets[0]).css("display")?"shake-block":"shake"}if("stop"===duration)return void $targets.removeClass(shakeClass);if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}$targets.addClass(shakeClass),1/0!==duration&&setTimeout(function(){$targets.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}})}();
 
-/* 介面中文化開始 */
-!function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();
-/* 介面中文化結束 */</script><tw-tag name="CSS" color="purple"></tw-tag><tw-tag name="noreturn" color="red"></tw-tag><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="325,200" size="100,100">&lt;!-- 宣告全域變數 --&gt;
+/* 介面中文化 */
+(function () {
+	/* General. */
+	l10nStrings.identity = '遊戲';
+	l10nStrings.aborting = '終止';
+	l10nStrings.cancel   = '取消';
+	l10nStrings.close    = '關閉';
+	l10nStrings.ok       = '確認';
+
+	/* Errors. */
+	l10nStrings.errorTitle              = '錯誤';
+	l10nStrings.errorToggle             = '切換錯誤顯示頁';	
+	l10nStrings.errorNonexistentPassage = '段落"{passage}"不存在';
+	l10nStrings.errorSaveDiskLoadFailed = '讀取存檔失敗';	
+	l10nStrings.errorSaveMissingData    = '存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞';
+	l10nStrings.errorSaveIdMismatch     = '保存{identity}是錯誤的';
+
+	/* Warnings. */
+	l10nStrings._warningIntroLacking  = '你的瀏覽器可能損壞或者被禁用';
+	l10nStrings._warningOutroDegraded = '，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。';
+	l10nStrings.warningNoWebStorage   = '{_warningIntroLacking} Web Storage API {_warningOutroDegraded}';
+	l10nStrings.warningDegraded       = '{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}';
+
+	/* Debug bar. */
+	l10nStrings.debugBarToggle      = '打開/關閉偵錯列';
+	l10nStrings.debugBarNoWatches   = '\u2014 沒有監看變數 \u2014';
+	l10nStrings.debugBarAddWatch    = '增加監看變數';
+	l10nStrings.debugBarDeleteWatch = '刪除監看變數';
+	l10nStrings.debugBarWatchAll    = '監看全部變數';
+	l10nStrings.debugBarWatchNone   = '刪除全部變數';
+	l10nStrings.debugBarLabelAdd    = '增加';
+	l10nStrings.debugBarLabelWatch  = '監看';
+	l10nStrings.debugBarLabelTurn   = '跳轉'; // (noun) chance to act (in a game), moment, period
+	l10nStrings.debugBarLabelViews  = '預覽';
+	l10nStrings.debugBarViewsToggle = '打開/關閉偵錯預覽模式';
+	l10nStrings.debugBarWatchToggle = '打開/關閉監看面板';
+
+	/* UI bar. */
+	l10nStrings.uiBarToggle   = '打開/關閉導航欄';
+	l10nStrings.uiBarBackward = '回朔{identity}的歷史紀錄';
+	l10nStrings.uiBarForward  = '快轉{identity}的歷史紀錄';
+	l10nStrings.uiBarJumpto   = '跳到{identity}的歷史紀錄中的某一點';
+
+	/* Jump To. */
+	l10nStrings.jumptoTitle       = '跳到';
+	l10nStrings.jumptoTurn        = '轉到';
+	l10nStrings.jumptoUnavailable = '目前沒有跳躍點\u2026';
+
+	/* Saves. */
+	l10nStrings.savesTitle       = '存檔';
+	l10nStrings.savesDisallowed  = '在這個段落中不允許存檔';
+	l10nStrings.savesIncapable   = '{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用';
+	l10nStrings.savesLabelAuto   = '自動存檔';
+	l10nStrings.savesLabelDelete = '刪除';
+	l10nStrings.savesLabelExport = '另存為\u2026';
+	l10nStrings.savesLabelImport = '讀取\u2026';
+	l10nStrings.savesLabelLoad   = '讀取';
+	l10nStrings.savesLabelClear  = '全部刪除';
+	l10nStrings.savesLabelSave   = '保存';
+	l10nStrings.savesLabelSlot   = '插槽';
+	l10nStrings.savesUnavailable = '未找到存檔插槽\u2026';
+	l10nStrings.savesUnknownDate = '未知';
+
+	/* Settings. */
+	l10nStrings.settingsTitle = '設置';
+	l10nStrings.settingsOff   = '關閉';
+	l10nStrings.settingsOn    = '開啟';
+	l10nStrings.settingsReset = '重置為默認值';
+
+	/* Restart. */
+	l10nStrings.restartTitle  = '重新開始';
+	l10nStrings.restartPrompt = '你確定要重新開始嗎？未保存的進度將會丟失。';
+
+	/* Share. */
+	l10nStrings.shareTitle = '分享';
+
+	/* Alert. */
+	l10nStrings.alertTitle = '警告';
+	
+	/* Autoload. */
+	l10nStrings.autoloadTitle  = '自動保存';
+	l10nStrings.autoloadCancel = '前往最初的段落';
+	l10nStrings.autoloadOk     = '讀取自動存檔';
+	l10nStrings.autoloadPrompt = '有一個自動存檔，讀取它還是前往最初的段落？';
+
+	/* Macros. */
+	l10nStrings.macroBackText   = '返回';
+	l10nStrings.macroReturnText = '返回';
+})();</script><tw-tag name="CSS" color="purple"></tw-tag><tw-tag name="noreturn" color="red"></tw-tag><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="325,200" size="100,100">&lt;!-- 宣告全域變數 --&gt;
 &lt;&lt;set $name to &#39;李仙得&#39;&gt;&gt;
 &lt;&lt;set $location to &#39;斯卡羅&#39;&gt;&gt;
 

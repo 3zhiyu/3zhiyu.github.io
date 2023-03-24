@@ -1,2 +1,8 @@
 @echo off
-dir /b /on >list.txt
+setlocal enabledelayedexpansion
+set "list="
+for %%i in (*.*) do (
+  set "filename=%%~nxi"
+  set "list=!list! 'media/!filename!'"
+)
+echo ^<^<preload %list%^>^> > list.txt
