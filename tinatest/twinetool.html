@@ -857,7 +857,94 @@ Macro.add('message', {
 });
 
 /* 介面中文化 */
-!function(){l10nStrings.identity="遊戲",l10nStrings.aborting="終止",l10nStrings.cancel="取消",l10nStrings.close="關閉",l10nStrings.ok="確認",l10nStrings.errorTitle="錯誤",l10nStrings.errorNonexistentPassage='段落"{passage}"不存在',l10nStrings.errorSaveMissingData="存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞",l10nStrings.errorSaveIdMismatch="保存{identity}是錯誤的",l10nStrings._warningIntroLacking="你的瀏覽器可能損壞或者被禁用",l10nStrings._warningOutroDegraded="，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。",l10nStrings.warningNoWebStorage="{_warningIntroLacking} Web Storage API {_warningOutroDegraded}",l10nStrings.warningDegraded="{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}",l10nStrings.debugViewTitle="調適模式",l10nStrings.debugViewToggle="切換調適模式",l10nStrings.uiBarToggle="打開/關閉導航欄",l10nStrings.uiBarBackward="後退",l10nStrings.uiBarForward="前進",l10nStrings.uiBarJumpto="跳到{identity}的歷史紀錄中的某一點",l10nStrings.jumptoTitle="跳到",l10nStrings.jumptoTurn="轉到",l10nStrings.jumptoUnavailable="目前沒有跳躍點…",l10nStrings.savesTitle="存檔",l10nStrings.savesDisallowed="在這個段落中不允許存檔",l10nStrings.savesEmptySlot="— 插槽空 —",l10nStrings.savesIncapable="{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用",l10nStrings.savesLabelAuto="自動存檔",l10nStrings.savesLabelDelete="刪除",l10nStrings.savesLabelExport="另存為……",l10nStrings.savesLabelImport="讀取……",l10nStrings.savesLabelLoad="讀取",l10nStrings.savesLabelClear="全部刪除",l10nStrings.savesLabelSave="保存",l10nStrings.savesLabelSlot="插槽",l10nStrings.savesSavedOn="保存在：",l10nStrings.savesUnavailable="未找到存檔插槽…",l10nStrings.savesUnknownDate="未知",l10nStrings.settingsTitle="設置",l10nStrings.settingsOff="關閉",l10nStrings.settingsOn="開啟",l10nStrings.settingsReset="重置為默認值",l10nStrings.restartTitle="重新開始",l10nStrings.restartPrompt="你確定要重新開始嗎？未保存的進度將會丟失。",l10nStrings.shareTitle="分享",l10nStrings.autoloadTitle="自動保存",l10nStrings.autoloadCancel="前往最初的段落",l10nStrings.autoloadOk="讀取自動存檔",l10nStrings.autoloadPrompt="有一個自動存檔，讀取它還是前往最初的段落？",l10nStrings.macroBackText="返回",l10nStrings.macroReturnText="返回"}();</script><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="200,600" size="100,100">
+(function () {
+	/* General. */
+	l10nStrings.identity = '遊戲';
+	l10nStrings.aborting = '終止';
+	l10nStrings.cancel   = '取消';
+	l10nStrings.close    = '關閉';
+	l10nStrings.ok       = '確認';
+
+	/* Errors. */
+	l10nStrings.errorTitle              = '錯誤';
+	l10nStrings.errorToggle             = '切換錯誤顯示頁';	
+	l10nStrings.errorNonexistentPassage = '段落"{passage}"不存在';
+	l10nStrings.errorSaveDiskLoadFailed = '讀取存檔失敗';	
+	l10nStrings.errorSaveMissingData    = '存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞';
+	l10nStrings.errorSaveIdMismatch     = '保存{identity}是錯誤的';
+
+	/* Warnings. */
+	l10nStrings._warningIntroLacking  = '你的瀏覽器可能損壞或者被禁用';
+	l10nStrings._warningOutroDegraded = '，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。';
+	l10nStrings.warningNoWebStorage   = '{_warningIntroLacking} Web Storage API {_warningOutroDegraded}';
+	l10nStrings.warningDegraded       = '{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}';
+
+	/* Debug bar. */
+	l10nStrings.debugBarToggle      = '打開/關閉偵錯列';
+	l10nStrings.debugBarNoWatches   = '\u2014 沒有監看變數 \u2014';
+	l10nStrings.debugBarAddWatch    = '增加監看變數';
+	l10nStrings.debugBarDeleteWatch = '刪除監看變數';
+	l10nStrings.debugBarWatchAll    = '監看全部變數';
+	l10nStrings.debugBarWatchNone   = '刪除全部變數';
+	l10nStrings.debugBarLabelAdd    = '增加';
+	l10nStrings.debugBarLabelWatch  = '監看';
+	l10nStrings.debugBarLabelTurn   = '跳轉'; // (noun) chance to act (in a game), moment, period
+	l10nStrings.debugBarLabelViews  = '預覽';
+	l10nStrings.debugBarViewsToggle = '打開/關閉偵錯預覽模式';
+	l10nStrings.debugBarWatchToggle = '打開/關閉監看面板';
+
+	/* UI bar. */
+	l10nStrings.uiBarToggle   = '打開/關閉導航欄';
+	l10nStrings.uiBarBackward = '回朔{identity}的歷史紀錄';
+	l10nStrings.uiBarForward  = '快轉{identity}的歷史紀錄';
+	l10nStrings.uiBarJumpto   = '跳到{identity}的歷史紀錄中的某一點';
+
+	/* Jump To. */
+	l10nStrings.jumptoTitle       = '跳到';
+	l10nStrings.jumptoTurn        = '轉到';
+	l10nStrings.jumptoUnavailable = '目前沒有跳躍點\u2026';
+
+	/* Saves. */
+	l10nStrings.savesTitle       = '存檔';
+	l10nStrings.savesDisallowed  = '在這個段落中不允許存檔';
+	l10nStrings.savesIncapable   = '{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用';
+	l10nStrings.savesLabelAuto   = '自動存檔';
+	l10nStrings.savesLabelDelete = '刪除';
+	l10nStrings.savesLabelExport = '另存為\u2026';
+	l10nStrings.savesLabelImport = '讀取\u2026';
+	l10nStrings.savesLabelLoad   = '讀取';
+	l10nStrings.savesLabelClear  = '全部刪除';
+	l10nStrings.savesLabelSave   = '保存';
+	l10nStrings.savesLabelSlot   = '插槽';
+	l10nStrings.savesUnavailable = '未找到存檔插槽\u2026';
+	l10nStrings.savesUnknownDate = '未知';
+
+	/* Settings. */
+	l10nStrings.settingsTitle = '設置';
+	l10nStrings.settingsOff   = '關閉';
+	l10nStrings.settingsOn    = '開啟';
+	l10nStrings.settingsReset = '重置為默認值';
+
+	/* Restart. */
+	l10nStrings.restartTitle  = '重新開始';
+	l10nStrings.restartPrompt = '你確定要重新開始嗎？未保存的進度將會丟失。';
+
+	/* Share. */
+	l10nStrings.shareTitle = '分享';
+
+	/* Alert. */
+	l10nStrings.alertTitle = '警告';
+	
+	/* Autoload. */
+	l10nStrings.autoloadTitle  = '自動保存';
+	l10nStrings.autoloadCancel = '前往最初的段落';
+	l10nStrings.autoloadOk     = '讀取自動存檔';
+	l10nStrings.autoloadPrompt = '有一個自動存檔，讀取它還是前往最初的段落？';
+
+	/* Macros. */
+	l10nStrings.macroBackText   = '返回';
+	l10nStrings.macroReturnText = '返回';
+})();</script><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="200,600" size="100,100">
 
 /*背包變數*/
 &lt;&lt;set $inventory to []&gt;&gt;
@@ -2068,8 +2155,8 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 }}}
 @@
 * 加上語法
-@@color:green;{{{@@.rumble;}}}@@字體上下顛倒效果@@color:green;{{{@@}}}@@
-@@.rumble;字體上下顛倒效果@@</tw-passagedata><tw-passagedata pid="47" name="字體左右抖動" tags="" position="1200,600" size="100,100">* 新增CSS代碼
+@@color:green;{{{@@.rumble;}}}@@字體上下抖動效果@@color:green;{{{@@}}}@@
+@@.rumble;字體上下抖動效果@@</tw-passagedata><tw-passagedata pid="47" name="字體左右抖動" tags="" position="1200,600" size="100,100">* 新增CSS代碼
 @@color:grey;
 {{{
 @-webkit-keyframes shudder {
@@ -2092,8 +2179,8 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 }}}
 @@
 * 加上語法
-@@color:green;{{{@@.shudder;}}}@@字體上下顛倒效果@@color:green;{{{@@}}}@@
-@@.shudder;字體上下顛倒效果@@</tw-passagedata><tw-passagedata pid="48" name="字體彈出" tags="" position="1300,600" size="100,100">* 加上語法
+@@color:green;{{{@@.shudder;}}}@@字體左右抖動效果@@color:green;{{{@@}}}@@
+@@.shudder;字體左右抖動效果@@</tw-passagedata><tw-passagedata pid="48" name="字體彈出" tags="" position="1300,600" size="100,100">* 加上語法
 @@color:green;{{{@@.pulse;}}}@@字體彈出效果@@color:green;{{{@@}}}@@
 @@.pulse;字體彈出效果@@
 
