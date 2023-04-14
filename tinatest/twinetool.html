@@ -643,7 +643,30 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
     clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
   }
 }
-/* 動態效果結束 */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 特定片段產生連結網址開始 */
+/* 動態效果結束 */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 強制line用外部瀏覽器開啟 */
+//<![CDATA[
+/*處理分享到 Line 的連結*/
+$("a").each(function () {
+var href = this.href;
+
+// http 網址才處理
+if (href.indexOf("http") != 0 || href.indexOf("//") < 0){
+return;
+}
+
+// 網址沒有參數 ? 時, 直接加參數
+if (href.indexOf("?") < 0) {
+href += "?openExternalBrowser=1";
+} else {
+// 網址有參數 ? 時, 用 & 加參數
+href += "&openExternalBrowser=1";
+}
+
+this.href = href;
+});
+//]]>
+
+/* 特定片段產生連結網址開始 */
 if ("onhashchange" in window) {  // event supported
 	window.onhashchange = function () {
 		hashChanged();
