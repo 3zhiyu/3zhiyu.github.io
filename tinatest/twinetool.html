@@ -3484,10 +3484,10 @@ window.hello = function (name) {
 @@
 * 新增Javascript代碼
 @@color:green;
-{{{
+&lt;p&gt;{{{
 /* 動態效果：&lt;&lt;shake&gt;&gt; */
 !function(){&quot;use strict&quot;;if(&quot;undefined&quot;==typeof version||&quot;undefined&quot;==typeof version.title||&quot;SugarCube&quot;!==version.title||&quot;undefined&quot;==typeof version.major||version.major&lt;2||&quot;undefined&quot;==typeof version.minor||version.minor&lt;5)throw new Error(&quot;&lt;&lt;shake&gt;&gt; macro requires SugarCube 2.5.0 or greater, aborting load&quot;);Macro.add(&quot;shake&quot;,{tags:null,handler:function(){var duration=this.args.length&gt;0?this.args[0]:1/0,shakeClass=&quot;shake&quot;;if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}Config.debug&amp;&amp;this.debugView.modes({block:!0});var $wrapper=jQuery(document.createElement(&quot;span&quot;));$wrapper.addClass(&quot;macro-&quot;+this.name+&quot; &quot;+shakeClass).wiki(this.payload[0].contents).appendTo(this.output),1/0!==duration&amp;&amp;setTimeout(function(){$wrapper.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}}),Macro.add([&quot;shakescreen&quot;,&quot;shaketarget&quot;],{handler:function(){var $targets,duration,shakeClass;if(&quot;shakescreen&quot;===this.name)$targets=jQuery(&quot;#passages&quot;),duration=this.args.length&gt;0?this.args[0]:1/0,shakeClass=&quot;shake-block&quot;;else{if(0===this.args.length)return this.error(&quot;no selector specified&quot;);if($targets=jQuery(this.args[0]),0===$targets.length)return this.error(&#39;no elements matched the selector &quot;&#39;+this.args[0]+&#39;&quot;&#39;);duration=this.args.length&gt;1?this.args[1]:1/0,shakeClass=&quot;block&quot;===jQuery($targets[0]).css(&quot;display&quot;)?&quot;shake-block&quot;:&quot;shake&quot;}if(&quot;stop&quot;===duration)return void $targets.removeClass(shakeClass);if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}$targets.addClass(shakeClass),1/0!==duration&amp;&amp;setTimeout(function(){$targets.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}})}();
-}}}
+}}}&lt;/p&gt;
 @@
 
 * 加上語法
