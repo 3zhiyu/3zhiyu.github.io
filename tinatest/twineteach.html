@@ -1706,7 +1706,6 @@ Twine學習資源
 ----
 &lt;h3&gt;遊戲功能與Javascript&lt;/h3&gt;
 *[[Javascript使用說明]]
-*[[在twine中使用Javascript的詳細說明與注意事項|在twine中使用JAVASCRIPT的方法]]
 
 ----
 &lt;h3&gt;遊戲版面樣式與CSS&lt;/h3&gt;
@@ -2893,7 +2892,8 @@ $(document).on(&#39;:Passagerender&#39;, function (ev) {
 * 加上語法
 @@color:green;{{{@@.fade-in-out;}}}@@字體閃爍效果@@color:green;{{{@@}}}@@
 @@.fade-in-out;字體閃爍效果@@</tw-passagedata><tw-passagedata pid="47" name="動態效果CSS和JS整合" tags="" position="1400,1025" size="100,100">&lt;h3&gt;@@JAVASCRIPT@@&lt;/h3&gt;
-&lt;p&gt;{{{
+@@color:green;
+{{{
 /* 動態效果：delay */
 $(document).on(&#39;:passagerender&#39;, function (ev) {
 	// Find all elements containing the delayed class.
@@ -2908,12 +2908,17 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 		});
 	}
 });
+
 /* 動態效果：&lt;&lt;shake&gt;&gt; */
+}}}
+&lt;p&gt;{{{
 !function(){&quot;use strict&quot;;if(&quot;undefined&quot;==typeof version||&quot;undefined&quot;==typeof version.title||&quot;SugarCube&quot;!==version.title||&quot;undefined&quot;==typeof version.major||version.major&lt;2||&quot;undefined&quot;==typeof version.minor||version.minor&lt;5)throw new Error(&quot;&lt;&lt;shake&gt;&gt; macro requires SugarCube 2.5.0 or greater, aborting load&quot;);Macro.add(&quot;shake&quot;,{tags:null,handler:function(){var duration=this.args.length&gt;0?this.args[0]:1/0,shakeClass=&quot;shake&quot;;if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}Config.debug&amp;&amp;this.debugView.modes({block:!0});var $wrapper=jQuery(document.createElement(&quot;span&quot;));$wrapper.addClass(&quot;macro-&quot;+this.name+&quot; &quot;+shakeClass).wiki(this.payload[0].contents).appendTo(this.output),1/0!==duration&amp;&amp;setTimeout(function(){$wrapper.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}}),Macro.add([&quot;shakescreen&quot;,&quot;shaketarget&quot;],{handler:function(){var $targets,duration,shakeClass;if(&quot;shakescreen&quot;===this.name)$targets=jQuery(&quot;#passages&quot;),duration=this.args.length&gt;0?this.args[0]:1/0,shakeClass=&quot;shake-block&quot;;else{if(0===this.args.length)return this.error(&quot;no selector specified&quot;);if($targets=jQuery(this.args[0]),0===$targets.length)return this.error(&#39;no elements matched the selector &quot;&#39;+this.args[0]+&#39;&quot;&#39;);duration=this.args.length&gt;1?this.args[1]:1/0,shakeClass=&quot;block&quot;===jQuery($targets[0]).css(&quot;display&quot;)?&quot;shake-block&quot;:&quot;shake&quot;}if(&quot;stop&quot;===duration)return void $targets.removeClass(shakeClass);if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}$targets.addClass(shakeClass),1/0!==duration&amp;&amp;setTimeout(function(){$targets.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}})}();
 }}}&lt;/p&gt;
+@@
 
 ----
 &lt;h3&gt;@@CSS@@&lt;/h3&gt;
+@@color:green;
 {{{
 /* 文字置中 */
 .center {
@@ -3474,6 +3479,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 	display: inline-block;
 }
 }}}
+@@
 [[返回|previous()]]</tw-passagedata><tw-passagedata pid="48" name="動態效果twine語法整合" tags="" position="1500,1025" size="100,100">@@color:green;{{{@@.center;}}}@@文字置中@@color:green;{{{@@}}}@@
 @@.center;文字置中@@
 
@@ -3608,28 +3614,6 @@ CSS在twine中不需要再透過特殊語法來控制，可直接沿用html、CS
 如果你不喜歡Twine的預設版面，你可以在&quot;StoryInterface&quot;的Passage中重設UI。
 * 關於sugarcube版面使用的markup可以參考[[此文件|http://www.motoslave.net/sugarcube/2/docs/html.html]]
 * 關於sugarcube版面的預設CSS可以參考[[此文件|https://www.motoslave.net/sugarcube/2/docs/#css]]
-
-----
-假設你只希望在特定script觸發時才改變版面樣式，你必須透過javascript來做到，例如：
-* 這是觸發的script：
-@@color:green;
-{{{
-&lt;&lt;script&gt;&gt;UI.restart();&lt;&lt;/script&gt;&gt; 
-}}}
-@@
-* 這是改變觸發script的CSS的javascript代碼（在「{ } Javascript」中置入代碼）：
-@@color:green;
-{{{
-// script觸發的&quot;Restart&quot;對話視窗標題文字變成紅色
-$(document).on(&#39;:dialogopened&#39;, function (ev) {
-	if ($(&#39;#ui-dialog-title&#39;).text() == &#39;Restart&#39;) {
-		$(&#39;#ui-dialog-title&#39;).css(&#39;color&#39;, &#39;red&#39;);
-	} else {
-		$(&#39;#ui-dialog-title&#39;).css(&#39;color&#39;, &#39;inherit&#39;);
-	}
-})
-}}}
-@@
 
 [[返回|previous()]]</tw-passagedata><tw-passagedata pid="52" name="文字輸入框" tags="" position="2100,0" size="100,100">&lt;div id=&#39;supportercode-form&#39;&gt;\
 &lt;&lt;textbox &#39;$inputtext&#39; &#39;正解為6&#39; autofocus&gt;&gt; \
