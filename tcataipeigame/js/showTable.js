@@ -30,7 +30,9 @@ document.getElementById('proposer').innerHTML = proposer;
 document.getElementById('content_1').innerHTML = urlParams.get('contentR1');
 document.getElementById('content_2').innerHTML = urlParams.get('contentR2');
 document.getElementById('content_3').innerHTML = urlParams.get('contentR3');
-document.getElementById('content_4').innerHTML = urlParams.get('contentR4');
+document.getElementById('topic_r1').innerHTML = urlParams.get('topicR1');
+document.getElementById('topic_r2').innerHTML = urlParams.get('topicR2');
+document.getElementById('topic_r3').innerHTML = urlParams.get('topicR3');
 document.getElementById('applyTime').innerHTML = urlParams.get('getDate');
 
 

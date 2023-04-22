@@ -1,67 +1,36 @@
 var contentR3 = '';
 var contentR1 = '';
-var contentR4 = '';
 var contentR2 = '';
-var taiwanEmpire = '';
-var peh_oe_ji = '';
-var tsai_poe_hoe = '';
+var topicR1 = '';
+var topicR2 = '';
+var topicR3 = '';
+
+
 var recorderName = '';
 
-function getDate() {
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd ; 
-    return today;
-}
 
 function downloadAsPDF(divID){
-    var doc = new jsPDF('p', 'pt', 'a4');   
+    var doc = new jsPDF('l', 'px', 'a1');   
 	doc.addFileToVFS('iansuiRegular.ttf', font);
 	doc.addFont('iansuiRegular.ttf', 'iansuiRegular', 'normal');
 	doc.setFont('iansuiRegular');
+    
     html2canvas(document.body, {
     onrendered: function(canvas) {
-		doc.addImage(proposal, 'PNG', 0, 0, 595, 840);
+		doc.addImage(proposal, 'PNG', 15, 15, 1755, 1241);
+        //doc.addImage(proposal, 'PNG', 0, 0, 595, 840);
+        doc.setTextColor(76, 72, 69);
+        doc.setFontSize(48);
+        doc.text(contentR3, 320, 220, {maxWidth:1}, 0);
+        doc.text(contentR1, 1120, 220, {maxWidth:1}, 0);
+        doc.text(contentR2, 720, 220, {maxWidth:1}, 0);
         doc.setTextColor(117,28,28);
-        switch(divID){
-            case 'contentR1':
-                doc.text(getContent('contentR1'), 195, 195); 
-                doc.text(contentR3, 195, 330);
-                doc.text(contentR4, 195, 525);
-                doc.text(contentR2, 195, 680);
-                break;
-            case 'contentR2':
-                doc.text(getContent('contentR2'), 195, 680);
-                doc.text(contentR3, 195, 345);
-                doc.text(contentR1, 195, 195);
-                doc.text(contentR4, 195, 525);
-                break;
-            case 'contentR3':
-                doc.text(getContent('contentR3'), 195, 345);
-                doc.text(contentR1, 195, 195);
-                doc.text(contentR4, 195, 525);
-                doc.text(contentR2, 195, 680);
-                break;
-            case 'contentR4':   
-                doc.text(getContent('contentR4'), 195, 525);
-                doc.text(contentR3, 195, 345);
-                doc.text(contentR1, 195, 195);
-                doc.text(contentR2, 195, 680);
-                break;
-            default:
-                //console.log('go to default');
-                doc.text(contentR3, 195, 345);
-                doc.text(contentR1, 195, 195);
-                doc.text(contentR4, 195, 525);
-                doc.text(contentR2, 195, 680);
-                
-        }
-        
-        doc.text(getDate(), 430, 100);
-        doc.text(recorderName, 150, 100);
-        doc.save('計畫表.pdf');
+        doc.setFontSize(64);
+        doc.text('●' + topicR1, 1200, 150, {maxWidth:1}, 0);
+        doc.text('●' + topicR2, 800, 150, {maxWidth:1}, 0);
+        doc.text('●' + topicR3, 400, 150, {maxWidth:1}, 0);
+        doc.text(recorderName, 1350, 915,{maxWidth:1}, 0);
+        doc.save('我的報導.pdf');
     }     
   });	
 }
@@ -76,11 +45,9 @@ function getContent(contentID){
 
 function viewTable(divID){
     var url = 'showTable.html?';
-    var uri = 'proposer='+ recorderName + '&' + divID + '=' + getContent(divID) + '&contentR1='+contentR1+'&contentR2='+contentR2+'&contentR3='+contentR3+'&contentR4='+contentR4+'&getDate='+getDate();
-    //sessionStorage.setItem('realURL', window.location.href);
+    var uri = 'proposer='+ recorderName + '&' + divID + '=' + getContent(divID) + '&contentR1='+contentR1+'&contentR2='+contentR2+'&contentR3='+contentR3+'&topicR1=●'+topicR1+'&topicR2=●'+topicR2+'&topicR3=●'+topicR3; 
     uri = utf8_to_b64(uri);
     url = url + uri;
-    //console.log('Final url is: ' + url);
     window.open(url);
 }
 
