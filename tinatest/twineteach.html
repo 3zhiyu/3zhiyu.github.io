@@ -2299,7 +2299,7 @@ twine語法：
 &lt;&lt;set $cyclingResult to $choices[$choicesCount]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;\
 &lt;&lt;linkreplace $choices[$choicesCount]&gt;&gt;&lt;&lt;include &quot;循環選項&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="逐行出現" tags="" position="700,1025" size="100,100">* 新增CSS代碼
-@@color:green;
+@@color:grey;
 {{{
 .delayed {
     opacity: 0;
@@ -2307,9 +2307,9 @@ twine語法：
 }}}
 @@
 * 新增Javascript代碼
-@@color:green;
+@@color:grey;
 {{{
-$(document).on(&#39;:Passagerender&#39;, function (ev) {
+$(document).on(&#39;:passagerender&#39;, function (ev) {
 	// Find all elements containing the delayed class.
 	var elems = $(ev.content).find(&#39;.delayed&#39;);
 	// Appearance delay (in milliseconds) between each delayed text block.
