@@ -1,12 +1,12 @@
-var contentR3 = '';
-var contentR1 = '';
-var contentR2 = '';
-var topicR1 = '';
-var topicR2 = '';
-var topicR3 = '';
+var contentR3 = '未填';
+var contentR1 = '未填';
+var contentR2 = '未填';
+var topicR1 = '未填';
+var topicR2 = '未填';
+var topicR3 = '未填';
 
 
-var recorderName = '';
+var recorderName = '姓名未填';
 
 
 function downloadAsPDF(divID){
@@ -48,7 +48,7 @@ function viewTable(divID){
     var uri = 'proposer='+ recorderName + '&' + divID + '=' + getContent(divID) + '&contentR1='+contentR1+'&contentR2='+contentR2+'&contentR3='+contentR3+'&topicR1=●'+topicR1+'&topicR2=●'+topicR2+'&topicR3=●'+topicR3; 
     uri = utf8_to_b64(uri);
     url = url + uri;
-    window.open(url);
+    window.open(url); 
 }
 
 function utf8_to_b64(str) {

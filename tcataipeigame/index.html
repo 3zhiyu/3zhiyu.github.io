@@ -98,7 +98,18 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="串聯文協一百點─報導蔣渭水" startnode="13" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* 名片上的姓名樣式 */
+	<tw-storydata name="串聯文協一百點─報導蔣渭水" startnode="13" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="19D64A05-4AE7-4383-BC8F-112277A9EACD" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* 報導上的姓名樣式 */
+.reportname {
+  position: absolute;
+  writing-mode: vertical-rl;
+  font-family: var(--special);
+  font-size: 12px;
+  top: 160px;
+  right: 50px;
+  line-height: 100%;
+}
+
+/* 名片上的姓名樣式 */
 .cardname {
   position: absolute;
   writing-mode: vertical-rl;
@@ -113,11 +124,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 .passage.notran {
 transition: none;
 opacity: 1;
-}.passage.notran {
-transition: none;
-opacity: 1;
 }
-
 
 /*素行紀錄表CSS匯入*/
 @import url('css/printTablePDF.css');
@@ -2374,7 +2381,7 @@ src=&quot;media/Item_04.png&quot; width=&quot;300px&quot; style=&quot;display:bl
 
 
 預載圖片
-&lt;&lt;preload  &#39;media/Background_02.png&#39; &#39;media/Background_03.png&#39; &#39;media/Background_04.png&#39; &#39;media/Background_05.png&#39; &#39;media/Background_06.png&#39; &#39;media/Background_07.png&#39; &#39;media/Character_01.png&#39; &#39;media/Character_02.png&#39; &#39;media/Character_03.png&#39; &#39;media/Character_04.png&#39; &#39;media/Character_05.png&#39; &#39;media/Character_06.png&#39; &#39;media/Character_07.png&#39; &#39;media/Character_08.png&#39; &#39;media/Character_09.png&#39; &#39;media/Character_10.png&#39; &#39;media/Character_11.png&#39; &#39;media/favicon.png&#39; &#39;media/gamestart.png&#39; &#39;media/handcuffs.png&#39; &#39;media/Icon_back.png&#39; &#39;media/Icon_menu.png&#39; &#39;media/Icon_restart.png&#39; &#39;media/Icon_save.png&#39; &#39;media/Item_01.png&#39; &#39;media/Item_02.png&#39; &#39;media/Item_03.png&#39; &#39;media/Item_04.png&#39; &#39;media/Item_05.png&#39; &#39;media/Item_05_1.png&#39; &#39;media/Item_06_0.png&#39; &#39;media/Item_06_1.png&#39; &#39;media/Item_06_2.png&#39; &#39;media/Item_06_3.png&#39; &#39;media/Item_06_4.png&#39; &#39;media/lineqrcode.png&#39; &#39;media/logo.png&#39; &#39;media/report.png&#39; &#39;media/report2.png&#39;&gt;&gt;  </tw-passagedata><tw-passagedata pid="3" name="錯誤訊息" tags="" position="476,401" size="100,100">錯誤訊息
+&lt;&lt;preload  &#39;media/Background_02.png&#39; &#39;media/Background_03.png&#39; &#39;media/Background_04.png&#39; &#39;media/Background_05.png&#39; &#39;media/Background_06.png&#39; &#39;media/Background_07.png&#39; &#39;media/Character_01.png&#39; &#39;media/Character_02.png&#39; &#39;media/Character_03.png&#39; &#39;media/Character_04.png&#39; &#39;media/Character_05.png&#39; &#39;media/Character_06.png&#39; &#39;media/Character_07.png&#39; &#39;media/Character_08.png&#39; &#39;media/Character_09.png&#39; &#39;media/Character_10.png&#39; &#39;media/Character_11.png&#39; &#39;media/favicon.png&#39; &#39;media/gamestart.png&#39; &#39;media/handcuffs.png&#39; &#39;media/Icon_back.png&#39; &#39;media/Icon_menu.png&#39; &#39;media/Icon_restart.png&#39; &#39;media/Icon_save.png&#39; &#39;media/Item_01.png&#39; &#39;media/Item_02.png&#39; &#39;media/Item_03.png&#39; &#39;media/Item_04.png&#39; &#39;media/Item_05.png&#39; &#39;media/Item_05_1.png&#39; &#39;media/Item_06_0.png&#39; &#39;media/Item_06_1.png&#39; &#39;media/Item_06_2.png&#39; &#39;media/Item_06_3.png&#39; &#39;media/Item_06_4.png&#39; &#39;media/lineqrcode.png&#39; &#39;media/logo.png&#39; &#39;media/report.png&#39; &#39;media/report2.png&#39; &#39;media/reportbg.png&#39;&gt;&gt;  </tw-passagedata><tw-passagedata pid="3" name="錯誤訊息" tags="" position="476,401" size="100,100">錯誤訊息
 
 【當前位置】$Now</tw-passagedata><tw-passagedata pid="4" name="章節選擇" tags="" position="229,399" size="100,100">&lt;DIV style=&quot;text-align:center;line-height:32px;font-size:24px;&quot;&gt;
 !章節選擇
@@ -2803,7 +2810,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
-src=&quot;media/Character_05.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;（有個人向你走來，給了你一張名片，他是「臺灣日日新報社」的記者）
+src=&quot;media/Item_05_1.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;（有個人向你走來，給了你一張名片，他是「臺灣日日新報社」的記者）
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
@@ -3193,7 +3200,7 @@ src=&quot;media/Character_06.png&quot; width=&quot;200px&quot; style=&quot;displ
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
-src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;（但你們都很確定，蔣渭水先生不會在從警署大門走出來了。）
+src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;（但你們都很確定，蔣渭水先生不會再從警署大門走出來了。）
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
 &lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
@@ -4067,15 +4074,16 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;goto 5-6-1&gt;&gt;
 &lt;&lt;/button&gt;&gt;&lt;&lt;replace &#39;#next&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/ctp&gt;&gt;
 
-&lt;span id=&#39;next&#39;&gt;&lt;&lt;button &quot;下一段對話&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="68" name="5-6-3" tags="Background_02" position="4200,1272" size="100,100">!!《臺灣新民報》報社
+&lt;span id=&#39;next&#39;&gt;&lt;&lt;button &quot;下一段對話&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/span&gt;</tw-passagedata><tw-passagedata pid="68" name="5-6-3" tags="Background_02" position="4200,1275" size="100,100">!!《臺灣新民報》報社
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 &lt;div class=&quot;NPC_Name&quot;&gt;【$Name】&lt;/div&gt;現在言論的尺度越來越嚴格，還是撤掉好了。
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
-src=&quot;media/Background_02.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;div style=&quot;width: 300px;margin:auto;position: relative;&quot;&gt;&lt;img
+src=&quot;media/reportbg.png&quot; width=&quot;100%&quot; &gt;&lt;p class=&quot;reportname&quot;&gt;$Name&lt;/p&gt;&lt;/div&gt;
 翌日，在《臺灣新民報》報社大樓所設置的讀報社。
 有人朗讀報紙給其他民眾，有人自顧自閱讀報紙。
 不管是朗誦還是閱讀，所有人都注意到報紙有一大格的空白。
@@ -4097,8 +4105,9 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 src=&quot;media/Character_03.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;&lt;div class=&quot;NPC_Name&quot;&gt;【林呈祿】&lt;/div&gt;我嘗試交涉，但不確定能不能刊登……
 
 &lt;&lt;ctpNext clear t8n redo&gt;&gt;
-&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;img
-src=&quot;media/Background_02.png&quot; width=100% style=&quot;display:block; margin:auto;&quot; &gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;replace &#39;#name&#39;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;div style=&quot;width: 300px;margin:auto;position: relative;&quot;&gt;&lt;img
+src=&quot;media/reportbg.png&quot; width=&quot;100%&quot; &gt;&lt;p class=&quot;reportname&quot;&gt;$Name&lt;/p&gt;&lt;/div&gt;
 翌日，在《臺灣新民報》報社大樓所設置的讀報社。
 有人朗讀報紙給其他民眾，有人自顧自閱讀報紙。
 不管是朗誦還是閱讀，所有人都注意到報紙有一大格的空白。
@@ -4158,7 +4167,7 @@ src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;displ
 	&lt;&lt;run $inventory.push(&#39;Item_03&#39;)&gt;&gt;
 	&lt;&lt;run $inventory.push(&#39;Item_04&#39;)&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="2-3-1" tags="Background_03 notran" position="1952,648" size="100,100">!!靜修高等女學校
+&lt;&lt;/ctp&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="2-3-1" tags="Background_03 notran" position="1950,650" size="100,100">!!靜修高等女學校
 &lt;span id=&#39;name&#39;&gt;&lt;img
 src=&quot;media/Character_01.png&quot; width=&quot;200px&quot; style=&quot;display:block; margin:auto;&quot; &gt;&lt;/span&gt;
 &lt;&lt;ctp &quot;對話&quot;&gt;&gt;

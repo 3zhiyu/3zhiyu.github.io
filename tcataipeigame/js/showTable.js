@@ -35,4 +35,3 @@ document.getElementById('topic_r2').innerHTML = urlParams.get('topicR2');
 document.getElementById('topic_r3').innerHTML = urlParams.get('topicR3');
 document.getElementById('applyTime').innerHTML = urlParams.get('getDate');
 
-
