@@ -2299,7 +2299,7 @@ twine語法：
 &lt;&lt;set $cyclingResult to $choices[$choicesCount]&gt;&gt;
 &lt;&lt;/silently&gt;&gt;\
 &lt;&lt;linkreplace $choices[$choicesCount]&gt;&gt;&lt;&lt;include &quot;循環選項&quot;&gt;&gt;&lt;&lt;/linkreplace&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="逐行出現" tags="" position="700,1025" size="100,100">* 新增CSS代碼
-@@color:grey;
+@@color:green;
 {{{
 .delayed {
     opacity: 0;
@@ -2307,7 +2307,7 @@ twine語法：
 }}}
 @@
 * 新增Javascript代碼
-@@color:grey;
+@@color:green;
 {{{
 $(document).on(&#39;:passagerender&#39;, function (ev) {
 	// Find all elements containing the delayed class.
@@ -2376,7 +2376,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   color: white;
   position: relative;
 }
-.glitch:before {
+.glitch::before {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -2390,7 +2390,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   animation: noise-anim-2 3s infinite linear alternate-reverse;
   -webkit-animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
-.glitch:after {
+.glitch::after {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -2539,7 +2539,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   color: white;
   position: relative;
 }
-.glitchy:before {
+.glitchy::before {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -2553,7 +2553,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   animation: noise-animY-2 3s infinite linear alternate-reverse;
   -webkit-animation: noise-animY-2 3s infinite linear alternate-reverse;
 }
-.glitchy:after {
+.glitchy::after {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -2700,7 +2700,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 }}}
 @@&lt;&lt;/message&gt;&gt;
 * 發抖效果的文字加上語法
-@@color:green;{{{&lt;span class=&quot;glitch&quot;&gt;}}}@@發抖效果的文字內容。@@color:green;{{{&lt;/span&gt;}}}@@
+@@color:green;{{{&lt;span class=&quot;glitchy&quot; data-text=&quot;}}}@@發抖效果的文字內容。@@color:green;{{{&quot;&gt;}}}@@發抖效果的文字內容。@@color:green;{{{&lt;/span&gt;}}}@@
 &lt;span class=&quot;glitchy&quot; data-text=&quot;抖動效果文字的內容。&quot;&gt;發抖效果文字的內容。&lt;/span&gt;
 只有單一文字@@color:green;{{{&lt;span class=&quot;glitchy&quot; data-text=&quot;}}}@@恐怖@@color:green;{{{&quot;&gt;}}}@@發抖@@color:green;{{{&lt;/span&gt;。}}}@@
 只有單一文字&lt;span class=&quot;glitchy&quot; data-text=&quot;恐怖&quot;&gt;發抖&lt;/span&gt;。</tw-passagedata><tw-passagedata pid="36" name="文字陰影" tags="" position="1100,1025" size="100,100">* 新增CSS代碼
@@ -2845,7 +2845,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 @@.pulse;字體彈出效果@@
 
 * 新增CSS代碼
-@@color:grey;
+@@color:green;
 {{{
 @-webkit-keyframes pulse {
 	0%  { -webkit-transform: scale(0, 0); transform: scale(0, 0) }
@@ -3092,7 +3092,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   color: white;
   position: relative;
 }
-.glitch:before {
+.glitch::before {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -3106,7 +3106,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   animation: noise-anim-2 3s infinite linear alternate-reverse;
   -webkit-animation: noise-anim-2 3s infinite linear alternate-reverse;
 }
-.glitch:after {
+.glitch::after {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -3255,7 +3255,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   color: white;
   position: relative;
 }
-.glitchy:before {
+.glitchy::before {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -3269,7 +3269,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
   animation: noise-animY-2 3s infinite linear alternate-reverse;
   -webkit-animation: noise-animY-2 3s infinite linear alternate-reverse;
 }
-.glitchy:after {
+.glitchy::after {
   content: attr(data-text);
   width: calc(100% + 0.5em);
   position: absolute;
@@ -3413,6 +3413,7 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
     clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
   }
 }
+
 /*! &lt;&lt;shake&gt;&gt;  */
 @-webkit-keyframes shakeanim {
 	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
@@ -3494,10 +3495,10 @@ $(document).on(&#39;:passagerender&#39;, function (ev) {
 @@color:green;{{{&lt;&lt;/timed&gt;&gt;}}}@@
 固定@@color:red;一秒@@後，逐行出現文字
 
-@@color:green;{{{&lt;span class=&quot;glitch&quot;&gt;}}}@@發抖效果@@color:green;{{{&lt;/span&gt;}}}@@
-&lt;span class=&quot;glitchy&quot; data-text=&quot;抖動效果&quot;&gt;發抖效果&lt;/span&gt;
-單一文字@@color:green;{{{&lt;span class=&quot;glitchy&quot; data-text=&quot;}}}@@恐怖@@color:green;{{{&quot;&gt;}}}@@發抖@@color:green;{{{&lt;/span&gt;}}}@@
-單一文字&lt;span class=&quot;glitchy&quot; data-text=&quot;恐怖&quot;&gt;發抖&lt;/span&gt;
+@@color:green;{{{&lt;span class=&quot;glitchy&quot; data-text=&quot;}}}@@發抖效果的文字內容。@@color:green;{{{&quot;&gt;}}}@@發抖效果的文字內容。@@color:green;{{{&lt;/span&gt;}}}@@
+&lt;span class=&quot;glitchy&quot; data-text=&quot;抖動效果文字的內容。&quot;&gt;發抖效果文字的內容。&lt;/span&gt;
+只有單一文字@@color:green;{{{&lt;span class=&quot;glitchy&quot; data-text=&quot;}}}@@恐怖@@color:green;{{{&quot;&gt;}}}@@發抖@@color:green;{{{&lt;/span&gt;。}}}@@
+只有單一文字&lt;span class=&quot;glitchy&quot; data-text=&quot;恐怖&quot;&gt;發抖&lt;/span&gt;。
 
 @@color:green;{{{&lt;span class=&quot;drunk&quot;&gt;}}}@@喝醉效果@@color:green;{{{&lt;/span&gt;}}}@@
 @@color:green;{{{@@.drunk;}}}@@喝醉效果@@color:green;{{{@@}}}@@

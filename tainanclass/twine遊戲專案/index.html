@@ -98,7 +98,17 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="twine範本_教學用" startnode="9" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* twine-user-stylesheet #1: "assets.css" */
+	<tw-storydata name="twine範本_教學用" startnode="9" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*自訂背景(標籤為bg1)*/
+body.bg1::before {
+  background-image: url("media/回家吧.png");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;  
+}
+
+/* twine-user-stylesheet #1: "assets.css" */
 /* Fonts */
 /* 思源黑體&思源宋體 */
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
@@ -1108,7 +1118,7 @@ Config.ui.stowBarInitially = true;
 	/* Macros. */
 	l10nStrings.macroBackText   = '返回';
 	l10nStrings.macroReturnText = '返回';
-})();</script><tw-tag name="CSS" color="purple"></tw-tag><tw-tag name="noreturn" color="red"></tw-tag><tw-tag name="bg1" color="blue"></tw-tag><tw-tag name="center" color="purple"></tw-tag><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="50,125" size="100,100">&lt;!-- 宣告全域變數 --&gt;
+})();</script><tw-tag name="CSS" color="purple"></tw-tag><tw-tag name="noreturn" color="red"></tw-tag><tw-tag name="center" color="purple"></tw-tag><tw-passagedata pid="1" name="StoryInit" tags="noreturn" position="50,125" size="100,100">&lt;!-- 宣告全域變數 --&gt;
 &lt;&lt;set $name to &#39;獵人父親&#39;&gt;&gt;
 &lt;&lt;set $location to &#39;來義&#39;&gt;&gt;
 
@@ -1142,7 +1152,7 @@ Config.ui.stowBarInitially = true;
 &lt;div id=&quot;ui-bar&quot; data-passage=&quot;UIBar&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;passages&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;footer&quot; data-passage=&quot;Footer&quot;&gt;&lt;/div&gt;
-*/</tw-passagedata><tw-passagedata pid="9" name="start" tags="" position="800,125" size="100,100">!上山狩獵
+*/</tw-passagedata><tw-passagedata pid="9" name="start" tags="bg1" position="800,125" size="100,100">!上山狩獵
 &lt;img src=&quot;https://drive.google.com/uc?id=1SppvpUeRGnlheUlb1uyhT-kr0LySJDHo&quot; width=&quot;500px&quot;&gt;
 
 你答應獵人父親的邀請，一起上山狩獵，再次挑戰捕捉那隻聰明的飛鼠！
@@ -1177,7 +1187,7 @@ Config.ui.stowBarInitially = true;
 &lt;&lt;/timed&gt;&gt;
 固定一秒後，逐行出現文字
 
-&lt;span class=&quot;glitch&quot;&gt;發抖效果&lt;/span&gt;
+&lt;span class=&quot;glitchy&quot; data-text=&quot;發抖效果&quot;&gt;發抖效果&lt;/span&gt;
 發抖效果
 單一文字&lt;span class=&quot;glitchy&quot; data-text=&quot;恐怖&quot;&gt;發抖&lt;/span&gt;
 單一文字發抖
