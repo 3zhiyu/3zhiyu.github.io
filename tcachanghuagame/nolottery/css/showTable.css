@@ -1,0 +1,89 @@
+@font-face{
+    font-family:'Iansui094-Regular';
+    src: url('../font/Iansui094-Regular.ttf'), 
+        url('../font/Iansui094-Regular.woff'); 
+}
+#tableContainer{
+        width: 596px;
+        height: 842px;
+        float:left;
+        position: absolute;
+        background-color: yellow;
+    }
+
+#proposer{
+    width: 125px;
+    height: 40px;
+    float: left;
+    position: absolute;
+    left: 150px;
+    top: 74px;
+    line-height: 40px;
+    text-align: center;
+}
+
+#applyTime{
+    width: 160px;
+    height: 40px;
+    float: left;
+    position: absolute;
+    left: 404px;
+    top: 74px;
+    line-height: 40px;
+    text-align: center;
+}
+
+#content_1{
+    text-align: center;
+    width: 515px;
+    height: 90px;
+    float: left;
+    position: absolute;
+    left: 40px;
+    top: 180px;
+}
+
+#content_3{
+    text-align: center;
+    width: 515px;
+    height: 100px;
+    float: left;
+    position: absolute;
+    left: 40px;
+    top: 338px;
+}
+
+#content_4{
+    text-align: center;
+    width: 515px;
+    height: 80px;
+    float: left;
+    position: absolute;
+    left: 40px;
+    top: 515px;
+}
+
+#content_2{
+    text-align: center;
+    width: 515px;
+    height: 140px;
+    float: left;
+    position: absolute;
+    left: 40px;
+    top: 670px;
+}
+
+#content_5{
+    text-align: center;
+    width: 515px;
+    height: 163px;
+    float: left;
+    position: absolute;
+    left: 40px;
+    top: 658px;
+}
+
+div{
+    color: #631c1c;
+    font-family: 'Iansui094-Regular' ;
+}
