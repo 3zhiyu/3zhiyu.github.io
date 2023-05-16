@@ -101,11 +101,12 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 	<tw-storydata name="鍵入資訊到google表單" startnode="1" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="BD305DFA-1395-42A3-AD80-A9AD82B0E0A0" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 輸入資料到google試算表 */
 window.inputsheet = function() {
   var lockID = LoadScreen.lock(); // 鎖定畫面處理以下程序
-  var name = State.variables.name;
-  var remark = State.variables.work;
-  var timecount = State.variables.timecount;
+  // 定義twine變數為傳遞給google試算表的變數
+  var name = State.variables.name; //$name
+  var remark = State.variables.work; //$work
+  var timecount = State.variables.timecount; //$timecount
   
-  // 取得當下日期
+  // 取得當下日期且格式為YYYY/MM/DD
   var currentDate = new Date(); // 取得當前日期
   var year = currentDate.getFullYear(); // 取得年份
   var month = String(currentDate.getMonth() + 1).padStart(2, '0'); // 取得月份，並補零
@@ -114,13 +115,14 @@ window.inputsheet = function() {
   
   //定義儲存到google試算表的資料
   let formdata = new FormData();
-  formdata.append("time", formattedDate);
-  formdata.append("name", name);
-  formdata.append("remark", remark);
-  formdata.append("timecount", timecount);
+  formdata.append("time", formattedDate); //填入當下日期
+  formdata.append("name", name); //$name
+  formdata.append("remark", remark); //$work
+  formdata.append("timecount", timecount); //$timecount
   
-  // google apps script透過doPost方法存取資料
+  // 傳遞資料給google apps script透過doPost方法存取
   const config = { method: "POST", body: formdata, redirect: "follow" };
+  //call api，網址替換成指定google試算表的網頁應用程式 Url
   fetch(
     "https://script.google.com/macros/s/AKfycbxksoqQpE9Qu_Aqg3XO0WOUcYHxYMqqDDusPy0ivGxrn1vuAaan4Rwlv-foaVR10ISZ/exec",
     config
@@ -128,6 +130,7 @@ window.inputsheet = function() {
     .then((response) => response.text())
     .then((result) => {
     if (result === "success") {
+      	// 資料傳遞成功跳出成功通知視窗
       	Dialog.setup("success");
 		Dialog.wiki(Story.get("success").processText());
 		Dialog.open();
@@ -135,6 +138,7 @@ window.inputsheet = function() {
     }
   })
     .catch((error) => {
+    	// 資料傳遞失敗跳出失敗通知視窗
         Dialog.setup("error");
 		Dialog.wiki(Story.get("error").processText());
 		Dialog.open();
@@ -160,7 +164,7 @@ window.readsheet = function() {
         name.push(text[i].name);
         info.push(text[i].info);
         hour.push(text[i].hours);
-        stat.push(text[i].stat);
+        stat.push(text[i].stats);
       }
 
       console.log(text);
@@ -204,7 +208,7 @@ window.readsheet = function() {
 &lt;/div&gt;
 ----
 &lt;h2&gt;讀取資料&lt;/h2&gt;
-點擊@@讀取@@顯示從google試算表讀取的資料。
+點擊@@讀取@@按鈕顯示從google試算表讀取的資料。
 
 工作紀錄：
 &lt;div id=&#39;sheet&#39;&gt;&lt;/div&gt;
