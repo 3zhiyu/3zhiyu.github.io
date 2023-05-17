@@ -4331,9 +4331,10 @@ window.inputsheet = function() {
     .then((result) =&gt; {
     if (result === &quot;success&quot;) {
       console.log(&quot;success&quot;);
+      LoadScreen.unlock(lockID); // 解鎖畫面
     }
   })
-    .catch((error) =&gt; console.log(&quot;error&quot;, error));
+    .catch((error) =&gt; console.log(&quot;error&quot;, error));LoadScreen.unlock(lockID); // 解鎖畫面
 }
 }}}
 @@
