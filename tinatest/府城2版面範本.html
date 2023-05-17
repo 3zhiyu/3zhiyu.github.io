@@ -2454,7 +2454,7 @@ Macro.add('message', {
 &lt;&lt;set $name to &#39;玩家名稱&#39;&gt;&gt; //玩家輸入名稱
 &lt;&lt;set $location to &#39;未知&#39;&gt;&gt; //玩家位置
 &lt;&lt;set $mission to &#39;未有任務&#39;&gt;&gt; //任務內容
-&lt;&lt;set $battle to false&gt;&gt; //戰鬥逃跑判定
+&lt;&lt;set $battle to []&gt;&gt; //戰鬥逃跑判定
 &lt;&lt;set $linklock to false&gt;&gt; //玩家選擇時上一句、下一句連結是否鎖定
 
 &lt;!-- 變數datamap宣告 --&gt;
@@ -3083,25 +3083,25 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 &lt;&lt;set $mission to &#39;打倒警手&#39;&gt;&gt;&lt;&lt;set $player.name to $name&gt;&gt;&lt;&lt;set $battleON to true&gt;&gt;\
 @@color:Orange;&lt;&lt;print $player.name&gt;&gt;的血量剩下&lt;&lt;live $player.HP&gt;&gt;&lt;&lt;liveblock&gt;&gt;&lt;&lt;if $player.HP &lt;= 0&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;goto &#39;失敗&#39;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;@@
 &lt;&lt;ctp &quot;對話&quot;&gt;&gt;
-&lt;span id=&quot;battletext&quot;&gt;進入戰鬥，你要做什麼？&lt;/span&gt;
+&lt;&lt;if $battle.includes(&quot;逃走&quot;)&gt;&gt;你找不到時機逃走！&lt;&lt;/if&gt;&gt;&lt;span id=&quot;battletext&quot;&gt;進入戰鬥，你要做什麼？&lt;/span&gt;
 &lt;&lt;ctpNext 0.5s t8n nobr&gt;&gt;
-&lt;&lt;replace &quot;#FSchoice&quot;&gt;&gt;\
+&lt;&lt;run $battle.delete(&#39;逃走&#39;)&gt;&gt;&lt;&lt;replace &quot;#FSchoice&quot;&gt;&gt;\
 &lt;&lt;boxAT&gt;&gt;\
 &lt;&lt;button &#39;使用拳法1&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法1，沒打到人反而自己摔倒在地！&#39;&gt;&gt;&lt;&lt;set $player.HP to $player.HP - 2&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;&lt;button &#39;使用拳法2&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法2，造成巨大的傷害！&#39;&gt;&gt;&lt;&lt;set $player1.HP to $player1.HP - random(15, 20)&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;&lt;button &#39;逃走&#39;&gt;&gt;&lt;&lt;set $reply to &#39;感覺打不過，趕緊來逃！&#39;&gt;&gt;&lt;&lt;set $battleON to false&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &#39;逃走&#39;&gt;&gt;&lt;&lt;set $reply to &#39;感覺打不過，趕緊來逃！&#39;&gt;&gt;&lt;&lt;run $battle.pushUnique(&#39;逃走&#39;)&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;/boxAT&gt;&gt;\
 &lt;&lt;/replace&gt;&gt;\
 &lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;ctpNext 0.5s clear&gt;&gt;
 &lt;&lt;replace &quot;#FSchoice&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;replace &quot;#back&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;if $battleON&gt;&gt;\
-&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;else&gt;&gt;\
+&lt;&lt;if $battle.includesAll(&quot;冰淇淋&quot;, &quot;逃走&quot;)&gt;&gt;\
 &lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[繼續|失敗]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+&lt;&lt;else&gt;&gt;\
+&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;print $reply&gt;&gt;
 &lt;&lt;ctpNext 0.5s clear&gt;&gt;
@@ -3112,7 +3112,7 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 &lt;div id=&#39;FSchoice&#39;&gt;&lt;/div&gt;
 &lt;div class=&#39;VNcharacter&#39;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=10GzE_-8oP7565va1T1AaxS3GOTfT6qrv&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="失敗" tags="bg1 story" position="1550,100" size="100,100">&lt;&lt;boxAT &quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&gt;&lt;h1&gt;戰鬥失敗&lt;/h1&gt;&lt;&lt;/boxAT&gt;&gt;
 &lt;img src=&quot;https://drive.google.com/uc?id=1qW46ZMO-bfXIV88vsq230W4Lu2tCew7q&quot; width=&quot;80%&quot;&gt;
-&lt;&lt;if $battle is true and $battleON is true&gt;&gt;\
+&lt;&lt;if $battle.includesAll(&quot;冰淇淋&quot;, &quot;逃走&quot;)&gt;&gt;\
 &lt;&lt;fadein 2s&gt;&gt;你趁著警手分心之際悄悄溜走，順利逃過一劫...&lt;&lt;/fadein&gt;&gt;
 
 【THE END】
@@ -3133,7 +3133,7 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="inventory" tags="center" position="675,375" size="100,100">&lt;div id=&#39;inv&#39;&gt;\
 每回合只能使用一個道具！
 
-&lt;&lt;button &#39;冰淇淋&#39;&gt;&gt;&lt;&lt;replace &quot;#battletext&quot;&gt;&gt;@@color:red;冰淇淋@@成功迷惑對方，必定順利逃跑！&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &quot;#back&quot;&gt;&gt;@@color:Gray;使用道具@@&lt;&lt;/replace&gt;&gt;&lt;&lt;set $battle to true&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &#39;冰淇淋&#39;&gt;&gt;&lt;&lt;replace &quot;#battletext&quot;&gt;&gt;@@color:red;冰淇淋@@成功迷惑對方，必定順利逃跑！&lt;&lt;/replace&gt;&gt;&lt;&lt;replace &quot;#back&quot;&gt;&gt;@@color:Gray;使用道具@@&lt;&lt;/replace&gt;&gt;&lt;&lt;run $battle.pushUnique(&#39;冰淇淋&#39;)&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;&lt;button &#39;酒瓶&#39;&gt;&gt;&lt;&lt;replace &quot;#battletext&quot;&gt;&gt;你拿出@@color:red;酒瓶@@當武器，沒想到卻激怒對方&lt;&lt;/replace&gt;&gt;&lt;&lt;set $player1.attack to random(13, 15)&gt;&gt;&lt;&lt;replace &quot;#back&quot;&gt;&gt;@@color:Gray;使用道具@@&lt;&lt;/replace&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/button&gt;&gt;
 
