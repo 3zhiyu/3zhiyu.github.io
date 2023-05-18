@@ -4553,37 +4553,33 @@ for %%i in (*.*) do (
 )
 echo ^&lt;^&lt;preload %list%^&gt;^&gt; &gt; list.txt
 }}}
-</tw-passagedata><tw-passagedata pid="93" name="遊戲畫面截圖" tags="" position="800,800" size="100,100">把特定id的{{{&lt;div&gt;}}}區塊內容截圖並下載於本機。
+</tw-passagedata><tw-passagedata pid="93" name="遊戲畫面截圖" tags="" position="800,800" size="100,100">用自訂巨集{{{&lt;&lt;captureScreen&gt;&gt;}}}把特定id的{{{&lt;div&gt;}}}區塊內容截圖並下載於本機。
 [[範例|https://3zhiyu.github.io/tinatest/%E5%BA%9C%E5%9F%8E2%E7%89%88%E9%9D%A2%E7%AF%84%E6%9C%AC]]
 
-* 截圖的按鈕語法（假設要截的是id為screen的區塊）
-@@color:green;{{{&lt;&lt;button&gt;&gt;&lt;&lt;set $screenID to &#39;#screen&#39;&gt;&gt;&lt;&lt;run captureScreen()&gt;&gt;&lt;&lt;/button&gt;&gt;}}}@@
+* 巨集語法（假設要截的是id為screen的區塊）
+@@color:green;{{{&lt;&lt;button&gt;&gt;&lt;&lt;captureScreen &quot;#divID&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;}}}@@
+{{{&quot;#divID&quot;}}}可不填，預設截取id為screen的{{{&lt;div&gt;}}}區塊
 
 * 在story javasvript中置入以下代碼，網址等部署完google表單的Apps Script才會有
 @@color:green;
 {{{
-/* 用html2canvas截圖 */
-// 引用html2canvas
-importScripts(&quot;https://html2canvas.hertzen.com/dist/html2canvas.js&quot;)
+/* 自訂巨集&lt;&lt;captureScreen&gt;&gt;：特定id的div區塊截圖（預設為#screen） */
+Macro.add(&#39;captureScreen&#39;, {
+  handler: function() {
+    var screenID = this.args[0] || &quot;#screen&quot;;
 
-// 擷取並處理圖片
-window.captureScreen = function() {
-  // 擷取的區塊用twine變數$screenID控制
-  var screenID = State.variables.screenID;
-  
-  html2canvas(document.querySelector(screenID)).then(canvas =&gt; {
-    // 獲取圖片數據URL
-    var imageData = canvas.toDataURL();
+    html2canvas(document.querySelector(screenID)).then(canvas =&gt; {
+      var image = canvas.toDataURL(&quot;image/png&quot;);
 
-    // 創建一個&lt;a&gt;元素，設置圖片數據作為下載連結
-    var link = document.createElement(&#39;a&#39;);
-    link.href = imageData;
-    link.download = &#39;screenshot.png&#39;; // 設置下載文件的名稱
+      var fileName = &quot;screenshot_&quot; + Date.now() + &quot;.png&quot;;
 
-    // 觸發點擊事件下載圖片
-    link.click();
-  });
-};
+      var link = document.createElement(&quot;a&quot;);
+      link.href = image;
+      link.download = fileName;
+      link.click();
+    });
+  }
+});
 }}}
 @@</tw-passagedata></tw-storydata>
 	<script id="script-sugarcube" type="text/javascript">
