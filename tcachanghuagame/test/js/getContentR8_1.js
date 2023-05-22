@@ -1,1 +1,0 @@
-var finalDecision = "逮捕！";
