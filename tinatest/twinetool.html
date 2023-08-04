@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Twine語法整合" startnode="9" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* titleAT樣式 */
+	<tw-storydata name="Twine語法整合" startnode="9" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* titleAT樣式 */
 .titleAT {
     background-color: rgba(0, 0, 0, 0.7);
     border: 2px solid #787878;
@@ -1400,27 +1400,37 @@ __底線__
 
 比如有一個音源檔案，位置放在media資料夾中，檔案名稱為「mp3.mp3」，在故事中稱呼為mp3。
 那麼代碼這麼寫--
-@@color:grey;
+@@color:green;
 {{{
 &lt;&lt;cacheaudio &#39;mp3&#39; &#39;media/mp3.mp3&#39;&gt;&gt;
 }}}
 @@
 如果音源檔案在google雲端資料夾上，要透過@@color:blue;&quot;&quot;&quot;https://drv.tw/&quot;&quot;&quot;@@去獲取音檔的連結。
-@@color:grey;
+@@color:green;
 {{{
 &lt;&lt;cacheaudio &#39;mp3ondrive&#39; &#39;https://el1l7eqjck7zfbkn6duica-on.drv.tw/%E5%B7%A5%E4%BD%9C/twine/audio/mp3.mp3&#39;&gt;&gt;
 }}}
 @@
 
 !!!!2.在要撥放音源的PASSAGE上，加入以下代碼：
-@@color:grey;
+@@color:green;
 {{{
-&lt;&lt;link &#39;連結文字&#39;&gt;&gt;
+&lt;&lt;link 播放音源&gt;&gt;
   &lt;&lt;audio &#39;音源名稱&#39; play&gt;&gt;
 &lt;&lt;/link&gt;&gt;
 }}}
 @@
-呈現結果--&lt;&lt;link 播MP3&gt;&gt;&lt;&lt;audio &#39;mp3&#39; play&gt;&gt;&lt;&lt;/link&gt;&gt;
+語法呈現結果 &lt;&lt;link 播放音源&gt;&gt;&lt;&lt;audio &#39;mp3&#39; play&gt;&gt;&lt;&lt;/link&gt;&gt;
+
+停止音源的語法：
+@@color:green;
+{{{
+&lt;&lt;link 停止音源&gt;&gt;
+  &lt;&lt;audio &#39;音源名稱&#39; stop&gt;&gt;
+&lt;&lt;/link&gt;&gt;
+}}}
+@@
+語法呈現結果 &lt;&lt;link 停止音源&gt;&gt;&lt;&lt;audio &#39;mp3&#39; stop&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 !!!!3.音源內嵌
 * 利用iframe內嵌，但會有播放器介面
@@ -1431,7 +1441,7 @@ __底線__
    src=&quot;https://drive.google.com/file/d/1-VHJLyCV7l3v1Ull3Q2lwMI86KQqFGTi/preview?usp=sharing&quot;&gt;
 &lt;/iframe&gt;
 * 語法
-@@color:grey;
+@@color:green;
 {{{
 &lt;iframe
    frameborder=&quot;0&quot;
