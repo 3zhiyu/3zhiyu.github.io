@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="Twine遊戲範本_含視覺小說版面" startnode="9" creator="Twine" creator-version="2.5.1" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* 取消進入新passage的過渡動畫(標籤為notran) */
+	<tw-storydata name="Twine遊戲範本_含視覺小說版面" startnode="9" creator="Twine" creator-version="2.6.2" format="SugarCube" format-version="2.36.1" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* 取消進入新passage的過渡動畫(標籤為notran) */
 .passage.notran {
 	transition: none;
   	opacity: 1;
@@ -1524,6 +1524,7 @@ html[data-debug-view] #debug-bar {
 	content: "\e851\00a0";
 }
 /* SugarCube's built-in Font Awesome icons - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 自訂巨集<<captureScreen>>：特定id的div區塊截圖（預設為#screen） */
+importScripts("https://html2canvas.hertzen.com/dist/html2canvas.js")
 Macro.add('captureScreen', {
   handler: function() {
     var screenID = this.args[0] || "#screen";
