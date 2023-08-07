@@ -2752,6 +2752,7 @@ _contents
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
 		&lt;td class=&#39;left&#39;&gt;&lt;span style=&#39;background-color:red;&#39;&gt;&lt;&lt;print _args[0]&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;right&#39;&gt;失敗次數：&lt;&lt;print $num&gt;&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;\
 ----
@@ -3099,9 +3100,9 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 &lt;&lt;ctpNext 0.5s t8n&gt;&gt;
 你瞄準刀客的弱點──眼睛，你準備用甚麼拳法來攻擊？
 
-&lt;&lt;button &#39;使用拳法1(錯的)&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法1，但你的攻擊被刀客擋下來了！&#39;&gt;&gt;&lt;&lt;set $battleON to false&gt;&gt;&lt;&lt;set $num to $num+1&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &#39;使用拳法1(錯的)&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法1，但你的攻擊被刀客擋下來了！&#39;&gt;&gt;&lt;&lt;set $num to $num+1&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;&lt;button &#39;使用拳法2(對的)&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法2，順利擊中弱點！&#39;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &#39;使用拳法2(對的)&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法2，順利擊中弱點！&#39;&gt;&gt;&lt;&lt;set $battleON to false&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;&lt;ctpNext 0.5s clear&gt;&gt;
 &lt;&lt;replace &quot;#back&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
@@ -3111,7 +3112,7 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 	&lt;&lt;if $battleON&gt;&gt;\
 	&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[下一回合|戰鬥模式]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 	&lt;&lt;else&gt;&gt;\
-	&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button &quot;繼續&quot;&gt;&gt;[[繼續|成功]]&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[繼續|成功]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 	&lt;&lt;/if&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;print $reply&gt;&gt;
