@@ -1523,7 +1523,18 @@ html[data-debug-view] #debug-bar {
 .sc-thumbtack::before {
 	content: "\e851\00a0";
 }
-/* SugarCube's built-in Font Awesome icons - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* 自訂巨集<<captureScreen>>：特定id的div區塊截圖（預設為#screen） */
+/* SugarCube's built-in Font Awesome icons - End */</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* Displaying Images in Twine */
+if (document.location.href.toLowerCase().includes("/temp/") || document.location.href.toLowerCase().includes("/private/") || hasOwnProperty.call(window, "storyFormat")) {
+	// Change this to the path where the HTML file is
+	// located if you want to run this from inside Twine.
+  	setup.Path = "C:/Users/user/Desktop/";  // Running inside Twine application(桌面media資料夾)
+} else { 
+	setup.Path = "";  // Running in a browser
+}
+setup.ImagePath = setup.Path + "media/img/";
+setup.SoundPath = setup.Path + "media/sounds/";
+
+/* 自訂巨集<<captureScreen>>：特定id的div區塊截圖（預設為#screen） */
 importScripts("https://html2canvas.hertzen.com/dist/html2canvas.js")
 Macro.add('captureScreen', {
   handler: function() {
@@ -2475,6 +2486,7 @@ Macro.add('message', {
 &lt;&lt;set $mission to &#39;未有任務&#39;&gt;&gt; //任務內容
 &lt;&lt;set $battle to []&gt;&gt; //戰鬥逃跑判定
 &lt;&lt;set $linklock to false&gt;&gt; //玩家選擇時上一句、下一句連結是否鎖定
+&lt;&lt;set $num to 0&gt;&gt; //錯誤失敗計算
 
 &lt;!-- 變數datamap宣告 --&gt;
 /* 戰鬥己方$player.name（攻擊力$player.attack） */
@@ -2740,15 +2752,14 @@ _contents
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
 		&lt;td class=&#39;left&#39;&gt;&lt;span style=&#39;background-color:red;&#39;&gt;&lt;&lt;print _args[0]&gt;&gt;&lt;/span&gt;&lt;/td&gt;
-		&lt;td class=&#39;right&#39;&gt;&lt;&lt;liveblock&gt;&gt;&lt;&lt;print &#39;&lt;&lt;set _HP to &#39; + $args[1] + &#39;&gt;&gt;&#39;&gt;&gt;血量：&lt;&lt;print _HP&gt;&gt;&lt;&lt;if _HP &lt;= 0&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;goto &#39;成功&#39;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;\
 ----
 _contents
 &lt;table class=&#39;speechtable&#39;&gt;
 	&lt;tr&gt;
-		&lt;td class=&#39;left&#39;&gt;&lt;span id=&#39;back&#39;&gt;&lt;&lt;button &#39;使用道具&#39;&gt;&gt;&lt;&lt;script&gt;&gt;Dialog.setup(&quot;使用道具&quot;);Dialog.wiki(Story.get(&quot;inventory&quot;).processText());Dialog.open();&lt;&lt;/script&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/span&gt;&lt;/td&gt;
-		&lt;td class=&#39;right&#39;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;button &#39;選擇行動&#39;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;/span&gt;&lt;/td&gt;
+		&lt;td class=&#39;left&#39;&gt;&lt;&lt;liveblock&gt;&gt;&lt;span id=&#39;back&#39;&gt;&lt;&lt;scicon step-backward&gt;&gt;&lt;&lt;link &quot;上一句&quot;&gt;&gt;&lt;&lt;ctpBack &quot;對話&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/span&gt;&lt;&lt;/liveblock&gt;&gt;&lt;/td&gt;
+		&lt;td class=&#39;right&#39;&gt;&lt;&lt;liveblock&gt;&gt;&lt;span id=&#39;next&#39;&gt;&lt;&lt;link &quot;下一句&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;&lt;scicon step-forward&gt;&gt;&lt;/span&gt;&lt;&lt;/liveblock&gt;&gt;&lt;/td&gt;
 	&lt;/tr&gt;
 &lt;/table&gt;&lt;/div&gt;
 &lt;&lt;/widget&gt;&gt;
@@ -3068,7 +3079,7 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 &lt;&lt;/linkreplace&gt;&gt;
 &lt;&lt;set $location to &#39;興濟宮&#39;&gt;&gt;&lt;&lt;set $mission to &#39;打敗神秘刀客&#39;&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="關卡3" tags="bg1" position="1300,100" size="100,100">&lt;&lt;boxAT &quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&gt;&lt;h1&gt;阻止神秘刀客&lt;/h1&gt;&lt;&lt;/boxAT&gt;&gt;
 &lt;&lt;if settings.notifications&gt;&gt;&lt;&lt;notify 3s&gt;&gt;刀客出現了！&lt;&lt;/notify&gt;&gt;&lt;&lt;/if&gt;&gt;\
-&lt;div class=&#39;VNcharacter&#39;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=10GzE_-8oP7565va1T1AaxS3GOTfT6qrv&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;
+&lt;div class=&#39;VNcharacter&#39;&gt;&lt;img src=&quot;media/img/boss.jpg&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;
 &lt;&lt;speechBOX &#39;刀客&#39;&gt;&gt;&lt;&lt;ctp &quot;對話&quot;&gt;&gt;
 &lt;&lt;set _ctp to CTP.getCTP(&quot;對話&quot;)&gt;&gt;
 刀客被精怪附身，沒有那麼容易打敗，必須從弱點著手，削弱精怪對刀客的控制！
@@ -3078,54 +3089,37 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 不同部位的弱點只能使用對應的拳法攻擊才有效！
 &lt;&lt;ctpNext t8n&gt;&gt;
 之前的努力就是為了這一刻！上吧！
-&lt;&lt;ctpNext t8n clear&gt;&gt;
-&lt;&lt;replace &quot;#back&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[進入戰鬥|戰鬥模式]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;print $reply&gt;&gt;
+&lt;&lt;replace &quot;#back&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[進入戰鬥|戰鬥模式]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="戰鬥模式" tags="bg1" position="1425,100" size="100,100">&lt;&lt;battleBOX $player1.name &quot;$player1.HP&quot; &gt;&gt;\
 &lt;&lt;set $player.name to $name&gt;&gt;&lt;&lt;set $battleON to true&gt;&gt;\
-@@color:Orange;&lt;&lt;print $player.name&gt;&gt;的血量剩下&lt;&lt;live $player.HP&gt;&gt;&lt;&lt;liveblock&gt;&gt;&lt;&lt;if $player.HP &lt;= 0&gt;&gt;&lt;&lt;timed 1s&gt;&gt;&lt;&lt;goto &#39;失敗&#39;&gt;&gt;&lt;&lt;/timed&gt;&gt;&lt;&lt;/if&gt;&gt;&lt;&lt;/liveblock&gt;&gt;@@
+
 &lt;&lt;ctp &quot;對話&quot;&gt;&gt;
-&lt;&lt;if $battle.includes(&quot;逃走&quot;)&gt;&gt;你找不到時機逃走！&lt;&lt;/if&gt;&gt;&lt;span id=&quot;battletext&quot;&gt;進入戰鬥，你要做什麼？&lt;/span&gt;
-&lt;&lt;ctpNext 0.5s t8n nobr&gt;&gt;
-&lt;&lt;run $battle.delete(&#39;逃走&#39;)&gt;&gt;&lt;&lt;replace &quot;#FSchoice&quot;&gt;&gt;\
-&lt;&lt;boxAT&gt;&gt;\
-&lt;&lt;button &#39;使用拳法1&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法1，沒打到人反而自己摔倒在地！&#39;&gt;&gt;&lt;&lt;set $player.HP to $player.HP - 2&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;span id=&quot;battletext&quot;&gt;@@color:Orange;你必須擊敗刀客的弱點，並且只有三次失敗的機會@@&lt;/span&gt;
+&lt;&lt;ctpNext 0.5s t8n&gt;&gt;
+你瞄準刀客的弱點──眼睛，你準備用甚麼拳法來攻擊？
 
-&lt;&lt;button &#39;使用拳法2&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法2，造成巨大的傷害！&#39;&gt;&gt;&lt;&lt;set $player1.HP to $player1.HP - random(15, 20)&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button &#39;使用拳法1(錯的)&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法1，但你的攻擊被刀客擋下來了！&#39;&gt;&gt;&lt;&lt;set $battleON to false&gt;&gt;&lt;&lt;set $num to $num+1&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 
-&lt;&lt;button &#39;逃走&#39;&gt;&gt;&lt;&lt;set $reply to &#39;感覺打不過，趕緊來逃！&#39;&gt;&gt;&lt;&lt;run $battle.pushUnique(&#39;逃走&#39;)&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;/boxAT&gt;&gt;\
-&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+&lt;&lt;button &#39;使用拳法2(對的)&#39;&gt;&gt;&lt;&lt;set $reply to &#39;你使出拳法2，順利擊中弱點！&#39;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+
 &lt;&lt;ctpNext 0.5s clear&gt;&gt;
-&lt;&lt;replace &quot;#FSchoice&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;replace &quot;#back&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;\
-&lt;&lt;if $battle.includesAll(&quot;冰淇淋&quot;, &quot;逃走&quot;)&gt;&gt;\
+&lt;&lt;if $num == 3&gt;&gt;\
 &lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[繼續|失敗]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
 &lt;&lt;else&gt;&gt;\
-&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;ctpAdvance &quot;對話&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;if $battleON&gt;&gt;\
+	&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[下一回合|戰鬥模式]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;else&gt;&gt;\
+	&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button &quot;繼續&quot;&gt;&gt;[[繼續|成功]]&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;\
+	&lt;&lt;/if&gt;&gt;\
 &lt;&lt;/if&gt;&gt;\
 &lt;&lt;print $reply&gt;&gt;
-&lt;&lt;ctpNext 0.5s clear&gt;&gt;
-你遭受警手攻擊，這回合已無法再行動。&lt;&lt;set $player.HP to $player.HP - $player1.attack&gt;&gt;&lt;&lt;update&gt;&gt;
-&lt;&lt;replace &quot;#next&quot;&gt;&gt;&lt;&lt;button [[下一回合|戰鬥模式]]&gt;&gt;&lt;&lt;/button&gt;&gt;&lt;&lt;/replace&gt;&gt;
 &lt;&lt;/ctp&gt;&gt;\
 &lt;&lt;/battleBOX&gt;&gt;
 &lt;div id=&#39;FSchoice&#39;&gt;&lt;/div&gt;
-&lt;div class=&#39;VNcharacter&#39;&gt;&lt;img src=&quot;https://drive.google.com/uc?id=10GzE_-8oP7565va1T1AaxS3GOTfT6qrv&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="失敗" tags="bg1 story" position="1550,100" size="100,100">&lt;&lt;boxAT &quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&gt;&lt;h1&gt;戰鬥失敗&lt;/h1&gt;&lt;&lt;/boxAT&gt;&gt;
-&lt;img src=&quot;https://drive.google.com/uc?id=1qW46ZMO-bfXIV88vsq230W4Lu2tCew7q&quot; width=&quot;80%&quot;&gt;
-&lt;&lt;if $battle.includesAll(&quot;冰淇淋&quot;, &quot;逃走&quot;)&gt;&gt;\
-&lt;&lt;fadein 2s&gt;&gt;你趁著警手分心之際悄悄溜走，順利逃過一劫...&lt;&lt;/fadein&gt;&gt;
-
-【THE END】
-&lt;&lt;button &#39;傳送戰鬥結果並觀看所有玩家的結果統計&#39;&gt;&gt;
-  &lt;&lt;set $result to &#39;逃跑&#39;&gt;&gt;
-  &lt;&lt;run inputsheet()&gt;&gt;
-  &lt;&lt;goto &#39;統計結果&#39;&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-&lt;&lt;else&gt;&gt;\
-&lt;&lt;fadein 2s&gt;&gt;你不敵警手，含恨被捕而失去了為父親報仇的機會...&lt;&lt;/fadein&gt;&gt;
+&lt;div class=&#39;VNcharacter&#39;&gt;&lt;img src=&quot;media/img/boss.jpg&quot; width=&quot;100%&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="失敗" tags="bg1 story" position="1550,100" size="100,100">&lt;&lt;boxAT &quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&gt;&lt;h1&gt;戰鬥失敗&lt;/h1&gt;&lt;&lt;/boxAT&gt;&gt;
+&lt;&lt;fadein 2s&gt;&gt;你沒能打中弱點，被刀客打敗...&lt;&lt;/fadein&gt;&gt;
 
 【THE END】
 &lt;&lt;button &#39;傳送戰鬥結果並觀看所有玩家的結果統計&#39;&gt;&gt;
@@ -3143,8 +3137,7 @@ https://github.com/cyrusfirheir/cycy-wrote-custom-macros/tree/master/live-update
 &lt;&lt;button &#39;大補丸&#39;&gt;&gt;&lt;&lt;replace &quot;#battletext&quot;&gt;&gt;你拿出家傳@@color:red;大補丸@@吃下肚，恢復了一些體力！&lt;&lt;/replace&gt;&gt;&lt;&lt;set $player.HP to $player.HP+5&gt;&gt;&lt;&lt;update&gt;&gt;&lt;&lt;replace &quot;#back&quot;&gt;&gt;@@color:Gray;使用道具@@&lt;&lt;/replace&gt;&gt;&lt;&lt;run Dialog.close()&gt;&gt;&lt;&lt;/button&gt;&gt;
 
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="28" name="成功" tags="bg1 story" position="1550,225" size="100,100">&lt;&lt;boxAT &quot;animate__bounceIn animate__infinite animate__slow&quot;&gt;&gt;&lt;h1&gt;戰鬥過關&lt;/h1&gt;&lt;&lt;/boxAT&gt;&gt;
-&lt;img src=&quot;https://drive.google.com/uc?id=1qW46ZMO-bfXIV88vsq230W4Lu2tCew7q&quot; width=&quot;80%&quot;&gt;
-&lt;&lt;fadein 2s&gt;&gt;你成功打倒警手，順利化解危機！&lt;&lt;/fadein&gt;&gt;
+&lt;&lt;fadein 2s&gt;&gt;你成功擊中弱點，打敗刀客！&lt;&lt;/fadein&gt;&gt;
 
 【THE END】
 &lt;&lt;button &#39;傳送戰鬥結果並觀看所有玩家的結果統計&#39;&gt;&gt;
