@@ -4619,26 +4619,29 @@ body.bg1 {
 * 使用[[此網站|https://www.image-map.net/]]建立影像地圖
 **上傳圖檔後，於下方區塊設定列中的Shape選擇類型為Rect，在於圖上畫出要互動的區塊範圍
 **如果要設定多個互動區塊，點擊區塊設定列中的「Add New Area」按鈕來新增區塊
-**建立完區塊後，點擊「Show Me The Code!」按鈕，然後複製@@color:green;{{{&lt;map name=&quot;image-map&quot;&gt;}}}@@～@@color:green;{{{&lt;/map&gt;}}}@@這部分的語法內容
+**建立完區塊後，點擊「Show Me The Code!」按鈕，然後複製@@color:green;{{{&lt;map name=&quot;image-map&quot;&gt;}}}@@～@@color:green;{{{&lt;/map&gt;}}}@@這部分~的語法內容
+**@@color:red;注意：@@複製的語法{{{&lt;area&gt;}}}結尾的&gt;前要加/
+**{{{&lt;area target=&quot;&quot; alt=&quot;&quot; title=&quot;&quot; href=&quot;&quot; coords=&quot;806,284,888,311&quot; shape=&quot;rect&quot;}}} @@color:red;/@@{{{&gt;}}}
 &lt;&lt;/message&gt;&gt;
 
 !!!!&lt;&lt;message &#39;2.回到twine，在要置入影像地圖的passage複製貼上以下語法&#39;&gt;&gt;
 @@color:green;
 {{{
 &lt;&lt;nobr&gt;&gt;
+&lt;map name=&quot;infographic&quot;&gt;
 （貼上剛在網站上複製的語法）
+&lt;/map&gt;
 &lt;div class=&quot;resizable imageMapObserve&quot; style=&quot;width: 200px;&quot;&gt;
 	&lt;img usemap=&quot;#infographic&quot; alt=&quot;影像地圖&quot; src=&quot;圖片位址&quot; /&gt;
 &lt;/div&gt;
 &lt;&lt;/nobr&gt;&gt;
-}
 }}}
 @@
 &lt;&lt;/message&gt;&gt;
 
 !!!!&lt;&lt;message &#39;3.編輯可互動區域的語法，設定互動方式&#39;&gt;&gt;
 * 編輯從網站上複製的語法，加入互動語法
-* @@color:green;{{{&lt;area target=&quot;&quot; alt=&quot;&quot; title=&quot;&quot;}}}@@ @@color:orange;{{{onclick=&quot;互動語法&quot;}}}@@ @@color:green;{{{href=&quot;&quot; coords=&quot;569,361,690,444&quot; shape=&quot;rect&quot;&gt;}}}@@
+* @@color:green;{{{&lt;area target=&quot;&quot; alt=&quot;&quot; title=&quot;&quot;}}}@@ @@color:orange;{{{onclick=&quot;互動語法&quot;}}}@@ @@color:green;{{{href=&quot;&quot; coords=&quot;569,361,690,444&quot; shape=&quot;rect&quot; /&gt;}}}@@
 ** 比如加入{{{&lt;&lt;goto&gt;&gt;}}}來鏈接到另一段落的互動功能，互動語法為：@@color:orange;{{{$.wiki(&#39;&lt;&lt;goto &amp;quot;Passage名稱&amp;quot;&gt;&gt;&#39;)}}}@@
 ** 要注意雙引號要改成@@color:green;{{{&amp;quot;}}}@@，單引號要改成@@color:green;{{{&amp;#39;}}}@@
 &lt;&lt;/message&gt;&gt;
