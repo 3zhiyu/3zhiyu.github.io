@@ -1,0 +1,3442 @@
+:: StoryTitle
+twine範本_偷來打棒球
+
+
+:: StoryData
+{
+  "ifid": "61B56C73-643A-4536-A82A-CE2DFE1C1B77",
+  "format": "SugarCube",
+  "format-version": "2.36.1",
+  "start": "開始遊戲",
+  "tag-colors": {
+    "CSS": "purple",
+    "noreturn": "red",
+    "center": "purple",
+    "court": "orange",
+    "rest": "purple"
+  },
+  "zoom": 1
+}
+
+
+:: *PassageDone [noreturn] {"position":"50,525","size":"100,100"}
+Double-click this passage to edit it.
+
+
+:: *PassageFooter [noreturn] {"position":"50,325","size":"100,100"}
+
+
+
+:: *PassageHeader [noreturn] {"position":"50,425","size":"100,100"}
+
+
+
+:: *PassageReady [noreturn] {"position":"50,625","size":"100,100"}
+<<script>>
+  WebFont.load({
+      google: {
+          families: ["Noto Sans TC", "Noto Serif TC", "cwTeXYen", "cwTeXKai"]
+      }
+  });
+<</script>>
+
+
+:: *StoryInterface [noreturn] {"position":"50,225","size":"100,100"}
+<!-- 如果想要自己設計側邊選單的UI，可在此自定義Html結構內容、編輯介面 -->
+<!-- 要注意一旦啟用此頁面，會破壞原本UI介面 -->
+/*
+範例1
+<div id="passages"></div>
+範例2
+<div id="ui-bar" data-passage="UIBar"></div>
+<div id="passages"></div>
+<div id="footer" data-passage="Footer"></div>
+*/
+
+
+:: 0-0 [court] {"position":"2575,250","size":"100,100"}
+<nobr>
+<p class="center delayed" style="background-color: black; padding: 1em;">經過精彩的40分鐘
+比賽現在已到了第五局上半
+比數來到10比10
+洋基隊與勇士隊戰成平手
+此時洋基隊投手陳南生因身體不適需下場休息
+$main_character上場投球！
+[[比賽開始|1-0]]</p>
+</nobr>
+
+
+:: 1-0 {"position":"2775,250","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑準備畫面.jpg" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "1-0">><<set _ctp to CTP.getCTP("1-0")>><<set $back_dialog to "1-0">>
+來吧，加油！
+<<ctpNext>>[[比賽開始|1-1]]
+<</ctp>><</speechBOX>>
+<<set $strike_num to 0>>
+<<set $ball_num to 0>>
+<<set $has_cur_ball_used_tool = 2>>
+
+
+:: 1-1 {"position":"2975,250","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "1-1">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "1-1">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "1-1">><<set _ctp to CTP.getCTP("1-1")>><<set $back_dialog to "1-1">>
+		喂！
+		<<ctpNext nobr>>
+		<br>你剛剛有沒有去廟裡拜$signal_list[0]，保佑我們贏得比賽啊？<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|1-1-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+
+:: 1-1-1 {"position":"2975,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "1-1-1">><<set _ctp to CTP.getCTP("1-1-1")>><<set $back_dialog to "1-1-1">><<set _linklock to true>>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-1-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "1-1-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "1-1-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-1-1">>
+        	<<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-1-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        <<if $ball_num >= 3>>[[繼續投球|1-3-2]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $is_cur_strike == true>>[[繼續投球|1-2]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $is_cur_strike == false && $ball_num < 3>>[[繼續投球|1-1]]<<set $has_cur_ball_used_tool = 2>><</if>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 1-2 {"position":"2775,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "1-2">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "1-2">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "1-2">><<set _ctp to CTP.getCTP("1-2")>><<set $back_dialog to "1-2">>
+		喂！
+		<<ctpNext nobr>>
+		<br>你剛剛有沒有去廟裡拜$signal_list[1]，保佑我們贏得比賽啊？<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|1-2-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 1-2-1 {"position":"2775,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+   
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "1-2-1">><<set _ctp to CTP.getCTP("1-2-1")>><<set $back_dialog to "1-2-1">>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "1-2-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-2-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "1-2-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-2-1">>
+        	<<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-2-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        <<if $ball_num >= 3>>[[繼續投球|1-3-2]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $is_cur_strike == true>>[[繼續投球|1-3]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $is_cur_strike == false && $ball_num < 3>>[[繼續投球|1-2]]<<set $has_cur_ball_used_tool = 2>><</if>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 1-3 {"position":"2975,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "1-3">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "1-3">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "1-3">><<set _ctp to CTP.getCTP("1-3")>><<set $back_dialog to "1-3">>
+		喂！
+		<<ctpNext nobr>>
+		<br>你剛剛有沒有去廟裡拜$signal_list[2]，保佑我們贏得比賽啊？<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|1-3-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 1-3-1 {"position":"2975,625","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "1-3-1">><<set _ctp to CTP.getCTP("1-3-1")>><<set $back_dialog to "1-3-1">>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "1-3-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "1-3-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-3-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-3-1">>
+        	<<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-3-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        <<if $strike_num >= 3>>[[看結果|1-4]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $ball_num >= 3>>[[繼續投球|1-3-2]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $is_cur_strike == false && $ball_num < 3>>[[繼續投球|1-3]]<<set $has_cur_ball_used_tool = 2>><</if>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 1-3-2 {"position":"2775,675","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "1-3">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "1-3">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "1-3-2">><<set _ctp to CTP.getCTP("1-3-2")>><<set $back_dialog to "1-3-2">>
+		喂！
+		<<ctpNext nobr>>
+		<br>我做好萬全的準備了<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|1-3-3]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 1-3-3 {"position":"2975,750","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：0
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "1-5-1">><<set _ctp to CTP.getCTP("1-5-1")>><<set $back_dialog to "1-5-1">>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "1-5-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        <<if $strike_num >= 3>>[[看結果|1-4]]<<set $has_cur_ball_used_tool = 2>><</if>>
+        <<if $strike_num != 3>>[[繼續投球|1-3-2]]<<set $has_cur_ball_used_tool = 2>><</if>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 1-4 {"position":"3125,750","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+太好了，成功把第一位打者三振掉了。
+<</ctp>><</speechBOX>>
+<p class="center delayed no_margin">[[下一位打者|2-0]]</p>
+
+
+:: 2-0 [court] {"position":"3275,250","size":"100,100"}
+
+<p class="center delayed" style="background-color: black; padding: 1em;">第二位打擊者已經準備好了
+[[開始遊戲|2-1]]</p>
+<<set $strike_num to 0>>
+<<set $ball_num to 0>>
+<<set $has_cur_ball_used_tool = 2>>
+
+
+:: 2-1 {"position":"3475,250","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "2-1">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "2-1">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-1">><<set _ctp to CTP.getCTP("2-1")>><<set $back_dialog to "2-1">>
+		喂！
+		<<ctpNext nobr>>
+		<br>你剛剛有沒有去廟裡拜$signal_list[2]，保佑我們贏得比賽啊？<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|2-1-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+:: 2-1-1 {"position":"3475,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-1-1">><<set _ctp to CTP.getCTP("2-1-1")>><<set $back_dialog to "2-1-1">><<set _linklock to true>>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "2-1-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "2-1-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-1-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-1-1">>
+        	<<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-1-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        [[繼續投球|2-2]]<<set $has_cur_ball_used_tool = 2>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 2-2 {"position":"3275,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "2-2">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "2-2">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-2">><<set _ctp to CTP.getCTP("2-2")>><<set $back_dialog to "2-2">>
+		喂！
+		<<ctpNext nobr>>
+		<br>你剛剛有沒有去廟裡拜$signal_list[0]，保佑我們贏得比賽啊？<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|2-2-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-2-1 {"position":"3275,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-2-1">><<set _ctp to CTP.getCTP("2-2-1")>><<set $back_dialog to "2-2-1">>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-2-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "2-2-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[1]>><<set $is_cur_strike to false>><<set $ball_num to $ball_num + 1>><<set _linklock to true>><<ctpAdvance "2-2-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-2-1">>
+        	<<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-2-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        [[繼續投球|2-3]]<<set $has_cur_ball_used_tool = 2>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 2-3 {"position":"3475,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+   <<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "2-3">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "2-3">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-3">><<set _ctp to CTP.getCTP("2-3")>><<set $back_dialog to "2-3">>
+		喂！
+		<<ctpNext nobr>>
+		<br>你剛剛有沒有去廟裡拜$signal_list[1]，保佑我們贏得比賽啊？<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|2-3-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-3-1 {"position":"3475,625","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-3-1">><<set _ctp to CTP.getCTP("2-3-1")>><<set $back_dialog to "2-3-1">>
+		<<link $ball_list[0]>>
+        	<<goto 2-3-2>><<set $has_cur_ball_used_tool = 2>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<goto 2-3-2>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<goto 2-3-2>>
+        <</link>>
+		<<ctpNext clear t8n>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 2-3-2 {"position":"3275,625","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/球在本壘上界外畫面.jpg" style="position: absolute; left: 40%; top: 30%; width: 20%;">
+<p class="center delayed no_margin" style="background-color: black; padding: 1em;">球被擊出，飛到本壘上方的界外
+捕手動都不動
+[[哪泥，但現在只能繼續投球了|2-4]]<<set $has_cur_ball_used_tool = 2>></p>
+
+
+:: 2-4 {"position":"3275,750","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "2-4">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "2-4">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-4">><<set _ctp to CTP.getCTP("2-4")>><<set $back_dialog to "2-4">>
+		喂！
+		<<ctpNext nobr>>
+		<br>我做好萬全的準備了<<set _linklock to true>>
+        <<ctpNext>>
+        [[準備好了|2-4-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-4-1 {"position":"3475,750","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：1
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-3-3">><<set _ctp to CTP.getCTP("2-3-3")>><<set $back_dialog to "2-3-3">>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "2-3-3">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        <<if $strike_num >= 3>>[[看結果|2-5]]<</if>>
+        <<if $strike_num < 3>>[[繼續投球|2-4]]<</if>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 2-5 {"position":"3275,875","size":"100,100"}
+
+<p class="center delayed no_margin" style="background-color: black; padding: 1em;">雖然第二位打者遭到三振
+但補手沒有去接界外球，$main_character超不爽...
+[[質問捕手|2-6]]</p>
+
+
+:: 2-6 {"position":"3475,875","size":"100,100"}
+
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-6">><<set _ctp to CTP.getCTP("2-6")>><<set $back_dialog to "2-6">>
+		喂！
+		<<ctpNext>><<set _linklock to false>>
+        [[你剛剛為什麼不接球？|2-6-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-6-1 {"position":"3600,875","size":"100,100"}
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-6-1">><<set _ctp to CTP.getCTP("2-6-1")>><<set $back_dialog to "2-6-1">>
+		<br>我...
+        <<ctpNext>><<set _linklock to false>>
+        [[我不知道可以接...|2-6-2]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-6-2 [court] {"position":"3600,750","size":"100,100"}
+
+<p class="center delayed no_margin" style="background-color: black; padding: 1em;">聽到兩人的爭吵後，教練喊了暫停。
+[[繼續|2-7]]</p>
+
+
+:: 2-7 {"position":"3600,625","size":"100,100"}
+<img src="source/media/張宗揚少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $translator>><<ctp "2-7">><<set _ctp to CTP.getCTP("2-7")>><<set $back_dialog to "2-7">>
+		好了好了，
+		<<ctpNext nobr>>
+        別吵了，
+        <<ctpNext nobr>>
+        肯寧漢姆少校要我跟你們說，
+        <<ctpNext clear>>
+        像這種打在本壘後方或是離捕手很近的界外球，
+        <<ctpNext nobr>>
+        是可以去接殺賺一個出局數的，
+        <<ctpNext nobr>>
+        以後要記得喔！
+        <<ctpNext ckear>>
+        好啦好啦，趕快回去專心比賽。
+        <<set _linklock to true>>
+        <<ctpNext>>
+        [[接下來|2-8]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-8 {"position":"3600,500","size":"100,100"}
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-8">><<set _ctp to CTP.getCTP("2-8")>><<set $back_dialog to "2-8">>
+		<br>天啊！我從來不知道可以這樣子。
+        <<ctpNext>><<set _linklock to false>>
+        [[接下來|2-8-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-8-1 {"position":"3600,375","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-6">><<set _ctp to CTP.getCTP("2-6")>><<set $back_dialog to "2-6">>
+		現在你知道了，
+		<<ctpNext nobr>><<set _linklock to false>>
+        以後不要再恍神啦。
+        <<ctpNext>>
+        [[接下來|2-8-2]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 2-8-2 {"position":"3600,250","size":"100,100"}
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "2-8-2">><<set _ctp to CTP.getCTP("2-8-2")>><<set $back_dialog to "2-8-2">>
+		<br>好啦，
+        <<ctpNext nobr>><<set _linklock to false>>
+        以後不會有界外球可以逃過我的手套的
+        <<ctpNext nobr>>
+        ，嘿嘿嘿。
+        <<ctpNext>>
+        [[繼續比賽|3-0]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 3-0 [court] {"position":"3775,250","size":"100,100"}
+
+<p class="center delayed no_margin" style="background-color: black; padding: 1em;">初二勇士隊更換代打
+第三位打擊者已經準備好了
+[[比賽開始|3-0-1]]</p>
+<<set $strike_num to 0>>
+<<set $ball_num to 0>>
+<<set $has_cur_ball_used_tool = 2>>
+
+
+:: 3-0-1 {"position":"3925,250","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "3-0-1">><<set _ctp to CTP.getCTP("3-0-1")>><<set $back_dialog to "3-0-1">>
+		$main_character，
+        <<ctpNext nobr>>
+        他們換了代打，
+        <<ctpNext nobr>>
+        我沒辦法給你暗號了，
+        <<ctpNext>>
+        你就照你想投的投吧！
+        <<ctpNext nobr>>
+        我會準備好的。
+		<<ctpNext clear>>
+		<br>準備好了嗎？
+        [[接下來|3-0-2]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+:: 3-0-2 {"position":"4075,250","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "3-0-2">><<set _ctp to CTP.getCTP("3-0-2")>><<set $back_dialog to "3-0-2">>
+我也會準備好的
+<<ctpNext nobr>>
+，你放心投。
+<<ctpNext>>
+[[接下來|3-0-3]]
+<</ctp>><</speechBOX>>
+
+
+:: 3-0-3 {"position":"4075,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-6">><<set _ctp to CTP.getCTP("2-6")>><<set $back_dialog to "2-6">>
+		好！那就來吧！
+		<<ctpNext>><<set _linklock to false>>
+        [[開始比賽|3-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 3-1 {"position":"3925,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "3-1">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "3-1">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "3-1">><<set _ctp to CTP.getCTP("3-1")>><<set $back_dialog to "3-1">>
+		喂！
+		<<set _linklock to false>>
+        <<ctpNext clear>>
+		<br>準備好了嗎？
+        [[準備好了|3-1-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+:: 3-1-1 {"position":"3775,375","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "3-1-1">><<set _ctp to CTP.getCTP("3-1-1")>><<set $back_dialog to "3-1-1">><<set _linklock to true>>
+	<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-1-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        [[繼續投球|3-2]]<<set $has_cur_ball_used_tool = 2>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 3-2 {"position":"3775,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "3-2">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "3-2">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "3-2">><<set _ctp to CTP.getCTP("3-2")>><<set $back_dialog to "3-2">>
+		喂！
+		<<set _linklock to false>>
+        <<ctpNext clear>>
+		<br>準備好了嗎？
+        [[準備好了|3-2-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+:: 3-2-1 {"position":"3925,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "3-2-1">><<set _ctp to CTP.getCTP("3-2-1")>><<set $back_dialog to "3-2-1">><<set _linklock to true>>
+		<<if $has_cur_ball_used_tool == 2>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 0>>
+		<<link $ball_list[0]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+        	<<update>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+            <<update>>
+        <</link>>
+	<</if>>
+	<<if $has_cur_ball_used_tool == 1>>
+		<<link $ball_list[3]>>
+        	<<set $reply to $ball_result_list[0]>><<set $is_cur_strike to true>><<set $strike_num to $strike_num + 1>><<set _linklock to true>><<ctpAdvance "3-2-1">>
+        	<<update>>
+		<</link>>
+	<</if>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+        [[繼續投球|3-3]]<<set $has_cur_ball_used_tool = 2>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 3-3 {"position":"4075,500","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<<if $has_cur_ball_used_tool == 2 && (!$is_tool_used_list[0] ||!$is_tool_used_list[1])>>
+	<div style="position: absolute; left: 10% ;top: 30%; background-color: black;"><p style="padding: 1em;">\
+		<<if !$is_tool_used_list[0]>>\
+			<<button "使用$tool_list[0]" "3-3">><<set $is_tool_used_list[0] to true>><<set $has_cur_ball_used_tool = 0>><</button>>\
+		<</if>>
+		<<if !$is_tool_used_list[1]>>\
+			<<button "使用$tool_list[1]" "3-3">><<set $is_tool_used_list[1] to true>><<set $has_cur_ball_used_tool = 1>><</button>>\
+		<</if>>\
+	</p></div>
+<</if>>
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "3-3">><<set _ctp to CTP.getCTP("3-3")>><<set $back_dialog to "3-3">>
+		喂！
+		<<set _linklock to false>>
+        <<ctpNext clear>>
+		<br>準備好了嗎？
+        [[準備好了|3-3-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+:: 3-3-1 {"position":"4075,625","size":"100,100"}
+<div style="position: absolute; left: 70% ;top: 10%; background-color: black;"><p style="padding: 1em;">當前局數：第五局上半
+   目前出局數：2
+   好球／壞球：$strike_num／$ball_num</p></div>
+<img src="source/media/小傑投球畫面.jpg" style="position: absolute; left: 20%; top: 30%; width: 20%;">
+<img src="source/media/好球畫面、揮棒畫面.jpg" style="position: absolute; left: 63%; top: 30%; width: 20%;">
+<<speechBOX $main_character>><<ctp "3-3-1">><<set _ctp to CTP.getCTP("3-3-1")>><<set $back_dialog to "3-3-1">><<set _linklock to true>>
+		<<link $ball_list[0]>>
+        	<<goto 3-4>>
+        <</link>>
+		<<link $ball_list[1]>>
+        	<<goto 3-4>>
+            <<update>>
+        <</link>>
+		<<link $ball_list[2]>>
+        	<<goto 3-4>>
+            <<update>>
+        <</link>>
+		<<ctpNext clear t8n>>
+		<<print $reply>>
+<</ctp>>
+<</speechBOX>>
+
+
+:: 3-4 {"position":"4200,625","size":"100,100"}
+
+<img src="source/media/游擊手接到球畫面.jpg" style="position: absolute; left: 18%; top: 40%; width: 20%;">
+<img class="delayed" src="source/media/游擊手傳球畫面.jpg" style="position: absolute; left: 40%; top: 40%; width: 20%;">
+<img class="delayed" src="source/media/跑者被刺殺落寞畫面.jpg" style="position: absolute; left: 62%; top: 40%; width: 20%;">
+
+<p class="center delayed no_margin" style="background-color: black; padding: 1em;">游擊手將球傳回一壘刺殺跑者後
+勇士隊累積三出局，五局上半結束。
+[[哪泥|3-5]]</p>
+
+
+:: 3-5 {"position":"4200,750","size":"100,100"}
+
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "3-5">><<set _ctp to CTP.getCTP("3-5")>><<set $back_dialog to "3-5">>
+		太厲害了，
+		<<ctpNext nobr>>
+		我們竟然成功守住這一局沒有失分。<<set _linklock to true>>
+        <<ctpNext>>
+        [[接下來|3-5-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+
+:: 3-5-1 {"position":"4200,875","size":"100,100"}
+
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-6">><<set _ctp to CTP.getCTP("2-6")>><<set $back_dialog to "2-6">>
+		對啊！
+		<<ctpNext>><<set _linklock to false>>
+        阿仁，你剛剛最後的防守也太帥了吧！
+        <<ctpNext>>
+        [[接下來|3-5-2]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 3-5-2 {"position":"4200,1000","size":"100,100"}
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "3-5-2">><<set _ctp to CTP.getCTP("3-5-2")>><<set $back_dialog to "3-5-2">>
+哈哈哈，
+<<ctpNext nobr>>
+我就說你放心投吧，
+<<ctpNext nobr>>
+我會接住的。
+<<ctpNext>>
+等等，
+<<ctpNext nobr>>
+$main_character你才是最大功臣吧，
+<<ctpNext nobr>>
+從沒看過這麼強的投手。
+<<ctpNext>>
+[[接下來|3-5-3]]
+<</ctp>><</speechBOX>>
+
+
+:: 3-5-3 {"position":"4200,1125","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "2-6">><<set _ctp to CTP.getCTP("2-6")>><<set $back_dialog to "2-6">>
+		嘿嘿嘿，
+        <<ctpNext nobr>>
+        謝謝誇獎，
+        <<ctpNext nobr>>
+        我們還有一個半局要打呢！  
+		<<ctpNext clear>><<set _linklock to false>>
+        先不要太開心跟鬆懈！
+        <<ctpNext>>
+        [[接下來|3-5-4]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: 3-5-4 {"position":"4200,1250","size":"100,100"}
+<img src="source/media/小傑與隊友開心慶祝畫面.jpg" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX '$shortstop、$catcher'>><<ctp "3-5-4">><<set _ctp to CTP.getCTP("3-5-4")>><<set $back_dialog to "3-5-4">>
+沒錯沒錯，
+<<ctpNext nobr>>
+加油。
+<<ctpNext>>
+[[接下來|4-1]]
+<</ctp>><</speechBOX>>
+
+
+:: 4-1 [court] {"position":"4275,250","size":"100,100"}
+
+<p class="center delayed no_margin" style="background-color: black; padding: 1em;">小傑及伙伴們雖然成功守住了比分，並在五局下半成功領先勇士隊一分但在第六局仍然被得兩分，最終以12比11輸掉了比賽。但對於小傑及他的隊友們來說，輸贏其實也並不這麼重要了。因為他們已經在比賽的過程中，領悟了只要有盡力投入，開心享受棒球才是最寶貴的經驗。</p>
+<p class="center delayed no_margin">[[？|4-1]]</p>
+
+
+:: All_Correct [rest] {"position":"2275,525","size":"100,100"}
+<img src="source/media/肯寧漢姆少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $coach>><<ctp "All_Correct">><<set _ctp to CTP.getCTP("All_Correct")>><<set $back_dialog to "All_Correct">>
+		[[Good job everyone, there is some coke and chewing gum, enjoy.|All_Correct-1]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: All_Correct-1 [rest] {"position":"2275,650","size":"100,100"}
+<img src="source/media/張宗揚少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $translator>><<ctp "All_Correct">><<set _ctp to CTP.getCTP("All_Correct")>><<set $back_dialog to "All_Correct">>
+		[[太棒了，看起來大家都有好好把棒球術語記起來喔，這些是肯寧漢姆少校獎勵大家的可樂跟口香糖，好好享用吧，但是要快喔，比賽就要開始了。|All_Correct-2]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: All_Correct-2 [rest] {"position":"2275,775","size":"100,100"}
+
+<<speechBOX '$main_character、 $shortstop、$catcher'>><<ctp "All_Correct">><<set _ctp to CTP.getCTP("All_Correct")>><<set $back_dialog to "All_Correct">>
+		[[好耶！太棒了。|0-0]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: Correct [rest] {"position":"2400,125","size":"100,100"}
+<img src="source/media/張宗揚少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $translator>><<ctp "Correct">><<set _ctp to CTP.getCTP("Correct")>><<set $back_dialog to "Correct">>
+		答對了，那我們馬上進入下一題，少校請出題。
+        <<if $cur_que_idx == 0>>[[下一題|Q1]]<</if>>
+        <<if $cur_que_idx == 1>>[[下一題|Q2]]<</if>>
+        <<if $cur_que_idx == 2>>[[下一題|Q3]]<</if>>
+        <</ctp>>
+<</speechBOX>>
+<<set $cur_que_idx to $cur_que_idx + 1>>
+
+
+:: Failed [rest] {"position":"2400,250","size":"100,100"}
+<img src="source/media/張宗揚少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $translator>><<ctp "Failed">><<set _ctp to CTP.getCTP("Failed")>><<set $back_dialog to "Failed">>
+		答錯囉！正確答案是$QA[$cur_que_idx].ans的意思，這樣就沒有獎品了，真可惜。沒關係，那就趕快準備開始比賽吧。
+        [[接下來|Failed-1]]
+        <</ctp>>
+<</speechBOX>>
+<<set $cur_que_idx to $cur_que_idx + 1>>
+
+:: Failed-1 [rest] {"position":"2400,250","size":"100,100"}
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "Failed">><<set _ctp to CTP.getCTP("Failed")>><<set $back_dialog to "Failed">>
+		沒關係啦，下次一定會答對的。來，我的分你一份。
+        [[回到球場|0-0]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: Opening of QA [rest] {"position":"1975,125","size":"100,100"}
+<img src="source/media/肯寧漢姆少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $coach>><<ctp "QAOP">><<set _ctp to CTP.getCTP("QAOP")>><<set $back_dialog to "QAOP">>
+		<br>準備好了嗎？那就開始囉
+        [[開始|Q0]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: Q0 [rest] {"position":"1975,250","size":"100,100"}
+<img src="source/media/肯寧漢姆少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $coach>><<ctp "QA0">><<set _ctp to CTP.getCTP("QA0")>><<set $back_dialog to "QA0">>
+		$QA[$cur_que_idx].que
+        [[$QA[0].ans|Correct]]
+        [[$QA[1].ans|Failed]]
+        [[$QA[2].ans|Failed]]
+        [[$QA[3].ans|Failed]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: Q1 [rest] {"position":"1975,400","size":"100,100"}
+<img src="source/media/肯寧漢姆少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $coach>><<ctp "QA1">><<set _ctp to CTP.getCTP("QA1")>><<set $back_dialog to "QA1">>
+		$QA[$cur_que_idx].que
+        [[$QA[0].ans|Failed]]
+        [[$QA[1].ans|Correct]]
+        [[$QA[2].ans|Failed]]
+        [[$QA[3].ans|Failed]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: Q2 [rest] {"position":"2125,400","size":"100,100"}
+<img src="source/media/肯寧漢姆少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $coach>><<ctp "QA2">><<set _ctp to CTP.getCTP("QA2")>><<set $back_dialog to "QA2">>
+		$QA[$cur_que_idx].que
+        [[$QA[0].ans|Failed]]
+        [[$QA[1].ans|Failed]]
+        [[$QA[2].ans|Correct]]
+        [[$QA[3].ans|Failed]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: Q3 [rest] {"position":"2275,400","size":"100,100"}
+<img src="source/media/肯寧漢姆少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $coach>><<ctp "QA3">><<set _ctp to CTP.getCTP("QA3")>><<set $back_dialog to "QA3">>
+		$QA[$cur_que_idx].que
+        [[$QA[0].ans|Failed]]
+        [[$QA[1].ans|Failed]]
+        [[$QA[2].ans|Failed]]
+        [[$QA[3].ans|All_Correct]]
+        <</ctp>>
+<</speechBOX>>
+
+
+:: StoryAuthor [noreturn] {"position":"150,425","size":"100,100"}
+作者
+
+
+:: StoryBanner [noreturn] {"position":"150,125","size":"100,100"}
+<img src="source/media/logo.png" width="100%">
+
+
+:: StoryCaption [noreturn] {"position":"150,525","size":"100,100"}
+<!-- 側邊欄顯示的文字在此編輯，此頁面加入非連結內容，會顯示於「StoryMenu」內容之下 -->
+角色名稱: $main_character
+位置: $location
+----
+敵人：$player1.name（攻擊力$player1.attack）
+
+
+:: StoryDisplayTitle [noreturn] {"position":"150,225","size":"100,100"}
+棒球大聯盟
+
+
+:: StoryInit [noreturn] {"position":"50,125","size":"100,100"}
+<!-- 宣告全域變數 -->
+<<set $main_character to '小傑'>>
+<<set $coach to '肯寧漢姆少校'>>
+<<set $catcher to '陳福官'>>
+<<set $shortstop to '曹常仁'>>
+<<set $translator to '張宗揚少校'>>
+<<set $location to '馬祖中學棒球場'>>
+<<set $inventory = ['貓咪', '狗狗']>>
+<<set $signal_list = ['媽祖', '千里眼', '順風耳']>>
+<<set $ball_list = ['直球', '曲球', '變化球', '強力直球']>>
+<<set $ball_result_list = ['好球', '壞球']>>
+<<set $strike_num to 0>>
+<<set $ball_num to 0>>
+<<set $is_cur_strike to false>>
+<<set $back_dialog to '對話'>>
+<<set $cur_que_idx to 0>>
+<<set $tool_list = ['口香糖', '可樂']>>
+<<set $is_tool_used_list = [false, false]>>
+<<set $has_cur_ball_used_tool = 2>> <!-- 0: 口香糖, 1: 可樂, 2: 沒用 -->
+
+<!-- 宣告datamap變數 -->
+<<set $player1 = {
+	name: "飛鼠",
+	HP: 150,
+	MP: 10,
+	attack: random(8, 10),
+	speed: 10,
+	coins: 200,
+	level: 10,
+}>>
+<<set $QA = [
+{
+	que: 'Okay, the question is, what is the Chinese meaning of Wallk?',
+    ans:'四壞球保送',
+},
+{
+	que: 'Okay, the question is, what is the Chinese meaning of Shortstop?',
+    ans:'游擊手',
+},
+{
+	que: 'Okay, the question is, what is the Chinese meaning of Pitcher?',
+    ans:'投手',
+},
+{
+	que: 'Okay, the question is, what is the Chinese meaning of Strike out?',
+    ans:'三振出局',
+},
+]>>
+
+
+:: StoryMenu [noreturn] {"position":"150,625","size":"100,100"}
+<!-- 側邊欄顯示的文字在此編輯，此頁面加入link連結內容，連結會自動轉成按鈕 -->
+<<link "背包" "背包">><</link>>
+<<link "製作人員">>
+	<<script>>
+		Dialog.setup("Credits");
+		Dialog.wiki(Story.get("credits").processText());
+		Dialog.open();
+	<</script>>
+<</link>>
+
+
+:: StorySubtitle [noreturn] {"position":"150,325","size":"100,100"}
+文學改編遊戲
+
+
+:: Widgets [widget] {"position":"550,375","size":"100,100"}
+<!-- 視覺小說版面的角色對話框 -->
+<<widget "speechBOX" container>>
+<<set _linklock to false>>\
+<div id="speechBOX">\
+<span style='background-color:red;'><<print _args[0]>></span>
+----
+_contents
+<table class='speechtable'>
+	<tr>
+		<td class='left'><<liveblock>><span id='back'><<if _ctp.log.index gt 0>><<if _linklock == false>><<scicon step-backward>><<link "上一句">><<ctpBack $back_dialog>><<update>><</link>><</if>><</if>></span><</liveblock>></td>
+		<td class='right'><<liveblock>><span id='next'><<if _ctp.log.index lt _ctp.stack.length - 1>><<if _linklock == false>><<link "下一句">><<ctpAdvance $back_dialog>><<update>><</link>><<scicon step-forward>><</if>><</if>></span><</liveblock>></td>
+	</tr>
+</table></div>
+<</widget>>
+
+<!-- sugarcube ICON -->
+<<widget "scicon">><span @class="'sc-icon sc-' + $args.raw" alt="' + $args.raw + '"></span><</widget>>
+
+
+:: all_0 [rest] {"position":"925,625","size":"100,100"}
+<img src="source/media/小傑與隊友開心慶祝畫面.jpg" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX '$main_character、$shortstop、$catcher'>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+哇！
+<<ctpNext nobr>>
+太棒了。
+<<ctpNext>>
+[[接下來|tran_1]]
+<</ctp>><</speechBOX>>
+
+
+
+:: catcher_0 [rest] {"position":"800,1250","size":"100,100"}
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+你放心啦！
+<<ctpNext clear>>
+你還記得我們之間的暗號嗎？
+[[接下來|main_4]]
+<</ctp>><</speechBOX>>
+
+
+
+:: catcher_1 [rest] {"position":"925,1125","size":"100,100"}
+<img src="source/media/陳福官對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $catcher>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+沒錯，
+<<ctpNext nobr>>
+所以你完全不用擔心，
+<<ctpNext nobr>>
+我會好好接住的！
+<<ctpNext>>
+[[接下來|shortstop_3]]
+<</ctp>><</speechBOX>>
+
+
+
+:: credits [noreturn] {"position":"550,250","size":"100,100"}
+<a href="https://3zhiyu.weebly.com/">三知餘文化</a>
+<a href="https://twinery.org/">twine官網</a>
+[[sugarcube技術文件|http://www.motoslave.net/sugarcube/2/docs/]]
+[[twine語法範例中文wiki|https://3zhiyu.github.io/tinatest/twineteach]]
+
+
+:: main_0 [rest] {"position":"800,375","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+終於要比賽了，我從來沒有比賽前這麼緊張過。
+[[接下來|shortstop_0]]
+<</ctp>><</speechBOX>>
+
+
+
+:: main_1 [rest] {"position":"800,625","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+以前還真的不會那麼緊張，哈哈哈。
+<<ctpNext clear>>
+在我的年代，我的隊伍算是一個很弱小的隊伍
+<<ctpNext nobr>>
+，打比賽也從來沒有贏過。
+<<ctpNext clear>>
+因為早就知道輸定了，所以比賽前反而都不會緊張。
+[[接下來|shortstop_1]]
+<</ctp>><</speechBOX>>
+
+
+
+:: main_2 [rest] {"position":"800,875","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+怎麼說？
+[[接下來|shortstop_2]]
+<</ctp>><</speechBOX>>
+
+
+
+:: main_3 [rest] {"position":"800,1125","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+你也太有信心了吧，
+<<ctpNext nobr>>
+我真的很怕如果換我上場投球會出事。
+<<ctpNext>>
+[[接下來|catcher_0]]
+<</ctp>><</speechBOX>>
+
+
+
+:: main_4 [rest] {"position":"925,1250","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+記得啊！
+<<ctpNext clear>>
+$signal_list[0]等於$ball_list[0]、$signal_list[1]等於$ball_list[1]、$signal_list[2]等於$ball_list[2]。
+[[接下來|catcher_1]]
+<</ctp>><</speechBOX>>
+
+
+
+:: main_5 [rest] {"position":"925,875","size":"100,100"}
+<img src="source/media/小傑對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $main_character>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+謝謝你們！
+<<ctpNext nobr>>
+你們真的是最好的隊友了。
+<<ctpNext clear>>
+啊！
+<<ctpNext nobr>>
+教練跟翻譯官來了！
+<<ctpNext>>
+[[接下來|tran_0]]
+<</ctp>><</speechBOX>>
+
+
+
+:: shortstop_0 [rest] {"position":"800,500","size":"100,100"}
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+嗯？
+<<ctpNext >>
+為甚麼？
+<<ctpNext clear>>
+你不是說你比過很多賽了嗎？
+<<ctpNext>>
+難道以前都不會緊張嗎？
+<<ctpNext>>
+[[接下來|main_1]]
+<</ctp>><</speechBOX>>
+
+
+:: shortstop_1 [rest] {"position":"800,750","size":"100,100"}
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+原來是這樣…
+<<ctpNext>>
+但我覺得你今天也不用緊張沒關係
+[[接下來|main_2]]
+<</ctp>><</speechBOX>>
+
+
+:: shortstop_2 [rest] {"position":"800,1000","size":"100,100"}
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+因為我們贏定了！
+<<ctpNext>>
+哈哈哈，我們這麼認真練習，一定可以的。
+[[接下來|main_3]]
+<</ctp>><</speechBOX>>
+
+
+:: shortstop_3 [rest] {"position":"925,1000","size":"100,100"}
+<img src="source/media/曹常仁對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $shortstop>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+$main_character你就放心投，
+<<ctpNext nobr>>
+就算真被打出去，
+<<ctpNext>>
+我這個黃金游擊手也會幫你擋住所有球的。
+[[接下來|main_5]]
+<</ctp>><</speechBOX>>
+
+
+:: tran_0 [rest] {"position":"925,750","size":"100,100"}
+<img src="source/media/張宗揚少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $translator>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+各位球員們大家好嗎？
+<<ctpNext clear>>
+肯寧漢姆上校說
+<<ctpNext nobr>>
+想在賽前考考大家對於棒球的英文知識。
+<<ctpNext>>
+如果答對的話，
+<<ctpNext nobr>>
+會有獎品來激勵大家喔！
+<<ctpNext>>
+[[接下來|all_0]]
+<</ctp>><</speechBOX>>
+
+
+
+:: tran_1 [rest] {"position":"1050,625","size":"100,100"}
+<img src="source/media/張宗揚少校對話圖片.png" style="position: absolute; left: 20%; top: 40%; width: 20%;">
+<<speechBOX $translator>><<ctp "對話">>
+<<set _ctp to CTP.getCTP("對話")>>
+好！
+<<ctpNext nobr>>
+那這邊幫大家複習一下喔！
+<<ctpNext clear>>
+「Wallk–四壞球保送」、「Shortstop-游擊手」、「Pitcher-投手」及「Strike out-三振出局」。
+<<ctpNext clear>>
+好，大家都記起來了嗎？
+<<ctpNext clear>>
+答錯一題就沒有獎品可以拿囉，那我們開始吧！
+[[接下來|Opening of QA]]
+<</ctp>><</speechBOX>>
+
+
+
+:: 側邊欄選單頁面 {"position":"550,0","size":"200,100"}
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+
+:: 動態效果 {"position":"300,875","size":"200,100"}
+/*@@.center;文字置中@@
+文字置中
+
+@@.delayed;第一行文字@@
+@@.delayed;第二行文字@@
+@@.delayed;第三行文字@@
+文字逐行出現
+
+<<timed 1s t8n>>第一行文字
+<<next>>第二行文字
+<<next>>第三行文字
+<</timed>>
+固定一秒後，逐行出現文字
+
+<span class="glitch">發抖效果</span>
+發抖效果
+單一文字<span class="glitchy" data-text="恐怖">發抖</span>
+單一文字發抖
+
+<span class="drunk">喝醉效果</span>
+@@.drunk;喝醉效果@@
+喝醉效果
+
+@@.shadow;文字陰影效果@@
+文字陰影效果
+
+@@.emboss;浮凸字體效果@@
+浮凸字體效果
+
+@@.blur;模糊字體效果@@
+模糊字體效果
+
+@@.blurrier;焦糊字體效果@@
+焦糊字體效果
+
+@@.smear;光暈字體效果@@
+光暈字體效果
+
+@@.mirror;字體鏡射效果@@
+字體鏡射效果
+
+@@.upside-down;字體上下顛倒效果@@
+字體上下顛倒效果
+
+@@.fade-in-out;字體閃爍效果@@
+字體閃爍效果
+
+@@.rumble;字體上下顛倒效果@@
+字體上下顛倒效果
+
+@@.shudder;字體上下顛倒效果@@
+字體上下顛倒效果
+
+@@.pulse;字體彈出效果@@
+字體彈出效果
+
+<<shake>>搖擺效果<</shake>>
+搖擺效果*/
+
+
+:: 圖片、影片、音源語法 {"position":"300,625","size":"200,100"}
+/*一、圖片語法
+[img[source/media/image.png]]
+<img src="圖片網址" width="寬(px)" height="高(px)" >
+-圖片如果放在google雲端，網址格式為：https://drive.google.com/uc?id=圖片ID
+-圖片如果放在media資料夾中，網址格式為：source/media/圖片檔名
+-圖片為連結：<<link [img[source/media/image.png][新的passage]]>><</link>>
+
+
+二、影片語法
+<video src="影片連結" width="寬(px)" height="高(px)" > </video>
+或是用Youtube的嵌入語法
+
+
+三、音源語法
+-在StoryInit宣告音源名稱與檔案位置：<<cacheaudio '音源名稱' '檔案位置'>>
+--音源名稱可隨意取名（建議使用英文）
+--檔案位置是音源檔案所在的資料夾位址或網址
+		放在media資料夾中的audio.mp3：source/media/audio.mp3
+        drive to web獲取的音檔連結："https://el1l7eqjck7zfbkn6duica-on.drv.tw/%E5%B7%A5%E4%BD%9C/twine/audio/audio.mp3"
+
+-在播放音源的Passage上，加入以下語法：
+    <<link 連結文字>>
+      <<audio '音源名稱' play>>
+    <</link>>
+*/
+
+:: 打擊關卡 {"position":"2775,0","size":"200,100"}
+
+
+
+:: 文字外觀樣式 {"position":"300,125","size":"200,100"}
+斜體
+//斜體//
+<em>斜體</em>
+
+粗體
+''粗體''
+<strong>粗體</strong>
+
+底線
+__底線__
+<u>底線</u>
+
+刪除線
+==刪除線==
+<s>刪除線</s>
+
+字上標
+字^^上標^^
+字<sup>上標</sup>
+
+字下標
+字~~下標~~
+字<sub>下標</sub>
+
+引用
+Quote
+> Quote
+Nested quote
+>> Nested quote
+
+格式化
+"""沒有樣式"""
+
+
+:: 文字標題與項目清單樣式 {"position":"300,250","size":"200,100"}
+標題1
+<h1>標題1</h1>
+!標題1
+
+標題2
+<h2>標題2</h2>
+!!標題2
+
+標題3
+<h3>標題3</h3>
+!!!標題3
+
+標題4
+<h4>標題4</h4>
+!!!!標題4
+
+標題5
+<h5>標題5</h5>
+!!!!!標題5
+
+標題6
+<h6>標題6</h6>
+!!!!!!標題6
+
+* 項目
+* 另一個項目
+
+# 編號
+# 下一個編號
+
+@@高亮文字@@
+@@color:green;綠色@@
+<span style='background-color:red;'>文字加底色</span>
+
+
+:: 文字特效語法 {"position":"300,375","size":"200,100"}
+/*@@.center;文字置中@@
+文字置中
+
+@@.delayed;第一行文字@@
+@@.delayed;第二行文字@@
+@@.delayed;第三行文字@@
+文字逐行出現
+
+<<timed 1s t8n>>第一行文字
+<<next>>第二行文字
+<<next>>第三行文字
+<</timed>>
+固定一秒後，逐行出現文字
+
+<span class="glitchy" data-text="發抖效果">發抖效果</span>
+發抖效果
+單一文字<span class="glitchy" data-text="恐怖">發抖</span>
+單一文字發抖
+
+<span class="drunk">喝醉效果</span>
+@@.drunk;喝醉效果@@
+喝醉效果
+
+<<shake>>搖擺效果<</shake>>
+搖擺效果
+
+@@.shadow;文字陰影效果@@
+文字陰影效果
+
+@@.emboss;浮凸字體效果@@
+浮凸字體效果
+
+@@.blur;模糊字體效果@@
+模糊字體效果
+
+@@.blurrier;焦糊字體效果@@
+焦糊字體效果
+
+@@.smear;光暈字體效果@@
+光暈字體效果
+
+@@.mirror;字體鏡射效果@@
+字體鏡射效果
+
+@@.upside-down;字體上下顛倒效果@@
+字體上下顛倒效果
+
+@@.fade-in-out;字體閃爍效果@@
+字體閃爍效果
+
+@@.rumble;字體左右抖動效果@@
+字體上下抖動效果
+
+@@.shudder;字體左右抖動效果@@
+字體左右抖動效果
+
+@@.pulse;字體彈出效果@@
+字體彈出效果
+*/
+
+:: 第一位打者 {"position":"2775,125","size":"200,100"}
+
+
+
+:: 第三位打者 {"position":"3775,125","size":"200,100"}
+
+
+
+:: 第二位打者 {"position":"3275,125","size":"200,100"}
+
+
+
+:: 系統設定和側邊欄相關 {"position":"50,0","size":"200,100"}
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+使用時，把頁面標題前的 * 刪除即開啟該頁面功能
+
+
+:: 背包 [noreturn] {"position":"550,125","size":"100,100"}
+<<if $inventory.length is 0>>\
+    你的背包裡沒有東西。
+<<else>>\
+    你的背包裡有：<<= $inventory.join(', ')>>。
+<</if>>
+
+<<back "返回">>
+
+
+:: 英語問答 {"position":"1975,0","size":"200,100"}
+
+
+
+:: 語法小抄 {"position":"300,0","size":"200,100"}
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+
+:: 變數 {"position":"300,750","size":"200,100"}
+/*一、變數類型
+故事變數：$var
+臨時變數：_var
+
+
+二、宣告變數
+<<set $numberVariable to 5>>
+<<set $stringVariable to '字串'>>
+<<set $logicalVariable to true>>
+<<set $inventory to ['盾牌', '胸甲']>>  → [ ]中也可以留空
+
+
+三、其他
+變數運算：<<set $apples to $apples + 1>>
+清除變數值：<<unset $var1, $var2>>
+新增陣列元素：<<run $inventory.push('增加元素')>>
+新增不重複的陣列元素：<<run $inventory.pushUnique('蘋果')>>
+刪除元素：<<run $inventory.delete('刪除元素')>>
+刪除第二個元素：<<run $inventory.deleteAt(1)>>
+隨機刪除一個元素：<<run $inventory.pluck()>>
+隨機刪除若干個元素：<<run $inventory.pluckMany(3)>>
+刪除最後一個元素：<<run $inventory.pop()>>
+列印陣列的第一個元素：<<= $inventory.first()>> 
+判斷陣列中是否有某元素：<<if $inventory.includes('蘋果')>>
+
+
+四、變數應用
+-符合條件下，執行特定行動
+--在StoryInit宣告變數：<<set $key to false>>
+--得到鑰匙的Passage設定鑰匙變數為true：<<set $key to true>>
+--遇到門的Passage中進行判定：
+    <<if $key>>
+     門打開了。
+    <<else>>
+     無法開門。
+    <</if>>
+
+-用變數來代表角色某屬性或物品
+--在StoryInit宣告角色初始血量為10：<<set $hp to 10>>
+--遇到會增減血量的事件時：<<set $hp to $hp + 1>>
+--顯示變數數值內容： 角色血量為$hp
+
+-迴圈呈列陣列中的所有元素
+--在StoryInit宣告陣列變數：<<set $playerequip to []>>
+--角色獲得物品時新增陣列元素：<<run $playerequip.push('滿級神裝')>>
+--呈列角色擁有的所有物品： 角色擁有裝備：<<for _i to 0; _i lt $playerequip.length; _i++>>$playerequip[_i]<</for>>
+*/
+
+:: 連結互動 {"position":"300,500","size":"200,100"}
+一、點擊連結後到新的頁面
+
+[[Passage名稱]]
+[[連結文字|Passage名稱]]
+<<link 連結文字Passage名稱>><</link>>
+[[外連網址|https://www.google.com/]]
+
+
+二、點擊連結後，連結內容變化成新內容
+
+1.點擊之後，連結文字後生成新內容
+<<linkappend '點擊文字'>>新的內容<</linkappend>>
+2.點擊之後，連結文字前生成新內容
+<<linkprepend '點擊文字'>>新的內容<</linkprepend>>
+3.點擊之後，連結文字被新內容取代
+<<linkreplace '點擊文字'>>新的內容<</linkreplace>>
+
+
+:: 遊戲教學 {"position":"900,125","size":"100,100"}
+<div class ="animate__bounceIn animate__infinite animate__slow"><span class="title">遊戲教學</span></div><<script>>UIBar.stow()<</script>>
+<div class="lefttext">
+#遊戲程式透過網頁瀏覽器來運作，建議使用@@color:green;chrome瀏覽器@@。
+#遊戲解謎過程會需要使用到@@color:green;剪刀@@裁切，建議在遊玩前先行準備。
+#遊戲程式的@@color:green;左側選單@@可以收合，點擊左側上方<img src="source/media/img/close.png" height="25px">進行收合展開。
+#遊戲過程中須保持網路連線。欲返回前一個遊戲畫面，請點擊左側選單上方的<img src="source/media/img/back.png" height="25px">，@@color:red;請勿點擊網頁瀏覽器上一頁@@。
+#選單中的<img src="source/media/img/save.png" height="20px">可以儲存遊戲進度；<img src="source/media/img/restart.png" height="20px">則可以清除所有遊戲資料，從頭開始遊戲。
+#若因故關閉遊戲程式導致遊戲進度重置，可從左側選單中的<img src="source/media/img/datamenu.png" height="25px">選擇欲遊玩的章節、關卡。
+</div>
+[[開始遊戲|開場旁白]]
+
+
+:: 開場 {"position":"800,0","size":"200,100"}
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+
+:: 開場旁白 [court] {"position":"800,250","size":"100,100"}
+
+<p class="center delayed" style="background-color: black; padding: 1em;">5月12日下午，$main_character與他的初一洋基隊隊友們迎來了初次的正式比賽，本次比賽他們將對上由初二學生所組成的勇士隊。比賽當天，馬祖中學董校長邀請了戰地指揮官彭啟超將軍主持典禮及開球，當時也有許多馬祖的高階將領到場觀賽，甚至有政大新聞系的同學跨海前來，也為位處戰地的馬祖擁有棒球賽感到驚奇。
+[[接下來|main_0]]
+</p>
+
+
+:: 開始遊戲 [court] {"position":"800,125","size":"100,100"}
+  <p class="center delayed no_margin">
+  <<button  '開始遊戲'>>
+		<<goto "開場旁白">>
+  <</button>>
+    <<button  '問答'>>
+		<<goto "Opening of QA">>
+  <</button>>
+    <<button  '第一個打者'>>
+		<<goto "1-0">>
+  <</button>>
+    <<button  '第二個打者'>>
+		<<goto "2-0">>
+  <</button>>
+      <<button  '第三個打者'>>
+		<<goto "3-0">>
+  <</button>>
+  </p>
+
+
+:: StoryScript [script]
+/* WebFont Loader */
+importScripts("https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js")
+	.then(function () {
+		// Code that depends on the script goes here.
+  		WebFont.load({
+      google: {
+        families: ["Noto Sans TC", "Noto Serif TC", "cwTeXYen", "cwTeXKai"]
+      }
+  });
+	})
+	.catch(function (err) {
+		// There was an error loading the script, log it to the console.
+		console.log(err);
+	});
+
+/* 返回前頁 */
+$(document).on(':passagestart', function (ev) {
+	if (!ev.passage.tags.includes('noreturn')) {
+		State.variables.return = ev.passage.title;
+	}
+});
+
+/* 動態效果 #1：delay */
+$(document).on(':passagerender', function (ev) {
+	// Find all elements containing the delayed class.
+	var elems = $(ev.content).find('.delayed');
+	// Appearance delay (in milliseconds) between each delayed text block.
+	var delay = 1000; // 1 second fade-in
+	if (elems.length > 0) {
+		elems.each(function (i) {
+			$(this)
+				.delay(delay * (i + 1))
+				.fadeTo(delay, 1);
+		});
+	}
+});
+
+/* 動態效果 #2：Animate.css */
+importStyles("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+
+/* twine-user-script #1: "config.js" */
+Config.history.controls = true;
+Config.history.maxStates = 40;
+Config.saves.slots = 8;
+Config.saves.autosave = true;
+Config.addVisitedLinkClass = true;
+Config.ui.stowBarInitially = true;
+
+/* twine-user-script #2: "shake-macro-set.min.js" */
+/*! <<shake>> macro set for SugarCube 2.x */
+!function(){"use strict";if("undefined"==typeof version||"undefined"==typeof version.title||"SugarCube"!==version.title||"undefined"==typeof version.major||version.major<2||"undefined"==typeof version.minor||version.minor<5)throw new Error("<<shake>> macro requires SugarCube 2.5.0 or greater, aborting load");Macro.add("shake",{tags:null,handler:function(){var duration=this.args.length>0?this.args[0]:1/0,shakeClass="shake";if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}Config.debug&&this.debugView.modes({block:!0});var $wrapper=jQuery(document.createElement("span"));$wrapper.addClass("macro-"+this.name+" "+shakeClass).wiki(this.payload[0].contents).appendTo(this.output),1/0!==duration&&setTimeout(function(){$wrapper.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}}),Macro.add(["shakescreen","shaketarget"],{handler:function(){var $targets,duration,shakeClass;if("shakescreen"===this.name)$targets=jQuery("#passages"),duration=this.args.length>0?this.args[0]:1/0,shakeClass="shake-block";else{if(0===this.args.length)return this.error("no selector specified");if($targets=jQuery(this.args[0]),0===$targets.length)return this.error('no elements matched the selector "'+this.args[0]+'"');duration=this.args.length>1?this.args[1]:1/0,shakeClass="block"===jQuery($targets[0]).css("display")?"shake-block":"shake"}if("stop"===duration)return void $targets.removeClass(shakeClass);if(1/0!==duration)try{duration=Math.max(Engine.minDomActionDelay,Util.fromCssTime(duration))}catch(e){return this.error(e.message)}$targets.addClass(shakeClass),1/0!==duration&&setTimeout(function(){$targets.removeClass(shakeClass)},Engine.minDomActionDelay+duration)}})}();
+
+/* 介面中文化 */
+(function () {
+	/* General. */
+	l10nStrings.identity = '遊戲';
+	l10nStrings.aborting = '終止';
+	l10nStrings.cancel   = '取消';
+	l10nStrings.close    = '關閉';
+	l10nStrings.ok       = '確認';
+
+	/* Errors. */
+	l10nStrings.errorTitle              = '錯誤';
+	l10nStrings.errorToggle             = '切換錯誤顯示頁';	
+	l10nStrings.errorNonexistentPassage = '段落"{passage}"不存在';
+	l10nStrings.errorSaveDiskLoadFailed = '讀取存檔失敗';	
+	l10nStrings.errorSaveMissingData    = '存檔缺少必須的數據，可能被讀取的文件不是存檔或存檔被損壞';
+	l10nStrings.errorSaveIdMismatch     = '保存{identity}是錯誤的';
+
+	/* Warnings. */
+	l10nStrings._warningIntroLacking  = '你的瀏覽器可能損壞或者被禁用';
+	l10nStrings._warningOutroDegraded = '，所以{identity}在受限模式中運行。你可以繼續運行，但是一些內容可能不能正確工作。';
+	l10nStrings.warningNoWebStorage   = '{_warningIntroLacking} Web Storage API {_warningOutroDegraded}';
+	l10nStrings.warningDegraded       = '{_warningIntroLacking} {identity}需要的功能 {_warningOutroDegraded}';
+
+	/* Debug bar. */
+	l10nStrings.debugBarToggle      = '打開/關閉偵錯列';
+	l10nStrings.debugBarNoWatches   = '\u2014 沒有監看變數 \u2014';
+	l10nStrings.debugBarAddWatch    = '增加監看變數';
+	l10nStrings.debugBarDeleteWatch = '刪除監看變數';
+	l10nStrings.debugBarWatchAll    = '監看全部變數';
+	l10nStrings.debugBarWatchNone   = '刪除全部變數';
+	l10nStrings.debugBarLabelAdd    = '增加';
+	l10nStrings.debugBarLabelWatch  = '監看';
+	l10nStrings.debugBarLabelTurn   = '跳轉'; // (noun) chance to act (in a game), moment, period
+	l10nStrings.debugBarLabelViews  = '預覽';
+	l10nStrings.debugBarViewsToggle = '打開/關閉偵錯預覽模式';
+	l10nStrings.debugBarWatchToggle = '打開/關閉監看面板';
+
+	/* UI bar. */
+	l10nStrings.uiBarToggle   = '打開/關閉導航欄';
+	l10nStrings.uiBarBackward = '回朔{identity}的歷史紀錄';
+	l10nStrings.uiBarForward  = '快轉{identity}的歷史紀錄';
+	l10nStrings.uiBarJumpto   = '跳到{identity}的歷史紀錄中的某一點';
+
+	/* Jump To. */
+	l10nStrings.jumptoTitle       = '跳到';
+	l10nStrings.jumptoTurn        = '轉到';
+	l10nStrings.jumptoUnavailable = '目前沒有跳躍點\u2026';
+
+	/* Saves. */
+	l10nStrings.savesTitle       = '存檔';
+	l10nStrings.savesDisallowed  = '在這個段落中不允許存檔';
+	l10nStrings.savesIncapable   = '{_warningIntroLacking}支持存檔所需的功能，因此本次遊戲的存檔功能已被禁用';
+	l10nStrings.savesLabelAuto   = '自動存檔';
+	l10nStrings.savesLabelDelete = '刪除';
+	l10nStrings.savesLabelExport = '另存為\u2026';
+	l10nStrings.savesLabelImport = '讀取\u2026';
+	l10nStrings.savesLabelLoad   = '讀取';
+	l10nStrings.savesLabelClear  = '全部刪除';
+	l10nStrings.savesLabelSave   = '保存';
+	l10nStrings.savesLabelSlot   = '插槽';
+	l10nStrings.savesUnavailable = '未找到存檔插槽\u2026';
+	l10nStrings.savesUnknownDate = '未知';
+
+	/* Settings. */
+	l10nStrings.settingsTitle = '設置';
+	l10nStrings.settingsOff   = '關閉';
+	l10nStrings.settingsOn    = '開啟';
+	l10nStrings.settingsReset = '重置為默認值';
+
+	/* Restart. */
+	l10nStrings.restartTitle  = '重新開始';
+	l10nStrings.restartPrompt = '你確定要重新開始嗎？未保存的進度將會丟失。';
+
+	/* Share. */
+	l10nStrings.shareTitle = '分享';
+
+	/* Alert. */
+	l10nStrings.alertTitle = '警告';
+	
+	/* Autoload. */
+	l10nStrings.autoloadTitle  = '自動保存';
+	l10nStrings.autoloadCancel = '前往最初的段落';
+	l10nStrings.autoloadOk     = '讀取自動存檔';
+	l10nStrings.autoloadPrompt = '有一個自動存檔，讀取它還是前往最初的段落？';
+
+	/* Macros. */
+	l10nStrings.macroBackText   = '返回';
+	l10nStrings.macroReturnText = '返回';
+})();
+
+/* 對話系統：Cycy wrote custom macros */
+(function () {
+	"use strict"; // the code should be executed in "strict mode"
+	window.CTP = function (config) {
+		this.id = "";
+		this.selector = "";
+		this.stack = [];
+		this.head = "";
+		this.tail = "";
+		this.log = {
+			clear: 0,
+			index: 0,
+			seen: 0,
+			delayed: false
+		};
+		Object.keys(config).forEach(function (pn) {
+			this[pn] = clone(config[pn]);
+		}, this);
+	};
+
+	CTP.prototype.clone = function () {
+		return new CTP(this);
+	};
+
+	CTP.prototype.toJSON = function () {
+		var ownData = {};
+		Object.keys(this).forEach(function (pn) {
+			ownData[pn] = clone(this[pn]);
+		}, this);
+		return JSON.reviveWrapper('new CTP($ReviveData$)', ownData);
+	};
+
+	CTP.getCTP = function (id) {
+		var clone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (!id || !id.trim()) throw new Error("No ID specified!");
+		variables()["#macro-ctp-dump"] = variables()["#macro-ctp-dump"] || {};
+		if (!variables()["#macro-ctp-dump"][id]) throw new Error("No CTP with ID '" + id + "' found!");
+		return clone ? variables()["#macro-ctp-dump"][id].clone() : variables()["#macro-ctp-dump"][id];
+	};
+
+	CTP.contentObject = function (content) {
+		var mods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		mods = mods.split(/\s+/g);
+		return {
+			clear: mods.includes("clear") && !mods.includes("noClear"),
+			nobr: mods.includes("nobr") && !mods.includes("br"),
+			transition: mods.includesAny("t8n", "transition") && !mods.includesAny("noT8n", "noTransition"),
+			delay: Util.fromCssTime(mods.find(function (el) {
+				return /[0-9\.]+m?s/.test(el);
+			}) || "0s"),
+			re: mods.includes("redo"),
+			content: content
+		};
+	};
+
+	CTP.prototype.add = function (content) {
+		var mods = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+		var contentObj = CTP.contentObject(content, mods);
+		contentObj.index = this.stack.length;
+		this.stack.push(contentObj);
+		return this;
+	};
+
+	CTP.item = function (item) {
+		var noT8n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (!item) return "";
+		var t8n = noT8n ? "" : item.transition ? "macro-ctp-entry-t8n" : "";
+		var br = item.index === 0 || item.index === "head" || item.clear ? " " : item.nobr ? " " : '<br class="macro-ctp-entry-index-' + item.index + '">';
+		var brAfter = item.index === "head" && !item.nobr ? "<br>" : " ";
+		return br + '<span class="macro-ctp-visible macro-ctp-entry macro-ctp-entry-index-' + item.index + ' ' + t8n + '">' + item.content + '\n</span>' + brAfter;
+	};
+
+	CTP.prototype.entry = function (index) {
+		var noT8n = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+		if (index < 0 || index >= this.stack.length) return "";
+		var entry = this.stack[index];
+		return CTP.item(entry, noT8n);
+	};
+
+	CTP.prototype.out = function () {
+		return '<span class="macro-ctp-wrapper">' + '<span class="ctp-head"></span>' + '<span class="ctp-body">' + this.entry(0) + '</span>' + '<span class="ctp-tail"></span>' + '</span>';
+	};
+
+	CTP.prototype.go = function (diff) {
+		if (!Number.isInteger(diff)) throw new Error(`Cannot move by non-integral amounts!`);
+		if (diff > 0) {
+			for (var i = 0; i < diff; i++) {
+				this.advance(true);
+			}
+		} else if (diff < 0) {
+			for (var _i = 0; _i < -diff; _i++) {
+				this.back();
+			}
+		}
+	};
+
+	CTP.prototype.goTo = function (index) {
+		this.go(index - this.log.index);
+	};
+
+	CTP.prototype.advance = function () {
+		var noDelay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var _this = this;
+		if (this.log.index === this.stack.length - 1 || this.log.delayed) return;
+		var index = ++this.log.index;
+		this.log.seen = Math.max(this.log.seen, index);
+		var _el = $(this.selector).children(".ctp-body");
+		if (this.stack[index].clear) {
+			_el.children().removeClass("macro-ctp-visible").hide();
+			this.log.clear = index - 1;
+		}
+		function delay(ctp) {
+			ctp.log.delayed = false;
+			$(ctp.selector).children(".ctp-body").wiki(ctp.entry(ctp.log.index)).siblings(".ctp-head").empty().wiki(CTP.item(ctp.head)).siblings(".ctp-tail").empty().wiki(CTP.item(ctp.tail));
+		}
+		if (noDelay) {
+			delay(_this);
+		} else {
+			this.log.delayed = true;
+			return new Promise(function (resolve, reject) {
+				setTimeout(function () {
+					delay(_this);
+					resolve("advanced");
+				}, _this.stack[index].delay);
+			});
+		}
+	};
+
+	CTP.prototype.back = function () {
+		var _this3 = this;
+		if (this.log.index <= 0 || this.log.delayed) return this;
+		if (this.log.clear >= --this.log.index) {
+			var clearIndex = 0;
+			var _clear = this.stack.filter(function (el) {
+				return el.clear && el.index < _this3.log.index + 1;
+			});
+			if (_clear.length) clearIndex = _clear[_clear.length - 1].index;
+			this.stack.slice(clearIndex, this.log.index + 1).forEach(function (el) {
+				$(_this3.selector).children(".ctp-body").children(".macro-ctp-entry-index-" + el.index).addClass("macro-ctp-visible").show();
+			}, this);
+		}
+		var item = this.stack[this.log.index];
+		if (item.re) $(this.selector).children(".ctp-body").children(".macro-ctp-entry.macro-ctp-entry-index-" + item.index).empty().wiki(item.content);
+		this.stack.slice(this.log.index + 1, this.log.seen + 1).forEach(function (el) {
+			$(_this3.selector).children(".ctp-body").children(".macro-ctp-entry-index-" + el.index).remove();
+		}, this);
+		$(this.selector).children(".ctp-head").empty().wiki(CTP.item(this.head)).siblings(".ctp-tail").empty().wiki(CTP.item(this.tail));
+		return this;
+	};
+
+	Macro.add("ctp", {
+		tags: ["ctpNext", "ctpHead", "ctpTail"],
+		handler: function handler() {
+			if (this.args.length === 0) return this.error("No ID specified!");
+			var _id = this.args[0];
+			var _data = 'data-ctp="' + Util.escape(_id) + '"';
+			var ctp = new CTP({
+				id: _id,
+				selector: '[' + _data + ']'
+			});
+			var _overArgs = this.payload[0].args;
+			_overArgs.reverse().pop();
+			_overArgs = " " + _overArgs.join(" ");
+			this.payload.forEach(function (el, index) {
+				var _args = el.args.join(" ");
+				switch (el.name) {
+					case "ctpHead":
+						{
+							var _head = CTP.contentObject(el.contents.trim(), _args + _overArgs);
+							_head.index = "head";
+							ctp.head = _head;
+							break;
+						}
+					case "ctpTail":
+						{
+							var _tail = CTP.contentObject(el.contents.trim(), _args + _overArgs);
+							_tail.index = "tail";
+							ctp.tail = _tail;
+							break;
+						}
+					default:
+						{
+							ctp.add(el.contents.trim(), (el.name === "ctp" ? "" : _args) + _overArgs);
+							break;
+						}
+				}
+			});
+			variables()["#macro-ctp-dump"] = variables()["#macro-ctp-dump"] || {};
+			variables()["#macro-ctp-dump"][_id] = ctp;
+			let out = $("<div />");
+			out.wiki(ctp.out()).children(".macro-ctp-wrapper").attr("data-ctp", Util.escape(_id)).children(".ctp-head").wiki(CTP.item(ctp.head)).siblings(".ctp-tail").wiki(CTP.item(ctp.tail));
+			$(this.output).append(out.children().unwrap());
+		}
+	});
+
+	Macro.add("ctpAdvance", {
+		handler: function handler() {
+			try {
+				var ctp = CTP.getCTP(this.args[0]);
+				if (ctp) ctp.advance();
+			} catch (ex) {
+				throw new Error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	Macro.add("ctpBack", {
+		handler: function handler() {
+			try {
+				var ctp = CTP.getCTP(this.args[0]);
+				if (ctp) ctp.back();
+			} catch (ex) {
+				throw new Error(_typeof(ex) === 'object' ? ex.message : ex);
+			}
+		}
+	});
+
+	$(document).on(':passageinit', function () {
+		delete variables()["#macro-ctp-dump"];
+	});
+})();
+/* 即時更新：Live Update */
+(function () {
+	"use strict";
+
+	$(document).on(":liveupdate", function () {
+		$(".macro-live").trigger(":liveupdateinternal");
+	});
+
+	Macro.add(['update', 'upd'], {
+		handler: function handler() {
+			$(document).trigger(":liveupdate");
+		}
+	});
+
+	Macro.add(['live', 'l', 'lh'], {
+		skipArgs: true,
+		handler: function handler() {
+			if (this.args.full.length === 0) {
+				return this.error('no expression specified');
+			}
+			try {
+				var statement = this.args.full;
+				var result = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+				if (result !== null) {
+					var lh = this.name === "lh";
+					var $el = $("<span></span>").addClass("macro-live").wiki(lh ? Util.escape(result) : result).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						var out = toStringOrDefault(Scripting.evalJavaScript(statement), null);
+						$el.empty().wiki(lh ? Util.escape(out) : out);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+
+	Macro.add(['liveblock', 'lb'], {
+		tags: null,
+		handler: function handler() {
+			try {
+				var content = this.payload[0].contents.trim();
+				if (content) {
+					var $el = $("<span></span>").addClass("macro-live macro-live-block").wiki(content).appendTo(this.output);
+					$el.on(":liveupdateinternal", this.createShadowWrapper(function (ev) {
+						$el.empty().wiki(content);
+					}));
+				}
+			} catch (ex) {
+				return this.error("bad evaluation: " + (_typeof(ex) === 'object' ? ex.message : ex));
+			}
+		}
+	});
+})();
+
+/*! Image Map Resizer
+ *  Desc: Resize HTML imageMap to scaled image.
+ *  Copyright: (c) 2014-15 David J. Bradshaw - dave@bradshaw.net
+ *  License: MIT
+ *  Modified for use in Twine/SugarCube by: HiEv (2020) v1.0
+ */
+(function() {
+	function scaleImageMap() {
+		function resizeMap() {
+			function resizeAreaTag(cachedAreaCoords, idx) {
+				function scale(coord) {
+					var dimension = 1 === (isWidth = 1 - isWidth) ? "width" : "height";
+					return (padding[dimension] + Math.floor(Number(coord) * scalingFactor[dimension]));
+				}
+
+				var isWidth = 0;
+				areas[idx].coords = cachedAreaCoords.split(",").map(scale).join(",");
+			}
+
+			if (image) {
+				var scalingFactor = {
+					width: $(image).width() / image.naturalWidth,
+					height: $(image).height() / image.naturalHeight,
+				};
+				var padding = {
+					width: parseInt(
+						window.getComputedStyle(image, null).getPropertyValue("padding-left"),
+						10
+					),
+					height: parseInt(
+						window.getComputedStyle(image, null).getPropertyValue("padding-top"),
+						10
+					),
+				};
+				cachedAreaCoordsArray.forEach(resizeAreaTag);
+			}
+		}
+		function getCoords(e) {
+			// Normalize coord-string to csv format without any space chars
+			return e.coords.replace(/ *, */g, ",").replace(/ +/g, ",");
+		}
+		function debounce() {
+			clearTimeout(timer);
+			timer = setTimeout(resizeMap, 250);
+		}
+		function start() {
+			function setupMap () {
+				if ($("img").width()) {
+					resizeMap();
+				} else {
+					if (++tries < 100) {
+						setTimeout(setupMap, 20);
+					}
+				}
+			}
+
+			var tries = 0;
+			if (image) {
+				setupMap();
+				var imo = $(context).find(".imageMapObserve");
+				if (imo.length) {
+					$(context).off("mouseup", ".imageMapObserve", resizeMap);
+					imo.on("mouseup", resizeMap);
+					if (window.ResizeObserver) {
+						new ResizeObserver(debounce).observe($(context)[0].querySelector(".imageMapObserve"));
+					}
+				}
+			}
+		}
+		function addEventListeners() {
+			if (image) {
+				image.addEventListener("load", resizeMap, false);  // Detect late image loads in IE11
+			}
+			window.addEventListener("focus", resizeMap, false);  // Cope with window being resized whilst on another tab
+			window.addEventListener("resize", debounce, false);
+			window.addEventListener("readystatechange", resizeMap, false);
+			document.addEventListener("fullscreenchange", resizeMap, false);
+			$("#ui-bar-toggle").click(debounce);
+		}
+		function beenHere() {
+			return "function" === typeof map._resize;
+		}
+		function getImg(name) {
+			return $(context).find('img[usemap="' + name + '"]')[0];
+		}
+		function setup() {
+			areas = map.getElementsByTagName("area");
+			cachedAreaCoordsArray = Array.prototype.map.call(areas, getCoords);
+			image = getImg("#" + map.name) || getImg(map.name);
+			map._resize = resizeMap;  // Bind resize method to HTML map element
+		}
+
+		var  /* jshint validthis:true */
+			map = this, areas = null,
+			cachedAreaCoordsArray = null,
+			image = null, timer = null;
+		if (!beenHere()) {
+			setup();
+			addEventListeners();
+			start();
+		} else {
+			var imo = $(context).find(".imageMapObserve");
+			if (imo.length) {
+				$(context).off("mouseup", ".imageMapObserve", resizeMap);
+				imo.on("mouseup", resizeMap);
+				if (window.ResizeObserver) {
+					new ResizeObserver(debounce).observe($(context)[0].querySelector(".imageMapObserve"));
+				}
+			}
+			map._resize();  // Already setup, so just resize map
+		}
+	}
+	function factory() {
+		function chkMap(element) {
+			if (!element.tagName) {
+				throw new TypeError("Object is not a valid DOM element");
+			} else if ("MAP" !== element.tagName.toUpperCase()) {
+				throw new TypeError("Expected <MAP> tag, found <" + element.tagName + ">.");
+			}
+		}
+		function init(element) {
+			if (element) {
+				chkMap(element);
+				scaleImageMap.call(element);
+				maps.push(element);
+			}
+		}
+
+		var maps;
+		return function imageMapResizeF(target) {
+			maps = [];  // Only return maps from this call
+			switch (typeof target) {
+				case "undefined":
+				case "string":
+					Array.prototype.forEach.call(context.querySelectorAll(target || "map"), init);
+					break;
+				case "object":
+					init(target);
+					break;
+				default:
+					throw new TypeError("Unexpected data type (" + typeof target + ").");
+			}
+			return maps;
+		};
+	}
+
+	var context = document;
+	if (typeof define === "function" && define.amd) {
+		define([], factory);
+	} else if (typeof module === "object" && typeof module.exports === "object") {
+		module.exports = factory();  // Node for browserfy
+	} else {
+		window.imageMapResize = factory();
+	}
+	if ("jQuery" in window) {
+		window.jQuery.fn.imageMapResize = function $imageMapResizeF() {
+			context = this.prevObject;
+			return this.filter("map").each(scaleImageMap).end();
+		};
+	}
+})();
+
+$(document).on(":passagerender", function (event) {
+	$(event.content).find("map").imageMapResize();
+});
+/* Image Map Resizer - End */
+
+:: StoryStylesheet [stylesheet]
+/*自訂背景(標籤為bg1)*/
+
+body.court {
+    background-image: url("source/media/球場畫面.jpg");
+    background-repeat: no-repeat;
+      background-position: center center;
+      background-origin: content-box;
+      height:100vh;
+  }
+  body.rest {
+    background-image: url("source/media/球場旁球員休息區.jpg");
+    background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center center;
+      background-origin: content-box;
+    height:100vh;
+  }
+/* twine-user-stylesheet #1: "assets.css" */
+/* Fonts */
+/* 思源黑體&思源宋體 */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400&display=swap");
+/* 楷體字體 https://fonts.googleapis.com/earlyaccess/cwtexkai.css */
+@font-face {
+  font-family: 'cwTeXKai';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.eot);
+  src: url(https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.woff2) format('woff2'),
+       url(https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.woff) format('woff'),
+       url(https://fonts.gstatic.com/ea/cwtexkai/v3/cwTeXKai-zhonly.ttf) format('truetype');
+}
+/* 圓體字體 https://fonts.googleapis.com/earlyaccess/cwtexyen.css */
+@font-face {
+  font-family: 'cwTeXYen';
+  font-style: normal;
+  font-weight: 500;
+  src: url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot);
+  src: url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff2) format('woff2'),
+       url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff) format('woff'),
+       url(https://fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.ttf) format('truetype');
+}
+/* 內海字體 https://github.com/max32002/naikaifont */
+@font-face {
+  font-family: 'naikaifont';
+  src: url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.0/webfont/NaikaiFont-Regular-Lite.woff2) format("woff2"), url(https://cdn.jsdelivr.net/gh/max32002/naikaifont@1.89/webfont/NaikaiFont-Regular.woff2) format("woff2");
+}
+
+/* twine-user-stylesheet #10: "custom.css" */
+/* Customizer Variables */
+:root {
+  --text-font: Arial, 'Noto Sans TC', -apple-system, BlinkMacSystemFont, Roboto, microsoft jhenghei, sans-serif;
+  --title-font: 'Helvetica Neue', 'Noto Sans TC', serif !important;
+  --sidebarbutton-font: 'cwTeXYen', sans-serif !important;
+  --button-font: 'Noto Serif TC', serif !important;
+  --background-color: rgb(38 34 31);
+  --background-text: rgb(229 226 223);
+  --sidebar-color: rgb(49 45 44);
+  --sidebar-text: rgb(238 237 236);
+  --accent-color: rgb(218 46 46);
+  --accent-text: rgb(255 255 255);
+  --sidebar-color-hsla: rgb(49 45 44 / 75%);
+}
+/* twine-user-stylesheet #2: "base.css" */
+/* Common style options */
+body {
+    background-color: var(--background-color);
+    color: var(--background-text);
+    font-family: var(--text-font);
+}
+
+
+body h1,
+body h2,
+body h3,
+body h4 {
+    font-family: var(--title-font);
+}
+
+body a,
+body a:hover {
+    color: var(--accent-color);
+}
+
+/* Icon rendering */
+#ui-bar a::before,
+#ui-bar button::before,
+#ui-bar #ui-bar-tray button,
+#ui-dialog button::before,
+#ui-dialog #ui-dialog-close,
+a.link-external::after {
+    font-weight: normal !important;
+}
+
+#ui-bar.stowed #ui-bar-toggle::before {
+    content: "\e82e";
+}
+
+#menu-item-saves a::before {
+    content: "\e814\00a0";
+}
+/* twine-user-stylesheet #4: "clean-base.css" */
+:root {
+    --accent-color-20: rgb(218 46 46 / 20%);
+    --background-text-20: rgb(229 226 223 / 20%);
+    --background-text-50: rgb(229 226 223 / 50%);
+    --radius: 4px;
+}
+
+body input,
+body select,
+body textarea,
+body button,
+body button[type="button"] {
+    background-color: var(--sidebar-color);
+    border-radius: var(--radius);
+    border: none !important;
+    box-shadow: 1px 1px 3px #0002;
+    color: var(--sidebar-text);
+    font-family: var(--button-font);
+}
+
+body select {
+    line-height: 1em;
+}
+
+body textarea,
+body input[type="text"] {
+    background-color: var(--accent-color-20);
+    box-shadow: 1px 1px 3px inset #0002;
+	font-family: var(--button-font);
+}
+
+body input[type="range"] {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+body input:disabled,
+body select:disabled,
+body textarea:disabled,
+body button:disabled {
+    background-color: var(--sidebar-color);
+    opacity: 0.33;
+}
+
+body input:hover:not(:disabled),
+body input:focus:not(:disabled),
+body button:hover:not(:disabled),
+body button:focus:not(:disabled),
+body select:hover:not(:disabled),
+body select:focus:not(:disabled),
+body textarea:hover:not(:disabled),
+body textarea:focus:not(:disabled) {
+    background-color: var(--accent-color);
+    box-shadow: 1px 1px 3px inset #0002;
+    color: var(--accent-text);
+}
+
+body input[type="range"]:hover:not(disabled),
+body input[type="range"]:focus:not(disabled) {
+    background-color: transparent;
+}
+
+body fieldset {
+    margin: 1em 0;
+    padding: 1em 1.5em;
+    border-radius: var(--radius);
+    border-color: var(--background-text-20);
+}
+
+body fieldset legend {
+    color: var(--background-text-50);
+    font-size: 0.9em;
+}
+
+body #passages {
+    max-width: 41em;
+}
+
+body #passages input,
+body #passages select,
+body #passages textarea,
+body #passages button,
+body #passages button[type="button"] {
+    margin: 0 4px 4px 0;
+    backdrop-filter: blur(2px);
+}
+
+body #passages img {
+    border-radius: var(--radius);
+    box-shadow: 1px 1px 3px #0002;
+}
+
+body #passages hr {
+    border-color: var(--background-text-20);
+}
+/* twine-user-stylesheet #5: "clean-debug.css" */
+html[data-debug-view] .debug {
+    background-color: var(--accent-color-20);
+}
+
+html[data-debug-view] .debug.hidden,
+html[data-debug-view] .debug.hidden .debug {
+    background-color: var(--accent-color-20);
+}
+
+html[data-debug-view] .debug[data-name][data-type].nonvoid::after,
+html[data-debug-view] .debug[data-name][data-type]::before {
+    background-color: var(--background-text-20);
+}
+
+html[data-debug-view] #debug-bar {
+    color: #fff;
+    font-family: monospace;
+}
+/* twine-user-stylesheet #6: "clean-dialog.css" */
+#ui-dialog {
+    background-color: var(--background-color);
+    color: var(--background-text);
+    border-radius: calc(var(--radius) * 2);
+    overflow: hidden;
+}
+
+#ui-dialog #ui-dialog-titlebar {
+    background-color: var(--sidebar-color);
+    box-shadow: 1px 1px 2px #0002;
+    color: var(--sidebar-text);
+    padding: 0.5em 0 0.25em;
+}
+
+#ui-dialog #ui-dialog-close {
+    box-shadow: none;
+}
+
+#ui-dialog #ui-dialog-body {
+    background-color: transparent;
+    border: none;
+}
+
+#ui-dialog #ui-dialog-body.saves tr:not(:first-child) {
+    border-top: 1px dotted var(--background-text-20);
+}
+
+#ui-dialog #ui-dialog-body.saves> :not(:first-child) {
+    border-top: 1px dotted var(--background-text-20);
+}
+/* twine-user-stylesheet #7: "clean-sidebar.css" */
+#ui-bar,
+#ui-bar #menu ul,
+#ui-bar #menu li,
+#ui-bar #menu li a,
+#ui-bar #ui-bar-tray button {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+#ui-bar {
+    backdrop-filter: blur(3px);
+    box-shadow: 1px 1px 3px #0002;
+    background-color: var(--sidebar-color-hsla);
+    color: var(--sidebar-text);
+}
+
+#ui-bar #menu li a,
+#ui-bar #ui-bar-toggle,
+#ui-bar #ui-bar-history [id|="history"] {
+    color: var(--sidebar-text);
+    padding: 5px 10px;
+}
+
+#ui-bar #menu li a:hover,
+#ui-bar #ui-bar-toggle:hover,
+#ui-bar #ui-bar-history [id|="history"]:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    border-radius: var(--radius);
+    box-shadow: 1px 1px 3px inset #0002;
+    color: var(--accent-text);
+    filter: none;
+}
+
+#ui-bar #ui-bar-history [id|="history"]:disabled {
+    opacity: 0.25;
+}
+
+#ui-bar #ui-bar-body {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 4.5em);
+    margin: 3em 0 1.5em;
+}
+
+#ui-bar #ui-bar-body nav {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: end;
+	font-family: var(--sidebarbutton-font);
+	font-size: 1.1em;
+}
+
+#ui-bar #menu {
+    text-align: left;
+}
+
+/* twine-user-stylesheet #13: "shake-macro-set.css" */
+/*! <<shake>> macro set for SugarCube 2.x */
+@-webkit-keyframes shakeanim {
+	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@-o-keyframes shakeanim {
+	0% { -o-transform: translate(2px, 1px) rotate(0deg); }
+	10% { -o-transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { -o-transform: translate(-3px, 0px) rotate(1deg); }
+	30% { -o-transform: translate(0px, 2px) rotate(0deg); }
+	40% { -o-transform: translate(1px, -1px) rotate(1deg); }
+	50% { -o-transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { -o-transform: translate(-3px, 1px) rotate(0deg); }
+	70% { -o-transform: translate(2px, 1px) rotate(-1deg); }
+	80% { -o-transform: translate(-1px, -1px) rotate(1deg); }
+	90% { -o-transform: translate(2px, 2px) rotate(0deg); }
+	100% { -o-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@keyframes shakeanim {
+	0% { transform: translate(2px, 1px) rotate(0deg); }
+	10% { transform: translate(-1px, -2px) rotate(-1deg); }
+	20% { transform: translate(-3px, 0px) rotate(1deg); }
+	30% { transform: translate(0px, 2px) rotate(0deg); }
+	40% { transform: translate(1px, -1px) rotate(1deg); }
+	50% { transform: translate(-1px, 2px) rotate(-1deg); }
+	60% { transform: translate(-3px, 1px) rotate(0deg); }
+	70% { transform: translate(2px, 1px) rotate(-1deg); }
+	80% { transform: translate(-1px, -1px) rotate(1deg); }
+	90% { transform: translate(2px, 2px) rotate(0deg); }
+	100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake-block,
+.shake {
+	-webkit-animation-duration: 0.8s;
+	     -o-animation-duration: 0.8s;
+	        animation-duration: 0.8s;
+	-webkit-animation-iteration-count: infinite;
+	     -o-animation-iteration-count: infinite;
+	        animation-iteration-count: infinite;
+	-webkit-animation-name: shakeanim;
+	     -o-animation-name: shakeanim;
+	        animation-name: shakeanim;
+	-webkit-animation-timing-function: linear;
+	     -o-animation-timing-function: linear;
+	        animation-timing-function: linear;
+	-webkit-transform-origin: 50% 50%;
+	    -ms-transform-origin: 50% 50%;
+	     -o-transform-origin: 50% 50%;
+	        transform-origin: 50% 50%;
+}
+.shake-block {
+	display: block;
+}
+.shake {
+	display: inline-block;
+}
+/* twine-user-stylesheet #14: "Add-ons Preview Style" */
+.by-line {
+    float: right;
+    font-size: .8em;
+    font-weight: normal;
+}
+/*動態效果整合*/
+/* 文字置中 */
+.center {
+	text-align: center;
+}
+
+/* 逐行出現 */
+.delayed {
+    opacity: 0;
+}
+
+/* 文字陰影 */
+.shadow {
+	text-shadow: 0.08em 0.08em 0.08em #FFF;
+}
+
+/* 文字浮凸 */
+.emboss {
+	text-shadow: 0.08em 0.08em 0em #FFF;
+	color: black;
+}
+
+/* 文字模糊 */
+.blur {
+	color: transparent;
+	text-shadow: 0em 0em 0.08em #FFF;
+}
+
+/* 文字焦糊 */
+.blurrier {
+	color: transparent;
+	text-shadow: 0em 0em 0.2em #FFF;
+}
+.blurrier::selection {
+	background-color: transparent;
+	color: transparent;
+}
+.blurrier::-moz-selection {
+	background-color: transparent;
+	color: transparent;
+}
+
+/* 光暈效果 */
+.smear {
+	color: transparent;
+	text-shadow:
+		0em    0em 0.02em rgba(255,255,255,0.75),
+		-0.2em 0em 0.5em  rgba(255,255,255,0.5),
+		0.2em  0em 0.5em  rgba(255,255,255,0.5);
+}
+
+/* 文字鏡射 */
+.mirror {
+	display: inline-block;
+	transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+}
+
+/* 文字上下顛倒 */
+.upside-down {
+	display: inline-block;
+	transform: scaleY(-1);
+	-webkit-transform: scaleY(-1);
+}
+
+/* 閃爍效果 */
+@-webkit-keyframes fade-in-out {
+	0%,
+	to {opacity: 0}
+	50% {opacity: 1}
+}
+@keyframes fade-in-out {
+	0%,
+	to {opacity: 0}
+	50% {opacity: 1}
+}
+.fade-in-out {
+	text-decoration: none;
+	animation: fade-in-out 2s ease-in-out infinite alternate;
+	-webkit-animation: fade-in-out 2s ease-in-out infinite alternate;
+}
+
+/* 上下抖動 */
+@-webkit-keyframes rumble {
+	50% {
+		-webkit-transform: translateY(-.2em);
+		transform: translateY(-.2em)
+	}
+}
+@keyframes rumble {
+	50% {
+		-webkit-transform: translateY(-.2em);
+		transform: translateY(-.2em)
+	}
+}
+.rumble {
+	-webkit-animation: rumble linear 0.1s 0s infinite;
+	animation: rumble linear 0.1s 0s infinite;
+	display:inline-block;
+}
+
+/* 左右抖動 */
+@-webkit-keyframes shudder {
+	50% {
+		-webkit-transform: translateX(0.2em);
+		transform: translateX(0.2em)
+	}
+}
+@keyframes shudder {
+	50% {
+		-webkit-transform: translateX(0.2em);
+		transform: translateX(0.2em)
+	}
+}
+.shudder {
+	-webkit-animation: shudder linear 0.1s 0s infinite;
+	animation: shudder linear 0.1s 0s infinite;
+	display: inline-block;
+}
+
+/* 彈出效果 */
+@-webkit-keyframes pulse {
+	0%  { -webkit-transform: scale(0, 0); transform: scale(0, 0) }
+	20% { -webkit-transform: scale(1.2, 1.2); transform: scale(1.2, 1.2) }
+	40% { -webkit-transform: scale(0.9, 0.9); transform: scale(0.9, 0.9) }
+	60% { -webkit-transform: scale(1.05, 1.05); transform: scale(1.05, 1.05) }
+	80% { -webkit-transform: scale(0.925, 0.925); transform:scale(0.925, 0.925) }
+	to  { -webkit-transform: scale(1, 1); transform: scale(1, 1) }
+}
+@keyframes pulse {
+	0%  { -webkit-transform: scale(0, 0); transform: scale(0, 0) }
+	20% { -webkit-transform: scale(1.2, 1.2); transform: scale(1.2, 1.2) }
+	40% { -webkit-transform: scale(0.9, 0.9); transform: scale(0.9, 0.9) }
+	60% { -webkit-transform: scale(1.05, 1.05); transform: scale(1.05, 1.05) }
+	80% { -webkit-transform: scale(0.925, 0.925); transform: scale(0.925, 0.925) }
+	to  { -webkit-transform: scale(1, 1); transform: scale(1, 1) }
+}
+.pulse {
+	-webkit-animation: pulse 0.8s;
+	animation: pulse 0.8s;
+	display: inline-block;
+}
+
+/* 喝醉效果 */
+.drunk {
+	animation: drunkCam 10s infinite alternate;
+	color: white;
+}
+@keyframes drunkCam {
+	0%  { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	20% { filter: blur(1px); text-shadow: 8px 0 0 grey; }
+	24% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	26% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	28% { filter: blur(1px); text-shadow: 10px 0 0 grey; }
+	30% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	60% { filter: blur(1px); text-shadow: 5px 0 0 grey; }
+	62% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	65% { filter: blur(2px); text-shadow: 8px 0 0 grey; }
+	67% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+	80% { filter: blur(0px); text-shadow: 8px 0 0 grey; }
+	85% { filter: blur(2px); text-shadow: 10px 0 0 grey; }
+	88% { filter: blur(1px); text-shadow: 5px 0 0 grey; }
+	90% { filter: blur(0px); text-shadow: 0 0 0 grey; }
+}
+
+/* 發抖效果 */
+/* The "clip" in ".glitch" is depreciated, so technically you should use the "clip-path" that's in ".glitchy" instead, however IE doesn't support "clip-path", and most browsers still support "clip". */
+
+.glitch {
+  color: white;
+  position: relative;
+}
+.glitch:before {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -9px;
+  text-shadow: 1px 0 blue;
+  top: -5px;
+  color: #FFD;
+  background: #111;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse;
+  -webkit-animation: noise-anim-2 3s infinite linear alternate-reverse;
+}
+.glitch:after {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -5px;
+  text-shadow: -1px 0 red;
+  top: -5px;
+  color: #DFF;
+  background: #111;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse;
+  -webkit-animation: noise-anim 2s infinite linear alternate-reverse;
+}
+@keyframes noise-anim {
+  0% {
+    clip: rect(80px, 9999px, 16px, 0);
+  }
+  5% {
+    clip: rect(94px, 9999px, 17px, 0);
+  }
+  10% {
+    clip: rect(9px, 9999px, 92px, 0);
+  }
+  15.0% {
+    clip: rect(37px, 9999px, 4px, 0);
+  }
+  20% {
+    clip: rect(53px, 9999px, 47px, 0);
+  }
+  25% {
+    clip: rect(99px, 9999px, 69px, 0);
+  }
+  30.0% {
+    clip: rect(15px, 9999px, 49px, 0);
+  }
+  35% {
+    clip: rect(83px, 9999px, 81px, 0);
+  }
+  40% {
+    clip: rect(55px, 9999px, 43px, 0);
+  }
+  45% {
+    clip: rect(28px, 9999px, 27px, 0);
+  }
+  50% {
+    clip: rect(64px, 9999px, 28px, 0);
+  }
+  55.0% {
+    clip: rect(76px, 9999px, 91px, 0);
+  }
+  60.0% {
+    clip: rect(29px, 9999px, 72px, 0);
+  }
+  65% {
+    clip: rect(70px, 9999px, 10px, 0);
+  }
+  70% {
+    clip: rect(5px, 9999px, 84px, 0);
+  }
+  75% {
+    clip: rect(46px, 9999px, 81px, 0);
+  }
+  80% {
+    clip: rect(7px, 9999px, 85px, 0);
+  }
+  85.0% {
+    clip: rect(17px, 9999px, 89px, 0);
+  }
+  90% {
+    clip: rect(41px, 9999px, 59px, 0);
+  }
+  95% {
+    clip: rect(53px, 9999px, 90px, 0);
+  }
+  100% {
+    clip: rect(10px, 9999px, 30px, 0);
+  }
+}
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(84px, 9999px, 3px, 0);
+  }
+  5% {
+    clip: rect(31px, 9999px, 69px, 0);
+  }
+  10% {
+    clip: rect(37px, 9999px, 33px, 0);
+  }
+  15.0% {
+    clip: rect(18px, 9999px, 6px, 0);
+  }
+  20% {
+    clip: rect(25px, 9999px, 87px, 0);
+  }
+  25% {
+    clip: rect(100px, 9999px, 8px, 0);
+  }
+  30.0% {
+    clip: rect(24px, 9999px, 87px, 0);
+  }
+  35% {
+    clip: rect(39px, 9999px, 16px, 0);
+  }
+  40% {
+    clip: rect(96px, 9999px, 25px, 0);
+  }
+  45% {
+    clip: rect(16px, 9999px, 100px, 0);
+  }
+  50% {
+    clip: rect(92px, 9999px, 76px, 0);
+  }
+  55.0% {
+    clip: rect(29px, 9999px, 40px, 0);
+  }
+  60.0% {
+    clip: rect(40px, 9999px, 39px, 0);
+  }
+  65% {
+    clip: rect(94px, 9999px, 44px, 0);
+  }
+  70% {
+    clip: rect(2px, 9999px, 78px, 0);
+  }
+  75% {
+    clip: rect(86px, 9999px, 50px, 0);
+  }
+  80% {
+    clip: rect(2px, 9999px, 46px, 0);
+  }
+  85.0% {
+    clip: rect(41px, 9999px, 71px, 0);
+  }
+  90% {
+    clip: rect(75px, 9999px, 15px, 0);
+  }
+  95% {
+    clip: rect(41px, 9999px, 8px, 0);
+  }
+  100% {
+    clip: rect(23px, 9999px, 75px, 0);
+  }
+}
+
+.glitchy {
+  color: white;
+  position: relative;
+}
+.glitchy:before {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -9px;
+  text-shadow: 1px 0 blue;
+  top: -5px;
+  color: #FFD;
+  background: var(--background-color);
+  overflow: hidden;
+  clip-path: polygon(0 0);
+  animation: noise-animY-2 3s infinite linear alternate-reverse;
+  -webkit-animation: noise-animY-2 3s infinite linear alternate-reverse;
+}
+.glitchy:after {
+  content: attr(data-text);
+  width: calc(100% + 0.5em);
+  position: absolute;
+  left: -5px;
+  text-shadow: -1px 0 red;
+  top: -5px;
+  color: #DFF;
+  background: var(--background-color);
+  overflow: hidden;
+  clip-path: polygon(0 0);
+  animation: noise-animY 2s infinite linear alternate-reverse;
+  -webkit-animation: noise-animY 2s infinite linear alternate-reverse;
+}
+@keyframes noise-animY {
+  0% {
+    clip-path: polygon(0 80px, 100% 80px, 100% 16px, 0 16px);
+  }
+  5% {
+    clip-path: polygon(0 94px, 100% 94px, 100% 17px, 0 17px);
+  }
+  10% {
+    clip-path: polygon(0 9px, 100% 9px, 100% 92px, 0 92px);
+  }
+  15.0% {
+    clip-path: polygon(0 37px, 100% 37px, 100% 4px, 0 4px);
+  }
+  20% {
+    clip-path: polygon(0 53px, 100% 53px, 100% 47px, 0 47px);
+  }
+  25% {
+    clip-path: polygon(0 99px, 100% 99px, 100% 69px, 0 69px);
+  }
+  30.0% {
+    clip-path: polygon(0 15px, 100% 15px, 100% 49px, 0 49px);
+  }
+  35% {
+    clip-path: polygon(0 83px, 100% 83px, 100% 81px, 0 81px);
+  }
+  40% {
+    clip-path: polygon(0 55px, 100% 55px, 100% 43px, 0 43px);
+  }
+  45% {
+    clip-path: polygon(0 28px, 100% 28px, 100% 27px, 0 27px);
+  }
+  50% {
+    clip-path: polygon(0 64px, 100% 64px, 100% 28px, 0 28px);
+  }
+  55.0% {
+    clip-path: polygon(0 76px, 100% 76px, 100% 91px, 0 91px);
+  }
+  60.0% {
+    clip-path: polygon(0 29px, 100% 29px, 100% 72px, 0 72px);
+  }
+  65% {
+    clip-path: polygon(0 70px, 100% 70px, 100% 10px, 0 10px);
+  }
+  70% {
+    clip-path: polygon(0 5px, 100% 5px, 100% 84px, 0 84px);
+  }
+  75% {
+    clip-path: polygon(0 46px, 100% 46px, 100% 81px, 0 81px);
+  }
+  80% {
+    clip-path: polygon(0 7px, 100% 7px, 100% 85px, 0 85px);
+  }
+  85.0% {
+    clip-path: polygon(0 17px, 100% 17px, 100% 89px, 0 89px);
+  }
+  90% {
+    clip-path: polygon(0 41px, 100% 41px, 100% 59px, 0 59px);
+  }
+  95% {
+    clip-path: polygon(0 53px, 100% 53px, 100% 90px, 0 90px);
+  }
+  100% {
+    clip-path: polygon(0 10px, 100% 10px, 100% 30px, 0 30px);
+  }
+}
+@keyframes noise-animY-2 {
+  0% {
+    clip-path: polygon(0 84px, 100% 84px, 100% 3px, 0 3px);
+  }
+  5% {
+    clip-path: polygon(0 31px, 100% 31px, 100% 69px, 0 69px);
+  }
+  10% {
+    clip-path: polygon(0 37px, 100% 37px, 100% 33px, 0 33px);
+  }
+  15.0% {
+    clip-path: polygon(0 18px, 100% 18px, 100% 6px, 0 6px);
+  }
+  20% {
+    clip-path: polygon(0 25px, 100% 25px, 100% 87px, 0 87px);
+  }
+  25% {
+    clip-path: polygon(0 100px, 100% 100px, 100% 8px, 0 8px);
+  }
+  30.0% {
+    clip-path: polygon(0 24px, 100% 24px, 100% 87px, 0 87px);
+  }
+  35% {
+    clip-path: polygon(0 39px, 100% 39px, 100% 16px, 0 16px);
+  }
+  40% {
+    clip-path: polygon(0 96px, 100% 96px, 100% 25px, 0 25px);
+  }
+  45% {
+    clip-path: polygon(0 16px, 100% 16px, 100% 100px, 0 100px);
+  }
+  50% {
+    clip-path: polygon(0 92px, 100% 92px, 100% 76px, 0 76px);
+  }
+  55.0% {
+    clip-path: polygon(0 29px, 100% 29px, 100% 40px, 0 40px);
+  }
+  60.0% {
+    clip-path: polygon(0 40px, 100% 40px, 100% 39px, 0 39px);
+  }
+  65% {
+    clip-path: polygon(0 94px, 100% 94px, 100% 44px, 0 44px);
+  }
+  70% {
+    clip-path: polygon(0 2px, 100% 2px, 100% 78px, 0 78px);
+  }
+  75% {
+    clip-path: polygon(0 86px, 100% 86px, 100% 50px, 0 50px);
+  }
+  80% {
+    clip-path: polygon(0 2px, 100% 2px, 100% 46px, 0 46px);
+  }
+  85.0% {
+    clip-path: polygon(0 41px, 100% 41px, 100% 71px, 0 71px);
+  }
+  90% {
+    clip-path: polygon(0 75px, 100% 75px, 100% 15px, 0 15px);
+  }
+  95% {
+    clip-path: polygon(0 41px, 100% 41px, 100% 8px, 0 8px);
+  }
+  100% {
+    clip-path: polygon(0 23px, 100% 23px, 100% 75px, 0 75px);
+  }
+}
+/* 對話系統：Cycy wrote custom macros */
+.macro-ctp-entry {
+	display: inline-block;
+}
+
+.macro-ctp-entry-t8n {
+	animation: macro-ctp-fade-in 0.4s ease;
+}
+
+@keyframes macro-ctp-fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+/* speechBOX：角色對話框 */
+#speechBOX {
+    padding: 20px;
+    background-color: rgb(0 0 0 / 60%);
+    border-radius: 20px;
+    position: fixed;
+    bottom: 1em;
+    width: 60vw;
+    transform: translateX(-49%);
+    left: 51%;
+    z-index: 5;
+}
+table.speechtable {
+  width: 100%;
+}
+table.speechtable td.right {
+  text-align:right;
+}
+table.speechtable td.left {
+  text-align:left;
+}
+/* SugarCube's built-in Font Awesome icons */
+.sc-fa {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+.sc-icon {
+	padding-left: 4px;
+}
+.sc-icon::before {
+	font-family: tme-fa-icons;
+	font-style: normal;
+	font-weight: 400;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	speak: none;
+}
+.sc-caret-left::before {
+	content: "\e819\00a0";
+}
+.sc-caret-right::before {
+	content: "\e81a\00a0";
+}
+
+/* Resizable element style */
+.resizable {
+	display: inline-block;
+	overflow: hidden;
+	line-height: 0;
+	resize: none;
+}
+.resizable img {
+	width: 100%;
+	height: 100%;
+}
+
+/* Area element style */
+area {
+	cursor: pointer;
+}
+area:focus {
+	outline: 2px solid black;
+}
+
+/*no margin*/
+no_margin {
+  	margin: 0 !important;
+  	padding: 0 !important;
+  	margin-block-start: 0;
+    margin-block-end: 0;
+  	white-space: nowrap;
+}

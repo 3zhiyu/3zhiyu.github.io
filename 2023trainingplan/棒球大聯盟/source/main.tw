@@ -1,0 +1,15 @@
+:: StoryData
+{
+        "ifid": "77EB5DAB-2DB4-4339-A1D7-E229BB133248",
+        "format": "SugarCube"
+}
+
+:: StoryTitle
+Twee!
+
+:: Start
+    <button >進入遊戲</button>
+    <<link "meow" "passage">><</link>>
+
+:: passage
+    m@@eowmeow@@
