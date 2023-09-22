@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://61B56C73-643A-4536-A82A-CE2DFE1C1B77// --><tw-storydata name="twine範本_成大中文_月之戀人" startnode="10" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="61B56C73-643A-4536-A82A-CE2DFE1C1B77" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*自訂背景(標籤為bg1)*/
+	<!-- UUID://33A4FFC9-0A4F-49BE-B441-60976F48A0EC// --><tw-storydata name="twine範本_成大中文_月之戀人" startnode="10" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="33A4FFC9-0A4F-49BE-B441-60976F48A0EC" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/*自訂背景(標籤為bg1)*/
 .ignore-br {
   br {
     display:none;
@@ -1003,7 +1003,7 @@ html[data-debug-view] #debug-bar {
     background-color: rgb(0 0 0 / 60%);
     border-radius: 20px;
     position: fixed;
-    bottom: 1em;
+    bottom: 1vh;
     width: 60vw;
 	height: 25vh;
     transform: translateX(-49%);
@@ -1844,10 +1844,72 @@ Config.ui.stowBarInitially = true;
 $(document).on(":passagerender", function (event) {
 	$(event.content).find("map").imageMapResize();
 });
-/* Image Map Resizer - End */</script><tw-tag name="court" color="orange"></tw-tag><tw-tag name="rest" color="purple"></tw-tag><tw-tag name="CSS" color="purple"></tw-tag><tw-tag name="noreturn" color="red"></tw-tag><tw-tag name="center" color="purple"></tw-tag><tw-passagedata pid="1" name="StoryAuthor" tags="noreturn" position="150,425" size="100,100">文字：曾昭榕
+/* Image Map Resizer - End */
+
+<!-- 自訂巨集<<preload>>：圖片預載 -->
+(function () {
+    'use strict';
+    // v1.0.0
+    // preload images prior to story startup
+
+    function preloadImage (url, cb) {
+        var img = new Image();
+        img.onload = cb;
+        img.onerror = cb;
+        img.src = url;
+    }
+
+    function preloadAll (urls, cb) {
+        var loaded = 0;
+        var toBeLoaded = urls.length;
+        if (toBeLoaded === 0) {
+            throw new Error("No URLs to preload!");
+        }
+        urls.forEach( function (url) {
+            preloadImage( url, function () {
+                loaded++;
+                if (loaded === toBeLoaded) {
+                    cb();
+                }
+            });
+        });
+    }
+
+    function isInit () {
+        return State.length <= 0;
+    }
+
+
+    function preload () {
+        var list = [].slice.call(arguments).flatten();
+        var id = isInit() ? LoadScreen.lock() : false;
+        preloadAll( list, function () {
+            if (id) {
+                LoadScreen.unlock(id);
+            }
+        });
+        return id;
+    }
+
+    setup.preload = preload;
+    setup.preload.force = false;
+
+    /* <<preload imageUrls...>> */
+    Macro.add('preload', {
+        handler : function () {
+            if (!isInit() && !setup.preload.force) {
+                return this.error("Attempting to preload images outside of `StoryInit` or similar can cause performance issues. Set `setup.preload.force` to `true` if you want to do it anyway.");
+            }
+            preload(this.args.flatten().filter( function (url) {
+                return typeof url === 'string';
+            }));
+        }
+    });
+}());</script><tw-tag name="court" color="orange"></tw-tag><tw-tag name="rest" color="purple"></tw-tag><tw-tag name="CSS" color="purple"></tw-tag><tw-tag name="noreturn" color="red"></tw-tag><tw-tag name="center" color="purple"></tw-tag><tw-passagedata pid="1" name="StoryAuthor" tags="noreturn" position="150,425" size="100,100">文字：曾昭榕
 遊戲：汪品均</tw-passagedata><tw-passagedata pid="2" name="StoryBanner" tags="noreturn" position="150,125" size="100,100">/* &lt;img src=&quot;assets/media/logo.jpeg&quot; width=&quot;100%&quot;&gt; */</tw-passagedata><tw-passagedata pid="3" name="StoryCaption" tags="noreturn" position="150,525" size="100,100">&lt;!-- 側邊欄顯示的文字在此編輯，此頁面加入非連結內容，會顯示於「StoryMenu」內容之下 --&gt;
 ----</tw-passagedata><tw-passagedata pid="4" name="StoryDisplayTitle" tags="noreturn" position="150,225" size="100,100">月之戀人</tw-passagedata><tw-passagedata pid="5" name="StoryInit" tags="noreturn" position="50,125" size="100,100">&lt;!-- 宣告全域變數 --&gt;
 &lt;&lt;set $use_wang_jacket to false&gt;&gt;
+&lt;&lt;preload &#39;media/01.png&#39; &#39;media/00.png&#39; &#39;media/04.png&#39; &#39;media/02.png&#39; &#39;media/小傑與隊友開心慶祝畫面.jpg&#39;&gt;&gt;
 &lt;!-- 宣告datamap變數 --&gt;
 &lt;&lt;set $character = {
 	&#39;王大閎&#39;: {
@@ -1864,7 +1926,7 @@ $(document).on(":passagerender", function (event) {
 	},
 	&#39;小透&#39;: {
 		name: &#39;小透&#39;,
-		img_src: &#39;media/logo.jpeg&#39;,
+		img_src: &#39;media/04.png&#39;,
 		description: &#39;與王大閎一同長大的青梅竹馬，穿著改良式的格紋旗袍，喜歡畫畫溫柔婉約的氣質女孩，喜歡王大閎卻不敢開口。&#39;
 	},
 	&#39;貝聿銘&#39;: {
@@ -2106,33 +2168,58 @@ $(document).on(":passagerender", function (event) {
 &lt;&lt;/widget&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="credits" tags="noreturn" position="50,425" size="100,100">&lt;a href=&quot;https://3zhiyu.weebly.com/&quot;&gt;三知餘文化&lt;/a&gt;
 &lt;a href=&quot;https://twinery.org/&quot;&gt;twine官網&lt;/a&gt;
 [[sugarcube技術文件|http://www.motoslave.net/sugarcube/2/docs/]]
-[[twine語法範例中文wiki|https://3zhiyu.github.io/tinatest/twineteach]]</tw-passagedata><tw-passagedata pid="10" name="Start" tags="center" position="2775,250" size="100,100">!月之戀人－鳳凰樹系館的戀愛物語
+[[twine語法範例中文wiki|https://3zhiyu.github.io/tinatest/twineteach]]</tw-passagedata><tw-passagedata pid="10" name="Start" tags="center" position="450,125" size="100,100">!月之戀人－鳳凰樹系館的戀愛物語
 
+&lt;&lt;button &quot;玩法介紹&quot;&gt;&gt;&lt;&lt;goto &quot;Guide&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button &quot;角色介紹&quot;&gt;&gt;&lt;&lt;goto &quot;Character_Intro&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button &quot;開始故事&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_des_0&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Character_Intro" tags="" position="100,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;男主  
-	$character[&#39;王大閎&#39;].name
-	$character[&#39;王大閎&#39;].description
+&lt;&lt;button &quot;開始故事&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_des_0&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="11" name="Guide" tags="center" position="100,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;
+!!遊戲玩法
+請盡量使用解析度為1920*1080之Chrome瀏覽器進行遊玩
+點選&lt;&lt;button &quot;按鈕&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;、紅色字體之&lt;&lt;link &quot;連結&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;或對話框右下角之&lt;&lt;link &quot;&lt;&lt;scicon forward&gt;&gt;&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;推進對話或劇情。
+若無法看到對話框右下角之&lt;&lt;link &quot;&lt;&lt;scicon forward&gt;&gt;&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;，請調整解析度或縮放畫面比例。
 
-女主 
-	$character[&#39;何天晴&#39;].name
-	$character[&#39;何天晴&#39;].description
-
-女二 
-	$character[&#39;小透&#39;].name
-	$character[&#39;小透&#39;].description
-
-男二
-	$character[&#39;貝聿銘&#39;].name
-	$character[&#39;貝聿銘&#39;].description
+&lt;&lt;button &quot;返回&quot;&gt;&gt;&lt;&lt;goto &quot;Start&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Character_Intro" tags="" position="450,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;width:30%;&quot; &gt;&lt;img @src=&quot;$character[&#39;王大閎&#39;].img_src&quot; style=&quot;max-height:100%; max-width:100%;&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;$character[&#39;王大閎&#39;].name
+	$character[&#39;王大閎&#39;].description&lt;/td&gt;
+    &lt;/tr&gt;
+	&lt;tr&gt;
+      &lt;td style=&quot;width:30%;&quot; &gt;&lt;img @src=&quot;$character[&#39;何天晴&#39;].img_src&quot; style=&quot;max-height:100%; max-width:100%;&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;$character[&#39;何天晴&#39;].name
+	$character[&#39;何天晴&#39;].description&lt;/td&gt;
+    &lt;/tr&gt;
+	    &lt;tr&gt;
+      &lt;td style=&quot;width:30%;&quot; &gt;&lt;img @src=&quot;$character[&#39;小透&#39;].img_src&quot; style=&quot;max-height:100%; max-width:100%;&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;$character[&#39;小透&#39;].name
+	$character[&#39;小透&#39;].description&lt;/td&gt;
+    &lt;/tr&gt;
+	&lt;tr&gt;
+      &lt;td style=&quot;width:30%;&quot; &gt;&lt;img @src=&quot;$character[&#39;貝聿銘&#39;].img_src&quot; style=&quot;max-height:100%; max-width:100%;&quot;&gt;&lt;/td&gt;
+      &lt;td&gt;$character[&#39;貝聿銘&#39;].name
+	$character[&#39;貝聿銘&#39;].description&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/div&gt;
-&lt;&lt;button &quot;返回&quot;&gt;&gt;&lt;&lt;goto &quot;Start&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="chap_1_des_0" tags="center" position="225,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;夕陽西下，路上熙來攘往的人群臉上都帶著疲憊，國立成功大學的成功湖畔卻不然，一群正值青春年華的大學生正在幫他們的好友慶生@@
-@@.delayed;很明顯看得出來，今天是人群中央那位全身都是刮鬍泡的同學生日@@
+&lt;&lt;button &quot;返回&quot;&gt;&gt;&lt;&lt;goto &quot;Start&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="chap_1_des_0" tags="center" position="600,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;夕陽西下，路上熙來攘往的人群臉上都帶著疲憊@@
+@@.delayed;國立成功大學的成功湖畔卻不然，一群正值青春年華的大學生正在幫他們的好友慶生@@
+@@.delayed;很明顯，今天是人群中央那位全身都是刮鬍泡的同學生日@@
 @@.delayed;一陣嬉鬧後，幾名同學冷不防地將壽星抬起，丟入成功湖內@@&lt;/div&gt;
-@@.delayed;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_00&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;@@</tw-passagedata><tw-passagedata pid="13" name="chap_1_dialog_00" tags="" position="350,225" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_01&quot; &quot;同學們&quot; &quot;media/小傑與隊友開心慶祝畫面.jpg&quot;&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;$character[&#39;何天晴&#39;].name！生日快樂！&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="chap_1_dialog_01" tags="" position="475,225" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_00&quot; $character[&#39;何天晴&#39;].name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;幹！刮鬍泡泡浴還不是最糟的慶生方式嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="chap_1_des_00" tags="center" position="600,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].name渾身濕淋淋地從湖裡爬起來，還來不及消化一同升上來的憤怒，便感到一陣驚慌@@
-@@.delayed;剛剛還在嬉鬧的同學們全都不見了，夕陽也早已與月亮完成交接，成功湖畔一點慶生的痕跡也沒有留下，剩一地月光與陣陣徐風陪她@@
-@@.delayed;一陣東張西望之後，她發現原本熟悉的系館不復存在，只有鋼筋搭起的骨架@@
-@@.delayed;而月光下，她看見一個風神俊朗、身型修長的憂鬱男子，腋下夾著一本素描本，正來回踱步@@
-@@.delayed;&lt;&lt;link &quot;$character[&#39;何天晴&#39;].name朝那名男子走去，隱約聽到了他喃喃自語...&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_0&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;@@&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="chap_1_dialog_0" tags="" position="725,225" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_1&quot; &quot;陌生男子&quot; $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;...不是這樣的，$character[&#39;貝聿銘&#39;].first_name...&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="chap_1_dialog_1" tags="" position="850,225" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_2&quot; $character[&#39;何天晴&#39;].name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;那個...不好意思，請問你是老師嗎？這裡是？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="chap_1_dialog_2" tags="" position="975,225" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_1&quot; &quot;陌生男子&quot; $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;我不是說了誰都不許吵我的嗎？你是誰？怎麼進到這裡來的？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="chap_1_des_1" tags="center" position="1100,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].name無語，這沒禮貌的傢伙是誰，本來打算說聲抱歉，但現在一個字都不想和這人說@@
+@@.delayed;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_00&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;@@</tw-passagedata><tw-passagedata pid="14" name="chap_1_dialog_00" tags="" position="600,475" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_01&quot; &quot;同學們&quot; &quot;media/小傑與隊友開心慶祝畫面.jpg&quot;&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;$character[&#39;何天晴&#39;].name！生日快樂！&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="chap_1_dialog_01" tags="" position="600,575" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_00&quot; $character[&#39;何天晴&#39;].name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;幹！刮鬍泡泡浴還不是最糟的慶生方式嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="chap_1_des_00" tags="center" position="1200,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].name渾身濕淋淋地從湖裡爬起來@@
+@@.delayed;還來不及消化一同升上來的憤怒，便感到一陣驚慌@@
+@@.delayed;剛剛還在嬉鬧的同學們全都不見了，夕陽也早已與月亮完成交接@@
+@@.delayed;成功湖畔一點慶生的痕跡也沒有留下，剩一地月光與陣陣徐風陪她@@
+
+@@.delayed;一陣東張西望之後@@
+@@.delayed;她發現原本熟悉的系館不復存在，只有鋼筋搭起的骨架@@
+@@.delayed;而月光下@@
+@@.delayed;有一位風神俊朗、身型修長的憂鬱男子@@
+@@.delayed;他腋下夾著素描本，正來回踱步@@
+@@.delayed;&lt;&lt;link &quot;$character[&#39;何天晴&#39;].name朝那名男子走去，隱約聽到了他喃喃自語...&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_0&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;@@&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="chap_1_dialog_0" tags="" position="600,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_1&quot; &quot;陌生男子&quot; $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;...不是這樣的，$character[&#39;貝聿銘&#39;].first_name...&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="chap_1_dialog_1" tags="" position="700,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_2&quot; $character[&#39;何天晴&#39;].name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;那個...不好意思，請問你是老師嗎？這裡是？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="chap_1_dialog_2" tags="" position="800,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_1&quot; &quot;陌生男子&quot; $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;我不是說了誰都不許吵我的嗎？你是誰？怎麼進到這裡來的？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="chap_1_des_1" tags="center" position="700,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].name無語，這沒禮貌的傢伙是誰，本來打算說聲抱歉，但現在一個字都不想和這人說@@
 @@.delayed;...@@
 @@.delayed;突然，她隱約想起落水時，曾看見水中漂浮著一排金色字句...@@
 
@@ -2143,37 +2230,37 @@ $(document).on(":passagerender", function (event) {
 !!@@.delayed;color:gold;此行必須幫助母胎單身的$character[&#39;王大閎&#39;].name脫離單身@@
 !!@@.delayed;color:gold;才能順利返回現實世界...」@@
 &lt;/div&gt;
-@@.delayed;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_3&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;@@</tw-passagedata><tw-passagedata pid="20" name="chap_1_dialog_3" tags="" position="1225,225" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_2&quot; $character[&#39;何天晴&#39;].past_name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;什麼鬼？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="chap_1_des_2" tags="center" position="100,350" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;一陣風吹來，$character[&#39;何天晴&#39;].past_name不禁打了個噴嚏。$character[&#39;王大閎&#39;].name？他誰啊？母胎單身？？超爛...@@
-@@.delayed;放眼望去也沒有第二個能對話的人了，不如問問那個沒禮貌的，她想@@
+@@.delayed;&lt;&lt;button &quot;繼續&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_des_2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;@@</tw-passagedata><tw-passagedata pid="21" name="chap_1_des_2" tags="center" position="800,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;什麼鬼？$character[&#39;何天晴&#39;].past_name心想。此時一陣風吹來，她不禁打了個噴嚏。$character[&#39;王大閎&#39;].name？他誰啊？母胎單身？？超爛...@@
+@@.delayed;放眼望去也沒有第二個能對話的人了，只好去問問那個沒禮貌的@@
 @@.delayed;她邁開步伐，追上前方逐漸遠離的身影，&lt;&lt;link &quot;問道...&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_4&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;@@
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="chap_1_dialog_4" tags="" position="225,350" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_20&quot; $character[&#39;何天晴&#39;].past_name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;你知道$character[&#39;王大閎&#39;].name是誰嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="chap_1_des_20" tags="center" position="350,350" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;男子赫然停下腳步，困惑的回頭望著$character[&#39;何天晴&#39;].past_name@@
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="chap_1_dialog_4" tags="" position="1000,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_20&quot; $character[&#39;何天晴&#39;].past_name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;你知道$character[&#39;王大閎&#39;].name是誰嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="chap_1_des_20" tags="center" position="800,225" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;男子赫然停下腳步，困惑的回頭望著$character[&#39;何天晴&#39;].past_name@@
 @@.delayed;&lt;&lt;link &quot;並開口向她說話&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_5&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;@@
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="chap_1_dialog_5" tags="" position="475,350" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_3&quot; &quot;陌生男子&quot; $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;你怎麼了，摔進湖裡之後連老師也不認得了嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="chap_1_des_3" tags="center" position="600,350" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;此刻，月色映照這名男子的臉龐，他深不見底的眼眸看起來非常吸引人...@@
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="chap_1_dialog_5" tags="" position="1100,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_3&quot; &quot;陌生男子&quot; $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;你怎麼了，摔進湖裡之後連老師也不認得了嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="chap_1_des_3" tags="center" position="900,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;此刻，月色映照這名男子的臉龐，他深不見底的眼眸看起來非常吸引人...@@
 @@.delayed;等等，吸引人？沒有。他只是沒禮貌的...帥哥。$character[&#39;何天晴&#39;].past_name不自覺的別開臉，心跳似乎有些加快@@
 @@.delayed;怎麼辦？？這人好像就是$character[&#39;王大閎&#39;].name...@@
 @@.delayed;這時另一名男子從轉角處快步走出@@
 @@.delayed;急忙將身上的外套披在濕淋淋的$character[&#39;何天晴&#39;].past_name身上@@
 @@.delayed;&lt;&lt;link &quot;說道&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_6&quot;&gt;&gt;&lt;&lt;/link&gt;&gt; @@
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="chap_1_dialog_6" tags="" position="725,350" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_60&quot; &quot;另一個陌生男子&quot; $character[&#39;貝聿銘&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;$character[&#39;何天晴&#39;].past_name你沒事吧？身上都是濕的...該不會摔進湖裡了？今天有點起風，小心別感冒，趕緊去換身衣服...&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="chap_1_dialog_60" tags="" position="850,350" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_61&quot; $character[&#39;何天晴&#39;].past_name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;不好意思，我認識你嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="chap_1_dialog_61" tags="" position="975,350" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_4&quot; &quot;另一個陌生男子&quot; $character[&#39;貝聿銘&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;啊？我是$character[&#39;貝聿銘&#39;].name啊，$character[&#39;何天晴&#39;].past_name，你剛剛撞到頭了？還好嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="chap_1_des_4" tags="center" position="1100,350" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;此刻$character[&#39;何天晴&#39;].past_name@@
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="26" name="chap_1_dialog_6" tags="" position="1200,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_60&quot; &quot;另一個陌生男子&quot; $character[&#39;貝聿銘&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;$character[&#39;何天晴&#39;].past_name你沒事吧？身上都是濕的...該不會摔進湖裡了？今天有點起風，小心別感冒，趕緊去換身衣服...&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="chap_1_dialog_60" tags="" position="1200,475" size="100,100">&lt;&lt;speechBOX &quot;chap_1_dialog_61&quot; $character[&#39;何天晴&#39;].past_name $character[&#39;何天晴&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;不好意思，我認識你嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="chap_1_dialog_61" tags="" position="1200,575" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_4&quot; &quot;另一個陌生男子&quot; $character[&#39;貝聿銘&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;啊？我是$character[&#39;貝聿銘&#39;].name啊，$character[&#39;何天晴&#39;].past_name，你剛剛撞到頭了？還好嗎？&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="chap_1_des_4" tags="center" position="1000,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;此刻$character[&#39;何天晴&#39;].past_name@@
 
 @@.delayed;&lt;&lt;link &quot;接受$character[&#39;貝聿銘&#39;].name的好意，將外套穿好並向他道謝&quot;&gt;&gt;&lt;&lt;set $use_wang_jacket to false&gt;&gt;&lt;&lt;goto &quot;chap_1_des_5&quot;&gt;&gt;&lt;&lt;/link&gt;&gt; @@
 @@.delayed;&lt;&lt;link &quot;看了一眼神色怪異的$character[&#39;王大閎&#39;].name後，決定將外套還給$character[&#39;貝聿銘&#39;].name&quot;&gt;&gt;&lt;&lt;set $use_wang_jacket to true&gt;&gt;&lt;&lt;goto &quot;chap_1_des_6&quot;&gt;&gt;&lt;&lt;/link&gt;&gt; @@
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="30" name="chap_1_des_5" tags="center" position="1225,350" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].past_name抬頭看了一眼$character[&#39;王大閎&#39;].name，注意到他嘴角微微抽動了一下@@
-@@.delayed;她還來不及問，就被$character[&#39;貝聿銘&#39;].name練拖帶拐的帶去她的宿舍整理儀容@@
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="30" name="chap_1_des_5" tags="center" position="1100,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].past_name抬頭看了一眼$character[&#39;王大閎&#39;].name，注意到他嘴角微微抽動了一下@@
+@@.delayed;她還來不及問，就被$character[&#39;貝聿銘&#39;].name連拖帶拐的帶去她的宿舍整理儀容@@
 &lt;/div&gt;
-@@.delayed;&lt;&lt;button &quot;前進第二幕&quot;&gt;&gt;&lt;&lt;goto &quot;chap_2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;@@</tw-passagedata><tw-passagedata pid="31" name="chap_1_des_6" tags="center" position="100,475" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;貝聿銘&#39;].name接過外套，傻傻站在原地@@
+@@.delayed;&lt;&lt;button &quot;前進第二幕&quot;&gt;&gt;&lt;&lt;goto &quot;chap_2&quot;&gt;&gt;&lt;&lt;/button&gt;&gt;@@</tw-passagedata><tw-passagedata pid="31" name="chap_1_des_6" tags="center" position="1200,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;貝聿銘&#39;].name接過外套，傻傻站在原地@@
 @@.delayed;$character[&#39;何天晴&#39;].past_name感到一陣尷尬，轉身離開@@
 
 @@.delayed;沒走幾步，視線便被一件外套遮住，接著硬生生地被轉了180度@@
 @@.delayed;她拿下外套，正準備還回去@@
 @@.delayed;卻看到$character[&#39;王大閎&#39;].name臉上掛著一抹神秘的微笑，走在她斜前方，&lt;&lt;link &quot;說...&quot;&gt;&gt;&lt;&lt;goto &quot;chap_1_dialog_7&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;@@
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="32" name="chap_1_dialog_7" tags="" position="225,475" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_done&quot; $character[&#39;王大閎&#39;].name $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;妳又往湖裡走，是想要去哪？外套披好，我陪你走回你的宿舍。&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="chap_1_des_done" tags="center" position="350,475" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].past_name什麼也反駁不了，只得乖乖地抓緊外套，跟了上去@@
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="32" name="chap_1_dialog_7" tags="" position="1300,375" size="100,100">&lt;&lt;speechBOX &quot;chap_1_des_done&quot; $character[&#39;王大閎&#39;].name $character[&#39;王大閎&#39;].img_src&gt;&gt;&lt;&lt;ctp &quot;test&quot;&gt;&gt;&lt;&lt;set $back_dialog = &quot;test&quot;&gt;&gt;&lt;&lt;set _ctp to CTP.getCTP(&quot;test&quot;)&gt;&gt;妳又往湖裡走，是想要去哪？外套披好，我陪你走回你的宿舍。&lt;&lt;/ctp&gt;&gt;&lt;&lt;/speechBOX&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="chap_1_des_done" tags="center" position="1300,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;$character[&#39;何天晴&#39;].past_name什麼也反駁不了，只得乖乖地抓緊外套，跟了上去@@
 @@.delayed;...@@
 @@.delayed;...@@
 
 @@.delayed;$character[&#39;王大閎&#39;].name很紳士的送她到女生宿舍門口，提醒她住在二樓走廊盡頭的房間，收走半濕的外套便轉身，沒入夜色之中。@@
 @@.delayed;&lt;&lt;link &quot;過了一晚&quot;&gt;&gt;&lt;&lt;goto &quot;chap_2&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;@@
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="chap_2" tags="center" position="475,475" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;第二天，$character[&#39;何天晴&#39;].past_name無所事事，來到一棵高大美麗的鳳凰樹前@@
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="34" name="chap_2" tags="center" position="1450,125" size="100,100">&lt;div class=&quot;meow&quot;&gt;@@.delayed;第二天，$character[&#39;何天晴&#39;].past_name無所事事，來到一棵高大美麗的鳳凰樹前@@
 @@.delayed;才剛站好，便聽到耳邊傳來謎之聲響@@
 !!@@.delayed;color:gold;「若你想回到原來的時空，必須在下個月圓之夜前完成任務，否則時空之門就會關閉@@
 !!@@.delayed;color:gold;想知道此番任務的進度順利與否，可以看這株鳳凰花開或凋落的情形@@
