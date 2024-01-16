@@ -786,6 +786,21 @@ input, select, textarea {
 /*動態效果整合*/</style><script role="script" id="twine-user-script" type="text/twine-javascript">/*設置favicon*/
 $(document.head).append("<link rel='icon' href='media/img/favicon.png'>");
 
+<!-- 置入google分析 -->
+/* 在<head>元素中置入google分析的script程式碼 */
+// 創建 <script> 元素
+var scriptElement = document.createElement("script");
+// 設置 <script> 元素的屬性
+scriptElement.async = true;
+scriptElement.src = "https://www.googletagmanager.com/gtag/js?id=G-2YQLQXKE8L"; //替換成自己專案的GA追蹤碼
+// 創建用於嵌入代碼的 <script> 元素
+var codeElement = document.createElement("script");
+// 設置 <script> 元素的內容
+codeElement.innerHTML = "window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-2YQLQXKE8L');";
+// 將 <script> 元素添加到 <head> 元素中
+document.head.appendChild(scriptElement);
+document.head.appendChild(codeElement);
+
 /* 置入Meta Tag(Meta Keywords) */
 // 創建一個新的<meta>元素並設置其屬性
 var metaKeywords = document.createElement('meta');
